@@ -5,7 +5,7 @@ package despaching.test;
  */
 public static class JVentana{
 
-    public satatic void print(){
+    public static void print(){
         System.out.println("Hola mundo");
     }
     
