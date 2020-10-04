@@ -41,7 +41,8 @@ public class JVentanaApp extends JFrame{
 
     /**
      * Metodo en el cual se configura el tamaño, se fija un {@linkplain Titulo} a la ventana,
-     * se activa la visibilidad, se fija la accion al cerrarse y se fija la localizacion.
+     * se activa la visibilidad, se fija la accion al cerrarse, se fija la localizacion y 
+     * se hace que no se pueda cambiar el tamaño de la ventana.
      */
     private void initFrame(){
         this.setSize(600,600);  //Fijamos el tamaño de la ventana a 600x600
@@ -49,6 +50,7 @@ public class JVentanaApp extends JFrame{
         this.setVisible(true);  //Hacemos la ventana visible
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);       //Cuando se cierre que termine el programa
         this.setLocationRelativeTo(null);   //Hacemos que la app se abra en el centro de la pantalla
+        this.setResizable(false);   //Fijamos que no se modifique el tamaño de la ventana
     }
     
 }
