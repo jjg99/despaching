@@ -8,7 +8,7 @@ import java.awt.BorderLayout;
  * Esta clase contiene el main, y sera la que contendra todos los paneles de
  * todos los usuarios y la que se encargara de pasar entre ellas.
  */
-public class JVentanaApp extends JFrame{
+public class JVentana extends JFrame{
     /**String con el nombre que tendra la ventanga generada */
     private final String Titulo = new String("Despaching");
 
@@ -16,14 +16,14 @@ public class JVentanaApp extends JFrame{
      * Metodo main crea una instancia de JVentanaApp
      */
     public static void main(String[] args){
-        new JVentanaApp();
+        new JVentana();
     }
     
     /**
      * Crea una nueva JVentanaApp, llamando al metodo {@link initComponets} para instanciar el 
      * panel inicial e {@link initFrame} para configurar y mostrar la ventana.
      */
-    public JVentanaApp(){
+    public JVentana(){
         initComponents();
         initFrame();
     }

@@ -1,4 +1,4 @@
-package PanelUser;
+package paneluser;
 
 public class PInicio {
     
