@@ -6,3 +6,6 @@ El objetivo de despaching es mejorar la organización de las reuniones con profe
 
 ## Autores
 Esta aplicación está realizada por Raúl, Félix, Juan Antonio y Javier como parte de la asignatura de Ingeniería del Software en la Universidad Pontificia de Comillas.
+
+## ok
+
