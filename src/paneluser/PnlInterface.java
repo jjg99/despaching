@@ -2,7 +2,7 @@ package paneluser;
 /**
  * Interfaz que define los metodos que tienen que implementar todos los paneles de la aplicación
  */
-public interface PInterface {
+public interface PnlInterface {
     /**
      * Metodo que hace que se elimine el Panel y deje paso al siguiente
     */

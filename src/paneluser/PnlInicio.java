@@ -4,7 +4,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import java.awt.Font;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -17,8 +16,10 @@ import util.Fuente;
  * Hereda de la clase {@link JPanel}
  * Implementa la interfaz {@link PInterface}
  */
-public class PInicio extends JPanel implements PInterface{
-    PInicio(){
+public class PnlInicio extends JPanel implements PnlInterface{
+    public static PnlInicio PnlInicio = new PnlInicio();
+
+    private PnlInicio(){
         /**Constructor de la clase, no recibe ningún parámetro*/
         this.establecerVentana();
     }
