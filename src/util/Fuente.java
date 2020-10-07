@@ -9,6 +9,7 @@ import javax.swing.JComponent;
  * mantener consistencia a lo largo del programa.
  */
 public class Fuente {
+    /**Fija el tipo de letra a <code>Font.SANS_SERIF</code>*/
     private final static String FUENTE = Font.SANS_SERIF;
 
     private final static int TAM_TITULO = 30;
