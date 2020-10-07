@@ -2,6 +2,8 @@ package gui;
 
 import javax.swing.JFrame;
 
+import paneluser.PnlInicio;
+
 import java.awt.BorderLayout;
 
 /**
@@ -16,7 +18,10 @@ public class JVentana extends JFrame{
      * Metodo main crea una instancia de JVentanaApp
      */
     public static void main(String[] args){
-        new JVentana();
+        JVentana ventanaPrueba = new JVentana(); // ventana de prueba para poder probar los diferentes paneles
+
+       
+        
     }
     
     /**
@@ -36,7 +41,9 @@ public class JVentana extends JFrame{
         this.setLayout(new BorderLayout());     //Fijamos el tipo de Layout
 /* ************************************************************************
         this.add(xxx, BorderLayout.CENTER); cambiar xxx por el panel PInicio
-***************************************************************************/
+**************************************************************/
+    // prueba de panel
+        this.add(PnlInicio.PnlInicio,BorderLayout.CENTER);
     }
 
     /**

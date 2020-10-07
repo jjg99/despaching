@@ -1,12 +1,15 @@
 package paneluser;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import java.awt.GridBagLayout;
+import java.net.URL;
 import java.awt.GridBagConstraints;
+
 
 import util.Fuente;
 
@@ -40,11 +43,22 @@ public class PnlInicio extends JPanel implements PnlInterface{
         c.gridx= 0; // se coloca el titulo en la parte superior de la pantalla
         c.gridy = 0;
         this.add(titulo,c);  // se añade el titulo al panel
+        /**Imagen para poder incluir el icono por defecto al iniciar sesion */
+        JLabel imagenDefault = null;
+        try{
+            imagenDefault = new JLabel(new ImageIcon(new URL("https://img.icons8.com/dusk/128/000000/add-user-group-man-woman.png")));
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        c.gridx = 0;       //se coloca el icono en el centro de la pantalla
+        c.gridy = 1;
+        this.add(imagenDefault,c);  //se añade el icono al panel
 
         /**Area para introducir el nombre de usuario  */
         JTextField usuario = new JTextField("Usuario");
         c.gridx = 0;  // se coloca el usuario en el centro de la pantalla
         c.gridy = 2;
+        //c.weighty = 0.00001;        //se le da cierta altura a todos los componentes por debajo del icono
         this.add(usuario,c);  // se añade el area de usuario al panel 
 
         /**Area para introducir la contraseña del usuario */
@@ -52,7 +66,7 @@ public class PnlInicio extends JPanel implements PnlInterface{
         c.gridx = 0; // se coloca la contraseña en el centro de la pantalla
         c.gridy = 3;
         this.add(psswd,c);  // se añade el area de contraseña al panel
-
+       
         /**Boton para entrar a la aplicación */
         JButton botonEntrar = new JButton("Entrar");
         c.gridx = 0;        //se coloca el boton inferior a la contraseña
