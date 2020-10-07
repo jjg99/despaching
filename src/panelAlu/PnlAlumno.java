@@ -1,4 +1,4 @@
-package panelAlu_;
+package panelAlu;
 
 public class PnlAlumno {
     
