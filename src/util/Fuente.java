@@ -18,18 +18,34 @@ public class Fuente {
     /**Fija el tamaño de la letra del cuerpo*/
     private final static int TAM_CUERPO = 20;
 
+    /**
+     * Metodo para fijar la letra del cuerpo.
+     * @param comp <code>JComponent</code> al que se le cambiara la letra.
+     */
     public static void setFuente(JComponent comp){
         comp.setFont(new Font(FUENTE, Font.PLAIN, TAM_CUERPO));
     }
 
+    /**
+     * Metodo para fijar la letra del cuerpo en negrita.
+     * @param comp <code>JComponent</code> al que se le cambiara la letra.
+     */
     public static void setFuenteNegrita(JComponent comp){
         comp.setFont(new Font(FUENTE, Font.BOLD, TAM_CUERPO));
     }
 
+    /**
+     * Metodo para fijar la letra del titulo.
+     * @param comp <code>JComponent</code> al que se le cambiara la letra.
+     */
     public static void setFuenteTitulo(JComponent comp){
         comp.setFont(new Font(FUENTE, Font.PLAIN, TAM_TITULO));
     }
 
+    /**
+     * Metodo para fijar la letra del titulo en negrita.
+     * @param comp <code>JComponent</code> al que se le cambiara la letra.
+     */
     public static void setFuenteTituloNegrita(JComponent comp){
         comp.setFont(new Font(FUENTE, Font.BOLD, TAM_TITULO));
     }
