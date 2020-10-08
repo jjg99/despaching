@@ -145,17 +145,15 @@ public class PnlInicio extends JPanel implements PnlInterface{
             @Override
             public void actionPerformed(ActionEvent e) {
                 /**En el caso de que se pulse el boton de entrar a la aplicación, 
-                 * se llama al metodo {@link eliminar}, 
-                 * y se llama al metodo {@link cambiarPanel}*/
-                PnlInicio.this.eliminar();  //se elimina el panel para liberar recursos
-                JVentana.cambiarPanel(new PnlAlumno()); // se establece el nuevo panel de la aplicación  
+                 * se llama al metodo {@link cambiarPanel}*/
+                JVentana.cambiarPanel(PnlAlumno.PnlAlumno); // se establece el nuevo panel de la aplicación  
             }
         });
 
     }
 
     @Override
-    public void eliminar(){
+    public void eliminar(){         //No se debe usar, ya que al cambiar la visibilidad no se puede volver a el
         this.setVisible(false);
 
     }
