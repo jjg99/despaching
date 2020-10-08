@@ -30,13 +30,19 @@ import util.Fuente;
 public class PnlInicio extends JPanel implements PnlInterface{
     public static PnlInicio PnlInicio = new PnlInicio();
 
+    /**
+     * Constructor de la clase, llamara al metodo {@link establecerVentana} para inicializar sus componentes
+     */
     private PnlInicio(){
-        /**Constructor de la clase, no recibe ningún parámetro*/
+        
         this.establecerVentana();
     }
-    @Override
     
-    public void establecerVentana(){
+    /**
+     * Metodo que inicializara y mostrara todos sus componentes
+     */
+    @Override
+        public void establecerVentana(){
         
         this.setLayout(new GridBagLayout()); //se establece el layout 
         /**Restricciones  para ir colocando los diferentes elementos dentro del {@link Gridbaglayout} */
