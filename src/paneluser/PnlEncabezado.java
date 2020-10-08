@@ -1,12 +1,14 @@
 package paneluser;
 
 import javax.swing.JPanel;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 
 import java.awt.GridBagLayout;
 import java.net.URL;
+import java.awt.Insets;
 import java.awt.GridBagConstraints;
 
 import util.Fuente;
@@ -59,7 +61,8 @@ public class PnlEncabezado extends JPanel implements PnlInterface {
         gbc.gridx = 0;       //se especifica la posicion en la matriz
         gbc.gridy = 0;
         gbc.gridheight = 2;	// altura
-		gbc.gridwidth = 1;	// anchura
+        gbc.gridwidth = 1;	// anchura
+        gbc.insets = new Insets(0,20,0,0);
         this.add(lblImagenUsuario,gbc);  //se añade el icono al panel
 
         /** nombre usuario */ 
@@ -68,33 +71,36 @@ public class PnlEncabezado extends JPanel implements PnlInterface {
         gbc.gridx = 1; // se especifica la posicion en la matriz
         gbc.gridy = 0;
         gbc.gridheight = 1;	// altura
-		gbc.gridwidth = 2; // anchura
+		gbc.gridwidth = 4; // anchura
         this.add(lblNombre,gbc);  // se añade el nombre al panel
 
         /** rol  */
-        JLabel lblRol = new JLabel("Usuario");
+        JLabel lblRol = new JLabel("Rol");
         Fuente.setFuente(lblRol); // establece la fuente del rol
         gbc.gridx = 1;    // se establece la posicion en la matriz
         gbc.gridy = 1;
         gbc.gridheight = 1;	// altura
-        gbc.gridwidth = 1;	// anchura
+        gbc.gridwidth = 2;	// anchura
+        gbc.insets = new Insets(0,50,0,0);
         this.add(lblRol,gbc);
 
         /**fecha */
         JLabel lblFecha = new JLabel("12/10/20");
         Fuente.setFuente(lblFecha); //establece la fuente de la fecha
-        gbc.gridx = 2;    // se establece la posicion en la matriz
+        gbc.gridx = 3;    // se establece la posicion en la matriz
         gbc.gridy = 1;
         gbc.gridheight = 1;	// altura
-        gbc.gridwidth = 1;	// anchura
+        gbc.gridwidth = 2;	// anchura
         this.add(lblFecha,gbc);
 
         /** boton cerrar sesion */
         JButton btnCerrarSesion = new JButton("Cerrar Sesion"); // se cambiara por un icono mas adelante
-        gbc.gridx = 3;    // se establece la posicion en la matriz
+        gbc.gridx = 5;    // se establece la posicion en la matriz
         gbc.gridy = 0;
         gbc.gridheight = 2;	// altura
         gbc.gridwidth = 1;	// anchura
+        gbc.ipadx = 0;
+        gbc.insets = new Insets(0,20,0,0);
         this.add(btnCerrarSesion,gbc);
     }
 
