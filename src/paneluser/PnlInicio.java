@@ -20,7 +20,7 @@ import util.Fuente;
  * Clase destinada a crear el panel de incio de la aplicación
  * La clase no tiene ningún parámetro de entrada, ya que va a ser la misma para todas las entrada que le lleguen.
  * Hereda de la clase {@link JPanel}
- * Implementa la interfaz {@link PInterface}
+ * Implementa la interfaz {@link PnlInterface}
  */
 public class PnlInicio extends JPanel implements PnlInterface{
     public static PnlInicio PnlInicio = new PnlInicio();
@@ -37,7 +37,7 @@ public class PnlInicio extends JPanel implements PnlInterface{
         /**Restricciones  para ir colocando los diferentes elementos dentro del {@link Gridbaglayout} */
         GridBagConstraints c = new GridBagConstraints();
 
-        c.fill = GridBagConstraints.NONE;       // de esta forma no rellena los huevos y además no hay que volver a tocarlo a lo largo del codigo, ya que la variable c se va reciclando
+        c.fill = GridBagConstraints.NONE;       // de esta forma no rellena los huecos y además no hay que volver a tocarlo a lo largo del codigo, ya que la variable c se va reciclando
         
         /** Titulo superior */ 
         JLabel lblTitulo = new JLabel("Despaching"); 
