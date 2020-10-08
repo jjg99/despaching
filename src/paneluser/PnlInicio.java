@@ -85,12 +85,14 @@ public class PnlInicio extends JPanel implements PnlInterface{
        
         /**Boton para entrar a la aplicación */
         JButton btnEntrar = new JButton("Entrar");
+        Fuente.setFuente(btnEntrar);
         c.gridx = 0;        //se coloca el boton inferior a la contraseña
         c.gridy = 4;
         this.add(btnEntrar,c);    //se añade el boton al panel
 
         /**Boton para rersetear la contrasena */
         JButton btnReset = new JButton("Reset Psswd");
+        Fuente.setFuente(btnReset);
        // c.anchor = ; // se coloca el boton a la misma altura que el boton de entrar
         c.gridx = 0;        //se coloca el boton inferior a la contraseña
         c.gridy = 5;
