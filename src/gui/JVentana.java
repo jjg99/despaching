@@ -7,6 +7,8 @@ import paneluser.PnlInicio;
 
 import java.awt.BorderLayout;
 
+import util.Fecha;
+
 /**
  * Esta clase contiene el main, y sera la que contendra todos los paneles de
  * todos los usuarios y la que se encargara de pasar entre ellas.
@@ -23,6 +25,8 @@ public class JVentana extends JFrame{
      */
     public static void main(String[] args){
         new JVentana();
+        System.out.println(Fecha.fechaString());
+
     }
     
     /**
