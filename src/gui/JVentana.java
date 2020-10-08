@@ -34,6 +34,7 @@ public class JVentana extends JFrame{
     public JVentana(){
         initComponents();
         initFrame();
+        this.requestFocusInWindow();    //Hacemos focus en la JVentana para que no empiece en el Textfield de Usuario
     }
 
     /**
@@ -60,7 +61,7 @@ public class JVentana extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);       //Cuando se cierre que termine el programa
         this.setLocationRelativeTo(null);   //Hacemos que la app se abra en el centro de la pantalla
         this.setResizable(false);   //Fijamos que no se modifique el tamaño de la ventana
-        this.requestFocusInWindow();    //Hacemos focus en la JVentana para que no empiece en el Usuario
+        this.requestFocus();
     }
 
     /**

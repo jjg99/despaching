@@ -34,7 +34,6 @@ public class PnlInicio extends JPanel implements PnlInterface{
      * Constructor de la clase, llamara al metodo {@link establecerVentana} para inicializar sus componentes
      */
     private PnlInicio(){
-        
         this.establecerVentana();
     }
     
