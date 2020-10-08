@@ -2,6 +2,8 @@ package paneluser;
 
 import javax.swing.JPanel;
 
+import gui.JVentana;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
@@ -9,6 +11,8 @@ import javax.swing.ImageIcon;
 import java.awt.GridBagLayout;
 import java.net.URL;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.awt.GridBagConstraints;
 
 import util.Fecha;
@@ -103,6 +107,14 @@ public class PnlEncabezado extends JPanel implements PnlInterface {
         gbc.ipadx = 0;
         gbc.insets = new Insets(0,20,0,0);
         this.add(btnCerrarSesion,gbc);
+
+        /**Metodo que cerrara sesion al usuario, llevandole a la pantalla de inicio */
+        btnCerrarSesion.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JVentana.cambiarPanel(PnlInicio.PnlInicio); // se establece el nuevo panel de la aplicación  
+            }
+        });
     }
 
     @Override
