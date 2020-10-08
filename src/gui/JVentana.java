@@ -60,6 +60,11 @@ public class JVentana extends JFrame{
         this.setResizable(false);   //Fijamos que no se modifique el tamaño de la ventana
     }
 
+    /**
+     * Metodo estatico que borra el contenido de {@link pnlVentana} y añade el <code>JPanel<\code>
+     * recibido en el centro.
+     * @param pnlPoner panel a cargar en {link pnlVentana}
+     */
     public static void cambiarPanel(JPanel pnlPoner){
         pnlVentana.removeAll();
         pnlVentana.add(pnlPoner, BorderLayout.CENTER);
