@@ -84,6 +84,11 @@ public class PnlInicio extends JPanel implements PnlInterface{
         c.gridy = 4;
         this.add(btnEntrar,c);    //se añade el boton al panel
 
+        /**Boton para rersetear la contrasena */
+        JButton btnReset = new JButton("Reset");
+        c.anchor = GridBagConstraints.RELATIVE; // se coloca el boton a la misma altura que el boton de entrar
+        this.add(btnReset,c);
+
         /**
          * Metodo que nos permite poder saber si el cuadro de texto esta seleccionado o no
          * para mostrar u ocultar el texto de "Usuario" en {@link txtUsuario}
@@ -140,7 +145,7 @@ public class PnlInicio extends JPanel implements PnlInterface{
                 /**En el caso de que se pulse el boton de entrar a la aplicación, 
                  * se llama al metodo {@link eliminar}, 
                  * y se llama al metodo {@link cambiarPanel}*/
-                PnlInicio.this.eliminar();  //se elimina el panel para liberar recursos
+                PnlInicio.this.eliminar();  //se elimina el panel para liberar recursos del ordenador
                 JVentana.cambiarPanel(new PnlAlumno()); // se establece el nuevo panel de la aplicación
                 
             }
