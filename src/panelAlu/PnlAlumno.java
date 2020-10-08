@@ -1,5 +1,8 @@
 package panelAlu;
 
-public class PnlAlumno {
+import javax.swing.JPanel;
+
+
+public class PnlAlumno extends JPanel {
     
 }
