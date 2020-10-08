@@ -16,8 +16,8 @@ import java.awt.event.FocusEvent;
 import java.net.URL;
 import java.awt.GridBagConstraints;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseAdapter;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 import util.Fuente;
 
@@ -134,17 +134,15 @@ public class PnlInicio extends JPanel implements PnlInterface{
             }
         });
         /**Metodo que permite añadir funcionalidad al boton de entrar {@link btnEntrar} */
-        btnEntrar.addMouseListener(new MouseAdapter(){
+        btnEntrar.addActionListener(new ActionListener(){
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 /**En el caso de que se pulse el boton de entrar a la aplicación, 
                  * se llama al metodo {@link eliminar}, 
                  * y se llama al metodo {@link cambiarPanel}*/
                 PnlInicio.this.eliminar();  //se elimina el panel para liberar recursos
-                JVentana.cambiarPanel(new PnlAlumno()); // se establece el nuevo panel de la aplicación
-                
+                JVentana.cambiarPanel(new PnlAlumno()); // se establece el nuevo panel de la aplicación  
             }
-
         });
 
     }
