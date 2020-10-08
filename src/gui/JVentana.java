@@ -18,10 +18,7 @@ public class JVentana extends JFrame{
      * Metodo main crea una instancia de JVentanaApp
      */
     public static void main(String[] args){
-        JVentana ventanaPrueba = new JVentana(); // ventana de prueba para poder probar los diferentes paneles
-
-       
-        
+        new JVentana();
     }
     
     /**
@@ -35,15 +32,11 @@ public class JVentana extends JFrame{
 
     /**
      * Metodo donde se inicializan los componentes iniciales de la aplicacion, es decir, 
-     * el {@link PInicio}
+     * el {@link PnlInicio}
      */
     private void initComponents(){
         this.setLayout(new BorderLayout());     //Fijamos el tipo de Layout
-/* ************************************************************************
-        this.add(xxx, BorderLayout.CENTER); cambiar xxx por el panel PInicio
-**************************************************************/
-    // prueba de panel
-        this.add(PnlInicio.PnlInicio,BorderLayout.CENTER);
+        this.add(PnlInicio.PnlInicio,BorderLayout.CENTER);      //Añadimos el panel de inicio
     }
 
     /**
