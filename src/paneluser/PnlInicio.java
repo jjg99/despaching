@@ -7,12 +7,17 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import gui.JVentana;
+import panelAlu.PnlAlumno;
+
 import java.awt.GridBagLayout;
 import java.awt.event.FocusListener;
 import java.awt.event.FocusEvent;
 import java.net.URL;
 import java.awt.GridBagConstraints;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
 
 import util.Fuente;
 
@@ -114,7 +119,7 @@ public class PnlInicio extends JPanel implements PnlInterface{
                 if(new String(pswdContrasena.getPassword()).equals("Contrasena")){     //Se comprueba si el texto que hay es Contrasena
                     // Como el texto es Contrasena, por tanto no se ha modificado, por lo que se borra
                     pswdContrasena.setText(null);
-                    pswdContrasena.setEchoChar('\u2022');   //Se activa que salgan circulos en vez de lod caracteres
+                    pswdContrasena.setEchoChar('\u2022');   //Se activa que salgan circulos en vez de los caracteres
                 }
             }
             /**
@@ -128,11 +133,25 @@ public class PnlInicio extends JPanel implements PnlInterface{
                 }
             }
         });
+        /**Metodo que permite añadir funcionalidad al boton de entrar {@link btnEntrar} */
+        btnEntrar.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                /**En el caso de que se pulse el boton de entrar a la aplicación, 
+                 * se llama al metodo {@link eliminar}, 
+                 * y se llama al metodo {@link cambiarPanel}*/
+                PnlInicio.this.eliminar();  //se elimina el panel para liberar recursos
+                JVentana.cambiarPanel(new PnlAlumno()); // se establece el nuevo panel de la aplicación
+                
+            }
+
+        });
+
     }
-       
 
     @Override
     public void eliminar(){
+        this.setVisible(false);
 
     }
 }
