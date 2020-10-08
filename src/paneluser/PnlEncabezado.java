@@ -11,6 +11,7 @@ import java.net.URL;
 import java.awt.Insets;
 import java.awt.GridBagConstraints;
 
+import util.Fecha;
 import util.Fuente;
 
 /** panel generico que tienen todos los profesores y alumnos
@@ -85,7 +86,7 @@ public class PnlEncabezado extends JPanel implements PnlInterface {
         this.add(lblRol,gbc);
 
         /**fecha */
-        JLabel lblFecha = new JLabel("12/10/20");
+        JLabel lblFecha = new JLabel(Fecha.fechaString());
         Fuente.setFuente(lblFecha); //establece la fuente de la fecha
         gbc.gridx = 3;    // se establece la posicion en la matriz
         gbc.gridy = 1;
