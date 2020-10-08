@@ -1,6 +1,7 @@
 package gui;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import paneluser.PnlInicio;
 
@@ -13,6 +14,9 @@ import java.awt.BorderLayout;
 public class JVentana extends JFrame{
     /**String con el nombre que tendra la ventanga generada */
     private final String Titulo = new String("Despaching");
+
+    /** Panel que contendra todos los componentes y ocupara la totalidad de la <code>JVentana<\code> */
+    private static JPanel pnlVentana = new JPanel();
 
     /**
      * Metodo main crea una instancia de JVentanaApp
@@ -35,8 +39,11 @@ public class JVentana extends JFrame{
      * el {@link PnlInicio}
      */
     private void initComponents(){
+        pnlVentana.setLayout(new BorderLayout());     //Fijamos el tipo de Layout
+        pnlVentana.add(PnlInicio.PnlInicio,BorderLayout.CENTER);      //Añadimos el panel de inicio
+
         this.setLayout(new BorderLayout());     //Fijamos el tipo de Layout
-        this.add(PnlInicio.PnlInicio,BorderLayout.CENTER);      //Añadimos el panel de inicio
+        this.add(pnlVentana,BorderLayout.CENTER);      //Añadimos el panel de la ventana
     }
 
     /**
@@ -51,6 +58,12 @@ public class JVentana extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);       //Cuando se cierre que termine el programa
         this.setLocationRelativeTo(null);   //Hacemos que la app se abra en el centro de la pantalla
         this.setResizable(false);   //Fijamos que no se modifique el tamaño de la ventana
+    }
+
+    public static void cambiarPanel(JPanel pnlPoner){
+        pnlVentana.removeAll();
+        pnlVentana.add(pnlPoner, BorderLayout.CENTER);
+        pnlVentana.updateUI();
     }
     
 }
