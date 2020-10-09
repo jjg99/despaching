@@ -23,7 +23,7 @@ import util.Fuente;
  */
 public class PnlEncabezado extends JPanel implements PnlInterface {
     
-    /**************************************************************
+    /* *************************************************************
      * atributo que tiene la informacion del usuario
      *  Usuario usuario; 
      * 
@@ -40,11 +40,10 @@ public class PnlEncabezado extends JPanel implements PnlInterface {
      * public Usuario getUsuario(){
      *       return this.usuariuo;
      * }
-     ***************************************************************/
+     ************************************************************** */
     
-    
+    /** constructor del panel que no recibe ningun paramentro de entrada(solo para el sprint 1) */
     public PnlEncabezado(){
-        /** constructor del panel que no recibe ningun paramentro de entrada(solo para el sprint 1) */
         this.establecerVentana();
     }
 
@@ -67,7 +66,7 @@ public class PnlEncabezado extends JPanel implements PnlInterface {
         gbc.gridy = 0;
         gbc.gridheight = 2;	// altura
         gbc.gridwidth = 1;	// anchura
-        gbc.insets = new Insets(0,20,0,0);
+        gbc.insets = new Insets(0,20,0,0); // deja una separacion a la izquierda
         this.add(lblImagenUsuario,gbc);  //se añade el icono al panel
 
         /** nombre usuario */ 
@@ -86,7 +85,7 @@ public class PnlEncabezado extends JPanel implements PnlInterface {
         gbc.gridy = 1;
         gbc.gridheight = 1;	// altura
         gbc.gridwidth = 2;	// anchura
-        gbc.insets = new Insets(0,50,0,0);
+        gbc.insets = new Insets(0,50,0,0); // deja una separacion a la izquierda
         this.add(lblRol,gbc);
 
         /**fecha */
@@ -105,7 +104,7 @@ public class PnlEncabezado extends JPanel implements PnlInterface {
         gbc.gridheight = 2;	// altura
         gbc.gridwidth = 1;	// anchura
         gbc.ipadx = 0;
-        gbc.insets = new Insets(0,20,0,0);
+        gbc.insets = new Insets(0,20,0,0); // deja una separacion a la izquierda
         this.add(btnCerrarSesion,gbc);
 
         /**Metodo que cerrara sesion al usuario, llevandole a la pantalla de inicio */
