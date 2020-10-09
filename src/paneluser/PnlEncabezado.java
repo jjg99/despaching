@@ -102,7 +102,7 @@ public class PnlEncabezado extends JPanel implements PnlInterface {
         /** boton cerrar sesion */
         JButton btnCerrarSesion = new JButton();
         try{
-            btnCerrarSesion.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/35/000000/change-user-male.png"))); // se pone el icono al boton
+            btnCerrarSesion.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/40/000000/exit-sign.png"))); // se pone el icono al boton
         }
         catch(MalformedURLException e){
             e.printStackTrace();
