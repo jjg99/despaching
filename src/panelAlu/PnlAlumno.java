@@ -116,7 +116,7 @@ public class PnlAlumno extends JPanel {
         this.add(new PnlEncabezado(),BorderLayout.NORTH);
         this.add(pnlInicioAlumno, BorderLayout.CENTER);
     }
-
+    
     private void addProfesores(DefaultListModel dlstProfesores){
         dlstProfesores.addElement("Profesor Generico 1");
         dlstProfesores.addElement("Profesor Genreico 2");
@@ -133,6 +133,7 @@ public class PnlAlumno extends JPanel {
         dlstProfesores.addElement("Profesor Genreico 13");
         dlstProfesores.addElement("Profesor Genreico 14");
         dlstProfesores.addElement("Profesor Genreico 15");
+        
     }
 
 }
