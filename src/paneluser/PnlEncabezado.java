@@ -8,7 +8,9 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 
+import java.awt.Color;
 import java.awt.GridBagLayout;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
@@ -58,7 +60,7 @@ public class PnlEncabezado extends JPanel implements PnlInterface {
         /** establece la imagen del usuario */
         JLabel lblImagenUsuario = null;
         try{
-            lblImagenUsuario = new JLabel(new ImageIcon(new URL("https://img.icons8.com/dusk/64/000000/add-user-group-man-woman.png")));
+            lblImagenUsuario = new JLabel(new ImageIcon(new URL("https://img.icons8.com/dusk/64/000000/checked-user-male.png")));
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,7 +100,16 @@ public class PnlEncabezado extends JPanel implements PnlInterface {
         this.add(lblFecha,gbc);
 
         /** boton cerrar sesion */
-        JButton btnCerrarSesion = new JButton("Cerrar Sesion"); // se cambiara por un icono mas adelante
+        JButton btnCerrarSesion = new JButton();
+        try{
+            btnCerrarSesion.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/35/000000/change-user-male.png"))); // se pone el icono al boton
+        }
+        catch(MalformedURLException e){
+            e.printStackTrace();
+        }
+        btnCerrarSesion.setOpaque(false);
+        btnCerrarSesion.setBackground(new Color(0,0,0));
+        btnCerrarSesion.setBorder(null);
         gbc.gridx = 5;    // se establece la posicion en la matriz
         gbc.gridy = 0;
         gbc.gridheight = 2;	// altura
