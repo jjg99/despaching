@@ -1,14 +1,9 @@
 package panelProf;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import java.awt.GridBagLayout;
-import java.awt.event.FocusListener;
-import java.awt.event.FocusEvent;
-import java.net.URL;
 import java.awt.GridBagConstraints;
 
 import java.awt.BorderLayout;
@@ -22,6 +17,10 @@ import util.Fuente;
 public class PnlProf  extends JPanel implements PnlInterface{
 
     public static PnlProf pnlProf = new PnlProf(); // se crea la variable que se instanciará desde fuera
+
+    /**
+     * Constructor del panel el cual llamara al metodo {@link establecerVentana}
+     */
     private PnlProf(){
         this.establecerVentana();
     }
