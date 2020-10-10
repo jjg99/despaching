@@ -5,7 +5,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 import paneluser.PnlEncabezado;
 import util.Fuente;
@@ -13,7 +12,6 @@ import util.Fuente;
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
-import java.awt.Insets;
 
 /**
  * Clase destinada a crear el panel del alumno, con el que interactuara con el resto del programa
