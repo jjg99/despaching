@@ -163,7 +163,7 @@ public class PnlInicio extends JPanel implements PnlInterface{
             public void actionPerformed(ActionEvent e) {
                 /**En el caso de que se pulse el boton de entrar a la aplicación, 
                  * se llama al metodo {@link cambiarPanel} solo version sprint1*/
-                JVentana.cambiarPanel(PnlProf.PnlProf); // se establece el nuevo panel de la aplicación
+                JVentana.cambiarPanel(PnlProf.pnlProf); // se establece el nuevo panel de la aplicación
             }
         });
 
