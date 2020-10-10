@@ -12,6 +12,7 @@ import panelAlu.PnlAlumno;
 import panelProf.PnlProf;
 
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.FocusListener;
 import java.awt.event.FocusEvent;
 import java.net.URL;
@@ -42,8 +43,7 @@ public class PnlInicio extends JPanel implements PnlInterface{
      * Metodo que inicializara y mostrara todos sus componentes
      */
     @Override
-        public void establecerVentana(){
-        
+    public void establecerVentana(){
         this.setLayout(new GridBagLayout()); //se establece el layout 
         /**Restricciones  para ir colocando los diferentes elementos dentro del {@link Gridbaglayout} */
         GridBagConstraints c = new GridBagConstraints();
@@ -82,6 +82,7 @@ public class PnlInicio extends JPanel implements PnlInterface{
         pswdContrasena.setEchoChar((char) 0);       //Se cambia a que salgan los caracteres en vez de los puntos
         c.gridx = 0; // se coloca la contraseña en el centro de la pantalla
         c.gridy = 3;
+        c.insets = new Insets(10,0,0,0);
         this.add(pswdContrasena,c);  // se añade el area de contraseña al panel
        
         /**Boton para entrar a la aplicación */
@@ -98,6 +99,7 @@ public class PnlInicio extends JPanel implements PnlInterface{
         c.gridx = 0;        //se coloca el boton inferior a la contraseña
         c.gridy = 5;
         this.add(btnReset,c);
+        c.insets = new Insets(0,0,0,0);
 
         /**
          * Metodo que nos permite poder saber si el cuadro de texto esta seleccionado o no
@@ -153,7 +155,8 @@ public class PnlInicio extends JPanel implements PnlInterface{
             @Override
             public void actionPerformed(ActionEvent e) {
                 /**En el caso de que se pulse el boton de entrar a la aplicación, 
-                 * se llama al metodo {@link cambiarPanel}*/
+                 * se llama al metodo {@link cambiarPanel}
+                 */
                 JVentana.cambiarPanel(PnlAlumno.PnlAlumno); // se establece el nuevo panel de la aplicación  
             }
         });
@@ -162,7 +165,8 @@ public class PnlInicio extends JPanel implements PnlInterface{
             @Override
             public void actionPerformed(ActionEvent e) {
                 /**En el caso de que se pulse el boton de entrar a la aplicación, 
-                 * se llama al metodo {@link cambiarPanel} solo version sprint1*/
+                 * se llama al metodo {@link cambiarPanel} solo version sprint1
+                 */
                 JVentana.cambiarPanel(PnlProf.pnlProf); // se establece el nuevo panel de la aplicación
             }
         });
