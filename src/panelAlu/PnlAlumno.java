@@ -5,10 +5,17 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 
 import paneluser.PnlEncabezado;
 import util.Fuente;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import javax.swing.border.EmptyBorder;
+import java.awt.Insets;
+import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -24,7 +31,7 @@ public class PnlAlumno extends JPanel {
         initComponents();
     }
 
-    /** Metodo en el cual se instanciaran todos los compones */
+    /** Metodo en el cual se instanciaran todos los componentes */
     private void initComponents(){
 
     
@@ -33,9 +40,7 @@ public class PnlAlumno extends JPanel {
         pnlInicioAlumno.setLayout(new GridBagLayout());     //Establecemos el layout
         /** Restricciones  para ir colocando los diferentes elementos dentro del {@link Gridbaglayout} */
         GridBagConstraints gbc = new GridBagConstraints();
-
-        // gbc.fill = GridBagConstraints.CENTER; // para que no se rellenen los huecos de la matriz
-        // gbc.anchor = GridBagConstraints.PAGE_START;
+        gbc.fill = GridBagConstraints.NONE; // para que los huecos no se rellenen
 
         /** Etiqueta que indica en que panel de uso se encuntra en el usuario */
         JLabel txtPantallaActual = new JLabel("Inicio");
@@ -44,11 +49,8 @@ public class PnlAlumno extends JPanel {
         gbc.gridy = 0;
         gbc.gridheight = 1; //Cuantas casillas de la matriz ocupa verticalmente
         gbc.gridwidth = 1;  //Cuantas casillas de la matriz ocupa horizontalmete
-        // // gbc.weightx = 0.5;
-        gbc.weighty = 1.0;
-        // gbc.insets = new Insets(5,0,5,0);   //Añadimos margenes
+        gbc.insets = (new Insets(20,100,0,0)); // ponemos margenes
         pnlInicioAlumno.add(txtPantallaActual, gbc);    //Lo añadimos al panel
-        gbc.weighty = 0.0;
 
         /** Etiqueta de Profesores */
         JLabel txtProfesor = new JLabel("Profesores");
@@ -57,18 +59,19 @@ public class PnlAlumno extends JPanel {
         gbc.gridy = 1;
         gbc.gridheight = 1; //Cuantas casillas de la matriz ocupa verticalmente
         gbc.gridwidth = 1;  //Cuantas casillas de la matriz ocupa horizontalmete
-        // // gbc.weightx = 0.5;
-        // // gbc.weighty = 1.0;
-        // gbc.insets = new Insets(50,0,0,0);   //Añadimos margenes
+        gbc.insets = (new Insets(20,100,0,0)); // ponemos margenes
         pnlInicioAlumno.add(txtProfesor, gbc);    //Lo añadimos al panel
 
-        DefaultListModel dlstProfesores = new DefaultListModel();   //Gestionara añadir y eliminar objetos de la lista
+        DefaultListModel<String> dlstProfesores = new DefaultListModel<String>();   //Gestionara añadir y eliminar objetos de la lista
         /** Lista que en la que el alumno podra ver a sus profesores */
-        JList lstProfesores = new JList(dlstProfesores);
+        JList<String> lstProfesores = new JList<String>(dlstProfesores);
         lstProfesores.setLayoutOrientation(JList.VERTICAL_WRAP);  //Hace que la lista se rellene de izquierda a derecha y de arriba a abajo
-        lstProfesores.setVisibleRowCount(10);
         addProfesores(dlstProfesores);
+        lstProfesores.setVisibleRowCount(Integer.valueOf(Math.round(Float.valueOf(dlstProfesores.getSize())/2))); // establecemos el numero de filas de la lista
         Fuente.setFuente(lstProfesores);
+        lstProfesores.setFixedCellHeight(25);
+        lstProfesores.setFixedCellWidth(225);
+        lstProfesores.setBorder(new EmptyBorder(5,5, 5, 5));
         JPanel pnlLista = new JPanel();
         pnlLista.setLayout(new BorderLayout());
         pnlLista.add(lstProfesores, BorderLayout.CENTER);
@@ -77,27 +80,45 @@ public class PnlAlumno extends JPanel {
         gbc.gridy = 2;
         gbc.gridheight = 1; //Cuantas casillas de la matriz ocupa verticalmente
         gbc.gridwidth = 3;  //Cuantas casillas de la matriz ocupa horizontalmete
-        // gbc.weightx = 1.0;
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.weighty = 0.5;
-        // gbc.insets = new Insets(0,0,0,0);   //Quitamos margenes
+        gbc.insets = (new Insets(20,0,0,0)); // ponemos margenes
         pnlInicioAlumno.add(pnlLista, gbc);
-        // gbc.weightx = 0.0;
-        gbc.weighty = 0.0;
-        gbc.fill = GridBagConstraints.NONE;
+       
 
         /** Boton para poder accecer a la ventana de reservar */
         JButton btnReservar = new JButton("Reservar");
+        try{
+            btnReservar.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/64/000000/date-to.png"))); // se pone el icono al boton
+        }
+        catch(MalformedURLException e){
+            e.printStackTrace();
+        }
+        btnReservar.setHorizontalTextPosition(SwingConstants.CENTER); // ponemos el texto en el centro
+        btnReservar.setVerticalTextPosition(SwingConstants.BOTTOM); // ponemos el texto abajo
+        btnReservar.setOpaque(false);
+        btnReservar.setBackground(new Color(0,0,0));
+        btnReservar.setBorder(null);
         Fuente.setFuente(btnReservar);
         //Colocamos la lista en el panel de Inicio de alumno
         gbc.gridx = 0;      //Especificamos posicion de la matriz
         gbc.gridy = 3;
         gbc.gridheight = 1; //Cuantas casillas de la matriz ocupa verticalmente
         gbc.gridwidth = 1;  //Cuantas casillas de la matriz ocupa horizontalmete
+        gbc.insets = (new Insets(20,0,0,0)); // ponemos margenes
         pnlInicioAlumno.add(btnReservar, gbc);
 
         /** Boton para acceder a la cola */
-	    JButton btnCola = new JButton("Cola");
+        JButton btnCola = new JButton("Cola");
+        try{
+            btnCola.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/64/000000/queue.png"))); // se pone el icono al boton
+        }
+        catch(MalformedURLException e){
+            e.printStackTrace();
+        }
+        btnCola.setHorizontalTextPosition(SwingConstants.CENTER); // ponemos el texto en el centro
+        btnCola.setVerticalTextPosition(SwingConstants.BOTTOM); // ponemos el texto abajo
+        btnCola.setOpaque(false);
+        btnCola.setBackground(new Color(0,0,0));
+        btnCola.setBorder(null);
         Fuente.setFuente(btnCola);
         //Colocamos la lista en el panel de Inicio de alumno
         gbc.gridx = 2;      //Especificamos posicion de la matriz
@@ -105,32 +126,32 @@ public class PnlAlumno extends JPanel {
         gbc.gridheight = 1; //Cuantas casillas de la matriz ocupa verticalmente
         gbc.gridwidth = 1;  //Cuantas casillas de la matriz ocupa horizontalmete
         gbc.anchor = GridBagConstraints.EAST;
+        gbc.insets = (new Insets(20,0,0,0)); // ponemos margenes
         pnlInicioAlumno.add(btnCola, gbc);
         gbc.anchor = GridBagConstraints.CENTER;
-
-
         
         this.setLayout(new BorderLayout());
         this.add(new PnlEncabezado(),BorderLayout.NORTH);
         this.add(pnlInicioAlumno, BorderLayout.CENTER);
     }
     
-    private void addProfesores(DefaultListModel dlstProfesores){
+    private void addProfesores(DefaultListModel<String> dlstProfesores){
         dlstProfesores.addElement("Profesor Generico 1");
-        dlstProfesores.addElement("Profesor Genreico 2");
-        dlstProfesores.addElement("Profesor Genreico 3");
-        dlstProfesores.addElement("Profesor Genreico 4");
-        dlstProfesores.addElement("Profesor Genreico 5");
+        dlstProfesores.addElement("Profesor Generico 2");
+        dlstProfesores.addElement("Profesor Generico 3");
+        dlstProfesores.addElement("Profesor Generico 4");
+        dlstProfesores.addElement("Profesor Generico 5");
         dlstProfesores.addElement("Profesor Genreico 6");
-        dlstProfesores.addElement("Profesor Genreico 7");
-        dlstProfesores.addElement("Profesor Genreico 8");
-        dlstProfesores.addElement("Profesor Genreico 9");
-        dlstProfesores.addElement("Profesor Genreico 10");
-        dlstProfesores.addElement("Profesor Genreico 11");
-        dlstProfesores.addElement("Profesor Genreico 12");
-        dlstProfesores.addElement("Profesor Genreico 13");
-        dlstProfesores.addElement("Profesor Genreico 14");
-        dlstProfesores.addElement("Profesor Genreico 15");
+        dlstProfesores.addElement("Profesor Generico 7");
+        dlstProfesores.addElement("Profesor Generico 8");
+        dlstProfesores.addElement("Profesor Generico 9");
+        dlstProfesores.addElement("Profesor Generico 10");
+        dlstProfesores.addElement("Profesor Generico 11");
+        dlstProfesores.addElement("Profesor Generico 12");
+        dlstProfesores.addElement("Profesor Generico 13");
+        dlstProfesores.addElement("Profesor Generico 14");
+        dlstProfesores.addElement("Profesor Generico 15");
+        
         
     }
 
