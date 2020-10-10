@@ -3,8 +3,6 @@ package gui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import panelAlu.PnlAlumno;
-import panelProf.PnlProf;
 import paneluser.PnlInicio;
 
 import java.awt.BorderLayout;
