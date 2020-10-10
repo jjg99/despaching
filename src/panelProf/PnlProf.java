@@ -3,7 +3,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import java.awt.GridBagLayout;
@@ -22,7 +21,7 @@ import util.Fuente;
 /**Clase para el panel del profesor */
 public class PnlProf  extends JPanel implements PnlInterface{
 
-    public static PnlProf PnlProf = new PnlProf(); // se crea la variable que se instanciará desde fuera
+    public static PnlProf pnlProf = new PnlProf(); // se crea la variable que se instanciará desde fuera
     private PnlProf(){
         this.establecerVentana();
     }
@@ -39,24 +38,24 @@ public class PnlProf  extends JPanel implements PnlInterface{
 
 
         /**Variable para establecer el titulo superior a la lista de reservas */
-        JLabel tituloReservas = new JLabel("Reservas");
-        Fuente.setFuenteNegrita(tituloReservas);      //se cambia la fuente del titulo a la predeterminada y en negrita
+        JLabel lblTituloReservas = new JLabel("Reservas");
+        Fuente.setFuenteNegrita(lblTituloReservas);      //se cambia la fuente del titulo a la predeterminada y en negrita
         c.gridx = 0;       // se situa en la parte superior izquierda de la pantalla
         c.gridy = 0;
-        panelInferior.add(tituloReservas,c);
+        panelInferior.add(lblTituloReservas,c);
 
         /**Variable de tipo {@link ListReservas} para guardar */
-        ListReservas listaReservas = new ListReservas();
-        listaReservas.actualizarValores();      //se actualizan las citas
+        ListReservas lstReservas = new ListReservas();
+        lstReservas.actualizarValores();      //se actualizan las citas
         c.gridy = 1;     //se coloca en la parte de la izquierda, debajo del titulo de reserva 
-        panelInferior.add(listaReservas,c);
+        panelInferior.add(lstReservas,c);
 
         /**Variable para establecer el titulo superior a la cola */
-        JLabel tituloCola = new JLabel("Cola");
-        Fuente.setFuenteNegrita(tituloCola);      //se cambia la fuente del titulo a la predeterminada y en negrita
+        JLabel lblTituloCola = new JLabel("Cola");
+        Fuente.setFuenteNegrita(lblTituloCola);      //se cambia la fuente del titulo a la predeterminada y en negrita
         c.gridx = 1;       // se situa en la parte superior izquierda de la pantalla
         c.gridy = 0;
-        panelInferior.add(tituloCola,c);
+        panelInferior.add(lblTituloCola,c);
 
         /**Variable de tipo {@link ListCola} para guardar toda la cola */
         ListCola listaCola = new ListCola();
