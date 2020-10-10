@@ -7,8 +7,6 @@ import paneluser.PnlInicio;
 
 import java.awt.BorderLayout;
 
-import util.Fecha;
-
 /**
  * Esta clase contiene el main, y sera la que contendra todos los paneles de
  * todos los usuarios y la que se encargara de pasar entre ellas.
