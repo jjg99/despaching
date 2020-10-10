@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 
 import gui.JVentana;
 import panelAlu.PnlAlumno;
+import panelProf.PnlProf;
 
 import java.awt.GridBagLayout;
 import java.awt.event.FocusListener;
@@ -154,6 +155,15 @@ public class PnlInicio extends JPanel implements PnlInterface{
                 /**En el caso de que se pulse el boton de entrar a la aplicación, 
                  * se llama al metodo {@link cambiarPanel}*/
                 JVentana.cambiarPanel(PnlAlumno.PnlAlumno); // se establece el nuevo panel de la aplicación  
+            }
+        });
+
+        btnReset.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                /**En el caso de que se pulse el boton de entrar a la aplicación, 
+                 * se llama al metodo {@link cambiarPanel} solo version sprint1*/
+                JVentana.cambiarPanel(PnlProf.PnlProf); // se establece el nuevo panel de la aplicación
             }
         });
 
