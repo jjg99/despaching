@@ -65,9 +65,4 @@ public class PnlProf  extends JPanel implements PnlInterface{
         this.add(panelInferior,BorderLayout.CENTER);    //se añade el panel inferior para ser pintado en el centro de la pantalla
 
     }
-    @Override
-    public void eliminar(){
-        this.setVisible(false);
-    }
-    
 }

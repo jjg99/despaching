@@ -225,10 +225,4 @@ public class PnlInicio extends JPanel implements PnlInterface{
         });
 
     }
-
-    @Override
-    public void eliminar(){         //No se debe usar, ya que al cambiar la visibilidad no se puede volver a el
-        this.setVisible(false);
-
-    }
 }

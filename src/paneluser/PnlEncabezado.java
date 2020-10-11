@@ -126,9 +126,4 @@ public class PnlEncabezado extends JPanel implements PnlInterface {
             }
         });
     }
-
-    @Override
-    public void eliminar(){
-
-    }
 }
