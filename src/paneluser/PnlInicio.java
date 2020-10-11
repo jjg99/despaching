@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import java.awt.event.MouseEvent;
+
 import gui.JVentana;
 import panelAlu.PnlAlumno;
 import panelProf.PnlProf;
@@ -14,8 +16,10 @@ import panelProf.PnlProf;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.FocusEvent;
 import java.net.URL;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 
 import java.awt.event.ActionListener;
@@ -31,6 +35,7 @@ import util.Fuente;
  */
 public class PnlInicio extends JPanel implements PnlInterface{
     public static PnlInicio PnlInicio = new PnlInicio();
+    JLabel lblImgOjo; 
 
     /**
      * Constructor de la clase, llamara al metodo {@link establecerVentana} para inicializar sus componentes
@@ -84,6 +89,18 @@ public class PnlInicio extends JPanel implements PnlInterface{
         c.gridy = 3;
         c.insets = new Insets(10,0,0,0);
         this.add(pswdContrasena,c);  // se añade el area de contraseña al panel
+
+        /** Imagen para poder mostrar la contraseña mientras se mantiene */
+        try{
+            lblImgOjo = new JLabel(new ImageIcon(new URL("https://img.icons8.com/dusk/25/000000/closed-eye.png")));
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        c.gridx = 1;       //se coloca el icono en el centro de la pantalla
+        c.gridy = 3;
+        c.anchor = GridBagConstraints.WEST;
+        this.add(lblImgOjo,c);  //se añade el icono al panel
+        c.anchor = GridBagConstraints.CENTER;
        
         /**Boton para entrar a la aplicación */
         JButton btnEntrar = new JButton("Entrar");
@@ -93,7 +110,11 @@ public class PnlInicio extends JPanel implements PnlInterface{
         this.add(btnEntrar,c);    //se añade el boton al panel
 
         /**Boton para rersetear la contrasena */
-        JButton btnReset = new JButton("Reset Psswd");
+        JButton btnReset = new JButton("Olvidaste tu contrasena");
+        btnReset.setOpaque(false);
+        btnReset.setBackground(new Color(0,0,0));
+        btnReset.setBorder(null);
+        btnReset.setForeground(new Color(20,90,240));
         Fuente.setFuente(btnReset);
        // c.anchor = ; // se coloca el boton a la misma altura que el boton de entrar
         c.gridx = 0;        //se coloca el boton inferior a la contraseña
@@ -168,6 +189,37 @@ public class PnlInicio extends JPanel implements PnlInterface{
                  * se llama al metodo {@link cambiarPanel} solo version sprint1
                  */
                 JVentana.cambiarPanel(PnlProf.pnlProf); // se establece el nuevo panel de la aplicación
+            }
+        });
+
+        btnReset.addMouseListener(new MouseAdapter(){
+            public void mouseEntered(MouseEvent e){
+                btnReset.setForeground(new Color(9,110,226,180));
+            }
+            public void mouseExited(MouseEvent e){
+                btnReset.setForeground(new Color(9,110,226,255));
+            }
+        });
+
+        lblImgOjo.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent me){
+                try{
+                    lblImgOjo.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/25/000000/ophthalmology.png")));
+                    pswdContrasena.setEchoChar((char) 0);   //Se pone que se pueda ver la contrasena
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            public void mouseReleased(MouseEvent me){
+                try{
+                    lblImgOjo.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/25/000000/closed-eye.png")));
+                    if(!new String(pswdContrasena.getPassword()).equals("Contrasena")){
+                        pswdContrasena.setEchoChar('\u2022');   //Se activa que salgan circulos en vez de los caracteres
+                    }
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
