@@ -57,11 +57,11 @@ public class PnlInicio extends JPanel implements PnlInterface{
         
         /** Titulo superior */ 
         JLabel lblTitulo = new JLabel("Despaching"); 
-                
         Fuente.setFuenteTituloNegrita(lblTitulo);  //establece la fuente del titulo y se establece el titulo a negrita
         c.gridx= 0; // se coloca el titulo en la parte superior de la pantalla
         c.gridy = 0;
         this.add(lblTitulo,c);  // se añade el titulo al panel
+
         /**Imagen para poder incluir el icono por defecto al iniciar sesion */
         JLabel lblImagenDefault = null;
         try{
@@ -78,7 +78,6 @@ public class PnlInicio extends JPanel implements PnlInterface{
         Fuente.setFuente(txtUsuario);      //Fijamos la fuente y tamaño de la letra
         c.gridx = 0;  // se coloca el usuario en el centro de la pantalla
         c.gridy = 2;
-        //c.weighty = 0.00001;        //se le da cierta altura a todos los componentes por debajo del icono
         this.add(txtUsuario,c);  // se añade el area de usuario al panel 
 
         /**Area para introducir la contraseña del usuario */
@@ -87,37 +86,37 @@ public class PnlInicio extends JPanel implements PnlInterface{
         pswdContrasena.setEchoChar((char) 0);       //Se cambia a que salgan los caracteres en vez de los puntos
         c.gridx = 0; // se coloca la contraseña en el centro de la pantalla
         c.gridy = 3;
-        c.insets = new Insets(10,0,0,0);
-        this.add(pswdContrasena,c);  // se añade el area de contraseña al panel
+        c.insets = new Insets(10,0,0,0);    //Se fija un margen
+        this.add(pswdContrasena,c);  //Se añade el area de contraseña al panel
 
-        /** Imagen para poder mostrar la contraseña mientras se mantiene */
+        /** Imagen para poder mostrar la contraseña mientras se mantiene dicha imagen*/
         try{
             lblImgOjo = new JLabel(new ImageIcon(new URL("https://img.icons8.com/dusk/25/000000/closed-eye.png")));
         }catch (Exception e) {
             e.printStackTrace();
         }
-        c.gridx = 1;       //se coloca el icono en el centro de la pantalla
+        c.gridx = 1;       //Se coloca el icono a la derecha del campo de contrasena
         c.gridy = 3;
-        c.anchor = GridBagConstraints.WEST;
+        c.anchor = GridBagConstraints.WEST;     //Fijamos que se ancle a la izquierda
         this.add(lblImgOjo,c);  //se añade el icono al panel
-        c.anchor = GridBagConstraints.CENTER;
+        c.anchor = GridBagConstraints.CENTER;   //Se vuelve a poner el valor por defecto para el resto de componentes
        
         /**Boton para entrar a la aplicación */
         JButton btnEntrar = new JButton("Entrar");
         Fuente.setFuente(btnEntrar);
-        c.gridx = 0;        //se coloca el boton inferior a la contraseña
+        c.gridx = 0;        //se coloca el boton debajo del de la contraseña
         c.gridy = 4;
         this.add(btnEntrar,c);    //se añade el boton al panel
 
         /**Boton para rersetear la contrasena */
-        JButton btnReset = new JButton("Olvidaste tu contrasena");
+        JButton btnReset = new JButton("Olvidaste tu contrasena?");
+        //Hacemos que solo se vea el texto
         btnReset.setOpaque(false);
         btnReset.setBackground(new Color(0,0,0));
         btnReset.setBorder(null);
         btnReset.setForeground(new Color(20,90,240));
         Fuente.setFuente(btnReset);
-       // c.anchor = ; // se coloca el boton a la misma altura que el boton de entrar
-        c.gridx = 0;        //se coloca el boton inferior a la contraseña
+        c.gridx = 0;        //se coloca el boton debajo del de iniciar sesion
         c.gridy = 5;
         this.add(btnReset,c);
         c.insets = new Insets(0,0,0,0);
@@ -192,11 +191,14 @@ public class PnlInicio extends JPanel implements PnlInterface{
             }
         });
 
+
         btnReset.addMouseListener(new MouseAdapter(){
             public void mouseEntered(MouseEvent e){
+                // Hacemos que cuando el raton este encima del componente se ponga mas clarito
                 btnReset.setForeground(new Color(9,110,226,180));
             }
             public void mouseExited(MouseEvent e){
+                // Hacemos que cuando el raton no este encima del componete, vuelva al color original
                 btnReset.setForeground(new Color(9,110,226,255));
             }
         });
@@ -210,7 +212,6 @@ public class PnlInicio extends JPanel implements PnlInterface{
                     e.printStackTrace();
                 }
             }
-
             public void mouseReleased(MouseEvent me){
                 try{
                     lblImgOjo.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/25/000000/closed-eye.png")));
