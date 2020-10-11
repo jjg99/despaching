@@ -18,6 +18,8 @@ import java.awt.Insets;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
 import java.net.URL;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -170,6 +172,38 @@ public class PnlInicio extends JPanel implements PnlInterface{
                 }
             }
         });
+
+        pswdContrasena.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyPressed(KeyEvent e){
+                //Hara que cuando el foco este en el cuadro de la contrasena y se de al "ENTER" se haga click en el boton de entrar
+				if(e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+					btnEntrar.doClick();
+				}
+			}
+        });
+
+        lblImgOjo.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent me){
+                try{
+                    lblImgOjo.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/25/000000/ophthalmology.png")));
+                    pswdContrasena.setEchoChar((char) 0);   //Se pone que se pueda ver la contrasena
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            public void mouseReleased(MouseEvent me){
+                try{
+                    lblImgOjo.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/25/000000/closed-eye.png")));
+                    if(!new String(pswdContrasena.getPassword()).equals("Contrasena")){
+                        pswdContrasena.setEchoChar('\u2022');   //Se activa que salgan circulos en vez de los caracteres
+                    }
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         /**Metodo que permite añadir funcionalidad al boton de entrar {@link btnEntrar} */
         btnEntrar.addActionListener(new ActionListener(){
             @Override
@@ -202,27 +236,5 @@ public class PnlInicio extends JPanel implements PnlInterface{
                 btnReset.setForeground(new Color(9,110,226,255));
             }
         });
-
-        lblImgOjo.addMouseListener(new MouseAdapter(){
-            public void mousePressed(MouseEvent me){
-                try{
-                    lblImgOjo.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/25/000000/ophthalmology.png")));
-                    pswdContrasena.setEchoChar((char) 0);   //Se pone que se pueda ver la contrasena
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            public void mouseReleased(MouseEvent me){
-                try{
-                    lblImgOjo.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/25/000000/closed-eye.png")));
-                    if(!new String(pswdContrasena.getPassword()).equals("Contrasena")){
-                        pswdContrasena.setEchoChar('\u2022');   //Se activa que salgan circulos en vez de los caracteres
-                    }
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
     }
 }
