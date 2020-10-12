@@ -1,12 +1,11 @@
 package gui;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import paneluser.PnlInicio;
-
-import java.awt.BorderLayout;
-
 /**
  * Esta clase contiene el main, y sera la que contendra todos los paneles de
  * todos los usuarios y la que se encargara de pasar entre ellas.

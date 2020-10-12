@@ -7,18 +7,19 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
-
-import paneluser.PnlEncabezado;
-import util.Fuente;
+import javax.swing.border.EmptyBorder;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import javax.swing.border.EmptyBorder;
+
 import java.awt.Insets;
-import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+
+import paneluser.PnlEncabezado;
+import util.Colores;
+import util.Fuente;
 
 /**
  * Clase destinada a crear el panel del alumno, con el que interactuara con el resto del programa
@@ -94,7 +95,7 @@ public class PnlAlumno extends JPanel {
         btnReservar.setHorizontalTextPosition(SwingConstants.CENTER); // ponemos el texto en el centro
         btnReservar.setVerticalTextPosition(SwingConstants.BOTTOM); // ponemos el texto abajo
         btnReservar.setOpaque(false);
-        btnReservar.setBackground(new Color(0,0,0));
+        Colores.setBGTransparente(btnReservar);
         btnReservar.setBorder(null);
         Fuente.setFuente(btnReservar);
         //Colocamos la lista en el panel de Inicio de alumno
@@ -116,7 +117,7 @@ public class PnlAlumno extends JPanel {
         btnCola.setHorizontalTextPosition(SwingConstants.CENTER); // ponemos el texto en el centro
         btnCola.setVerticalTextPosition(SwingConstants.BOTTOM); // ponemos el texto abajo
         btnCola.setOpaque(false);
-        btnCola.setBackground(new Color(0,0,0));
+        Colores.setBGTransparente(btnCola);
         btnCola.setBorder(null);
         Fuente.setFuente(btnCola);
         //Colocamos la lista en el panel de Inicio de alumno

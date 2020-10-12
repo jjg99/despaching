@@ -8,26 +8,25 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import java.awt.event.MouseEvent;
-
-import gui.JVentana;
-import panelAlu.PnlAlumno;
-import panelProf.PnlProf;
-
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
-import java.net.URL;
-import java.awt.GridBagConstraints;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+
+import java.net.URL;
+
 import util.Fuente;
 import util.Colores;
+import gui.JVentana;
+import panelAlu.PnlAlumno;
+import panelProf.PnlProf;
 
 /**
  * Clase destinada a crear el panel de incio de la aplicación

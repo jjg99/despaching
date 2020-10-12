@@ -1,22 +1,21 @@
 package paneluser;
 
 import javax.swing.JPanel;
-
-import gui.JVentana;
-
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 
-import java.awt.Color;
-import java.awt.GridBagLayout;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.GridBagConstraints;
 
+import gui.JVentana;
+import util.Colores;
 import util.Fecha;
 import util.Fuente;
 
@@ -108,7 +107,7 @@ public class PnlEncabezado extends JPanel implements PnlInterface {
             e.printStackTrace();
         }
         btnCerrarSesion.setOpaque(false);
-        btnCerrarSesion.setBackground(new Color(0,0,0));
+        Colores.setBGTransparente(btnCerrarSesion);
         btnCerrarSesion.setBorder(null);
         gbc.gridx = 5;    // se establece la posicion en la matriz
         gbc.gridy = 0;
