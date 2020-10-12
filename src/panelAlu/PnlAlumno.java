@@ -34,7 +34,6 @@ public class PnlAlumno extends JPanel {
     /** Metodo en el cual se instanciaran todos los componentes */
     private void initComponents(){
 
-    
         /** Panel del alumno que contendra todos los componentes con los que interactuara */
         JPanel pnlInicioAlumno = new JPanel();
         pnlInicioAlumno.setLayout(new GridBagLayout());     //Establecemos el layout
@@ -62,26 +61,26 @@ public class PnlAlumno extends JPanel {
         gbc.insets = (new Insets(20,100,0,0)); // ponemos margenes
         pnlInicioAlumno.add(txtProfesor, gbc);    //Lo añadimos al panel
 
-        DefaultListModel<String> dlstProfesores = new DefaultListModel<String>();   //Gestionara añadir y eliminar objetos de la lista
+        DefaultListModel<String> dlstProfesores = new DefaultListModel<String>();   //Gestionara añadira y eliminara objetos de la lista
         /** Lista que en la que el alumno podra ver a sus profesores */
         JList<String> lstProfesores = new JList<String>(dlstProfesores);
-        lstProfesores.setLayoutOrientation(JList.VERTICAL_WRAP);  //Hace que la lista se rellene de izquierda a derecha y de arriba a abajo
-        addProfesores(dlstProfesores);
+        lstProfesores.setLayoutOrientation(JList.VERTICAL_WRAP);  //Hace que la lista se rellene de  de arriba a abajo y de izquierda a derecha
+        addProfesores(dlstProfesores);      //Llamamos a el metodo para que rellene la lista
         lstProfesores.setVisibleRowCount(Integer.valueOf(Math.round(Float.valueOf(dlstProfesores.getSize())/2))); // establecemos el numero de filas de la lista
-        Fuente.setFuente(lstProfesores);
-        lstProfesores.setFixedCellHeight(25);
-        lstProfesores.setFixedCellWidth(225);
-        lstProfesores.setBorder(new EmptyBorder(5,5, 5, 5));
+        Fuente.setFuente(lstProfesores);    //Fijamos la fuente
+        lstProfesores.setFixedCellHeight(25);       //se fija la altura de cada objeto de la lista
+        lstProfesores.setFixedCellWidth(225);       //se fija el ancho de cada objeto de la lista
+        lstProfesores.setBorder(new EmptyBorder(5,5,5,5));        //se agrega un pequeño margen al en el interior de la lista
         JPanel pnlLista = new JPanel();
         pnlLista.setLayout(new BorderLayout());
-        pnlLista.add(lstProfesores, BorderLayout.CENTER);
+        pnlLista.add(lstProfesores, BorderLayout.CENTER);   //Se agrega la lista a un panel para fijar un tamaño
         //Colocamos la lista en el panel de Inicio de alumno
         gbc.gridx = 0;      //Especificamos posicion de la matriz
         gbc.gridy = 2;
         gbc.gridheight = 1; //Cuantas casillas de la matriz ocupa verticalmente
         gbc.gridwidth = 3;  //Cuantas casillas de la matriz ocupa horizontalmete
         gbc.insets = (new Insets(20,0,0,0)); // ponemos margenes
-        pnlInicioAlumno.add(pnlLista, gbc);
+        pnlInicioAlumno.add(pnlLista, gbc);     //Agregamaos el panel de la lista
        
 
         /** Boton para poder accecer a la ventana de reservar */
@@ -149,7 +148,7 @@ public class PnlAlumno extends JPanel {
         dlstProfesores.addElement("Profesor Generico 11");
         dlstProfesores.addElement("Profesor Generico 12");
         dlstProfesores.addElement("Profesor Generico 13");
-        dlstProfesores.addElement("Profesor Generico 14");
+        dlstProfesores.addElement("Profesor Genreico 14");
         dlstProfesores.addElement("Profesor Generico 15");
         
         
