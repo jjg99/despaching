@@ -15,7 +15,7 @@ public class JVentana extends JFrame{
     /**String con el nombre que tendra la ventanga generada */
     private final String Titulo = new String("Despaching");
 
-    /** Panel que contendra todos los componentes y ocupara la totalidad de la <code>JVentana<\code> */
+    /** Panel que contendra todos los componentes y ocupara la totalidad de la <code>JVentana</code> */
     private static JPanel pnlVentana = new JPanel();
 
     /**
@@ -26,7 +26,7 @@ public class JVentana extends JFrame{
     }
     
     /**
-     * Crea una nueva JVentanaApp, llamando al metodo {@link initComponets} para instanciar el 
+     * Crea una nueva JVentanaApp, llamando al metodo {@link initComponents} para instanciar el 
      * panel inicial e {@link initFrame} para configurar y mostrar la ventana.
      */
     public JVentana(){
@@ -64,7 +64,7 @@ public class JVentana extends JFrame{
     }
 
     /**
-     * Metodo estatico que borra el contenido de {@link pnlVentana} y añade el <code>JPanel<\code>
+     * Metodo estatico que borra el contenido de {@link pnlVentana} y añade el <code>JPanel</code>
      * recibido en el centro.
      * @param pnlPoner panel a cargar en {link pnlVentana}
      */

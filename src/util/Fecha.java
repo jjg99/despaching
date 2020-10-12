@@ -8,8 +8,8 @@ import java.util.Calendar;
 */
 public abstract class Fecha {
     /**
-     * Metodo para obtener la fecha con el formato <code>dd/MM/yyyy<\code>
-     * @return Una <code>String<\code> de la fecha
+     * Metodo para obtener la fecha con el formato <code>dd/MM/yyyy</code>
+     * @return Una <code>String</code> de la fecha
      */
     public static String fechaString(){
         Calendar fecha = Calendar.getInstance();    //Obtenemos una instancia de calendario
