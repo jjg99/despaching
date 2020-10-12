@@ -12,13 +12,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import paneluser.PnlEncabezado;
 import paneluser.PnlHorario;
-import paneluser.PnlInterface;
 import util.Colores;
 import util.Fuente;
 
@@ -111,7 +109,7 @@ public class PnlProf extends JPanel{
         pnlDerecha.add(lstScroll,BorderLayout.CENTER);
         pnlDerecha.add(pnlEliminarAlu,BorderLayout.SOUTH);
 
-
+        //Agregamos todo a PnlProf
         this.setLayout(new BorderLayout()); //se establece el layout de tipo borderLayout
         this.add(new PnlEncabezado(),BorderLayout.NORTH);   //se añade el panel de encabezado en la parte superior de la pantalla
         this.add(pnlIzquierda,BorderLayout.WEST);    //se añade el panel izquierdo para ser pintado
@@ -139,7 +137,6 @@ public class PnlProf extends JPanel{
                 removeCola(dlstColaAlumnos);
             }
         });
-
     }
     /**
      * Metodo que obtiene la Cola
