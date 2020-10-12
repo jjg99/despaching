@@ -21,13 +21,13 @@ import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 import java.net.URL;
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import util.Fuente;
+import util.Colores;
 
 /**
  * Clase destinada a crear el panel de incio de la aplicación
@@ -105,6 +105,7 @@ public class PnlInicio extends JPanel implements PnlInterface{
        
         /**Boton para entrar a la aplicación */
         JButton btnEntrar = new JButton("Entrar");
+        Colores.setBGAzul(btnEntrar);
         Fuente.setFuente(btnEntrar);
         c.gridx = 0;        //se coloca el boton debajo del de la contraseña
         c.gridy = 4;
@@ -113,10 +114,9 @@ public class PnlInicio extends JPanel implements PnlInterface{
         /**Boton para rersetear la contrasena */
         JButton btnReset = new JButton("Olvidaste tu contrasena?");
         //Hacemos que solo se vea el texto
-        btnReset.setOpaque(false);
-        btnReset.setBackground(new Color(0,0,0));
+        Colores.setBGTransparente(btnReset);
         btnReset.setBorder(null);
-        btnReset.setForeground(new Color(20,90,240));
+        Colores.setFGAzulOsc(btnReset);
         Fuente.setFuente(btnReset);
         c.gridx = 0;        //se coloca el boton debajo del de iniciar sesion
         c.gridy = 5;
@@ -229,11 +229,11 @@ public class PnlInicio extends JPanel implements PnlInterface{
         btnReset.addMouseListener(new MouseAdapter(){
             public void mouseEntered(MouseEvent e){
                 // Hacemos que cuando el raton este encima del componente se ponga mas clarito
-                btnReset.setForeground(new Color(9,110,226,180));
+                Colores.setFGAzulOscTrans(btnReset);
             }
             public void mouseExited(MouseEvent e){
                 // Hacemos que cuando el raton no este encima del componete, vuelva al color original
-                btnReset.setForeground(new Color(9,110,226,255));
+                Colores.setFGAzulOsc(btnReset);
             }
         });
     }
