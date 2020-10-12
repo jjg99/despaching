@@ -114,6 +114,7 @@ public class PnlInicio extends JPanel implements PnlInterface{
         /**Boton para rersetear la contrasena */
         JButton btnReset = new JButton("Olvidaste tu contrasena?");
         //Hacemos que solo se vea el texto
+        btnReset.setOpaque(false);
         Colores.setBGTransparente(btnReset);
         btnReset.setBorder(null);
         Colores.setFGAzulOsc(btnReset);
