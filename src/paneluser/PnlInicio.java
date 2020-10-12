@@ -51,6 +51,7 @@ public class PnlInicio extends JPanel implements PnlInterface{
     @Override
     public void establecerVentana(){
         this.setLayout(new GridBagLayout()); //se establece el layout 
+        Colores.setBGColor(this);      //Fijamos el color del fondo
         /**Restricciones  para ir colocando los diferentes elementos dentro del {@link Gridbaglayout} */
         GridBagConstraints c = new GridBagConstraints();
 

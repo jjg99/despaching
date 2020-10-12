@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import paneluser.PnlInicio;
+import util.Colores;
 /**
  * Esta clase contiene el main, y sera la que contendra todos los paneles de
  * todos los usuarios y la que se encargara de pasar entre ellas.
@@ -40,6 +41,7 @@ public class JVentana extends JFrame{
      */
     private void initComponents(){
         pnlVentana.setLayout(new BorderLayout());     //Fijamos el tipo de Layout
+        Colores.setBGColor(pnlVentana);    //Fijamos el color del fondo
         pnlVentana.add(PnlInicio.PnlInicio,BorderLayout.CENTER);      //Añadimos el panel de inicio
 
         this.setLayout(new BorderLayout());     //Fijamos el tipo de Layout

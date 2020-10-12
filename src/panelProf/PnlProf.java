@@ -36,6 +36,7 @@ public class PnlProf extends JPanel{
         /** Panel que contendra el Horario del dia */
         JPanel pnlIzquierda = new JPanel();
         pnlIzquierda.setLayout(new BorderLayout());
+        Colores.setBGColor(pnlIzquierda);   //Fijamos el color del fondo
 
         JLabel lblHorario = new JLabel("Horario:");
         Fuente.setFuenteNegrita(lblHorario);
@@ -43,6 +44,7 @@ public class PnlProf extends JPanel{
         /** Panel que contendra la etiqueta {@link lblHorario}*/
         JPanel pnlTxtHorario = new JPanel();
         pnlTxtHorario.setLayout(new FlowLayout());
+        Colores.setBGColor(pnlTxtHorario);   //Fijamos el color del fondo
         pnlTxtHorario.add(lblHorario);
         
         // Agregamos ambos componentes al panel
@@ -52,6 +54,7 @@ public class PnlProf extends JPanel{
         /** Panel que contendra la cola */
         JPanel pnlDerecha = new JPanel();
         pnlDerecha.setLayout(new BorderLayout());
+        Colores.setBGColor(pnlDerecha);   //Fijamos el color del fondo
 
         //Etiqueta Cola
         JLabel lblCola = new JLabel("Cola:");
@@ -60,6 +63,7 @@ public class PnlProf extends JPanel{
         //Panel para la etiqueta cola
         JPanel pnlTxtCola = new JPanel();
         pnlTxtCola.setLayout(new FlowLayout());
+        Colores.setBGColor(pnlTxtCola);   //Fijamos el color del fondo
         pnlTxtCola.add(lblCola);
 
         //Boton para abrir la cola
@@ -76,12 +80,14 @@ public class PnlProf extends JPanel{
         /**Panel de botones que controlan la cola */
         JPanel pnlCola = new JPanel();
         pnlCola.setLayout(new FlowLayout());
+        Colores.setBGColor(pnlCola);   //Fijamos el color del fondo
         pnlCola.add(btnCerrar);
         pnlCola.add(btnAbrir);
 
         /**Panel con la etiqueta y los botones de abrir y cerrar la cola */
         JPanel pnlGestorCola = new JPanel();
         pnlGestorCola.setLayout(new GridLayout(2,1));
+        Colores.setBGColor(pnlGestorCola);   //Fijamos el color del fondo
         pnlGestorCola.add(pnlTxtCola);
         pnlGestorCola.add(pnlCola);
         
@@ -102,6 +108,7 @@ public class PnlProf extends JPanel{
         Colores.setBGAzul(btnEliminarAlumno);
         JPanel pnlEliminarAlu = new JPanel();
         pnlEliminarAlu.setLayout(new FlowLayout());
+        Colores.setBGColor(pnlEliminarAlu);   //Fijamos el color del fondo
         pnlEliminarAlu.add(btnEliminarAlumno);
 
         //Agregamos componentes al panel derecho

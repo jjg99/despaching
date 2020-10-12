@@ -11,6 +11,8 @@ import javax.swing.JComponent;
 */
 public class Colores {
 
+    /**Fija el color del fonda para toda la app */
+    private final static Color FONDO = new Color(255, 255, 255);    //Blanco
     /**Fija el color Verde */
     private final static Color VERDE = new Color(114, 202, 175);
     /**Fija el color Rojo */
@@ -27,6 +29,14 @@ public class Colores {
     private final static Color TRANSPARENTE = new Color(0, 0, 0, 0);
 
    /**
+     * Metodo para fijar el color del fonde para toda la app.
+     * @param comp <code>JComponent</code> al que se le cambiara el color.
+     */
+    public static void setBGColor(JComponent comp){
+        comp.setBackground(FONDO);
+    }
+
+    /**
      * Metodo para fijar el color del background en verde.
      * @param comp <code>JComponent</code> al que se le cambiara el color.
      */

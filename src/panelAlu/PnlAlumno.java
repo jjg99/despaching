@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import javax.swing.border.EmptyBorder;
@@ -38,6 +39,7 @@ public class PnlAlumno extends JPanel {
         /** Panel del alumno que contendra todos los componentes con los que interactuara */
         JPanel pnlInicioAlumno = new JPanel();
         pnlInicioAlumno.setLayout(new GridBagLayout());     //Establecemos el layout
+        Colores.setBGColor(pnlInicioAlumno);   //Fijamos el color del fondo
         /** Restricciones  para ir colocando los diferentes elementos dentro del {@link Gridbaglayout} */
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.NONE; // para que los huecos no se rellenen
@@ -72,16 +74,14 @@ public class PnlAlumno extends JPanel {
         lstProfesores.setFixedCellHeight(25);       //se fija la altura de cada objeto de la lista
         lstProfesores.setFixedCellWidth(225);       //se fija el ancho de cada objeto de la lista
         lstProfesores.setBorder(new EmptyBorder(5,5,5,5));        //se agrega un pequeño margen al en el interior de la lista
-        JPanel pnlLista = new JPanel();
-        pnlLista.setLayout(new BorderLayout());
-        pnlLista.add(lstProfesores, BorderLayout.CENTER);   //Se agrega la lista a un panel para fijar un tamaño
+        JScrollPane pnlLstScroll = new JScrollPane(lstProfesores);   //Hacemos que podamos hacer scroll en la lista
         //Colocamos la lista en el panel de Inicio de alumno
         gbc.gridx = 0;      //Especificamos posicion de la matriz
         gbc.gridy = 2;
         gbc.gridheight = 1; //Cuantas casillas de la matriz ocupa verticalmente
         gbc.gridwidth = 3;  //Cuantas casillas de la matriz ocupa horizontalmete
         gbc.insets = (new Insets(20,0,0,0)); // ponemos margenes
-        pnlInicioAlumno.add(pnlLista, gbc);     //Agregamaos el panel de la lista
+        pnlInicioAlumno.add(pnlLstScroll, gbc);     //Agregamaos el panel de la lista
        
 
         /** Boton para poder accecer a la ventana de reservar */
@@ -131,6 +131,7 @@ public class PnlAlumno extends JPanel {
         gbc.anchor = GridBagConstraints.CENTER;
         
         this.setLayout(new BorderLayout());
+        Colores.setBGColor(this);   //Fijamos el color del fondo
         this.add(new PnlEncabezado(),BorderLayout.NORTH);
         this.add(pnlInicioAlumno, BorderLayout.CENTER);
     }
