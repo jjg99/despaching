@@ -51,7 +51,7 @@ public class PnlAlumno extends JPanel {
         gbc.gridy = 0;
         gbc.gridheight = 1; //Cuantas casillas de la matriz ocupa verticalmente
         gbc.gridwidth = 1;  //Cuantas casillas de la matriz ocupa horizontalmete
-        gbc.insets = (new Insets(20,100,0,0)); // ponemos margenes
+        // gbc.insets = (new Insets(20,100,0,0)); // ponemos margenes
         pnlInicioAlumno.add(txtPantallaActual, gbc);    //Lo añadimos al panel
 
         /** Etiqueta de Profesores */
@@ -61,15 +61,14 @@ public class PnlAlumno extends JPanel {
         gbc.gridy = 1;
         gbc.gridheight = 1; //Cuantas casillas de la matriz ocupa verticalmente
         gbc.gridwidth = 1;  //Cuantas casillas de la matriz ocupa horizontalmete
-        gbc.insets = (new Insets(20,100,0,0)); // ponemos margenes
+        // gbc.insets = (new Insets(20,100,0,0)); // ponemos margenes
         pnlInicioAlumno.add(txtProfesor, gbc);    //Lo añadimos al panel
 
         DefaultListModel<String> dlstProfesores = new DefaultListModel<String>();   //Gestionara añadira y eliminara objetos de la lista
         /** Lista que en la que el alumno podra ver a sus profesores */
         JList<String> lstProfesores = new JList<String>(dlstProfesores);
-        lstProfesores.setLayoutOrientation(JList.VERTICAL_WRAP);  //Hace que la lista se rellene de  de arriba a abajo y de izquierda a derecha
+        lstProfesores.setLayoutOrientation(JList.VERTICAL);  //Hace que la lista se rellene de arriba a abajo 
         addProfesores(dlstProfesores);      //Llamamos a el metodo para que rellene la lista
-        lstProfesores.setVisibleRowCount(Integer.valueOf(Math.round(Float.valueOf(dlstProfesores.getSize())/2))); // establecemos el numero de filas de la lista
         Fuente.setFuente(lstProfesores);    //Fijamos la fuente
         lstProfesores.setFixedCellHeight(25);       //se fija la altura de cada objeto de la lista
         lstProfesores.setFixedCellWidth(225);       //se fija el ancho de cada objeto de la lista
@@ -151,9 +150,7 @@ public class PnlAlumno extends JPanel {
         dlstProfesores.addElement("Profesor Generico 12");
         dlstProfesores.addElement("Profesor Generico 13");
         dlstProfesores.addElement("Profesor Genreico 14");
-        dlstProfesores.addElement("Profesor Generico 15");
-        
-        
+        dlstProfesores.addElement("Profesor Generico 15");  
     }
 
 }
