@@ -37,7 +37,7 @@ public class PostgreSQLJDBC {
       ResultSet rs = null;
       try {
          rs = stmt.executeQuery(sql);     //Se ejecuta la query y se guardan los resultados
-         System.out.println("Ejecuntado la sentencia: SELECT nombre FROM \"Usuarios\" WHERE rol='prof' \n Se obtienen todos los profes de la BD:");
+         System.out.println("Ejecutando la sentencia: SELECT nombre FROM \"Usuarios\" WHERE rol='prof' \n Se obtienen todos los profes de la BD:");
          while (rs.next()) { 
             System.out.println("Nombre: " + rs.getString("nombre"));    //Extrae y muestra el nombre de los resultados
          }
@@ -50,7 +50,7 @@ public class PostgreSQLJDBC {
 
       try {
          rs = stmt.executeQuery(sql);
-         System.out.println("\nEjecuntado la sentencia: SELECT nombre FROM \"Usuarios\" WHERE rol='alu' \n Se obtienen todos los alumnos de la BD:");
+         System.out.println("\nEjecutando la sentencia: SELECT nombre FROM \"Usuarios\" WHERE rol='alu' \n Se obtienen todos los alumnos de la BD:");
          while (rs.next()) {
             System.out.println("Nombre: " + rs.getString("nombre"));    //Extrae y muestra el nombre de los resultados
          }
