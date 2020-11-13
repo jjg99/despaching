@@ -1,22 +1,21 @@
 package panelAlu;
 
+import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-import javax.swing.ImageIcon;
 import javax.swing.border.EmptyBorder;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import java.awt.Insets;
-import java.awt.BorderLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
 
 import paneluser.PnlEncabezado;
 import util.Colores;
