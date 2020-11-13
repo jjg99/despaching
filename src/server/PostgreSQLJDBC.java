@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class PostgreSQLJDBC {
-   private final static String BD_URL = "jdbc:postgresql://jonan.hopto.org:5432/Despaching";
+   private static final String BD_URL = "jdbc:postgresql://jonan.hopto.org:5432/Despaching";
    private static final String USER = "postgres";
    private static final String PASS = "admin";
 
