@@ -1,6 +1,5 @@
 /*
-Por ahora esta clase esta diseña para funcionar de manera autonoma e independiente para asegurar el correcto funcionamiento
-de esta clase y de un comportamiento correcto de la base de datos, tras estas pruebas sera debidamente comentada y configurada
+Esta esta para entender la integracion de sql en java y realizar pruebas de conectividad a la BD
  */
 package server;
 
@@ -18,31 +17,44 @@ public class PostgreSQLJDBC {
    public static void main(String args[]) {
       Connection connection = null;
       try {
-         Class.forName("org.postgresql.Driver");
-         connection = DriverManager.getConnection(BD_URL, USER, PASS);
+         Class.forName("org.postgresql.Driver");      //se carga el driver de la BD
+         connection = DriverManager.getConnection(BD_URL, USER, PASS);     //Se realiza la conexion a la BD
       } catch (Exception e) {
          e.printStackTrace();
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(0);
       }
-      System.out.println("Opened database successfully");
       // pruebas de conectividad
       Statement stmt = null;
       try {
-         stmt = connection.createStatement();
+         stmt = connection.createStatement();      //Se prepara para la ejecucion de de querys
       } catch (SQLException e) {
          e.printStackTrace();
       }
 
-      String sql = "SELECT nombre FROM \"Usuarios\" WHERE rol='prof'";  //Obtiene todos los nombres de los profesores
+      String sql = "SELECT nombre FROM \"Usuarios\" WHERE rol='prof'";  //Se fija la String de la query
 
       ResultSet rs = null;
       try {
-         rs = stmt.executeQuery(sql);
+         rs = stmt.executeQuery(sql);     //Se ejecuta la query y se guardan los resultados
          System.out.println("Ejecuntado la sentencia: SELECT nombre FROM \"Usuarios\" WHERE rol='prof' \n Se obtienen todos los profes de la BD:");
-         while (rs.next()) {
-            System.out.println("Nombre: " + rs.getString("nombre"));
+         while (rs.next()) { 
+            System.out.println("Nombre: " + rs.getString("nombre"));    //Extrae y muestra el nombre de los resultados
          }
+         rs.close();
+      } catch (SQLException e) {
+         e.printStackTrace();
+      }
+
+      sql = "SELECT nombre FROM \"Usuarios\" WHERE rol='alu'";  //Se fija la String de otra query
+
+      try {
+         rs = stmt.executeQuery(sql);
+         System.out.println("\nEjecuntado la sentencia: SELECT nombre FROM \"Usuarios\" WHERE rol='alu' \n Se obtienen todos los alumnos de la BD:");
+         while (rs.next()) {
+            System.out.println("Nombre: " + rs.getString("nombre"));    //Extrae y muestra el nombre de los resultados
+         }
+         rs.close();
       } catch (SQLException e) {
          e.printStackTrace();
       }
