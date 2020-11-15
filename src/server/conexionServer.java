@@ -15,10 +15,7 @@ public class conexionServer{
             Class.forName("org.postgresql.Driver"); // se carga el driver de la BD
             conexion = DriverManager.getConnection(BD_URL, USER, PASS); // Se realiza la conexion a la BD
         } catch (Exception e) {
-            //TODO: Hacer que use un error de la clase de gestion de errores
-            e.printStackTrace();
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
+            util.GestionMensajes.msgErrorBD();
         }
     }
 
@@ -26,9 +23,10 @@ public class conexionServer{
         try {
             conexion.close();
         } catch (SQLException e) {
+            //TODO: Usar error generico cuando este creado
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-    }    
+    }
 }
