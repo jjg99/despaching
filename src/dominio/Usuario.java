@@ -16,7 +16,7 @@ public class Usuario {
     private String apellidos;
     /** String que contiene el id del usuario en la base de datos */
     private String id;
-
+    
     /** constructor basico de un usuario, contiene el correo y la contraseña,
      *  lo minimo para poder iniciar sesion
      */
