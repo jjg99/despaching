@@ -91,7 +91,7 @@ public class PnlInicio extends JPanel implements PnlInterface{
 
         /** Imagen para poder mostrar la contraseña mientras se mantiene dicha imagen*/
         try{
-            lblImgOjo = new JLabel(new ImageIcon(new URL("https://img.icons8.com/dusk/25/000000/closed-eye.png")));
+            lblImgOjo = new JLabel(new ImageIcon(new URL("https://img.icons8.com/fluent-systems-regular/25/000000/invisible.png")));
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -185,7 +185,7 @@ public class PnlInicio extends JPanel implements PnlInterface{
         lblImgOjo.addMouseListener(new MouseAdapter(){
             public void mousePressed(MouseEvent me){
                 try{
-                    lblImgOjo.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/25/000000/ophthalmology.png")));
+                    lblImgOjo.setIcon(new ImageIcon(new URL("https://img.icons8.com/fluent-systems-regular/25/000000/visible.png")));
                     pswdContrasena.setEchoChar((char) 0);   //Se pone que se pueda ver la contrasena
                 }catch (Exception e) {
                     e.printStackTrace();
@@ -193,7 +193,7 @@ public class PnlInicio extends JPanel implements PnlInterface{
             }
             public void mouseReleased(MouseEvent me){
                 try{
-                    lblImgOjo.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/25/000000/closed-eye.png")));
+                    lblImgOjo.setIcon(new ImageIcon(new URL("https://img.icons8.com/fluent-systems-regular/25/000000/invisible.png")));
                     if(!new String(pswdContrasena.getPassword()).equals("Contrasena")){
                         pswdContrasena.setEchoChar('\u2022');   //Se activa que salgan circulos en vez de los caracteres
                     }
