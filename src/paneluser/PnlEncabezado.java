@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import gui.JVentana;
 import util.Colores;
@@ -99,13 +100,16 @@ public class PnlEncabezado extends JPanel implements PnlInterface {
         this.add(lblFecha,gbc);
 
         /** boton cerrar sesion */
-        JButton btnCerrarSesion = new JButton();
+        JButton btnCerrarSesion = new JButton("Cerrar Sesion");
         try{
             btnCerrarSesion.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/40/000000/exit-sign.png"))); // se pone el icono al boton
         }
         catch(MalformedURLException e){
             e.printStackTrace();
         }
+        btnCerrarSesion.setHorizontalTextPosition(SwingConstants.CENTER); // ponemos el texto en el centro
+        btnCerrarSesion.setVerticalTextPosition(SwingConstants.BOTTOM); // ponemos el texto abajo
+        Fuente.setFuente(btnCerrarSesion);
         btnCerrarSesion.setOpaque(false);
         Colores.setBGTransparente(btnCerrarSesion);
         btnCerrarSesion.setBorder(null);
