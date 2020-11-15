@@ -2,6 +2,9 @@ package util;
 
 import javax.swing.JOptionPane;
 
+import java.io.StringWriter;
+import java.io.PrintWriter;
+
 /**
 * Esta clase se encarga de la gestión de mensajes de errores, emitiendolos una vez
 * llamados sus metodos o interpretando el tipo de error presentado en el programa.
