@@ -81,12 +81,11 @@ public class JVentana extends JFrame {
     /**
      * Metodo estatico que borra el contenido de {@link pnlVentana} y añade el <code>JPanel</code>
      * recibido en el centro.
-     * @param pnlPoner panel a cargar en {link pnlVentana}
+     * @param pnlPoner panel a cargar en {@link pnlVentana}
      */
     public static void cambiarPanel(JPanel pnlPoner){
         pnlVentana.removeAll();
         pnlVentana.add(pnlPoner, BorderLayout.CENTER);
         pnlVentana.updateUI();
     }
-    
 }

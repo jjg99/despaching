@@ -18,12 +18,13 @@ public class Alumno extends Usuario  {
         super(correo,password,nombre,apellidos,id);     // se inicia el objeto, instanciando al objeto superior
     }
 
-    public void getProfesores(){
-        /**Metodo para conseguir una lista de todos los profesores del alumno, crea un @link ArrayList de @Profesor */
+    /**Metodo para conseguir una lista de todos los profesores del alumno, crea un {@link ArrayList} de @Profesor */
+    public void getProfesores(){ 
         listaProfesores = Conexion.getProfesores();
     }
+
+    /**Utiliza el metodo de la clase @link Fachada, para conectarse a la base de datos y pedir las colas en las que se encuentra el alumno */
     public void getColas(){
-        /**Utiliza el metodo de la clase @link Fachada, para conectarse a la base de datos y pedir las colas en las que se encuentra el alumno */
         listaColas = GestorCola.getColasAlumno(super.getId());      // le pide al gestor de colas que le devuelva la lista de colas a la que se encuentra apuntado el alumno
     }
 }
