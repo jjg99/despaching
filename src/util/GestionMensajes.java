@@ -23,7 +23,7 @@ public class GestionMensajes {
      */
     public static void msgErrorDisponibilidad()
     {
-        JOptionPane.showMessageDialog(null, "No existe disponibilidad para reservar con este porfesor", "Error", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "No existe disponibilidad para reservar con este profesor", "Error", JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**
@@ -35,4 +35,13 @@ public class GestionMensajes {
         JOptionPane.showMessageDialog(null, "No se ha podido conectar con la base de datos, compruebe su conexion a Internet", "Error", JOptionPane.WARNING_MESSAGE);
     }
 
+    public static void msgErrorGenerico(Exception e)
+    {
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        e.printStackTrace(pw);
+        String mensaje_error = sw.toString();
+
+        JOptionPane.showMessageDialog(null, mensaje_error, "Error", JOptionPane.WARNING_MESSAGE);
+    }
 }
