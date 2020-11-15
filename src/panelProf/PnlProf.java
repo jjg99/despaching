@@ -5,13 +5,17 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import paneluser.PnlEncabezado;
@@ -76,7 +80,7 @@ public class PnlProf extends JPanel{
         Fuente.setFuente(btnCerrar);
         Colores.setBGRojo(btnCerrar);
 
-        /**Panel de botones que controlan la cola */
+        /**Panel de botones que controlan el estado de la cola */
         JPanel pnlCola = new JPanel();
         pnlCola.setLayout(new FlowLayout());
         Colores.setBGColor(pnlCola);   //Fijamos el color del fondo
@@ -103,17 +107,46 @@ public class PnlProf extends JPanel{
 
         /**Boton para eliminar alumno seleccionado */
         JButton btnEliminarAlumno = new JButton("Eliminar alumno");
+        try{
+            btnEliminarAlumno.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/35/000000/delete-sign.png"))); // se pone el icono al boton
+        }
+        catch(MalformedURLException e){
+            e.printStackTrace();
+        }
+        btnEliminarAlumno.setHorizontalTextPosition(SwingConstants.CENTER); // ponemos el texto en el centro
+        btnEliminarAlumno.setVerticalTextPosition(SwingConstants.BOTTOM); // ponemos el texto abajo
+        btnEliminarAlumno.setOpaque(false);
+        Colores.setBGTransparente(btnEliminarAlumno);
+        btnEliminarAlumno.setBorder(null);
         Fuente.setFuente(btnEliminarAlumno);
-        Colores.setBGAzul(btnEliminarAlumno);
-        JPanel pnlEliminarAlu = new JPanel();
-        pnlEliminarAlu.setLayout(new FlowLayout());
-        Colores.setBGColor(pnlEliminarAlu);   //Fijamos el color del fondo
-        pnlEliminarAlu.add(btnEliminarAlumno);
+        
+        /**Boton para actualizar la cola */
+        JButton btnActualizar = new JButton("Actualizar");
+        try{
+            btnActualizar.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/30/000000/synchronize.png"))); // se pone el icono al boton
+        }
+        catch(MalformedURLException e){
+            e.printStackTrace();
+        }
+        btnActualizar.setHorizontalTextPosition(SwingConstants.CENTER); // ponemos el texto en el centro
+        btnActualizar.setVerticalTextPosition(SwingConstants.BOTTOM); // ponemos el texto abajo
+        btnActualizar.setOpaque(false);
+        Colores.setBGTransparente(btnActualizar);
+        btnActualizar.setBorder(null);
+        Fuente.setFuente(btnActualizar);
+
+        /** Panel que contiene el boton de actualizar y el de eliminar */
+        JPanel pnlBotonesLista = new JPanel();
+        pnlBotonesLista.setLayout(new FlowLayout(FlowLayout.CENTER, 20,5));
+        Colores.setBGColor(pnlBotonesLista);   //Fijamos el color del fondo
+        pnlBotonesLista.add(btnActualizar);
+        pnlBotonesLista.add(btnEliminarAlumno);
+        pnlBotonesLista.setVisible(false);  
 
         //Agregamos componentes al panel derecho
         pnlDerecha.add(pnlGestorCola,BorderLayout.NORTH);
         pnlDerecha.add(lstScroll,BorderLayout.CENTER);
-        pnlDerecha.add(pnlEliminarAlu,BorderLayout.SOUTH);
+        pnlDerecha.add(pnlBotonesLista,BorderLayout.SOUTH);
 
         //Agregamos todo a PnlProf
         this.setLayout(new BorderLayout()); //se establece el layout de tipo borderLayout
@@ -131,6 +164,10 @@ public class PnlProf extends JPanel{
                 btnCerrar.updateUI();
                 removeCola(dlstColaAlumnos);    //borramos la lista
                 setCola(dlstColaAlumnos);       //obtenemos la lista
+
+                //Se muestran los botones de Actualizar y eliminar
+                pnlBotonesLista.setVisible(true);
+                PnlProf.pnlProf.updateUI();
             }
         });
         btnCerrar.addActionListener(new ActionListener(){
@@ -141,6 +178,10 @@ public class PnlProf extends JPanel{
                 btnAbrir.setOpaque(false);
                 btnAbrir.updateUI();
                 removeCola(dlstColaAlumnos);
+
+                //Se ocultan los botones de Actualizar y eliminar
+                pnlBotonesLista.setVisible(false);
+                PnlProf.pnlProf.updateUI();
             }
         });
     }
