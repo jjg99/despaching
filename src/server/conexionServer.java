@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import util.GestionMensajes;
+
 /**
  * Clase que se encarga de la conexion a la base de datos
  */
@@ -18,14 +20,14 @@ public class conexionServer{
     private static final String PASS = "admin";
 
     /** 
-     * Metodo el cual intentara conectarse a la base de datos llamando a {@link util.GestionMensajes.msgErrorBD} si hubiera un error.
+     * Metodo el cual intentara conectarse a la base de datos llamando a {@link GestionMensajes.msgErrorBD} si hubiera un error.
      */
     public static void startConnection(){
         try {
             Class.forName("org.postgresql.Driver"); // se carga el driver de la BD
             conexion = DriverManager.getConnection(BD_URL, USER, PASS); // Se realiza la conexion a la BD
         } catch (Exception e) {
-            util.GestionMensajes.msgErrorBD();
+            GestionMensajes.msgErrorBD();
         }
     }
 
