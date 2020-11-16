@@ -1,5 +1,6 @@
 package dominio;
 
+import gui.JVentana;
 import panelProf.PnlProf;
 import server.Fachada;
 
@@ -14,10 +15,8 @@ public class ControlSesion {
      */
     public static boolean logIn(String user, String pass){
         Usuario usuario = Fachada.logIn(user,pass);
-        System.out.println(usuario);
-        System.out.println(usuario instanceof Profesor);
         if(usuario instanceof Profesor){
-            PnlProf.setProfesor((Profesor) usuario);
+            JVentana.cambiarPanel(PnlProf.pnlProf = new PnlProf((Profesor) usuario)); // se establece el nuevo panel de la aplicación
             return true;
         } else {
             return false;

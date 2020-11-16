@@ -22,7 +22,6 @@ import javax.swing.JTextField;
 
 import dominio.ControlSesion;
 import gui.JVentana;
-import panelAlu.PnlAlumno;
 import panelProf.PnlProf;
 import server.ConexionServer;
 import util.Colores;
@@ -34,7 +33,7 @@ import util.Fuente;
  * Hereda de la clase {@link JPanel}
  * Implementa la interfaz {@link PnlInterface}
  */
-public class PnlInicio extends JPanel implements PnlInterface{
+public class PnlInicio extends JPanel{
     public static PnlInicio PnlInicio = new PnlInicio();
     JLabel lblImgOjo; 
 
@@ -48,7 +47,6 @@ public class PnlInicio extends JPanel implements PnlInterface{
     /**
      * Metodo que inicializara y mostrara todos sus componentes
      */
-    @Override
     public void establecerVentana(){
         this.setLayout(new GridBagLayout()); //se establece el layout 
         /**Restricciones  para ir colocando los diferentes elementos dentro del {@link Gridbaglayout} */
@@ -213,10 +211,9 @@ public class PnlInicio extends JPanel implements PnlInterface{
                 //TODO: esta conexion esta puesta para probar codigo de otros paneles, puede no ser la correcta para la accion de iniciar sesion
                 ConexionServer.startConnection();
                 if(ControlSesion.logIn(txtUsuario.getText(),new String(pswdContrasena.getPassword()))){
-                    /**En el caso de que se pulse el boton de entrar a la aplicación, 
-                     * se llama al metodo {@link cambiarPanel}
-                     */
-                    JVentana.cambiarPanel(PnlProf.pnlProf); // se establece el nuevo panel de la aplicación 
+                    txtUsuario.setText("Usuario");              //Se rellena con "Usuario"
+                    pswdContrasena.setText("Contrasena");       //Se rellena con "Contrasena"
+                    pswdContrasena.setEchoChar((char) 0);       //Se cambia a que salgan los caracteres en vez de los puntos
                 }
                  
             }

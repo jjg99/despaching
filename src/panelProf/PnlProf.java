@@ -20,7 +20,6 @@ import javax.swing.border.EmptyBorder;
 
 import dominio.GestorCola;
 import dominio.Profesor;
-import dominio.Usuario;
 import paneluser.PnlEncabezado;
 import paneluser.PnlHorario;
 import util.Colores;
@@ -29,19 +28,25 @@ import util.Fuente;
 /**Clase para el panel del profesor */
 public class PnlProf extends JPanel{
 
-    public static PnlProf pnlProf = new PnlProf(); // se crea la variable que se instanciará desde fuera
+    public static PnlProf pnlProf; // se crea la variable que se instanciará desde fuera
 
     /** Profesor que ha iniciado sesion */
     private static Profesor profesor;
 
     /**
-     * Constructor del panel el cual llamara al metodo {@link establecerVentana}
+     * Constructor del panel el cual llamara al metodo {@link establecerVentana} y al metodo{@link setProfesor}
+     * @param prof 
      */
-    private PnlProf(){
+    public PnlProf(Profesor prof){
+        setProfesor(prof);
         this.establecerVentana();
     }
 
-    public static void setProfesor(Profesor prof) {
+    /**
+     * Metodo que asigna el profesor al panel
+     * @param prof profesor que a iniciado sesion
+     */
+    private void setProfesor(Profesor prof) {
         profesor = prof;
     }
 
@@ -165,8 +170,7 @@ public class PnlProf extends JPanel{
                 //Comprobamos que el boton no este activo
                 if(!btnAbrir.isOpaque()){
                     //Añadimos el profesor a la tabla de la Cola
-                    // if(GestorCola.openCola(profesor.getId())){
-                    if(GestorCola.openCola("Atilano")){
+                    if(GestorCola.openCola(profesor.getId())){
                         //Se hace que el boton tenga color y se le quita al otro
                         btnAbrir.setOpaque(true);
                         btnCerrar.setOpaque(false);
@@ -187,8 +191,7 @@ public class PnlProf extends JPanel{
                 //Comprobamos que el boton no este activo
                 if(!btnCerrar.isOpaque()){
                     //Eliminamos el profesor de la tabla Colas
-                    // if(GestorCola.closeCola(profesor.getId())){
-                    if(GestorCola.closeCola("Atilano")){
+                    if(GestorCola.closeCola(profesor.getId())){
                         //Se hace que el boton tenga color y se le quita al otro
                         btnCerrar.setOpaque(true);
                         btnAbrir.setOpaque(false);
