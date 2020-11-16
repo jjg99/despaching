@@ -2,6 +2,7 @@ package dominio;
 
 import java.util.ArrayList;
 import server.Fachada;
+import util.GestionMensajes;
 
 /**Clase que se encarga del control de las colas de los despachos de los profesores */
 public abstract class GestorCola {
@@ -21,8 +22,12 @@ public abstract class GestorCola {
      * @return <code>true</code> si se ha añadido satisfactoriamente el profesor, si da cualquier tipo de error devuelve <code>false</code>
      */
 	public static boolean closeCola(String id) {
-        
-        return Fachada.closeCola(id);
+        if(0 == GestionMensajes.msg2OpcionesGenerico(new Object[] {"Si", "No"}, "Al cerrar la cola se borraran todos los alumnos que estan en ella\n¿Seguro que desea cerrar la cola?"
+        , "¿Desea cerrar la cola?")){
+            return Fachada.closeCola(id);
+        }else{
+            return false;
+        }
 	}
 
     // /**

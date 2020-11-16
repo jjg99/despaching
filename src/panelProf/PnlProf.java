@@ -54,7 +54,6 @@ public class PnlProf extends JPanel{
         /** Panel que contendra el Horario del dia */
         JPanel pnlIzquierda = new JPanel();
         pnlIzquierda.setLayout(new BorderLayout());
-        Colores.setBGColor(pnlIzquierda);   //Fijamos el color del fondo
 
         JLabel lblHorario = new JLabel("Horario:");
         Fuente.setFuenteNegrita(lblHorario);
@@ -62,7 +61,6 @@ public class PnlProf extends JPanel{
         /** Panel que contendra la etiqueta {@link lblHorario}*/
         JPanel pnlTxtHorario = new JPanel();
         pnlTxtHorario.setLayout(new FlowLayout());
-        Colores.setBGColor(pnlTxtHorario);   //Fijamos el color del fondo
         pnlTxtHorario.add(lblHorario);
         
         // Agregamos ambos componentes al panel
@@ -72,7 +70,6 @@ public class PnlProf extends JPanel{
         /** Panel que contendra la cola */
         JPanel pnlDerecha = new JPanel();
         pnlDerecha.setLayout(new BorderLayout());
-        Colores.setBGColor(pnlDerecha);   //Fijamos el color del fondo
 
         //Etiqueta Cola
         JLabel lblCola = new JLabel("Cola:");
@@ -81,7 +78,6 @@ public class PnlProf extends JPanel{
         //Panel para la etiqueta cola
         JPanel pnlTxtCola = new JPanel();
         pnlTxtCola.setLayout(new FlowLayout());
-        Colores.setBGColor(pnlTxtCola);   //Fijamos el color del fondo
         pnlTxtCola.add(lblCola);
 
         //Boton para abrir la cola
@@ -98,14 +94,12 @@ public class PnlProf extends JPanel{
         /**Panel de botones que controlan el estado de la cola */
         JPanel pnlCola = new JPanel();
         pnlCola.setLayout(new FlowLayout());
-        Colores.setBGColor(pnlCola);   //Fijamos el color del fondo
         pnlCola.add(btnCerrar);
         pnlCola.add(btnAbrir);
 
         /**Panel con la etiqueta y los botones de abrir y cerrar la cola */
         JPanel pnlGestorCola = new JPanel();
         pnlGestorCola.setLayout(new GridLayout(2,1));
-        Colores.setBGColor(pnlGestorCola);   //Fijamos el color del fondo
         pnlGestorCola.add(pnlTxtCola);
         pnlGestorCola.add(pnlCola);
         
@@ -153,7 +147,6 @@ public class PnlProf extends JPanel{
         /** Panel que contiene el boton de actualizar y el de eliminar */
         JPanel pnlBotonesLista = new JPanel();
         pnlBotonesLista.setLayout(new FlowLayout(FlowLayout.CENTER, 20,5));
-        Colores.setBGColor(pnlBotonesLista);   //Fijamos el color del fondo
         pnlBotonesLista.add(btnActualizar);
         pnlBotonesLista.add(btnEliminarAlumno);
         pnlBotonesLista.setVisible(false);  
@@ -173,36 +166,43 @@ public class PnlProf extends JPanel{
         btnAbrir.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                //Añadir el profesor a la tabla de la Cola
-                // if(GestorCola.openCola(profesor.getId())){
-                if(GestorCola.openCola("Atilano")){
-                    //Se hace que el boton tenga color y se le quita al otro
-                    btnAbrir.setOpaque(true);
-                    btnCerrar.setOpaque(false);
-                    btnCerrar.updateUI();
-                    removeCola(dlstColaAlumnos);    //borramos la lista
-                    setCola(dlstColaAlumnos);       //obtenemos la lista
+                //Comprobamos que el boton no este activo
+                if(!btnAbrir.isOpaque()){
+                    //Añadimos el profesor a la tabla de la Cola
+                    // if(GestorCola.openCola(profesor.getId())){
+                    if(GestorCola.openCola("Atilano")){
+                        //Se hace que el boton tenga color y se le quita al otro
+                        btnAbrir.setOpaque(true);
+                        btnCerrar.setOpaque(false);
+                        btnCerrar.updateUI();
+                        removeCola(dlstColaAlumnos);    //borramos la lista
+                        setCola(dlstColaAlumnos);       //obtenemos la lista
 
-                    //Se muestran los botones de Actualizar y eliminar
-                    pnlBotonesLista.setVisible(true);
-                    PnlProf.pnlProf.updateUI();
+                        //Se muestran los botones de Actualizar y eliminar
+                        pnlBotonesLista.setVisible(true);
+                        PnlProf.pnlProf.updateUI();
+                    }
                 }
             }
         });
         btnCerrar.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                // if(GestorCola.closeCola(profesor.getId())){
-                if(GestorCola.closeCola("Atilano")){
-                    //Se hace que el boton tenga color y se le quita al otro
-                    btnCerrar.setOpaque(true);
-                    btnAbrir.setOpaque(false);
-                    btnAbrir.updateUI();
-                    removeCola(dlstColaAlumnos);
+                //Comprobamos que el boton no este activo
+                if(!btnCerrar.isOpaque()){
+                    //Eliminamos el profesor de la tabla Colas
+                    // if(GestorCola.closeCola(profesor.getId())){
+                    if(GestorCola.closeCola("Atilano")){
+                        //Se hace que el boton tenga color y se le quita al otro
+                        btnCerrar.setOpaque(true);
+                        btnAbrir.setOpaque(false);
+                        btnAbrir.updateUI();
+                        removeCola(dlstColaAlumnos);
 
-                    //Se ocultan los botones de Actualizar y eliminar
-                    pnlBotonesLista.setVisible(false);
-                    PnlProf.pnlProf.updateUI();
+                        //Se ocultan los botones de Actualizar y eliminar
+                        pnlBotonesLista.setVisible(false);
+                        PnlProf.pnlProf.updateUI();
+                    }
                 }
             }
         });
