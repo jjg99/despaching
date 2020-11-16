@@ -24,9 +24,7 @@ public class UsuarioDAO {
             rs = stmt.executeQuery(sql);
             Usuario usuario=null;
             while (rs.next()){
-                System.out.println(rs.getString("rol"));
-                if(rs.getString("rol").equals(new Sprint("prof"))){
-                    System.out.println("1");
+                if(rs.getString("rol").equals(new String("prof"))){
                    usuario = new Profesor(rs.getString("correo"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("clave"));
                 } else {
                 
