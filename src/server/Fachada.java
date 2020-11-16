@@ -1,6 +1,8 @@
 package server;
 
 import dao.ColaDAO;
+import dao.UsuarioDAO;
+import dominio.Usuario;
 
 /** Clase que se encarga de redirigir el trafico a los DAO */
 public class Fachada {
@@ -28,5 +30,9 @@ public class Fachada {
      */
 	public static boolean closeCola(String id) {
 		return ColaDAO.closeCola(id);
-	}
+    }
+    
+    public static Usuario logIn(String user, String pass) {
+        return UsuarioDAO.logIn(user, pass);    
+    }
 }
