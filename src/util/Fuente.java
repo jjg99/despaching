@@ -1,6 +1,7 @@
 package util;
 
 import java.awt.Font;
+import java.awt.Color;
 
 import javax.swing.JComponent;
 
@@ -17,6 +18,9 @@ public class Fuente {
 
     /**Fija el tamaño de la letra del cuerpo*/
     private final static int TAM_CUERPO = 20;
+
+    /**Fija el color de la letra verda */
+    private final static Color VERDE = new Color(114, 202, 175);
 
     /**
      * Metodo para fijar la letra del cuerpo.
@@ -49,4 +53,6 @@ public class Fuente {
     public static void setFuenteTituloNegrita(JComponent comp){
         comp.setFont(new Font(FUENTE, Font.BOLD, TAM_TITULO));
     }
+
+    
 }
