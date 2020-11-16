@@ -192,15 +192,18 @@ public class PnlProf extends JPanel{
         btnCerrar.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                //Se hace que el boton tenga color y se le quita al otro
-                btnCerrar.setOpaque(true);
-                btnAbrir.setOpaque(false);
-                btnAbrir.updateUI();
-                removeCola(dlstColaAlumnos);
+                // if(GestorCola.closeCola(profesor.getId())){
+                if(GestorCola.closeCola("Atilano")){
+                    //Se hace que el boton tenga color y se le quita al otro
+                    btnCerrar.setOpaque(true);
+                    btnAbrir.setOpaque(false);
+                    btnAbrir.updateUI();
+                    removeCola(dlstColaAlumnos);
 
-                //Se ocultan los botones de Actualizar y eliminar
-                pnlBotonesLista.setVisible(false);
-                PnlProf.pnlProf.updateUI();
+                    //Se ocultan los botones de Actualizar y eliminar
+                    pnlBotonesLista.setVisible(false);
+                    PnlProf.pnlProf.updateUI();
+                }
             }
         });
     }

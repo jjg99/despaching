@@ -8,11 +8,21 @@ public abstract class GestorCola {
 
     /**
      * Metodo que abre la cola, añadiendo el id del profesor a la tabla pertiente
-     * @param id identificador unico del profesor
-     * @return <code>true</code> si se ha añadido satisfactoriamente el profesor, si da cualquier tipo de error devuelve false
+     * @param id identificador unico del profesor que desea abrir la cola
+     * @return <code>true</code> si se ha añadido satisfactoriamente el profesor, si da cualquier tipo de error devuelve <code>false</code>
      */
 	public static boolean openCola(String id) {
         return Fachada.openCola(id);
+	}
+
+    /**
+     * Metodo que confirma que el {@link Profesor} desea cerrar la cola y si confirma la cierra llamando a {@link Fachada.closeCola}
+     * @param id dentificador unico del profesor que desea cerrar la cola
+     * @return <code>true</code> si se ha añadido satisfactoriamente el profesor, si da cualquier tipo de error devuelve <code>false</code>
+     */
+	public static boolean closeCola(String id) {
+        
+        return Fachada.closeCola(id);
 	}
 
     // /**
