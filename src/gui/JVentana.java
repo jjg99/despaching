@@ -73,7 +73,7 @@ public class JVentana extends JFrame {
         } catch (MalformedURLException e){
             e.printStackTrace();
         }
-        this.setSize(600,600);  //Fijamos el tamaño de la ventana a 600x600
+        this.setSize(700,700);  //Fijamos el tamaño de la ventana a 600x600
         this.setTitle(Titulo);  //Ponemos el titulo a la ventana
         this.setVisible(true);  //Hacemos la ventana visible
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);       //Cuando se cierre que termine el programa
