@@ -7,7 +7,7 @@ import server.Fachada;
 public class Alumno extends Usuario  {
     /**Atributos de la clase alumno */
 
-    private ArrayList<Profesor> listaProfesores = new ArrayList<Profesor>();        // arrayList que va a contener todos los porfesores del alumno
+    private ArrayList<String> listaProfesores = new ArrayList<String>();        // arrayList que va a contener todos los porfesores del alumno
     private ArrayList<String> listaColas = new ArrayList<String>();        // arrayList que contiene los nombres de 
 
     public Alumno (String correo,String password){
@@ -21,7 +21,7 @@ public class Alumno extends Usuario  {
 
     /**Metodo para conseguir una lista de todos los profesores del alumno, crea un {@link ArrayList} de @Profesor */
     public void getProfesores(){ 
-        listaProfesores = Fachada.getProfesores(super.getId());
+        listaProfesores = Fachada.getProfesoresAlumno(super.getId());
     }
 
     /**Utiliza el metodo de la clase @link Fachada, para conectarse a la base de datos y pedir las colas en las que se encuentra el alumno */
