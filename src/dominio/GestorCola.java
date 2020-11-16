@@ -1,6 +1,8 @@
 package dominio;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import server.Fachada;
 import util.GestionMensajes;
 
@@ -39,6 +41,11 @@ public abstract class GestorCola {
         //el 
         ArrayList<String> colasAlumno = Fachada.getColas(id);
         return colasAlumno;
+    }
+    /**Metoodo que deuelve al profesor la cola de alumnos que tiene */
+    public static ArrayList<String>getColaProfesor(String idProfesor){
+        return Fachada.getColaProfesor(idProfesor);
+
     }
     
 }
