@@ -11,12 +11,12 @@ public class Alumno extends Usuario  {
     private ArrayList<String> listaColas = new ArrayList<String>();        // arrayList que contiene los nombres de 
 
     public Alumno (String correo,String password){
-        super(correo, password);  // se inicia el objeto, instanciando al objeto superior     
+        super(correo);  // se inicia el objeto, instanciando al objeto superior     
     }
 
     /** constructor que inicia todos los atributos de un usuario */
-    public Alumno (String correo, String password, String nombre, String apellidos, String id){
-        super(correo,password,nombre,apellidos,id);     // se inicia el objeto, instanciando al objeto superior
+    public Alumno (String correo, String nombre, String apellidos, String id){
+        super(correo,nombre,apellidos,id);     // se inicia el objeto, instanciando al objeto superior
     }
 
     /**Metodo para conseguir una lista de todos los profesores del alumno, crea un {@link ArrayList} de @Profesor */

@@ -1,12 +1,11 @@
 package util;
 
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-
+import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
-import java.io.PrintWriter;
+
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  * Esta clase se encarga de la gestión de mensajes de errores, emitiendolos una
