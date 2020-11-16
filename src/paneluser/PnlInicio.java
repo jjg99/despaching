@@ -225,6 +225,10 @@ public class PnlInicio extends JPanel{
                     txtUsuario.setText("Usuario");              //Se rellena con "Usuario"
                     pswdContrasena.setText("Contrasena");       //Se rellena con "Contrasena"
                     pswdContrasena.setEchoChar((char) 0);       //Se cambia a que salgan los caracteres en vez de los puntos
+                } else {
+                    GestionMensajes.msgErrorInicioSesion();
+                    txtUsuario.requestFocus();
+                    txtUsuario.selectAll();
                 }
                  
             }
@@ -234,11 +238,7 @@ public class PnlInicio extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 //TODO: modificar acorde con la funcionalidad el momento de conectarse a la base de datos
-                ConexionServer.startConnection();
-                /**En el caso de que se pulse el boton de entrar a la aplicación, 
-                 * se llama al metodo {@link cambiarPanel} solo version sprint1
-                 */
-                JVentana.cambiarPanel(PnlProf.pnlProf); // se establece el nuevo panel de la aplicación
+                //ConexionServer.startConnection();
             }
         });
 

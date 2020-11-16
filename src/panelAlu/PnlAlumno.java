@@ -17,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import dominio.Alumno;
 import paneluser.PnlEncabezado;
 import util.Colores;
 import util.Fuente;
@@ -25,11 +26,26 @@ import util.Fuente;
  * Clase destinada a crear el panel del alumno, con el que interactuara con el resto del programa
  */
 public class PnlAlumno extends JPanel {
-    public static PnlAlumno PnlAlumno = new PnlAlumno();
+    public static PnlAlumno PnlAlumno;  // se crea la variable que se instanciará desde fuera
 
-    /** Constructor que llamara al metodo {@link initComponents} */
-    private PnlAlumno(){
+    /** Alumno que ha iniciado sesion */
+    private static Alumno alumno;
+
+    /** 
+     * Constructor que llamara al metodo {@link initComponents} y al metodo{@link setAlumno}
+     * @param alu alumno que a inicado sesion
+     */
+    public PnlAlumno(Alumno alu){
+        setAlumno(alu);
         initComponents();
+    }
+
+    /**
+     * Metodo que asigna el alumno al panel
+     * @param alu alumno que a iniciado sesion
+     */
+    private void setAlumno(Alumno alu) {
+        alumno = alu;
     }
 
     /** Metodo en el cual se instanciaran todos los componentes */
@@ -128,7 +144,7 @@ public class PnlAlumno extends JPanel {
         gbc.anchor = GridBagConstraints.CENTER;
         
         this.setLayout(new BorderLayout());
-        this.add(new PnlEncabezado(),BorderLayout.NORTH);
+        this.add(new PnlEncabezado(alumno),BorderLayout.NORTH);
         this.add(pnlInicioAlumno, BorderLayout.CENTER);
     }
     

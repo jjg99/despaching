@@ -3,6 +3,7 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import dominio.Alumno;
 import dominio.Profesor;
 import dominio.Usuario;
 import server.ConexionServer;
@@ -12,26 +13,34 @@ import java.util.ArrayList;
 /** Clase que se encarga de realizar las sentencias SQL de los usuarios */
 public class UsuarioDAO {
 
+    /**
+     * Metodo que ejecutara la sentencia SQL para ver si un usuario con una contraseña estan en el sistema, si lo esta lo creara
+     * en funcion de su rol.
+     * @param user el nombre de usuario a comprobar en el sistema
+     * @param pass contraseña del usario a comprobar en el sistema
+     * @return un <code>Usuario</code> que contendra la informacion del usuario que ha iniciado sesion si los parametros de entrada se 
+     *          encontraban en el sistema
+     */
 	public static Usuario logIn(String user, String pass) {
         Statement stmt;
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
             ResultSet rs;
-            String sql = "SELECT \"clave\",\"correo\",\"rol\",\"nombre\",\"apellidos\" " +
+            //Sentencia SQL
+            String sql = "SELECT \"clave\",\"correo\",\"rol\",\"nombre\",\"apellido\" " +
                     "FROM \"Usuarios\"" +
                     "WHERE clave='" + user + "' and contrasena='" + pass + "'";
             rs = stmt.executeQuery(sql);
             Usuario usuario=null;
             while (rs.next()){
                 if(rs.getString("rol").equals(new String("prof"))){
-                   usuario = new Profesor(rs.getString("correo"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("clave"));
-                } else {
-                
+                    usuario = new Profesor(rs.getString("correo"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("clave"));
+                } else if(rs.getString("rol").equals(new String("alu"))){
+                    usuario = new Alumno(rs.getString("correo"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("clave"));
                 }
             }
             return usuario;
-            
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -81,17 +90,13 @@ public class UsuarioDAO {
                 resultadoNombre.append(resultadoConsulta.getString("nombre"));      // se construye el String con el nombrey apellidos del alumno
                 resultadoNombre.append(" ");
                 resultadoNombre.append(resultadoConsulta.getString("apellidos"));
-
-
-
             }
-        
         } catch (Exception e) {
             e.printStackTrace();
         }
         return resultadoNombre.toString();
+    }
 
-    }   
     public static ArrayList<String> getClasesProfesor(String idProfesor){
         Statement stmt;     // se crea el statement sobre el que trabajar
         ResultSet resultadoConsulta = null;
@@ -104,16 +109,12 @@ public class UsuarioDAO {
             // se lee la respuesta por parte dela base de datos
             while(resultadoConsulta.next()){
                 resultadoClases.add(resultadoConsulta.getString("grupo"));      // se construye el String con el nombrey apellidos del alumno
-                
-
-
             }
         
         } catch (Exception e) {
             e.printStackTrace();
         }
         return resultadoClases;
-
     }
     
 }

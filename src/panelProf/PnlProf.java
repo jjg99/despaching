@@ -35,7 +35,7 @@ public class PnlProf extends JPanel{
 
     /**
      * Constructor del panel el cual llamara al metodo {@link establecerVentana} y al metodo{@link setProfesor}
-     * @param prof 
+     * @param prof profesor que a iniciado sesion
      */
     public PnlProf(Profesor prof){
         setProfesor(prof);
