@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import dao.ColaDAO;
 import dominio.Usuario;
 import dominio.Alumno;
 import dominio.Profesor;
@@ -80,13 +81,11 @@ public class PnlEncabezado extends JPanel implements PnlInterface {
 
         /** rol  */
         JLabel lblRol = null;
-        if (usuario instanceof Alumno){
+        if (usuario instanceof Alumno)
             lblRol =  new JLabel("Alumno");
-        }
         else{
-            if (usuario instanceof Profesor){
+            if (usuario instanceof Profesor)
                 lblRol =  new JLabel("Profesor");
-            }
             else{
                 lblRol =  new JLabel("Rol");
             }
@@ -134,6 +133,9 @@ public class PnlEncabezado extends JPanel implements PnlInterface {
         btnCerrarSesion.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (usuario instanceof Profesor){
+                    ColaDAO.closeCola(usuario.getId());
+                }
                 JVentana.cambiarPanel(PnlInicio.PnlInicio); // se establece el nuevo panel de la aplicación
                 ConexionServer.endConnection();  
             }

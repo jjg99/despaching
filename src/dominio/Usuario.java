@@ -9,8 +9,6 @@ public class Usuario {
     /** String que contiene el correo con el que se inicia sesion */
     private String correo;
     /** String que contiene la contraseña con la que se inicia sesion */
-    private String password;
-    /** String que contine el nombre del usuario */
     private String nombre;
     /** String que contiene los apellidos del usuario */
     private String apellidos;
@@ -20,7 +18,6 @@ public class Usuario {
     /** constructor basico de un usuario, contiene el correo y la contraseña,
      *  lo minimo para poder iniciar sesion
      *  @param correo String con el usuario
-     *  @param password String con la contraseña
      */
     public Usuario (String correo){
         this.setCorreo(correo);
@@ -28,7 +25,6 @@ public class Usuario {
 
     /** constructor que inicia todos los atributos de un usuario
      *  @param correo String con el correo
-     *  @param password String con la contraseña
      *  @param nombre String con el nombre
      *  @param apellidos String con los apellidos
      *  @param id String con el id
@@ -52,20 +48,6 @@ public class Usuario {
     */
     public String getCorreo(){
         return this.correo;
-    }
-    
-    /** metodo para establecer la contraseña
-     *  @param password contiene la contraseña del usuario
-     */
-    public void setPassword(String password){
-        this.password = password;
-    }
-
-    /** metodo para recuperar la contraseña
-     * @return String con la contraseña
-     */
-    public String getPassword(){
-        return this.password;
     }
 
     /** metodo para establecer el nombre
