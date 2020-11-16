@@ -15,8 +15,8 @@ public class Alumno extends Usuario  {
     }
 
     /** constructor que inicia todos los atributos de un usuario */
-    public Alumno (String correo, String nombre, String apellidos, String id){
-        super(correo,nombre,apellidos,id);     // se inicia el objeto, instanciando al objeto superior
+    public Alumno (String correo, String nombre, String apellido, String id){
+        super(correo,nombre,apellido,id);     // se inicia el objeto, instanciando al objeto superior
     }
 
     /**Metodo para conseguir una lista de todos los profesores del alumno, crea un {@link ArrayList} de @Profesor */

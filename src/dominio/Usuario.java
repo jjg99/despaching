@@ -10,8 +10,8 @@ public class Usuario {
     private String correo;
     /** String que contiene la contraseña con la que se inicia sesion */
     private String nombre;
-    /** String que contiene los apellidos del usuario */
-    private String apellidos;
+    /** String que contiene el primer apellido del usuario */
+    private String apellido;
     /** String que contiene el id del usuario en la base de datos */
     private String id;
     
@@ -26,13 +26,13 @@ public class Usuario {
     /** constructor que inicia todos los atributos de un usuario
      *  @param correo String con el correo
      *  @param nombre String con el nombre
-     *  @param apellidos String con los apellidos
+     *  @param apellido String con el primer apellido
      *  @param id String con el id
      */
-    public Usuario (String correo, String nombre, String apellidos, String id){
+    public Usuario (String correo, String nombre, String apellido, String id){
         this(correo);
         this.setNombre(nombre);
-        this.setApellidos(apellidos);
+        this.setApellido(apellido);
         this.setId(id);
     }
 
@@ -67,15 +67,15 @@ public class Usuario {
     /** metodo para establecer los apellidos 
      *  @param apellidos contiene los apellidos del usuario
     */
-    public void setApellidos(String apellidos){
-        this.apellidos = apellidos;
+    public void setApellido(String apellido){
+        this.apellido = apellido;
     }
 
     /** metodo para recuperar los apellidos
      * @return String con los apellidos
      */
-    public String getApellidos(){
-        return this.apellidos;
+    public String getApellido(){
+        return this.apellido;
     }
 
     /** metodo para establecer el id 

@@ -12,8 +12,8 @@ public class Profesor extends Usuario{
     /**  */
     private ArrayList<String> colaAlu;
 
-    public Profesor(String correo, String nombre, String apellidos, String id) {
-        super(correo, nombre, apellidos, id);
+    public Profesor(String correo, String nombre, String apellido, String id) {
+        super(correo, nombre, apellido, id);
     }
     /**Metodo para conseguir una lista de todos los profesores del alumno
      * crea un {@link ArrayList} de @Profesor */
