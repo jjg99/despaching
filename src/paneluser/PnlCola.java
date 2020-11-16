@@ -232,7 +232,7 @@ public class PnlCola extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e){
 
-                String lista
+                
             }
         });
 
