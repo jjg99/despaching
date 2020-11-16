@@ -136,7 +136,7 @@ public class PnlEncabezado extends JPanel{
                 if (usuario instanceof Profesor){
                     String opciones[]= {"Si", "No"};
                     int opcion = GestionMensajes.msg2OpcionesGenerico(opciones,"Los alumnos en la cola se borraran \n ¿Seguro que quiere cerrar sesion?", "¿Cerrar sesion?");
-                    if (opcion == 1){
+                    if (opcion == 0){
                         Fachada.closeCola(usuario.getId());
                         JVentana.cambiarPanel(PnlInicio.PnlInicio); // se establece el nuevo panel de la aplicación
                         ConexionServer.endConnection();
@@ -146,7 +146,7 @@ public class PnlEncabezado extends JPanel{
                     if (usuario instanceof Alumno){
                         String opciones[]= {"Si", "No"};
                         int opcion = GestionMensajes.msg2OpcionesGenerico(opciones,"¿Seguro que quiere cerrar sesion?", "¿Cerrar sesion?");
-                        if (opcion == 1){
+                        if (opcion == 0){
                             JVentana.cambiarPanel(PnlInicio.PnlInicio); // se establece el nuevo panel de la aplicación
                             ConexionServer.endConnection();
                         }
