@@ -50,5 +50,9 @@ public class Fachada {
     public static Usuario logIn(String user, String pass) {
         return UsuarioDAO.logIn(user, pass);    
     }
+    public static ArrayList<String> getProfesoresAlumno(String idAlumno){
+        return UsuarioDAO.getProfesoresAlumno(idAlumno);
+
+    }
     
 }

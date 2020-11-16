@@ -74,16 +74,17 @@ public class ColaDAO {
     }
     /**Metodo que se encarga de devolver la posiciónk en la cola de un alumno
      * @param String idAlumno
+     * @param String profesorCola
      * @return int posicion
      */
-    public static int getPosicionColaAlumno(String idAlumno){
+    public static int getPosicionColaAlumno(String idAlumno,String colaProfesor){
         Statement stmt;     // se crea el statement sobre el que trabajar
         ResultSet resultadoConsulta = null;
         int resultadoPosicion = 0;     // objeto que va a contener el resultado que se envia al alumno, en el caso de que se produzca un error devolverá un 0
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "SELECT Colas FROM \"Colas\" WHERE CONTAINS('"+idAlumno+"') ";
+            String sql = "SELECT Colas FROM \"Colas\" WHERE clave = '"+colaProfesor+"' CONTAINS('"+idAlumno+"') ";
             resultadoConsulta =stmt.executeQuery(sql);    // se ejecuta la solicitud sql
             // se lee la respuesta por parte dela base de datos
             while(resultadoConsulta.next()){
