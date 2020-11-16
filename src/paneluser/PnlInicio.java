@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import dominio.ControlSesion;
 import gui.JVentana;
 import panelAlu.PnlAlumno;
 import panelProf.PnlProf;
@@ -211,10 +212,12 @@ public class PnlInicio extends JPanel implements PnlInterface{
             public void actionPerformed(ActionEvent e) {
                 //TODO: esta conexion esta puesta para probar codigo de otros paneles, puede no ser la correcta para la accion de iniciar sesion
                 ConexionServer.startConnection();
-                /**En el caso de que se pulse el boton de entrar a la aplicación, 
-                 * se llama al metodo {@link cambiarPanel}
-                 */
-                JVentana.cambiarPanel(PnlAlumno.PnlAlumno); // se establece el nuevo panel de la aplicación 
+                if(ControlSesion.logIn(txtUsuario.getText(),new String(pswdContrasena.getPassword()))){
+                    /**En el caso de que se pulse el boton de entrar a la aplicación, 
+                     * se llama al metodo {@link cambiarPanel}
+                     */
+                    JVentana.cambiarPanel(PnlProf.pnlProf); // se establece el nuevo panel de la aplicación 
+                }
                  
             }
         });

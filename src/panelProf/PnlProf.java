@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 
 import dominio.GestorCola;
 import dominio.Profesor;
+import dominio.Usuario;
 import paneluser.PnlEncabezado;
 import paneluser.PnlHorario;
 import util.Colores;
@@ -31,7 +32,7 @@ public class PnlProf extends JPanel{
     public static PnlProf pnlProf = new PnlProf(); // se crea la variable que se instanciará desde fuera
 
     /** Profesor que ha iniciado sesion */
-    private Profesor profesor;
+    private static Profesor profesor;
 
     /**
      * Constructor del panel el cual llamara al metodo {@link establecerVentana}
@@ -40,13 +41,8 @@ public class PnlProf extends JPanel{
         this.establecerVentana();
     }
 
-    /**
-     * Constructor del panel el cual llamara al metodo {@link establecerVentana} y asigna el profesor asociado al panel
-     * @param prof profesor que inicia sesion.
-     */
-    private PnlProf(Profesor prof){
-        this.profesor = prof;
-        this.establecerVentana();
+    public static void setProfesor(Profesor prof) {
+        profesor = prof;
     }
 
     /** Metodo que inicializara e instanciara todos los componentes en la ventana */
@@ -158,7 +154,7 @@ public class PnlProf extends JPanel{
 
         //Agregamos todo a PnlProf
         this.setLayout(new BorderLayout()); //se establece el layout de tipo borderLayout
-        this.add(new PnlEncabezado(),BorderLayout.NORTH);   //se añade el panel de encabezado en la parte superior de la pantalla
+        this.add(new PnlEncabezado(profesor),BorderLayout.NORTH);   //se añade el panel de encabezado en la parte superior de la pantalla
         this.add(pnlIzquierda,BorderLayout.WEST);    //se añade el panel izquierdo para ser pintado
         this.add(pnlDerecha,BorderLayout.CENTER);     //se añade el panel derecho
 
