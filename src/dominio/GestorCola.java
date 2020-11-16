@@ -30,15 +30,15 @@ public abstract class GestorCola {
         }
 	}
 
-    // /**
-    //  * metodo se encarga de conectarse a la fachada y recibir una lista con todos los despachos a los que se ah apuntado el alumno
-    //  * @param String id
-    //  * @return @ArrayList con los nombres de los profesores a los que esta apuntado */
-    // public static ArrayList<String> getColasAlumno(String id){
+    /**
+    * metodo se encarga de conectarse a la fachada y recibir una lista con todos los despachos a los que se ah apuntado el alumno
+    * @param String id
+    * @return @ArrayList con los nombres de los profesores a los que esta apuntado */
+    public static ArrayList<String> getColasAlumno(String id){
         
-    //     //el 
-    //     ArrayList<String> colasAlumno = Fachada.getColas(id);
-    //     return colasAlumno;
-    // }
+        //el 
+        ArrayList<String> colasAlumno = Fachada.getColas(id);
+        return colasAlumno;
+    }
     
 }

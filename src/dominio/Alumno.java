@@ -2,6 +2,7 @@ package dominio;
 
 import java.util.ArrayList;
 
+import server.Fachada;
 
 public class Alumno extends Usuario  {
     /**Atributos de la clase alumno */
@@ -20,7 +21,7 @@ public class Alumno extends Usuario  {
 
     /**Metodo para conseguir una lista de todos los profesores del alumno, crea un {@link ArrayList} de @Profesor */
     public void getProfesores(){ 
-        listaProfesores = Conexion.getProfesores();
+        listaProfesores = Fachada.getProfesores(super.getId());
     }
 
     /**Utiliza el metodo de la clase @link Fachada, para conectarse a la base de datos y pedir las colas en las que se encuentra el alumno */

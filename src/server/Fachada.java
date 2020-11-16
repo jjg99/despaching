@@ -2,14 +2,16 @@ package server;
 
 import dao.ColaDAO;
 
+import java.util.ArrayList;
+
 /** Clase que se encarga de redirigir el trafico a los DAO */
 public class Fachada {
     /**Metodo que se encarga de instanciar al Dao de la base de datos de colas para recibir todas las colas a la que esta aputnado un alumno
-     * @param String id
+     * @param String idAlumno
      * @return  {@link ArrayList}
      */
-    public static void getColas(){
-
+    public static ArrayList<String> getColasAlumno(String idAlumno){
+        return ColaDAO.getColasAlumno(idAlumno);
     }
 
     /**
@@ -28,5 +30,9 @@ public class Fachada {
      */
 	public static boolean closeCola(String id) {
 		return ColaDAO.closeCola(id);
-	}
+    }
+    public static ArrayList<String> getProfesores(String idAlumno){
+        return ClaseDAO.getProfesores(idAlumno);
+
+    }
 }
