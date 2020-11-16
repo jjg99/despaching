@@ -14,6 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import dominio.Usuario;
+import dominio.Alumno;
+import dominio.Profesor;
 import gui.JVentana;
 import server.ConexionServer;
 import util.Colores;
@@ -25,30 +28,25 @@ import util.Fuente;
  */
 public class PnlEncabezado extends JPanel implements PnlInterface {
     
-    /* *************************************************************
-     * atributo que tiene la informacion del usuario
-     *  Usuario usuario; 
-     * 
-     * constructor que indica que usuario se tiene
-     * public PnlEncabezado(Usuario usuario){
-     *      this.setUsuario(usuario);
-     *      this.establecerVentana();
-     * }
-     * 
-     * public void setUsuario(Usuario usuario){
-     *      this.usuario = usuario;
-     * }
-     * 
-     * public Usuario getUsuario(){
-     *       return this.usuariuo;
-     * }
-     ************************************************************** */
+    /** atributo que tiene la informacion del usuario*/
+     private Usuario usuario; 
     
-    /** constructor del panel que no recibe ningun paramentro de entrada(solo para el sprint 1) */
-    public PnlEncabezado(){
-        this.establecerVentana();
+    /** constructor que indica que usuario se tiene */
+    public PnlEncabezado(Usuario usuario){
+         this.setUsuario(usuario);
+         this.establecerVentana();
     }
-
+    
+    /** metodo para establecer el usuario asociado al panel encabezado */
+    public void setUsuario(Usuario usuario){
+         this.usuario = usuario;
+    }
+    
+    /** metodo que devuelve el usuario asociado al panel encabezado */
+    public Usuario getUsuario(){
+          return this.usuario;
+    }
+    
     @Override
     public void establecerVentana(){
         this.setLayout(new GridBagLayout()); //se establece el layout 
@@ -72,7 +70,7 @@ public class PnlEncabezado extends JPanel implements PnlInterface {
         this.add(lblImagenUsuario,gbc);  //se añade el icono al panel
 
         /** nombre usuario */ 
-        JLabel lblNombre = new JLabel("Usuario Generico"); 
+        JLabel lblNombre = new JLabel(usuario.getNombre()+ " " + usuario.getApellidos()); 
         Fuente.setFuenteTituloNegrita(lblNombre);  //establece la fuente del nombre y la pone en negrita
         gbc.gridx = 1; // se especifica la posicion en la matriz
         gbc.gridy = 0;
@@ -81,7 +79,18 @@ public class PnlEncabezado extends JPanel implements PnlInterface {
         this.add(lblNombre,gbc);  // se añade el nombre al panel
 
         /** rol  */
-        JLabel lblRol = new JLabel("Rol");
+        JLabel lblRol = null;
+        if (usuario instanceof Alumno){
+            lblRol =  new JLabel("Alumno");
+        }
+        else{
+            if (usuario instanceof Profesor){
+                lblRol =  new JLabel("Profesor");
+            }
+            else{
+                lblRol =  new JLabel("Rol");
+            }
+        }
         Fuente.setFuente(lblRol); // establece la fuente del rol
         gbc.gridx = 1;    // se establece la posicion en la matriz
         gbc.gridy = 1;
