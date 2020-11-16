@@ -17,24 +17,45 @@ import javax.swing.JLabel;
 
 import util.Colores;
 import util.Fuente;
-import dominio.Usuario;
+import server.Fachada;
 import dominio.Alumno;
-import dominio.GestorCola;
 
 /**
  * Clase que crea un panel que muestra la cola de un alumno y le da opciones para 
  * apuntarse y modificar su situacion en ella
  */
 public class PnlCola extends JPanel {
-    public static PnlCola pnlCola = new PnlCola();
 
-    /** Constructor que llama al metodo {@link initComponentes} */
-    private PnlCola()
+    private static Alumno alumno;
+    private static String idProf;
+
+    private static JButton btnAtras;
+    private static JButton btnActualizar;
+    private static JButton btnEntrarCola;
+    private static JButton btnSalirCola;
+
+    private static JLabel lblNumGenteEspera;
+    private static JLabel lblNumPosCola;
+
+    private static int intPosCola = 0;
+    private static int intNumCola = 0;
+
+    public static PnlCola pnlCola = new PnlCola(alumno, idProf);
+
+    /** Constructor que llama al metodo {@link initComponentes} y {@link crearComponentes} */
+    private PnlCola(Alumno alu, String idprof)
     {
+        actualizarAlumno(alu);
+        actualizarProfesor(idprof);
+        actualizarDatos();
         crearComponentes();
-        
+        initComponentes(); 
     }
 
+
+    /**
+     * Método que genera los componentes del panel y los coloca en el orden adecuado
+     */
 
     private void crearComponentes()
     {
@@ -53,8 +74,9 @@ public class PnlCola extends JPanel {
 
         // Creacion de todos los componentes
         // ##################################
+        
         // Creacion del boton atras
-        JButton btnAtras = new JButton("Volver");
+        btnAtras = new JButton("Volver");
         try{
             btnAtras.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/40/return.png"))); // se pone el icono al boton
         }
@@ -79,6 +101,7 @@ public class PnlCola extends JPanel {
         JLabel lblCola = new JLabel("Cola");
         Fuente.setFuenteTituloNegrita(lblCola);
 
+        // Ajuste de lblCola en el panel
         c.gridx = 0;
         c.gridy = 1;
         c.gridwidth = 2;
@@ -114,7 +137,7 @@ public class PnlCola extends JPanel {
         pnlInfCola.add(lblAbierta, c);
 
         // Creacion del boton actualizar
-        JButton btnActualizar = new JButton("Actualizar");
+        btnActualizar = new JButton("Actualizar");
         try{
             btnActualizar.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/30/000000/synchronize.png"))); // se pone el icono al boton
         }
@@ -138,6 +161,7 @@ public class PnlCola extends JPanel {
         JLabel lblGenteEspera = new JLabel("Gente en la cola: ");
         Fuente.setFuente(lblGenteEspera);
 
+        // Ajuste de lblGenteEspera en el panel
         c.gridx = 0;
         c.gridy = 4;
         c.anchor = GridBagConstraints.LINE_START;
@@ -145,8 +169,10 @@ public class PnlCola extends JPanel {
         pnlInfCola.add(lblGenteEspera, c);
 
         // Creacion de la etiqueta Numero Personas en la cola
-        JLabel lblNumGenteEspera = new JLabel("4");
+        lblNumGenteEspera = new JLabel("4");
         Fuente.setFuenteNegrita(lblNumGenteEspera);
+        
+        // Ajuste de lblNumGenteEspera en el panel
         c.gridx = 1;
         c.anchor = GridBagConstraints.LINE_END;
 
@@ -156,6 +182,7 @@ public class PnlCola extends JPanel {
         JLabel lblPosCola = new JLabel("Su posicion en la cola: ");
         Fuente.setFuente(lblPosCola);
 
+        // Ajuste de lblPosCola en el panel
         c.gridx = 0;
         c.gridy = 5;
         c.anchor = GridBagConstraints.LINE_START;
@@ -163,15 +190,17 @@ public class PnlCola extends JPanel {
         pnlInfCola.add(lblPosCola, c);
 
         // Creacion de la etiqueta Numero Personas en la cola
-        JLabel lblNumPosCola = new JLabel("4");
+        lblNumPosCola = new JLabel("4");
         Fuente.setFuenteNegrita(lblNumPosCola);
+        
+        // Ajuste de lblNumPosCola en el panel
         c.gridx = 1;
         c.anchor = GridBagConstraints.LINE_END;
 
         pnlInfCola.add(lblNumPosCola, c);
 
         // Creacion del boton salir de la cola
-        JButton btnSalirCola = new JButton("Salir de la cola");
+        btnSalirCola = new JButton("Salir de la cola");
 
         try{
             btnSalirCola.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/40/logout-rounded.png"))); // se pone el icono al boton
@@ -185,6 +214,7 @@ public class PnlCola extends JPanel {
         btnSalirCola.setBorder(null);
         Fuente.setFuente(btnSalirCola);
 
+        // Ajuste del btnSalirCola en el panel
         c.gridx = 0;
         c.gridy = 6;
         c.weighty = 0.3;
@@ -193,7 +223,7 @@ public class PnlCola extends JPanel {
         pnlInfCola.add(btnSalirCola, c);
 
         // Creacion del boton entrar a la cola
-        JButton btnEntrarCola = new JButton("Entrar a la cola");
+        btnEntrarCola = new JButton("Entrar a la cola");
 
         try{
             btnEntrarCola.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/40/login-rounded-right.png"))); // se pone el icono al boton
@@ -207,19 +237,32 @@ public class PnlCola extends JPanel {
         btnEntrarCola.setBorder(null);
         Fuente.setFuente(btnEntrarCola);
 
+        // Ajuste del btnEntrarCola en el panel
         c.gridx = 1;
         c.anchor = GridBagConstraints.LINE_END;
 
         pnlInfCola.add(btnEntrarCola, c);
 
+
+        // Creacion del layout dentro de la ventana
         this.setLayout(new BorderLayout());
         //this.add(new PnlEncabezado(user),BorderLayout.NORTH);
+        //TODO: ajustar el encabezado dentro del panel e instanciarlo correctamente
         this.add(pnlInfCola, BorderLayout.CENTER);
 
+    }
 
+    /**
+     * Metodo que genera todos los Action Listeners y asocia acciones a los elementos presentes en la ventana
+     */
 
-
+    private static void initComponentes()
+    {
         // CREACION DE LOS ACTION LISTENER
+
+        /**
+         * Metodo que implementa el action listener para volver al panel del alumno
+         */
         btnAtras.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
@@ -228,17 +271,73 @@ public class PnlCola extends JPanel {
             }
         });
 
+        /**
+         * Metodo que implementa el action listener para actualizar los datos en al pantalla
+         */
         btnActualizar.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
 
+                actualizarDatos();
+
+            }
+        });
+
+        /**
+         * Metodo que implementa el action listener para entrar en la cola
+         */
+        btnEntrarCola.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+
+                //TODO: Añadir el metodo para entrar en la cola
                 
             }
         });
 
+        /**
+         * Metodo que implementa el action listener para salir de la cola
+         */
+        btnSalirCola.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
 
-
+                //TODO: Añadir el metodo para salir de la cola
+                
+            }
+        });
     }
+
+
+    /**
+     * Metodo que actualiza los datos enseñados en el panel
+     */
+    private static void actualizarDatos() 
+    {
+        PnlCola.intPosCola = Fachada.getPosicionAlumno(PnlCola.alumno.getId(), idProf);
+        PnlCola.intNumCola = Fachada.getColaProfesor(idProf).size();
+    }
+
+    /**
+     * Metodo que actualiza el alumno que tien que cargar el panel
+     * @param alu recibe el alumno para anadir este al panel
+     */
+
+    private static void actualizarAlumno(Alumno alu)
+    {
+        PnlCola.alumno = alu;
+    }
+
+    /**
+     * Metodo que actualiza el rpofesor a ensenar en el panel
+     * @param prof String que indica el codigo de profesor para hacer queries
+     */
+    private static void actualizarProfesor(String prof)
+    {
+        PnlCola.idProf = prof;
+    }
+
+
 
    
 }
