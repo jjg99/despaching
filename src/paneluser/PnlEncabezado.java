@@ -134,8 +134,8 @@ public class PnlEncabezado extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (usuario instanceof Profesor){
-                    String opciones[]= {"continuar con la sesion", "Cerrar la sesion"};
-                    GestionMensajes.msg2OpcionesGenerico(opciones,"la cola se cerrara si no esta cerrada", "cerrar sesion");
+                    String opciones[]= {"Si", "No"};
+                    GestionMensajes.msg2OpcionesGenerico(opciones,"Los alumnos en la cola se borraran \n ¿Seguro que quiere cerrar sesion?", "¿Cerrar sesion?");
                     Fachada.closeCola(usuario.getId());
                 }
                 JVentana.cambiarPanel(PnlInicio.PnlInicio); // se establece el nuevo panel de la aplicación
