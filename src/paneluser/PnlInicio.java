@@ -71,6 +71,7 @@ public class PnlInicio extends JPanel implements PnlInterface{
         }
         c.gridx = 0;       //se coloca el icono en el centro de la pantalla
         c.gridy = 1;
+        c.insets = new Insets(0,0,100,0); // distancia entre el titulo y las cajas de iniciar sesion
         this.add(lblImagenDefault,c);  //se añade el icono al panel
 
         /**Area para introducir el nombre de usuario  */
@@ -78,6 +79,7 @@ public class PnlInicio extends JPanel implements PnlInterface{
         Fuente.setFuente(txtUsuario);      //Fijamos la fuente y tamaño de la letra
         c.gridx = 0;  // se coloca el usuario en el centro de la pantalla
         c.gridy = 2;
+        c.insets = new Insets(0,0,0,0);
         this.add(txtUsuario,c);  // se añade el area de usuario al panel 
 
         /**Area para introducir la contraseña del usuario */
