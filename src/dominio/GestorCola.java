@@ -47,5 +47,17 @@ public abstract class GestorCola {
         return Fachada.getColaProfesor(idProfesor);
 
     }
+
+    /**
+     * Metodo que se encarga de obtener la posicion de un alumno en la cola 
+     * @param idAlumno id del alumno
+     * @param profesorCola id del profesor
+     * @return int con la posicion del alumno en la cola
+     */
+
+    public static int getPosicionAlumno(String idAlumno, String profesorCola)
+    {
+        return Fachada.getPosicionAlumno(idAlumno, profesorCola);
+    }
     
 }
