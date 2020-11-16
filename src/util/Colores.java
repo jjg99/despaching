@@ -12,7 +12,7 @@ import javax.swing.JComponent;
 public class Colores {
 
     /**Fija el color del fonda para toda la app */
-    private final static Color FONDO = new Color(255, 255, 255);    //Blanco
+    public final static Color FONDO = new Color(255, 255, 255);    //Blanco
     /**Fija el color Verde */
     private final static Color VERDE = new Color(114, 202, 175);
     /**Fija el color Rojo */
@@ -20,7 +20,7 @@ public class Colores {
     /**Fija el color Amarillo */
     private final static Color AMARILLO = new Color(249, 227, 174);
     /**Fija el color Azul */
-    private final static Color AZUL = new Color(194, 205, 231); 
+    public final static Color AZUL = new Color(194, 205, 231); 
     /**Fija el color Azul Oscuro para el texto */
     private final static Color AZUL_OSC = new Color(9, 110, 226);
     /**Fija el color Azul Oscuro Translucido para el texto */

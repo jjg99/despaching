@@ -7,6 +7,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 import paneluser.PnlInicio;
 import util.Colores;
@@ -38,6 +39,10 @@ public class JVentana extends JFrame {
      * ventana.
      */
     public JVentana() {
+        //Fijamos unos colores por defecto
+        UIManager.put("OptionPane.background", Colores.FONDO);
+        UIManager.put("Panel.background", Colores.FONDO);
+        UIManager.put("Button.background", Colores.AZUL);
         initComponents();
         initFrame();
         this.requestFocusInWindow(); // Hacemos focus en la JVentana para que no empiece en el Textfield de Usuario
@@ -49,7 +54,6 @@ public class JVentana extends JFrame {
      */
     private void initComponents() {
         pnlVentana.setLayout(new BorderLayout()); // Fijamos el tipo de Layout
-        Colores.setBGColor(pnlVentana); // Fijamos el color del fondo
         pnlVentana.add(PnlInicio.PnlInicio, BorderLayout.CENTER); // Añadimos el panel de inicio
 
         this.setLayout(new BorderLayout()); // Fijamos el tipo de Layout

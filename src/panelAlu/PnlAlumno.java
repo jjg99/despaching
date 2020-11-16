@@ -38,7 +38,6 @@ public class PnlAlumno extends JPanel {
         /** Panel del alumno que contendra todos los componentes con los que interactuara */
         JPanel pnlInicioAlumno = new JPanel();
         pnlInicioAlumno.setLayout(new GridBagLayout());     //Establecemos el layout
-        Colores.setBGColor(pnlInicioAlumno);   //Fijamos el color del fondo
         /** Restricciones  para ir colocando los diferentes elementos dentro del {@link Gridbaglayout} */
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.NONE; // para que los huecos no se rellenen
@@ -129,7 +128,6 @@ public class PnlAlumno extends JPanel {
         gbc.anchor = GridBagConstraints.CENTER;
         
         this.setLayout(new BorderLayout());
-        Colores.setBGColor(this);   //Fijamos el color del fondo
         this.add(new PnlEncabezado(),BorderLayout.NORTH);
         this.add(pnlInicioAlumno, BorderLayout.CENTER);
     }

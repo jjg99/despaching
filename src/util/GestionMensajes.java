@@ -2,11 +2,10 @@ package util;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 import java.io.StringWriter;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.awt.HeadlessException;
 import java.io.PrintWriter;
 
 /**
