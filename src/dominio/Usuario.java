@@ -20,14 +20,13 @@ public class Usuario {
     /** constructor basico de un usuario, contiene el correo y la contraseña,
      *  lo minimo para poder iniciar sesion
      */
-    public Usuario (String correo,String password){
+    public Usuario (String correo){
         this.setCorreo(correo);
-        this.setPassword(password);
     }
 
     /** constructor que inicia todos los atributos de un usuario */
-    public Usuario (String correo, String password, String nombre, String apellidos, String id){
-        this(correo, password);
+    public Usuario (String correo, String nombre, String apellidos, String id){
+        this(correo);
         this.setNombre(nombre);
         this.setApellidos(apellidos);
         this.setId(id);

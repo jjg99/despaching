@@ -11,8 +11,8 @@ public class Profesor extends Usuario{
     /**  */
     private ArrayList<Alumno> colaAlu;
 
-    public Profesor(String correo, String password, String nombre, String apellidos, String id) {
-        super(correo, password, nombre, apellidos, id);
+    public Profesor(String correo, String nombre, String apellidos, String id) {
+        super(correo, nombre, apellidos, id);
     }
 
 
