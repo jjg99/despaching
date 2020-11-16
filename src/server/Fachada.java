@@ -4,13 +4,28 @@ import dao.ColaDAO;
 import dao.UsuarioDAO;
 import dominio.Usuario;
 
+import java.util.ArrayList;
+
 /** Clase que se encarga de redirigir el trafico a los DAO */
 public class Fachada {
     /**Metodo que se encarga de instanciar al Dao de la base de datos de colas para recibir todas las colas a la que esta aputnado un alumno
      * @param String id
      * @return  {@link ArrayList}
      */
-    public static void getColas(){
+    public static ArrayList<String> getColas(String idAlumno){
+        return ColaDAO.getColasAlumno(idAlumno);
+
+
+    }
+    
+    /**Metodo que se encarga de instanciar al Dao de la base de datos de colas para recibir la posición de un alumno en una cola
+    * @param String id
+    * @param String profesorCola
+    * @return  {@link ArrayList}
+    */
+    public static int getPosicionAlumno(String idAlumno,String profesorCola){
+        return ColaDAO.getPosicionColaAlumno(idAlumno, profesorCola);
+
 
     }
 
@@ -35,4 +50,5 @@ public class Fachada {
     public static Usuario logIn(String user, String pass) {
         return UsuarioDAO.logIn(user, pass);    
     }
+    
 }
