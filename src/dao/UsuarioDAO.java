@@ -40,7 +40,7 @@ public class UsuarioDAO {
         }
     }
     
-    public static ArrayList<String> getProfesores(String idAlumno){
+    public static ArrayList<String> getProfesoresAlumno(String idAlumno){
 
         Statement stmt;     // se crea el statement sobre el que trabajar
         ResultSet resultadoConsulta = null;
