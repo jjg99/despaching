@@ -9,7 +9,7 @@ import util.GestionMensajes;
 /**
  * Clase que se encarga de la conexion a la base de datos
  */
-public class conexionServer{
+public class ConexionServer{
     /** Variable estatica que en donde se almacenara la conexion */
     public static Connection conexion;
     /** Variable estatica y final en donde se almacenara la URL de la base de datos */

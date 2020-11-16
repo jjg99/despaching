@@ -18,6 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import dominio.GestorCola;
+import dominio.Profesor;
 import paneluser.PnlEncabezado;
 import paneluser.PnlHorario;
 import util.Colores;
@@ -28,12 +30,25 @@ public class PnlProf extends JPanel{
 
     public static PnlProf pnlProf = new PnlProf(); // se crea la variable que se instanciará desde fuera
 
+    /** Profesor que ha iniciado sesion */
+    private Profesor profesor;
+
     /**
      * Constructor del panel el cual llamara al metodo {@link establecerVentana}
      */
     private PnlProf(){
         this.establecerVentana();
     }
+
+    /**
+     * Constructor del panel el cual llamara al metodo {@link establecerVentana} y asigna el profesor asociado al panel
+     * @param prof profesor que inicia sesion.
+     */
+    private PnlProf(Profesor prof){
+        this.profesor = prof;
+        this.establecerVentana();
+    }
+
     /** Metodo que inicializara e instanciara todos los componentes en la ventana */
     public void establecerVentana(){
         /** Panel que contendra el Horario del dia */
@@ -108,7 +123,7 @@ public class PnlProf extends JPanel{
         /**Boton para eliminar alumno seleccionado */
         JButton btnEliminarAlumno = new JButton("Eliminar alumno");
         try{
-            btnEliminarAlumno.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/35/000000/delete-sign.png"))); // se pone el icono al boton
+            btnEliminarAlumno.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/30/000000/delete-sign.png"))); // se pone el icono al boton
         }
         catch(MalformedURLException e){
             e.printStackTrace();
@@ -158,16 +173,20 @@ public class PnlProf extends JPanel{
         btnAbrir.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                //Se hace que el boton tenga color y se le quita al otro
-                btnAbrir.setOpaque(true);
-                btnCerrar.setOpaque(false);
-                btnCerrar.updateUI();
-                removeCola(dlstColaAlumnos);    //borramos la lista
-                setCola(dlstColaAlumnos);       //obtenemos la lista
+                //Añadir el profesor a la tabla de la Cola
+                // if(GestorCola.openCola(profesor.getId())){
+                if(GestorCola.openCola("Atilano")){
+                    //Se hace que el boton tenga color y se le quita al otro
+                    btnAbrir.setOpaque(true);
+                    btnCerrar.setOpaque(false);
+                    btnCerrar.updateUI();
+                    removeCola(dlstColaAlumnos);    //borramos la lista
+                    setCola(dlstColaAlumnos);       //obtenemos la lista
 
-                //Se muestran los botones de Actualizar y eliminar
-                pnlBotonesLista.setVisible(true);
-                PnlProf.pnlProf.updateUI();
+                    //Se muestran los botones de Actualizar y eliminar
+                    pnlBotonesLista.setVisible(true);
+                    PnlProf.pnlProf.updateUI();
+                }
             }
         });
         btnCerrar.addActionListener(new ActionListener(){
@@ -187,7 +206,7 @@ public class PnlProf extends JPanel{
     }
     /**
      * Metodo que obtiene la Cola
-     * @param dlstCola ListModel donde se cargara la cola
+     * @param dlstCola <code>ListModel</code> donde se cargara la cola
      */
     private void setCola(DefaultListModel<String> dlstCola){
         dlstCola.addElement("Alumno Generico 1");
