@@ -88,7 +88,7 @@ public class ColaDAO {
             resultadoConsulta =stmt.executeQuery(sql);    // se ejecuta la solicitud sql
             // se lee la respuesta por parte dela base de datos
             while(resultadoConsulta.next()){
-                String colaCompleta = resultadoConsulta.getString("Colas");
+                String colaCompleta = resultadoConsulta.getString("colas");
                 // ahora que se tiene toda la cola hay que fragmentarla 
                 String[] colaFragmentada = colaCompleta.split(",");
                 // se recorre la cola para buscar el termino que se quiere
@@ -115,6 +115,49 @@ public class ColaDAO {
         }
         return resultadoPosicion;
 
+    }
+    /**Metodo encargado de conseguir la cola de alumnos de un profesor determinado
+     * @param String idProfesor
+     * @return {@link ArrayList}
+     */
+    public static ArrayList<String> getColaProfesor(String idProfesor){
+        Statement stmt;     // se crea el statement sobre el que trabajar
+        ResultSet resultadoConsulta = null;
+        ArrayList<String> resultadoCola = new ArrayList<String>();     // objeto que va a contener el resultado que se envia al alumno
+        StringBuilder stringCompuesto = new StringBuilder();            // objeto utilizado para formar un string con el nombre del alumno y su clave
+        // Ejecucion de la sentencia SQL
+        try {
+            stmt = ConexionServer.conexion.createStatement();
+            String sql = "SELECT colas FROM \"clave\" WHERE clavePROF = '"+idProfesor+"'";
+            resultadoConsulta =stmt.executeQuery(sql);    // se ejecuta la solicitud sql
+            // se lee la respuesta por parte de la base de datos
+            while(resultadoConsulta.next()){
+                String colaCompleta = resultadoConsulta.getString("colas");
+                // ahora que se tiene toda la cola hay que fragmentarla 
+                String[] colaFragmentada = colaCompleta.split(",");
+                // se recorre la cola para buscar el termino que se quiere
+                for(String elemento:colaFragmentada){
+                    if(elemento.equals(",")){
+                        // en el caso de que se trate de un divisor no se aumenta el contador
+
+                    }
+                    else{
+                        // en el caso de que se trate de un alumno, se guarda la clave del alumno, y se busca en la base de datos por el nombre del alumno
+                        stringCompuesto.append(UsuarioDAO.getNombreAlumno(elemento));       // se añade al string compuesto el nombre y apellido del alumno
+                        stringCompuesto.append("(");
+                        stringCompuesto.append(elemento);
+                        stringCompuesto.append(")");
+
+                        resultadoCola.add(stringCompuesto.toString());      // se guarda en la cola resultado para el profesor el nombre apellido y clave del alumno
+                        stringCompuesto = new StringBuilder();          // de esta forma se deja el objeto vacío para el siguiente alumno
+                    }
+
+                }
+        
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resultadoCola;
     }
 }
 

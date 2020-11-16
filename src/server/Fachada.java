@@ -54,5 +54,11 @@ public class Fachada {
         return UsuarioDAO.getProfesoresAlumno(idAlumno);
 
     }
-    
+    public static ArrayList<String> getColaProfesor(String idProfesor){
+        return ColaDAO.getColaProfesor(idProfesor);
+    }
+    public static ArrayList<String> getClasesProfesor(String idProfesor){
+        return UsuarioDAO.getClasesProfesor(idProfesor);
+
+    }
 }
