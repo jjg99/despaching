@@ -23,6 +23,7 @@ import server.ConexionServer;
 import util.Colores;
 import util.Fecha;
 import util.Fuente;
+import util.GestionMensajes;
 
 /** panel generico que tienen todos los profesores y alumnos
  *  el panel tendra 1 entrada que sera el alumno o profesor en cuestion(la primera version puede no contar con ello)
@@ -133,6 +134,8 @@ public class PnlEncabezado extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (usuario instanceof Profesor){
+                    String opciones[]= {"continuar con la sesion", "Cerrar la sesion"};
+                    GestionMensajes.msg2OpcionesGenerico(opciones,"la cola se cerrara si no esta cerrada", "cerrar sesion");
                     Fachada.closeCola(usuario.getId());
                 }
                 JVentana.cambiarPanel(PnlInicio.PnlInicio); // se establece el nuevo panel de la aplicación
