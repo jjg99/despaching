@@ -36,10 +36,17 @@ public class GestionMensajes {
      * Metodo que emite un mensaje de error cuando no se ha podido conectar con la
      * base de datos
      */
-    public static void msgErrorBD() {
-        JOptionPane.showMessageDialog(null,
-                "No se ha podido conectar con la base de datos, compruebe su conexion a Internet", "Error",
-                JOptionPane.WARNING_MESSAGE);
+    public static int msgErrorBD() {
+        String mensaje = "No se ha podido conectar con la base de datos, compruebe su conexion a Internet\no intentelo de nuevo mas tarde";
+        Object[] opciones = {"Reintentar","Salir"};
+        try {
+            return JOptionPane.showOptionDialog(null, mensaje, "Error", JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    new ImageIcon(new URL("https://img.icons8.com/dusk/64/000000/error.png")), opciones, opciones[0]);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 1;
+        }
     }
 
     public static void msgErrorGenerico(Exception e) {

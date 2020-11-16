@@ -20,14 +20,16 @@ public class ConexionServer{
     private static final String PASS = "admin";
 
     /** 
-     * Metodo el cual intentara conectarse a la base de datos llamando a {@link GestionMensajes.msgErrorBD} si hubiera un error.
+     * Metodo el cual intentara conectarse a la base de datos.
+     * @return un booleano indicando si hay o no conexion con la base de datos
      */
-    public static void startConnection(){
+    public static boolean startConnection(){
         try {
             Class.forName("org.postgresql.Driver"); // se carga el driver de la BD
             conexion = DriverManager.getConnection(BD_URL, USER, PASS); // Se realiza la conexion a la BD
+            return true;
         } catch (Exception e) {
-            GestionMensajes.msgErrorBD();
+            return false;
         }
     }
 
