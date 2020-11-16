@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import gui.JVentana;
 import panelAlu.PnlAlumno;
 import panelProf.PnlProf;
+import server.ConexionServer;
 import util.Colores;
 import util.Fuente;
 
@@ -207,16 +208,21 @@ public class PnlInicio extends JPanel implements PnlInterface{
         btnEntrar.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+                //TODO: esta conexion esta puesta para probar codigo de otros paneles, puede no ser la correcta para la accion de iniciar sesion
+                ConexionServer.startConnection();
                 /**En el caso de que se pulse el boton de entrar a la aplicación, 
                  * se llama al metodo {@link cambiarPanel}
                  */
-                JVentana.cambiarPanel(PnlAlumno.PnlAlumno); // se establece el nuevo panel de la aplicación  
+                JVentana.cambiarPanel(PnlAlumno.PnlAlumno); // se establece el nuevo panel de la aplicación 
+                 
             }
         });
 
         btnReset.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+                //TODO: modificar acorde con la funcionalidad el momento de conectarse a la base de datos
+                ConexionServer.startConnection();
                 /**En el caso de que se pulse el boton de entrar a la aplicación, 
                  * se llama al metodo {@link cambiarPanel} solo version sprint1
                  */

@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import gui.JVentana;
+import server.ConexionServer;
 import util.Colores;
 import util.Fecha;
 import util.Fuente;
@@ -125,7 +126,8 @@ public class PnlEncabezado extends JPanel implements PnlInterface {
         btnCerrarSesion.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                JVentana.cambiarPanel(PnlInicio.PnlInicio); // se establece el nuevo panel de la aplicación  
+                JVentana.cambiarPanel(PnlInicio.PnlInicio); // se establece el nuevo panel de la aplicación
+                ConexionServer.endConnection();  
             }
         });
     }
