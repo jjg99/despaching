@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import dao.ColaDAO;
+import server.Fachada;
 import dominio.Usuario;
 import dominio.Alumno;
 import dominio.Profesor;
@@ -27,7 +27,7 @@ import util.Fuente;
 /** panel generico que tienen todos los profesores y alumnos
  *  el panel tendra 1 entrada que sera el alumno o profesor en cuestion(la primera version puede no contar con ello)
  */
-public class PnlEncabezado extends JPanel implements PnlInterface {
+public class PnlEncabezado extends JPanel{
     
     /** atributo que tiene la informacion del usuario*/
      private Usuario usuario; 
@@ -48,7 +48,6 @@ public class PnlEncabezado extends JPanel implements PnlInterface {
           return this.usuario;
     }
     
-    @Override
     public void establecerVentana(){
         this.setLayout(new GridBagLayout()); //se establece el layout 
         /**Restricciones  para ir colocando los diferentes elementos dentro del {@link Gridbaglayout} */
@@ -134,7 +133,7 @@ public class PnlEncabezado extends JPanel implements PnlInterface {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (usuario instanceof Profesor){
-                    ColaDAO.closeCola(usuario.getId());
+                    Fachada.closeCola(usuario.getId());
                 }
                 JVentana.cambiarPanel(PnlInicio.PnlInicio); // se establece el nuevo panel de la aplicación
                 ConexionServer.endConnection();  
