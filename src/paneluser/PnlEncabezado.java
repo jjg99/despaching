@@ -71,7 +71,7 @@ public class PnlEncabezado extends JPanel{
         this.add(lblImagenUsuario,gbc);  //se añade el icono al panel
 
         /** nombre usuario */ 
-        JLabel lblNombre = new JLabel(usuario.getNombre()+ " " + usuario.getApellidos()); 
+        JLabel lblNombre = new JLabel(usuario.getNombre()+ " " + usuario.getApellido()); 
         Fuente.setFuenteTituloNegrita(lblNombre);  //establece la fuente del nombre y la pone en negrita
         gbc.gridx = 1; // se especifica la posicion en la matriz
         gbc.gridy = 0;
