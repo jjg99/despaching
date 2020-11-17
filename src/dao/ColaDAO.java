@@ -4,6 +4,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import dominio.Alumno;
+import dominio.Profesor;
+
 import server.ConexionServer;
 
 /** Clase que se encarga de realizar las sentencias SQL de la cola */
@@ -19,7 +22,7 @@ public class ColaDAO {
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "INSERT INTO \"Colas\" VALUES ('" + id + "')";
+            String sql = "INSERT INTO \"Colas\"(\"clave\") VALUES ('" + id + "')";
             stmt.executeUpdate(sql);
             return true;
         } catch (Exception e) {
@@ -157,5 +160,31 @@ public class ColaDAO {
         }
         return resultadoCola;
     }
+    
+    public static void addAlumnoCola(Alumno alumno,Profesor profesor){
+        Statement stmt;     // se crea el statement sobre el que trabajar
+        StringBuilder stringCompuesto = new StringBuilder();            // objeto utilizado para formar un string con el nombre del alumno y su clave
+        // Ejecucion de la sentencia SQLç
+        // primero se necesita conseguir la cola actual de alumno asociada al profesor en concreto
+        ArrayList<String> colaProfesor = ColaDAO.getColaProfesor(profesor.getId());
+        //se constuye un string con todos los alumnos de la cola
+        for(String alumnoEnCola: colaProfesor){
+            stringCompuesto.append(alumnoEnCola);
+            stringCompuesto.append(",");
+        }
+        // por ultimo se añade el alumno que se desea poner al final de la cola
+        stringCompuesto.append(alumno.getId());
+        // ahora se inserta el nuevo string en la base de datos
+        try {
+            stmt = ConexionServer.conexion.createStatement();
+            String sql = "UPDATE \"Colas\" SET \"colas\"="+stringCompuesto.toString()+"WHERE clave ="+profesor.getId();
+            stmt.executeUpdate(sql);    // se ejecuta la solicitud sql
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }
+
 
