@@ -1,24 +1,24 @@
 
 package paneluser;
 
+import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.BorderLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
+import dominio.Usuario;
+import server.Fachada;
 import util.Colores;
 import util.Fuente;
-import server.Fachada;
-import dominio.Usuario;
 
 
 /**

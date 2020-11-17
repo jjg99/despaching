@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import util.GestionMensajes;
-
 /**
  * Clase que se encarga de la conexion a la base de datos
  */

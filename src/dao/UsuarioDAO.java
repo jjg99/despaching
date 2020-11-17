@@ -2,13 +2,12 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import dominio.Alumno;
 import dominio.Profesor;
 import dominio.Usuario;
 import server.ConexionServer;
-
-import java.util.ArrayList;
 
 /** Clase que se encarga de realizar las sentencias SQL de los usuarios */
 public class UsuarioDAO {

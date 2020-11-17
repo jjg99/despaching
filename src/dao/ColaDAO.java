@@ -1,12 +1,10 @@
 package dao;
 
-import java.sql.Statement;
 import java.sql.ResultSet;
-
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import server.ConexionServer;
-
-import java.util.ArrayList;
 
 /** Clase que se encarga de realizar las sentencias SQL de la cola */
 public class ColaDAO {

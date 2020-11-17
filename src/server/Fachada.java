@@ -1,10 +1,10 @@
 package server;
 
+import java.util.ArrayList;
+
 import dao.ColaDAO;
 import dao.UsuarioDAO;
 import dominio.Usuario;
-
-import java.util.ArrayList;
 
 /** Clase que se encarga de redirigir el trafico a los DAO */
 public class Fachada {

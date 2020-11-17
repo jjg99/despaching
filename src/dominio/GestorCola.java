@@ -1,7 +1,6 @@
 package dominio;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import server.Fachada;
 import util.GestionMensajes;

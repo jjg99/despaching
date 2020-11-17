@@ -1,7 +1,7 @@
 package util;
 
-import java.awt.Font;
 import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.JComponent;
 

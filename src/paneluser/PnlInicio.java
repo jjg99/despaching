@@ -21,8 +21,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import dominio.ControlSesion;
-import gui.JVentana;
-import panelProf.PnlProf;
 import server.ConexionServer;
 import util.Colores;
 import util.Fuente;

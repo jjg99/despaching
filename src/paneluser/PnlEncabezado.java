@@ -14,12 +14,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import server.Fachada;
-import dominio.Usuario;
 import dominio.Alumno;
 import dominio.Profesor;
+import dominio.Usuario;
 import gui.JVentana;
 import server.ConexionServer;
+import server.Fachada;
 import util.Colores;
 import util.Fecha;
 import util.Fuente;
