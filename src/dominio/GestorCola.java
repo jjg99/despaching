@@ -58,5 +58,14 @@ public abstract class GestorCola {
     {
         return Fachada.getPosicionAlumno(idAlumno, profesorCola);
     }
+    /**Metodo encargado de solicitar a {@link Fachada} que añada un alumno a la cola de un profesor
+     * @param Alumno alumno
+     * @param Profesor profesor
+     */
+    public static void addAlumnoCola(Alumno alumno, Profesor profesor){
+        // se le pide a la fachada que añada un alumno
+        Fachada.addAlumnoCola(alumno, profesor);
+
+    }
     
 }

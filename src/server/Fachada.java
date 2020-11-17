@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import dao.ColaDAO;
 import dao.UsuarioDAO;
+import dominio.Alumno;
 import dominio.Usuario;
+import dominio.Profesor;
 
 /** Clase que se encarga de redirigir el trafico a los DAO */
 public class Fachada {
@@ -61,4 +63,12 @@ public class Fachada {
         return UsuarioDAO.getClasesProfesor(idProfesor);
 
     }
+    /**Metodo encargado de solicitar a {@link ColaDao} que añada un alumno a la cola de un profesor
+     * @param Alumno alumno
+     * @param Profesor profesor
+     */
+    public static void addAlumnoCola(Alumno alumno, Profesor profesor){
+        ColaDAO.addAlumnoCola(alumno,profesor);
+    }
+
 }
