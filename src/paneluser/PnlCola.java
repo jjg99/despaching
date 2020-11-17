@@ -18,7 +18,8 @@ import javax.swing.JLabel;
 import util.Colores;
 import util.Fuente;
 import server.Fachada;
-import dominio.Alumno;
+import dominio.Usuario;
+
 
 /**
  * Clase que crea un panel que muestra la cola de un alumno y le da opciones para 
@@ -26,7 +27,7 @@ import dominio.Alumno;
  */
 public class PnlCola extends JPanel {
 
-    private static Alumno alumno;
+    private static Usuario alumno;
     private static String idProf;
 
     private static JButton btnAtras;
@@ -36,17 +37,20 @@ public class PnlCola extends JPanel {
 
     private static JLabel lblNumGenteEspera;
     private static JLabel lblNumPosCola;
+    private static JLabel lblProf;
 
-    private static int intPosCola = 0;
-    private static int intNumCola = 0;
+    //TODO: Revisar la instanciación de clases
+    private static int intPosCola;
+    private static int intNumCola;
 
     public static PnlCola pnlCola = new PnlCola(alumno, idProf);
 
     /** Constructor que llama al metodo {@link initComponentes} y {@link crearComponentes} */
-    private PnlCola(Alumno alu, String idprof)
+    private PnlCola(Usuario alu, String idprof)
     {
         actualizarAlumno(alu);
         actualizarProfesor(idprof);
+        getNombreProfesor(idprof);
         actualizarDatos();
         crearComponentes();
         initComponentes(); 
@@ -111,7 +115,7 @@ public class PnlCola extends JPanel {
         pnlInfCola.add(lblCola, c);
 
         //Creacion de la etiqueta del profesor
-        JLabel lblProf = new JLabel("Profesor generico");
+        //lblProf = new JLabel("Profesor generico");
         //TODO: Añadir el nombre del profesor pasado por el constructor
         Fuente.setFuenteTitulo(lblProf);
 
@@ -124,7 +128,7 @@ public class PnlCola extends JPanel {
 
 
         // Creacion de la etiqueta cola abierta
-        //TODO: Añadir color a la etiqueta de 
+        //TODO: Añadir color a la etiqueta de Abierta
         JLabel lblAbierta = new JLabel("Abierta");
         Fuente.setFuente(lblAbierta);
         Colores.setBGVerde(lblAbierta);
@@ -169,7 +173,7 @@ public class PnlCola extends JPanel {
         pnlInfCola.add(lblGenteEspera, c);
 
         // Creacion de la etiqueta Numero Personas en la cola
-        lblNumGenteEspera = new JLabel("4");
+        lblNumGenteEspera = new JLabel(String.valueOf(intNumCola));
         Fuente.setFuenteNegrita(lblNumGenteEspera);
         
         // Ajuste de lblNumGenteEspera en el panel
@@ -190,7 +194,7 @@ public class PnlCola extends JPanel {
         pnlInfCola.add(lblPosCola, c);
 
         // Creacion de la etiqueta Numero Personas en la cola
-        lblNumPosCola = new JLabel("4");
+        lblNumPosCola = new JLabel(String.valueOf(intPosCola));
         Fuente.setFuenteNegrita(lblNumPosCola);
         
         // Ajuste de lblNumPosCola en el panel
@@ -246,7 +250,7 @@ public class PnlCola extends JPanel {
 
         // Creacion del layout dentro de la ventana
         this.setLayout(new BorderLayout());
-        //this.add(new PnlEncabezado(user),BorderLayout.NORTH);
+        this.add(new PnlEncabezado(PnlCola.alumno),BorderLayout.NORTH);
         //TODO: ajustar el encabezado dentro del panel e instanciarlo correctamente
         this.add(pnlInfCola, BorderLayout.CENTER);
 
@@ -323,7 +327,7 @@ public class PnlCola extends JPanel {
      * @param alu recibe el alumno para anadir este al panel
      */
 
-    private static void actualizarAlumno(Alumno alu)
+    private static void actualizarAlumno(Usuario alu)
     {
         PnlCola.alumno = alu;
     }
@@ -335,6 +339,15 @@ public class PnlCola extends JPanel {
     private static void actualizarProfesor(String prof)
     {
         PnlCola.idProf = prof;
+    }
+
+    /**
+     * Metodo que obtiene el nombre del profesor para enseñarlo por pantalla
+     * @param prof String que contiene el identificador del porfesor
+     */
+    private static void getNombreProfesor(String prof)
+    {
+        //PnlCola.lblProf = Fachada.getNombreProf(prof)
     }
 
 
