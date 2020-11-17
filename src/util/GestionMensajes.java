@@ -19,8 +19,15 @@ public class GestionMensajes {
      * introducidos son erroneos.
      */
     public static void msgErrorInicioSesion() {
-        JOptionPane.showMessageDialog(null, "Usuario y/o contrasena incorrectos", "Error Inicio Sesión",
-                JOptionPane.WARNING_MESSAGE);
+        try {
+            String mensaje = "Usuario y/o contrasena incorrectos";
+            Object[] opciones = {"Aceptar"};
+            JOptionPane.showOptionDialog(null, mensaje, "Error Inicio Sesión", JOptionPane.DEFAULT_OPTION,
+                                        JOptionPane.QUESTION_MESSAGE,
+                                        new ImageIcon(new URL("https://img.icons8.com/dusk/64/000000/error.png")), opciones, opciones[0]);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
