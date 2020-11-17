@@ -16,4 +16,13 @@ public abstract class Fecha {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");  //Fijamos el formato que deseamos
 		return sdf.format(fecha.getTime()).toString();     //aplicamos el formato y lo convertimos a String
     }
+
+    /**
+     * Metodo para obtener el dia de la semana indicado en un numero empezando en 1-> domingo
+     * @return un <code>int</code> del dia de la semana
+     */
+    public static int getDiaSemana(){
+        Calendar cal = Calendar.getInstance();
+        return cal.get(Calendar.DAY_OF_WEEK);
+    }
 }

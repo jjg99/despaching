@@ -66,7 +66,7 @@ public class PnlProf extends JPanel{
         
         // Agregamos ambos componentes al panel
         pnlIzquierda.add(pnlTxtHorario,BorderLayout.NORTH);
-        pnlIzquierda.add(new PnlHorario(),BorderLayout.CENTER);
+        pnlIzquierda.add(new PnlHorario(profesor),BorderLayout.CENTER);
 
         /** Panel que contendra la cola */
         JPanel pnlDerecha = new JPanel();

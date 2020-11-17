@@ -5,15 +5,29 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import dominio.Usuario;
+import dao.HorarioDao;
+import util.Fecha;
 import util.Colores;
 import util.Fuente;
 
 /** Panel generico el cual mostrata un horario de un profesor */
 public class PnlHorario extends JPanel{
     
+    /** atributo que contiene el usuario al que pertenece el horario */
+    private Usuario usuario;
+    
     /** Constructor que llama al metodo {@link initComponents} */
-    public PnlHorario(){
+    public PnlHorario(Usuario usuario){
+        setUsuario(usuario);
         initComponents();
+    }
+
+    /** metodo para establecer el usuario
+     * @param usuario contiene el usuario al que el horario pertenece
+     */
+    public void setUsuario(Usuario usuario){
+        this.usuario = usuario;
     }
 
     private void initComponents(){
@@ -30,15 +44,77 @@ public class PnlHorario extends JPanel{
                 this.add(btnHoras[i][j]);
             }
         }
-        //Fijamos algunos colores para ver como queda en distintos casos
-        Colores.setBGAmarillo(btnHoras[4][0]);
-        Colores.setBGAmarillo(btnHoras[5][0]);
-        Colores.setBGAmarillo(btnHoras[5][1]);
-        Colores.setBGRojo(btnHoras[0][0]);
-        Colores.setBGRojo(btnHoras[1][0]);
-        Colores.setBGRojo(btnHoras[3][1]);
-        Colores.setBGRojo(btnHoras[3][0]);
-        Colores.setBGRojo(btnHoras[6][0]);
-        Colores.setBGRojo(btnHoras[0][1]);
+        //hacemos que el horario sea dinámico
+        this.setHorario(btnHoras);
+    }
+    
+    /** metodo para establecer el horario del profesor de manera dinamica
+     * @param btnHoras es una matriz de botones que seran de un color especifico y se les cambiara el color
+     */
+    private void setHorario(JButton btnHoras[][]){
+        String horario= HorarioDao.getHorario(usuario.getId()); // se consigue el horario de la base de datos
+        String[] clases = horario.split(";");  // se separa en dias de la semana
+        int dia = Fecha.getDiaSemana() -2; // variable que contiene el numero del dia que es
+
+        String[] horas = clases[dia].split(","); // se separa las clases del dia
+        int horafinant = 0; // varible que contiene la hora anterior a la clase con la que se comprara si hay solaapamiento
+        int minutosfinant = 0; // variable que contiene los minutos anteriores a la clase con la que se compara si hay solapamientos
+        for (int i=1; i< horas.length ;i++){ // bucle que rrecore las clases del dia
+            int horaini = Integer.valueOf(String.valueOf(horas[i].charAt(0)) + String.valueOf(horas[i].charAt(1))); // variable que almacena la hora de inicio de la clase
+            int minutosini = Integer.valueOf(String.valueOf(horas[i].charAt(3)) + String.valueOf(horas[i].charAt(4))); // variable que almacena los minutos de inicio de la clase
+            int horafin = Integer.valueOf(String.valueOf(horas[i].charAt(6)) + String.valueOf(horas[i].charAt(7))); // variable que almacena la hora de fin de la clase
+            int minutosfin = Integer.valueOf(String.valueOf(horas[i].charAt(9)) + String.valueOf(horas[i].charAt(10))); // variable que almacena los minutos de fin de la clase
+            if (minutosini == 0) // cambia el boton al color que le corresponde
+                if (horaini-7 > 7 )
+                    Colores.setBGRojo(btnHoras[horaini -15][1]);
+                else{
+                    Colores.setBGRojo(btnHoras[horaini -8][0]);
+                }
+            else{
+                if (horaini == horafinant && (minutosini == minutosfinant || minutosini == minutosfinant - 10))
+                    if (horaini-7 > 7 ){
+                        Colores.setBGRojo(btnHoras[horaini -15][1]);
+                        if (horafin-7 > 7 ){
+                            Colores.setBGAmarillo(btnHoras[horafin -15][1]);
+                        }
+                        else{
+                            Colores.setBGAmarillo(btnHoras[horafin -8][0]);
+                        }
+                    }
+                    else{
+                        Colores.setBGRojo(btnHoras[horaini -8][0]);
+                        if (horafin-7 > 7 ){
+                            Colores.setBGAmarillo(btnHoras[horafin -15][1]);
+                        }
+                        else{
+                            Colores.setBGAmarillo(btnHoras[horafin -8][0]);
+                        }
+                    }
+                else{
+                    if (horaini-7 > 7 ){
+
+                        Colores.setBGAmarillo(btnHoras[horaini -15][1]);
+                        if (horafin-7 > 7 ){
+                            Colores.setBGAmarillo(btnHoras[horafin -15][1]);
+                        }
+                        else{
+                            Colores.setBGAmarillo(btnHoras[horafin -8][0]);
+                        }
+                    }
+                    else{
+                        Colores.setBGAmarillo(btnHoras[horaini -8][0]);
+                        if (horafin-7 > 7 ){
+                            Colores.setBGAmarillo(btnHoras[horafin -15][1]);
+                        }
+                        else{
+                            Colores.setBGAmarillo(btnHoras[horafin -8][0]);
+                        }
+                    }
+                }
+            }
+            horafinant = horafin;
+            minutosfinant = minutosfin; 
+        }
+
     }
 }
