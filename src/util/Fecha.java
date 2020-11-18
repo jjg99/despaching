@@ -18,13 +18,12 @@ public abstract class Fecha {
     }
 
     /**
-     * Metodo para obtener el dia de la semana indicado en un numero empezando en 1-> domingo
+     * Metodo para obtener el dia de la semana indicado en un numero empezando en 0-> Lunes
      * @return un <code>int</code> del dia de la semana
      */
     public static int getDiaSemana(){
         Calendar cal = Calendar.getInstance();
-        // SimpleDateFormat sdf = new SimpleDateFormat("u");  //Fijamos el formato que deseamos
-        // return Integer.parseInt(sdf.format(cal.getTime()).toString());
-        return cal.get(Calendar.DAY_OF_WEEK);
+        SimpleDateFormat sdf = new SimpleDateFormat("u");  //Fijamos el formato que deseamos
+        return Integer.parseInt(sdf.format(cal.getTime()).toString()) -1;
     }
 }

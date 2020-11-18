@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 
 import dominio.Usuario;
 import server.Fachada;
-import util.Fecha;
 import util.Colores;
 import util.Fuente;
 
@@ -18,9 +17,9 @@ public class PnlHorario extends JPanel{
     private Usuario usuario;
     
     /** Constructor que llama al metodo {@link initComponents} */
-    public PnlHorario(Usuario usuario){
+    public PnlHorario(Usuario usuario,int dia){
         setUsuario(usuario);
-        initComponents();
+        initComponents(dia);
     }
 
     /** metodo para establecer el usuario
@@ -30,7 +29,7 @@ public class PnlHorario extends JPanel{
         this.usuario = usuario;
     }
 
-    private void initComponents(){
+    private void initComponents(int dia){
         this.setLayout(new GridLayout(7,2,5,5));    //Matriz de 7*2 con separacion de 5 en ambos sentidos
         
         /** Matriz de botones que contendra el horario del profesor */
@@ -45,24 +44,22 @@ public class PnlHorario extends JPanel{
             }
         }
         //hacemos que el horario sea dinámico
-        this.setHorario(btnHoras);
+        this.setHorario(btnHoras,dia);
     }
     
     /** metodo para establecer el horario del profesor de manera dinamica
      * @param btnHoras es una matriz de botones que seran de un color especifico y se les cambiara el color
      */
-    private void setHorario(JButton btnHoras[][]){
+    private void setHorario(JButton btnHoras[][],int dia){
         String horario= Fachada.getHorario(usuario.getId()); // se consigue el horario de la base de datos
         String[] clases = horario.split(";");  // se separa en dias de la semana
-        int dia = Fecha.getDiaSemana() -2; // variable que contiene el numero del dia que es
-        if (dia == -1 || dia == 6){ // los sabados y domingos pintan en gris pues no hay clases
+        if (dia > 5) // los sabados y domingos se pintan en azul pues no hay clases
             for (int i=0; i<7; i++)
                 for (int j=0; j<2;j++)
-                    Colores.setBGAzul(btnHoras[i][j]);
-        } 
-        else {
+                    Colores.setBGAzul(btnHoras[i][j]); 
+        else { // se pinta el horario en funcion del horario
             String[] horas = clases[dia].split(","); // se separa las clases del dia
-            int horafinant = 0; // varible que contiene la hora anterior a la clase con la que se comprara si hay solaapamiento
+            int horafinant = 0; // varible que contiene la hora anterior a la clase con la que se comprara si hay solapamiento
             int minutosfinant = 0; // variable que contiene los minutos anteriores a la clase con la que se compara si hay solapamientos
             for (int i=1; i< horas.length ;i++){ // bucle que rrecore las clases del dia
                 int horaini = Integer.valueOf(String.valueOf(horas[i].charAt(0)) + String.valueOf(horas[i].charAt(1))); // variable que almacena la hora de inicio de la clase

@@ -24,6 +24,7 @@ import paneluser.PnlEncabezado;
 import paneluser.PnlHorario;
 import util.Colores;
 import util.Fuente;
+import util.Fecha;
 
 /**Clase para el panel del profesor */
 public class PnlProf extends JPanel{
@@ -66,7 +67,7 @@ public class PnlProf extends JPanel{
         
         // Agregamos ambos componentes al panel
         pnlIzquierda.add(pnlTxtHorario,BorderLayout.NORTH);
-        pnlIzquierda.add(new PnlHorario(profesor),BorderLayout.CENTER);
+        pnlIzquierda.add(new PnlHorario(profesor,Fecha.getDiaSemana()),BorderLayout.CENTER);
 
         /** Panel que contendra la cola */
         JPanel pnlDerecha = new JPanel();
