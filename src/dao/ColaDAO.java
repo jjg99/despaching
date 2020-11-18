@@ -160,7 +160,12 @@ public class ColaDAO {
         }
         return resultadoCola;
     }
-    
+
+     /**Metodo encargado de añadir un alumno a la una cola determinada, al final de la cola
+     * @param Alumno alumno
+     * @param Profesor profesor
+     * @return {@link ArrayList}
+     */
     public static void addAlumnoCola(Alumno alumno,Profesor profesor){
         Statement stmt;     // se crea el statement sobre el que trabajar
         StringBuilder stringCompuesto = new StringBuilder();            // objeto utilizado para formar un string con el nombre del alumno y su clave
@@ -184,7 +189,7 @@ public class ColaDAO {
         }
 
     }
-
+    
 }
 
 
