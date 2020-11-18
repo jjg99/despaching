@@ -50,7 +50,6 @@ public class PnlAlumno extends JPanel {
 
     /** Metodo en el cual se instanciaran todos los componentes */
     private void initComponents(){
-
         /** Panel del alumno que contendra todos los componentes con los que interactuara */
         JPanel pnlInicioAlumno = new JPanel();
         pnlInicioAlumno.setLayout(new GridBagLayout());     //Establecemos el layout
@@ -147,6 +146,11 @@ public class PnlAlumno extends JPanel {
         this.add(new PnlEncabezado(alumno),BorderLayout.NORTH);
         this.add(pnlInicioAlumno, BorderLayout.CENTER);
     }
+
+    /** Metodo estatico que elimina el alumno asociado al panel */
+    public static void delAlumno(){
+        alumno=null;
+    }
     
     private void addProfesores(DefaultListModel<String> dlstProfesores){
         dlstProfesores.addElement("Profesor Generico 1");
@@ -163,7 +167,6 @@ public class PnlAlumno extends JPanel {
         dlstProfesores.addElement("Profesor Generico 12");
         dlstProfesores.addElement("Profesor Generico 13");
         dlstProfesores.addElement("Profesor Genreico 14");
-        dlstProfesores.addElement("Profesor Generico 15");  
+        dlstProfesores.addElement("Profesor Generico 15");
     }
-
 }

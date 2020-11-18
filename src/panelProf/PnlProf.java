@@ -237,4 +237,9 @@ public class PnlProf extends JPanel{
     private void removeCola(DefaultListModel<String> dlstCola){
         dlstCola.removeAllElements();
     }
+
+    /** Metodo estatico que elimina el profesor asociado al panel */
+	public static void delProfesor(){
+        profesor=null;
+	}
 }

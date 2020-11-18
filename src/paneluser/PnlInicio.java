@@ -63,13 +63,13 @@ public class PnlInicio extends JPanel{
         /**Imagen para poder incluir el icono por defecto al iniciar sesion */
         JLabel lblImagenDefault = null;
         try{
-            lblImagenDefault = new JLabel(new ImageIcon(new URL("https://img.icons8.com/dusk/128/000000/add-user-group-man-woman.png")));
+            lblImagenDefault = new JLabel(new ImageIcon(new URL("https://img.icons8.com/dusk/185/000000/add-user-group-man-woman.png")));
         }catch (Exception e) {
             e.printStackTrace();
         }
         c.gridx = 0;       //se coloca el icono en el centro de la pantalla
         c.gridy = 1;
-        c.insets = new Insets(0,0,100,0); // distancia entre el titulo y las cajas de iniciar sesion
+        c.insets = new Insets(0,0,50,0); // distancia entre el titulo y las cajas de iniciar sesion
         this.add(lblImagenDefault,c);  //se añade el icono al panel
 
         /**Area para introducir el nombre de usuario  */

@@ -18,6 +18,8 @@ import dominio.Alumno;
 import dominio.Profesor;
 import dominio.Usuario;
 import gui.JVentana;
+import panelAlu.PnlAlumno;
+import panelProf.PnlProf;
 import server.ConexionServer;
 import server.Fachada;
 import util.Colores;
@@ -47,6 +49,10 @@ public class PnlEncabezado extends JPanel{
     /** metodo que devuelve el usuario asociado al panel encabezado */
     public Usuario getUsuario(){
           return this.usuario;
+    }
+
+    private void delUsuario(){
+        this.usuario=null;    
     }
     
     public void establecerVentana(){
@@ -139,21 +145,19 @@ public class PnlEncabezado extends JPanel{
                     if (opcion == 0){
                         Fachada.closeCola(usuario.getId());
                         JVentana.cambiarPanel(PnlInicio.PnlInicio); // se establece el nuevo panel de la aplicación
+                        PnlProf.delProfesor();
+                        ConexionServer.endConnection();
+                    }
+                } else if (usuario instanceof Alumno){
+                    String opciones[]= {"Si", "No"};
+                    int opcion = GestionMensajes.msg2OpcionesGenerico(opciones,"¿Seguro que quiere cerrar sesion?", "¿Cerrar sesion?");
+                    if (opcion == 0){
+                        JVentana.cambiarPanel(PnlInicio.PnlInicio); // se establece el nuevo panel de la aplicación
+                        PnlAlumno.delAlumno();
                         ConexionServer.endConnection();
                     }
                 }
-                else{
-                    if (usuario instanceof Alumno){
-                        String opciones[]= {"Si", "No"};
-                        int opcion = GestionMensajes.msg2OpcionesGenerico(opciones,"¿Seguro que quiere cerrar sesion?", "¿Cerrar sesion?");
-                        if (opcion == 0){
-                            JVentana.cambiarPanel(PnlInicio.PnlInicio); // se establece el nuevo panel de la aplicación
-                            ConexionServer.endConnection();
-                        }
-                    }
-                      
-                }
-                
+                delUsuario();
             }
         });
     }
