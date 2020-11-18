@@ -215,7 +215,7 @@ public class ColaDAO {
             colaProfesor.remove(indiceAlumno);
             try {
                 stmt = ConexionServer.conexion.createStatement();
-                String sql = "UPDATE \"Colas\" SET \"colas\"="+stringCompuesto.toString()+"WHERE clave ="+profesor.getId();
+                String sql = "UPDATE \"Colas\" SET \"colas\"="+colaProfesor.toString()+"WHERE clave ="+profesor.getId();
                 stmt.executeUpdate(sql);    // se ejecuta la solicitud sql
             } catch (Exception e) {
                 e.printStackTrace();
