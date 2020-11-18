@@ -1,6 +1,7 @@
 package panelAlu;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -57,6 +58,7 @@ public class PnlAlumno extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.NONE; // para que los huecos no se rellenen
 
+        //TODO: txtPantallaActual y txtProfesores centralo con respecto a la lista
         /** Etiqueta que indica en que panel de uso se encuntra en el usuario */
         JLabel txtPantallaActual = new JLabel("Inicio");
         Fuente.setFuenteTituloNegrita(txtPantallaActual);   //Cambiamos el tipo de letra
@@ -84,9 +86,10 @@ public class PnlAlumno extends JPanel {
         addProfesores(dlstProfesores);      //Llamamos a el metodo para que rellene la lista
         Fuente.setFuente(lstProfesores);    //Fijamos la fuente
         lstProfesores.setFixedCellHeight(25);       //se fija la altura de cada objeto de la lista
-        lstProfesores.setFixedCellWidth(225);       //se fija el ancho de cada objeto de la lista
+        // lstProfesores.setFixedCellWidth(225);       //se fija el ancho de cada objeto de la lista
         lstProfesores.setBorder(new EmptyBorder(5,5,5,5));        //se agrega un pequeño margen al en el interior de la lista
         JScrollPane pnlLstScroll = new JScrollPane(lstProfesores);   //Hacemos que podamos hacer scroll en la lista
+        pnlLstScroll.setPreferredSize(new Dimension(350, 350));     //Fiajamos el tamaño del JScrollPane
         //Colocamos la lista en el panel de Inicio de alumno
         gbc.gridx = 0;      //Especificamos posicion de la matriz
         gbc.gridy = 2;
