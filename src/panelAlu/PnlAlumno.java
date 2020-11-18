@@ -66,7 +66,7 @@ public class PnlAlumno extends JPanel {
         gbc.gridy = 0;
         gbc.gridheight = 1; //Cuantas casillas de la matriz ocupa verticalmente
         gbc.gridwidth = 1;  //Cuantas casillas de la matriz ocupa horizontalmete
-        // gbc.insets = (new Insets(20,100,0,0)); // ponemos margenes
+        gbc.insets = (new Insets(0,40,0,0)); // ponemos margenes
         pnlInicioAlumno.add(txtPantallaActual, gbc);    //Lo añadimos al panel
 
         /** Etiqueta de Profesores */
@@ -76,7 +76,7 @@ public class PnlAlumno extends JPanel {
         gbc.gridy = 1;
         gbc.gridheight = 1; //Cuantas casillas de la matriz ocupa verticalmente
         gbc.gridwidth = 1;  //Cuantas casillas de la matriz ocupa horizontalmete
-        // gbc.insets = (new Insets(20,100,0,0)); // ponemos margenes
+        gbc.insets = (new Insets(0,40,0,0)); // ponemos margenes
         pnlInicioAlumno.add(txtProfesor, gbc);    //Lo añadimos al panel
 
         DefaultListModel<String> dlstProfesores = new DefaultListModel<String>();   //Gestionara añadira y eliminara objetos de la lista
