@@ -350,7 +350,4 @@ public class PnlCola extends JPanel {
         //PnlCola.lblProf = Fachada.getNombreProf(prof)
     }
 
-
-
-   
 }
