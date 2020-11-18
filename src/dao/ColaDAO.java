@@ -164,7 +164,6 @@ public class ColaDAO {
      /**Metodo encargado de añadir un alumno a la una cola determinada, al final de la cola
      * @param Alumno alumno
      * @param Profesor profesor
-     * @return {@link ArrayList}
      */
     public static void addAlumnoCola(Alumno alumno,Profesor profesor){
         Statement stmt;     // se crea el statement sobre el que trabajar
@@ -189,7 +188,43 @@ public class ColaDAO {
         }
 
     }
-    
+
+    /**Metodo para borrar a un alumno de una cola determinada
+     * @param Alumno alumno
+     * @param Profesor profesor
+     */
+    public static void delAlumnoCola(Alumno alumno, Profesor profesor){
+        Statement stmt;     // se crea el statement sobre el que trabajar
+
+        // para poder borrar a un alumno de una cola, primero se necesita cargar la cola del profesor
+        ArrayList<String> colaProfesor = ColaDAO.getColaProfesor(profesor.getId());
+
+        // busca en la cola en indice del alumno que se desea borrar
+        int indiceAlumno = colaProfesor.indexOf(alumno.getId());
+        if(indiceAlumno<0){     // indicaría que el alumno no pertenece a la col
+            System.out.println("El alumno no pertenece a la cola");
+
+        }else{
+          try{  
+                //se borra el elemento siguiente, ya que después de cada alumno existe una coma de separaciópn, se borra primero para evitar problemas de indices
+                colaProfesor.remove(indiceAlumno+1);
+          }catch(Error error){
+              // no se hace nada, se pone el try porque en el caso de que se borre el utlimo elemento de la lista, va a saltar error al no tener ningun elemento en ese indice
+          }
+            // se borra al alumno de la lista
+            colaProfesor.remove(indiceAlumno);
+            try {
+                stmt = ConexionServer.conexion.createStatement();
+                String sql = "UPDATE \"Colas\" SET \"colas\"="+stringCompuesto.toString()+"WHERE clave ="+profesor.getId();
+                stmt.executeUpdate(sql);    // se ejecuta la solicitud sql
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+
 }
 
 

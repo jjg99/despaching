@@ -76,5 +76,8 @@ public class Fachada {
     public static void addAlumnoCola(Alumno alumno, Profesor profesor){
         ColaDAO.addAlumnoCola(alumno,profesor);
     }
+    public static void delAlumno(Alumno alumno, Profesor profesor){
+        ColaDAO.delAlumnoCola(alumno, profesor);
+    }
 
 }

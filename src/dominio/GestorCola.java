@@ -67,5 +67,9 @@ public abstract class GestorCola {
         Fachada.addAlumnoCola(alumno, profesor);
 
     }
+    public static void delAlumno(Alumno alumno, Profesor profesor){
+        Fachada.delAlumno(alumno,profesor);
+
+    }
     
 }
