@@ -6,7 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import dominio.Usuario;
-import dao.HorarioDao;
+import server.Fachada;
 import util.Fecha;
 import util.Colores;
 import util.Fuente;
@@ -52,7 +52,7 @@ public class PnlHorario extends JPanel{
      * @param btnHoras es una matriz de botones que seran de un color especifico y se les cambiara el color
      */
     private void setHorario(JButton btnHoras[][]){
-        String horario= HorarioDao.getHorario(usuario.getId()); // se consigue el horario de la base de datos
+        String horario= Fachada.getHorario(usuario.getId()); // se consigue el horario de la base de datos
         String[] clases = horario.split(";");  // se separa en dias de la semana
         int dia = Fecha.getDiaSemana() -2; // variable que contiene el numero del dia que es
 
