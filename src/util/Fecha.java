@@ -13,7 +13,7 @@ public abstract class Fecha {
      */
     public static String fechaString(){
         Calendar fecha = Calendar.getInstance();    //Obtenemos una instancia de calendario
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");  //Fijamos el formato que deseamos
+		SimpleDateFormat sdf = new SimpleDateFormat("E dd/MM/yyyy");  //Fijamos el formato que deseamos
 		return sdf.format(fecha.getTime()).toString();     //aplicamos el formato y lo convertimos a String
     }
 
@@ -23,6 +23,8 @@ public abstract class Fecha {
      */
     public static int getDiaSemana(){
         Calendar cal = Calendar.getInstance();
+        // SimpleDateFormat sdf = new SimpleDateFormat("u");  //Fijamos el formato que deseamos
+        // return Integer.parseInt(sdf.format(cal.getTime()).toString());
         return cal.get(Calendar.DAY_OF_WEEK);
     }
 }
