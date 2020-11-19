@@ -20,12 +20,23 @@ public class Alumno extends Usuario  {
     }
 
     /**Metodo para conseguir una lista de todos los profesores del alumno, crea un {@link ArrayList} de @Profesor */
-    private void getProfesores(){ 
+    private void cargarProfesores(){ 
         listaProfesores = Fachada.getProfesoresAlumno(super.getId());
     }
 
     /**Utiliza el metodo de la clase @link Fachada, para conectarse a la base de datos y pedir las colas en las que se encuentra el alumno */
-    private void getColas(){
+    private void cargarColas(){
         listaColas = GestorCola.getColasAlumno(super.getId());      // le pide al gestor de colas que le devuelva la lista de colas a la que se encuentra apuntado el alumno
     }
+
+    public ArrayList<String> getListaProfesores() {
+        this.cargarProfesores();
+        return listaProfesores;
+    }
+
+    public ArrayList<String> getListaColas() {
+        this.cargarColas();
+        return listaColas;
+    }
+    
 }
