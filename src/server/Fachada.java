@@ -79,5 +79,8 @@ public class Fachada {
     public static void delAlumno(Usuario alumno, Profesor profesor){
         ColaDAO.delAlumnoCola(alumno, profesor);
     }
+    public static String getNombreAlumno(String idAlumno){
+        return UsuarioDAO.getNombreAlumno(idAlumno)
 
+    }
 }
