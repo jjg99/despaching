@@ -56,9 +56,9 @@ public abstract class GestorCola {
      * @return int con la posicion del alumno en la cola
      */
 
-    public static int getPosicionAlumno(String idAlumno, String profesorCola)
+    public static int getPosicionAlumno(String idAlumno, String idProfesor)
     {
-        return Fachada.getPosicionAlumno(idAlumno, profesorCola);
+        return Fachada.getPosicionAlumno(idAlumno, idProfesor);
     }
     /**Metodo encargado de solicitar a {@link Fachada} que añada un alumno a la cola de un profesor
      * @param Alumno alumno
