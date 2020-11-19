@@ -73,8 +73,7 @@ public class ColaDAO {
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "SELECT U.nombre FROM \"Colas C, Usuarios U\" WHERE (U.clave= C.clave) AND CONTAINS(C.colas,'"
-                    + idAlumno + "') ";
+            String sql = "SELECT U.nombre FROM \"Colas C, Usuarios U\" WHERE (U.clave= C.clave) AND CONTAINS(C.colas,'" + idAlumno + "') ";
             resultadoConsulta = stmt.executeQuery(sql); // se ejecuta la solicitud sql
             // se lee la respuesta por parte dela base de datos
             while (resultadoConsulta.next()) {
