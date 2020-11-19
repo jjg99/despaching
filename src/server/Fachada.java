@@ -57,7 +57,7 @@ public class Fachada {
         return UsuarioDAO.getProfesoresAlumno(idAlumno);
 
     }
-    public static ArrayList<String> getColaProfesor(String idProfesor){
+    public static ArrayList<Usuario> getColaProfesor(String idProfesor){
         return ColaDAO.getColaProfesor(idProfesor);
     }
     public static ArrayList<String> getClasesProfesor(String idProfesor){
@@ -76,7 +76,7 @@ public class Fachada {
     public static void addAlumnoCola(Alumno alumno, Profesor profesor){
         ColaDAO.addAlumnoCola(alumno,profesor);
     }
-    public static void delAlumno(Alumno alumno, Profesor profesor){
+    public static void delAlumno(Usuario alumno, Profesor profesor){
         ColaDAO.delAlumnoCola(alumno, profesor);
     }
 

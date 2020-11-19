@@ -82,13 +82,13 @@ public class UsuarioDAO {
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "SELECT \"nombre\", \"apellidos\" FROM \"Usuarios\" WHERE claveALU = '"+idAlumno+"'";
+            String sql = "SELECT \"nombre\", \"apellido\" FROM \"Usuarios\" WHERE clave = '"+idAlumno+"'";
             resultadoConsulta =stmt.executeQuery(sql);    // se ejecuta la solicitud sql
             // se lee la respuesta por parte dela base de datos
             while(resultadoConsulta.next()){
                 resultadoNombre.append(resultadoConsulta.getString("nombre"));      // se construye el String con el nombrey apellidos del alumno
                 resultadoNombre.append(" ");
-                resultadoNombre.append(resultadoConsulta.getString("apellidos"));
+                resultadoNombre.append(resultadoConsulta.getString("apellido"));
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -22,10 +22,12 @@ public abstract class GestorCola {
      * @param id dentificador unico del profesor que desea cerrar la cola
      * @return <code>true</code> si se ha añadido satisfactoriamente el profesor, si da cualquier tipo de error devuelve <code>false</code>
      */
-	public static boolean closeCola(String id) {
-        if(0 == GestionMensajes.msg2OpcionesGenerico(new Object[] {"Si", "No"}, "Al cerrar la cola se borraran todos los alumnos que estan en ella\n¿Seguro que desea cerrar la cola?"
-        , "¿Desea cerrar la cola?")){
+	public static boolean closeCola(String id, boolean first) {
+        if(first){
             return Fachada.closeCola(id);
+        } else if(0 == GestionMensajes.msg2OpcionesGenerico(new Object[] {"Si", "No"}, "Al cerrar la cola se borraran todos los alumnos que estan en ella\n¿Seguro que desea cerrar la cola?"
+            , "¿Desea cerrar la cola?")){
+                return Fachada.closeCola(id);
         }else{
             return false;
         }
@@ -42,7 +44,7 @@ public abstract class GestorCola {
         return colasAlumno;
     }
     /**Metoodo que deuelve al profesor la cola de alumnos que tiene */
-    public static ArrayList<String>getColaProfesor(String idProfesor){
+    public static ArrayList<Usuario>getColaProfesor(String idProfesor){
         return Fachada.getColaProfesor(idProfesor);
 
     }
@@ -67,7 +69,7 @@ public abstract class GestorCola {
         Fachada.addAlumnoCola(alumno, profesor);
 
     }
-    public static void delAlumno(Alumno alumno, Profesor profesor){
+    public static void delAlumno(Usuario alumno, Profesor profesor){
         Fachada.delAlumno(alumno,profesor);
 
     }

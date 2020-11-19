@@ -10,7 +10,7 @@ public class Profesor extends Usuario{
     /**  */
     private ArrayList<String> listaClases;
     /**  */
-    private ArrayList<String> colaAlu;
+    private ArrayList<Usuario> colaAlu;
 
     public Profesor(String correo, String nombre, String apellido, String id) {
         super(correo, nombre, apellido, id);
@@ -40,7 +40,7 @@ public class Profesor extends Usuario{
     }
 
 
-    public ArrayList<String> getColaAlu() {
+    public ArrayList<Usuario> getColaAlu() {
         this.cargarCola();
         return colaAlu;
     }

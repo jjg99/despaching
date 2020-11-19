@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -20,8 +21,10 @@ import javax.swing.border.EmptyBorder;
 
 import dominio.GestorCola;
 import dominio.Profesor;
+import dominio.Usuario;
 import paneluser.PnlEncabezado;
 import paneluser.PnlHorario;
+import server.Fachada;
 import util.Colores;
 import util.Fuente;
 import util.Fecha;
@@ -41,6 +44,7 @@ public class PnlProf extends JPanel{
     public PnlProf(Profesor prof){
         setProfesor(prof);
         this.establecerVentana();
+        GestorCola.closeCola(profesor.getId(),true);
     }
 
     /**
@@ -106,12 +110,12 @@ public class PnlProf extends JPanel{
         pnlGestorCola.add(pnlCola);
         
         //Agregamos la lista
-        DefaultListModel<String> dlstColaAlumnos = new DefaultListModel<String>();   //Gestionara añadira y eliminara objetos de la lista
+        DefaultListModel<Usuario> dlstColaAlumnos = new DefaultListModel<Usuario>();   //Gestionara añadira y eliminara objetos de la lista
         /** Lista que en la que el alumno podra ver a sus profesores */
-        JList<String> lstCola = new JList<String>(dlstColaAlumnos);
+        JList<Usuario> lstCola = new JList<Usuario>(dlstColaAlumnos);
         lstCola.setLayoutOrientation(JList.VERTICAL);  //Hace que la lista se rellene de  de arriba a abajo y de izquierda a derecha
         Fuente.setFuente(lstCola);
-        lstCola.setFixedCellHeight(25);       //se fija la altura de cada objeto de la lista
+        lstCola.setFixedCellHeight(35);       //se fija la altura de cada objeto de la lista
         lstCola.setFixedCellWidth(225);       //se fija el ancho de cada objeto de la lista
         lstCola.setBorder(new EmptyBorder(5,5,5,5));        //se agrega un pequeño margen al en el interior de la lista
         JScrollPane lstScroll = new JScrollPane(lstCola);   //Hacemos que podamos hacer scroll en la lista
@@ -192,7 +196,7 @@ public class PnlProf extends JPanel{
                 //Comprobamos que el boton no este activo
                 if(!btnCerrar.isOpaque()){
                     //Eliminamos el profesor de la tabla Colas
-                    if(GestorCola.closeCola(profesor.getId())){
+                    if(GestorCola.closeCola(profesor.getId(),false)){
                         //Se hace que el boton tenga color y se le quita al otro
                         btnCerrar.setOpaque(true);
                         btnAbrir.setOpaque(false);
@@ -206,36 +210,44 @@ public class PnlProf extends JPanel{
                 }
             }
         });
+
+        btnActualizar.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                removeCola(dlstColaAlumnos);
+                setCola(dlstColaAlumnos);
+                PnlProf.pnlProf.updateUI();
+            }
+        });
+
+        btnEliminarAlumno.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                GestorCola.delAlumno(lstCola.getSelectedValue(), profesor);
+                removeCola(dlstColaAlumnos);
+                setCola(dlstColaAlumnos);
+                PnlProf.pnlProf.updateUI();
+            }
+        });
     }
     /**
      * Metodo que obtiene la Cola
      * @param dlstCola <code>ListModel</code> donde se cargara la cola
      */
-    private void setCola(DefaultListModel<String> dlstCola){
-        dlstCola.addElement("Alumno Generico 1");
-        dlstCola.addElement("Alumno Generico 2");
-        dlstCola.addElement("Alumno Generico 3");
-        dlstCola.addElement("Alumno Generico 4");
-        dlstCola.addElement("Alumno Generico 5");
-        dlstCola.addElement("Alumno Generico 6");
-        dlstCola.addElement("Alumno Generico 7");
-        dlstCola.addElement("Alumno Generico 8");
-        dlstCola.addElement("Alumno Generico 9");
-        dlstCola.addElement("Alumno Generico 10");
-        dlstCola.addElement("Alumno Generico 11");
-        dlstCola.addElement("Alumno Generico 12");
-        dlstCola.addElement("Alumno Generico 13");
-        dlstCola.addElement("Alumno Generico 14");
-        dlstCola.addElement("Alumno Generico 15");
-        dlstCola.addElement("Alumno Generico 16");
-
+    private void setCola(DefaultListModel<Usuario> dlstCola){
+        ArrayList<Usuario> colaAlumnos = profesor.getColaAlu();
+        if(!colaAlumnos.isEmpty()){
+            for(Usuario alu:colaAlumnos){
+                dlstCola.addElement(alu);
+            } 
+        }
     }
 
     /**
      * Metodo que elimina todo el contenido de la cola
      * @param dlstCola ListModel que contiene la cola a borrar
      */
-    private void removeCola(DefaultListModel<String> dlstCola){
+    private void removeCola(DefaultListModel<Usuario> dlstCola){
         dlstCola.removeAllElements();
     }
 

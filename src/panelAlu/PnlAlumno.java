@@ -58,7 +58,6 @@ public class PnlAlumno extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.NONE; // para que los huecos no se rellenen
 
-        //TODO: txtPantallaActual y txtProfesores centralo con respecto a la lista
         /** Etiqueta que indica en que panel de uso se encuntra en el usuario */
         JLabel txtPantallaActual = new JLabel("Inicio");
         Fuente.setFuenteTituloNegrita(txtPantallaActual);   //Cambiamos el tipo de letra

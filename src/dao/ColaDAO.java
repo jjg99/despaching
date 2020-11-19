@@ -1,23 +1,27 @@
 package dao;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 import dominio.Alumno;
 import dominio.Profesor;
-
+import dominio.Usuario;
 import server.ConexionServer;
 
 /** Clase que se encarga de realizar las sentencias SQL de la cola */
 public class ColaDAO {
 
     /**
-     * Metodo que añade al profesor en la tabla de colas, de manera que puede aceptar alumnos en dicha cola
+     * Metodo que añade al profesor en la tabla de colas, de manera que puede
+     * aceptar alumnos en dicha cola
+     * 
      * @param id identificador unico del profesor que va a abrir la cola
-     * @return <code>true</code> si la sentencia se ha ejecutado correctamente y si falla algo devolvera <code>false</code>
+     * @return <code>true</code> si la sentencia se ha ejecutado correctamente y si
+     *         falla algo devolvera <code>false</code>
      */
-	public static boolean openCola(String id) {
+    public static boolean openCola(String id) {
         Statement stmt;
         // Ejecucion de la sentencia SQL
         try {
@@ -29,15 +33,18 @@ public class ColaDAO {
             e.printStackTrace();
             return false;
         }
-	}
+    }
 
     /**
-     * Metodo que borra al profesor de la tabla Colas, de esta manera queda cerrada su cola, no pudiendo apuntarse nuevos alumnos
+     * Metodo que borra al profesor de la tabla Colas, de esta manera queda cerrada
+     * su cola, no pudiendo apuntarse nuevos alumnos
+     * 
      * @param id identificador unico del profesor que va a cerrar la cola
-     * @return <code>true</code> si la sentencia se ha ejecutado correctamente y si falla algo devolvera <code>false</code>
+     * @return <code>true</code> si la sentencia se ha ejecutado correctamente y si
+     *         falla algo devolvera <code>false</code>
      */
-	public static boolean closeCola(String id) {
-		Statement stmt;
+    public static boolean closeCola(String id) {
+        Statement stmt;
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
@@ -49,131 +56,173 @@ public class ColaDAO {
             return false;
         }
     }
-    /**Metodo encargado de acceder a la base de datos y de cargar las colas al que se encuentra añadido un alumno
-    *@param String id
-    *@return @link ArrayList*/
 
-    public static ArrayList<String> getColasAlumno(String idAlumno){
-        Statement stmt;     // se crea el statement sobre el que trabajar
+    /**
+     * Metodo encargado de acceder a la base de datos y de cargar las colas al que
+     * se encuentra añadido un alumno
+     * 
+     * @param String id
+     * @return @link ArrayList
+     */
+
+    public static ArrayList<String> getColasAlumno(String idAlumno) {
+        Statement stmt; // se crea el statement sobre el que trabajar
         ResultSet resultadoConsulta = null;
-        ArrayList<String> resultadoColas = new ArrayList<String>();     // objeto que va a contener el resultado que se envia al alumno
+        ArrayList<String> resultadoColas = new ArrayList<String>(); // objeto que va a contener el resultado que se
+                                                                    // envia al alumno
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "SELECT U.nombre FROM \"Colas C, Usuarios U\" WHERE (U.clave= C.clave) AND CONTAINS(C.colas,'"+idAlumno+"') ";
-            resultadoConsulta =stmt.executeQuery(sql);    // se ejecuta la solicitud sql
+            String sql = "SELECT U.nombre FROM \"Colas C, Usuarios U\" WHERE (U.clave= C.clave) AND CONTAINS(C.colas,'"
+                    + idAlumno + "') ";
+            resultadoConsulta = stmt.executeQuery(sql); // se ejecuta la solicitud sql
             // se lee la respuesta por parte dela base de datos
-            while(resultadoConsulta.next()){
+            while (resultadoConsulta.next()) {
                 resultadoColas.add(resultadoConsulta.getString("U.nombre"));
 
             }
-        
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return resultadoColas;
     }
-    /**Metodo que se encarga de devolver la posiciónk en la cola de un alumno
+
+    /**
+     * Metodo que se encarga de devolver la posiciónk en la cola de un alumno
+     * 
      * @param String idAlumno
      * @param String profesorCola
      * @return int posicion
      */
-    public static int getPosicionColaAlumno(String idAlumno,String colaProfesor){
-        Statement stmt;     // se crea el statement sobre el que trabajar
+    public static int getPosicionColaAlumno(String idAlumno, String colaProfesor) {
+        Statement stmt; // se crea el statement sobre el que trabajar
         ResultSet resultadoConsulta = null;
-        int resultadoPosicion = 0;     // objeto que va a contener el resultado que se envia al alumno, en el caso de que se produzca un error devolverá un 0
+        int resultadoPosicion = 0; // objeto que va a contener el resultado que se envia al alumno, en el caso de
+                                   // que se produzca un error devolverá un 0
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "SELECT Colas FROM \"Colas\" WHERE clave = '"+colaProfesor+"' CONTAINS('"+idAlumno+"') ";
-            resultadoConsulta =stmt.executeQuery(sql);    // se ejecuta la solicitud sql
+            String sql = "SELECT Colas FROM \"colas\" WHERE clave = '" + colaProfesor + "' CONTAINS('" + idAlumno
+                    + "') ";
+            resultadoConsulta = stmt.executeQuery(sql); // se ejecuta la solicitud sql
             // se lee la respuesta por parte dela base de datos
-            while(resultadoConsulta.next()){
+            while (resultadoConsulta.next()) {
                 String colaCompleta = resultadoConsulta.getString("colas");
-                // ahora que se tiene toda la cola hay que fragmentarla 
+                // ahora que se tiene toda la cola hay que fragmentarla
                 String[] colaFragmentada = colaCompleta.split(",");
                 // se recorre la cola para buscar el termino que se quiere
-                int posicion = 0;      // se utiliza la variable como un contador para saber en que posición se encuentra el alumno
-                for(String elemento:colaFragmentada){
-                    if(elemento.equals(",")){
+                int posicion = 0; // se utiliza la variable como un contador para saber en que posición se
+                                  // encuentra el alumno
+                for (String elemento : colaFragmentada) {
+                    if (elemento.equals(",")) {
                         // en el caso de que se trate de un divisor no se aumenta el contador
 
-                    }
-                    else if(elemento.equals(idAlumno)){
+                    } else if (elemento.equals(idAlumno)) {
                         resultadoPosicion = posicion;
 
-                    }
-                    else{
-                        posicion = posicion +1;     // si se trata de un alumno se 
+                    } else {
+                        posicion = posicion + 1; // si se trata de un alumno se
                     }
 
                 }
 
             }
-        
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return resultadoPosicion;
 
     }
-    /**Metodo encargado de conseguir la cola de alumnos de un profesor determinado
+
+    /**
+     * Metodo encargado de conseguir la cola de alumnos de un profesor determinado
+     * 
      * @param String idProfesor
      * @return {@link ArrayList}
      */
-    public static ArrayList<String> getColaProfesor(String idProfesor){
-        Statement stmt;     // se crea el statement sobre el que trabajar
+    public static ArrayList<Usuario> getColaProfesor(String idProfesor) {
+        Statement stmt; // se crea el statement sobre el que trabajar
         ResultSet resultadoConsulta = null;
-        ArrayList<String> resultadoCola = new ArrayList<String>();     // objeto que va a contener el resultado que se envia al alumno
-        StringBuilder stringCompuesto = new StringBuilder();            // objeto utilizado para formar un string con el nombre del alumno y su clave
+        ArrayList<Usuario> resultadoCola = new ArrayList<Usuario>();
+        // ArrayList<String> resultadoCola = new ArrayList<String>(); // objeto que va a
+        // contener el resultado que se envia al alumno
+        StringBuilder stringCompuesto = new StringBuilder(); // objeto utilizado para formar un string con el nombre del
+                                                             // alumno y su clave
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "SELECT colas FROM \"clave\" WHERE clavePROF = '"+idProfesor+"'";
-            resultadoConsulta =stmt.executeQuery(sql);    // se ejecuta la solicitud sql
+            String sql = "SELECT \"colas\" FROM \"Colas\" WHERE clave = '" + idProfesor + "'";
+            resultadoConsulta = stmt.executeQuery(sql); // se ejecuta la solicitud sql
             // se lee la respuesta por parte de la base de datos
-            while(resultadoConsulta.next()){
+            while (resultadoConsulta.next()) {
                 String colaCompleta = resultadoConsulta.getString("colas");
-                // ahora que se tiene toda la cola hay que fragmentarla 
+                // ahora que se tiene toda la cola hay que fragmentarla
                 String[] colaFragmentada = colaCompleta.split(",");
                 // se recorre la cola para buscar el termino que se quiere
-                for(String elemento:colaFragmentada){
-                    if(elemento.equals(",")){
+                for (String elemento : colaFragmentada) {
+                    if (elemento.equals(",")) {
                         // en el caso de que se trate de un divisor no se aumenta el contador
 
-                    }
-                    else{
-                        // en el caso de que se trate de un alumno, se guarda la clave del alumno, y se busca en la base de datos por el nombre del alumno
-                        stringCompuesto.append(UsuarioDAO.getNombreAlumno(elemento));       // se añade al string compuesto el nombre y apellido del alumno
-                        stringCompuesto.append("(");
-                        stringCompuesto.append(elemento);
-                        stringCompuesto.append(")");
+                    } else {
+                        // // en el caso de que se trate de un alumno, se guarda la clave del alumno, y
+                        // se busca en la base de datos por el nombre del alumno
+                        // stringCompuesto.append(UsuarioDAO.getNombreAlumno(elemento)); // se añade al
+                        // string compuesto el nombre y apellido del alumno
+                        // stringCompuesto.append("(");
+                        // stringCompuesto.append(elemento);
+                        // stringCompuesto.append(")");
 
-                        resultadoCola.add(stringCompuesto.toString());      // se guarda en la cola resultado para el profesor el nombre apellido y clave del alumno
-                        stringCompuesto = new StringBuilder();          // de esta forma se deja el objeto vacío para el siguiente alumno
+                        // resultadoCola.add(stringCompuesto.toString()); // se guarda en la cola
+                        // resultado para el profesor el nombre apellido y clave del alumno
+                        // stringCompuesto = new StringBuilder(); // de esta forma se deja el objeto
+                        // vacío para el siguiente alumno
+                        String nombreYapellido[] = UsuarioDAO.getNombreAlumno(elemento).split(" ");
+                        StringBuilder nombreCompleto = new StringBuilder();
+                        if (nombreYapellido.length >= 2) {
+                            for (int i = 0; i < nombreYapellido.length - 1; i++) {
+                                nombreCompleto.append(nombreYapellido[i]);
+                                if (i < nombreYapellido.length - 2) {
+                                    nombreCompleto.append(" ");
+                                }
+                            }
+                        } else {
+                            nombreCompleto.append(nombreYapellido[0]);
+                        }
+                        resultadoCola.add(new Usuario(nombreCompleto.toString(),
+                                nombreYapellido[nombreYapellido.length - 1], elemento));
+                        nombreCompleto = new StringBuilder();
                     }
 
                 }
             }
+        } catch (NullPointerException NPE) {
+            return resultadoCola;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return resultadoCola;
     }
 
-     /**Metodo encargado de añadir un alumno a la una cola determinada, al final de la cola
-     * @param Alumno alumno
+    /**
+     * Metodo encargado de añadir un alumno a la una cola determinada, al final de
+     * la cola
+     * 
+     * @param Alumno   alumno
      * @param Profesor profesor
      */
-    public static void addAlumnoCola(Alumno alumno,Profesor profesor){
-        Statement stmt;     // se crea el statement sobre el que trabajar
-        StringBuilder stringCompuesto = new StringBuilder();            // objeto utilizado para formar un string con el nombre del alumno y su clave
+    public static void addAlumnoCola(Alumno alumno, Profesor profesor) {
+        Statement stmt; // se crea el statement sobre el que trabajar
+        StringBuilder stringCompuesto = new StringBuilder(); // objeto utilizado para formar un string con el nombre del
+                                                             // alumno y su clave
         // Ejecucion de la sentencia SQLç
-        // primero se necesita conseguir la cola actual de alumno asociada al profesor en concreto
-        ArrayList<String> colaProfesor = ColaDAO.getColaProfesor(profesor.getId());
-        //se constuye un string con todos los alumnos de la cola
-        for(String alumnoEnCola: colaProfesor){
-            stringCompuesto.append(alumnoEnCola);
+        // primero se necesita conseguir la cola actual de alumno asociada al profesor
+        // en concreto
+        ArrayList<Usuario> colaProfesor = ColaDAO.getColaProfesor(profesor.getId());
+        // se constuye un string con todos los alumnos de la cola
+        for (Usuario alumnoEnCola : colaProfesor) {
+            stringCompuesto.append(alumnoEnCola.getId());
             stringCompuesto.append(",");
         }
         // por ultimo se añade el alumno que se desea poner al final de la cola
@@ -181,44 +230,63 @@ public class ColaDAO {
         // ahora se inserta el nuevo string en la base de datos
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "UPDATE \"Colas\" SET \"colas\"="+stringCompuesto.toString()+"WHERE clave ="+profesor.getId();
-            stmt.executeUpdate(sql);    // se ejecuta la solicitud sql
+            String sql = "UPDATE \"Colas\" SET \"colas\"=" + stringCompuesto.toString() + "WHERE clave ="
+                    + profesor.getId();
+            stmt.executeUpdate(sql); // se ejecuta la solicitud sql
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    /**Metodo para borrar a un alumno de una cola determinada
-     * @param Alumno alumno
+    /**
+     * Metodo para borrar a un alumno de una cola determinada
+     * 
+     * @param Alumno   alumno
      * @param Profesor profesor
      */
-    public static void delAlumnoCola(Alumno alumno, Profesor profesor){
-        Statement stmt;     // se crea el statement sobre el que trabajar
+    public static void delAlumnoCola(Usuario alumno, Profesor profesor) {
+        Statement stmt; // se crea el statement sobre el que trabajar
 
-        // para poder borrar a un alumno de una cola, primero se necesita cargar la cola del profesor
-        ArrayList<String> colaProfesor = ColaDAO.getColaProfesor(profesor.getId());
+        // para poder borrar a un alumno de una cola, primero se necesita cargar la cola
+        // del profesor
+        ArrayList<Usuario> colaProfesor = ColaDAO.getColaProfesor(profesor.getId());
 
         // busca en la cola en indice del alumno que se desea borrar
-        int indiceAlumno = colaProfesor.indexOf(alumno.getId());
-        if(indiceAlumno<0){     // indicaría que el alumno no pertenece a la col
+        int indiceAlumno = colaProfesor.indexOf(alumno);
+        if (indiceAlumno < 0) { // indicaría que el alumno no pertenece a la col
             System.out.println("El alumno no pertenece a la cola");
-
-        }else{
-          try{  
-                //se borra el elemento siguiente, ya que después de cada alumno existe una coma de separaciópn, se borra primero para evitar problemas de indices
-                colaProfesor.remove(indiceAlumno+1);
-          }catch(Error error){
-              // no se hace nada, se pone el try porque en el caso de que se borre el utlimo elemento de la lista, va a saltar error al no tener ningun elemento en ese indice
-          }
-            // se borra al alumno de la lista
-            colaProfesor.remove(indiceAlumno);
+        } else {
+            StringBuilder newColaProfesor;
             try {
+                // se borra el elemento siguiente, ya que después de cada alumno existe una coma
+                // de separaciópn, se borra primero para evitar problemas de indices
+                colaProfesor.remove(indiceAlumno);
+            } catch (Error error) {
+                // no se hace nada, se pone el try porque en el caso de que se borre el utlimo
+                // elemento de la lista, va a saltar error al no tener ningun elemento en ese
+                // indice
+            }
+            try {
+                newColaProfesor = new StringBuilder();
+                for (Usuario alu : colaProfesor) {
+                    newColaProfesor.append(alu.getId()).append(",");
+                }
                 stmt = ConexionServer.conexion.createStatement();
-                String sql = "UPDATE \"Colas\" SET \"colas\"="+colaProfesor.toString()+"WHERE clave ="+profesor.getId();
-                stmt.executeUpdate(sql);    // se ejecuta la solicitud sql
-            } catch (Exception e) {
-                e.printStackTrace();
+                String sql = "UPDATE \"Colas\" SET \"colas\"='"
+                        + newColaProfesor.substring(0, newColaProfesor.length() - 1) + "' WHERE clave ='"
+                        + profesor.getId() + "'";
+                stmt.executeUpdate(sql); // se ejecuta la solicitud sql
+            } catch (StringIndexOutOfBoundsException se) {  //Si es el ultimo alumno, saltara esta excepcion
+                try {
+                    String sql = "UPDATE \"Colas\" SET \"colas\"= null WHERE clave ='" + profesor.getId() + "'";
+                    stmt = ConexionServer.conexion.createStatement();
+                    stmt.executeUpdate(sql);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }catch (Exception e) {
+                    e.printStackTrace();
             }
         }
 
