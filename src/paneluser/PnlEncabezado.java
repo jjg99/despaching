@@ -147,6 +147,7 @@ public class PnlEncabezado extends JPanel{
                         JVentana.cambiarPanel(PnlInicio.PnlInicio); // se establece el nuevo panel de la aplicación
                         PnlProf.delProfesor();
                         ConexionServer.endConnection();
+                        delUsuario();
                     }
                 } else if (usuario instanceof Alumno){
                     String opciones[]= {"Si", "No"};
@@ -155,9 +156,9 @@ public class PnlEncabezado extends JPanel{
                         JVentana.cambiarPanel(PnlInicio.PnlInicio); // se establece el nuevo panel de la aplicación
                         PnlAlumno.delAlumno();
                         ConexionServer.endConnection();
+                        delUsuario();
                     }
                 }
-                delUsuario();
             }
         });
     }
