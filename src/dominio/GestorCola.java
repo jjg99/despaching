@@ -40,7 +40,7 @@ public abstract class GestorCola {
     public static ArrayList<String> getColasAlumno(String id){
         
         //el 
-        ArrayList<String> colasAlumno = Fachada.getColas(id);
+        ArrayList<String> colasAlumno = Fachada.getColasAlumno(id);
         return colasAlumno;
     }
     /**Metoodo que deuelve al profesor la cola de alumnos que tiene */
