@@ -80,7 +80,7 @@ public class Fachada {
         ColaDAO.delAlumnoCola(alumno, profesor);
     }
     public static String getNombreAlumno(String idAlumno){
-        return UsuarioDAO.getNombreAlumno(idAlumno)
+        return UsuarioDAO.getNombreAlumno(idAlumno);
 
     }
 }
