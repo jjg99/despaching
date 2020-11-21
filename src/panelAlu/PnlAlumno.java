@@ -18,7 +18,10 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import java.util.ArrayList;
+
 import dominio.Alumno;
+import dominio.Profesor;
 import paneluser.PnlEncabezado;
 import util.Colores;
 import util.Fuente;
@@ -31,6 +34,7 @@ public class PnlAlumno extends JPanel {
 
     /** Alumno que ha iniciado sesion */
     private static Alumno alumno;
+    private static ArrayList<Profesor> listaProf;
 
     /** 
      * Constructor que llamara al metodo {@link initComponents} y al metodo{@link setAlumno}
@@ -38,6 +42,7 @@ public class PnlAlumno extends JPanel {
      */
     public PnlAlumno(Alumno alu){
         setAlumno(alu);
+        setListaProfesores();
         initComponents();
     }
 
@@ -47,6 +52,15 @@ public class PnlAlumno extends JPanel {
      */
     private void setAlumno(Alumno alu) {
         alumno = alu;
+    }
+
+    /**
+     * Metodo que carga la lista de profesores que posee un alumno
+     */
+
+    private void setListaProfesores()
+    {
+        listaProf = alumno.getListaProfesores();
     }
 
     /** Metodo en el cual se instanciaran todos los componentes */
@@ -143,6 +157,8 @@ public class PnlAlumno extends JPanel {
         gbc.insets = (new Insets(20,0,0,0)); // ponemos margenes
         pnlInicioAlumno.add(btnCola, gbc);
         gbc.anchor = GridBagConstraints.CENTER;
+
+        
         
         this.setLayout(new BorderLayout());
         this.add(new PnlEncabezado(alumno),BorderLayout.NORTH);
@@ -155,20 +171,12 @@ public class PnlAlumno extends JPanel {
     }
     
     private void addProfesores(DefaultListModel<String> dlstProfesores){
-        dlstProfesores.addElement("Profesor Generico 1");
-        dlstProfesores.addElement("Profesor Generico 2");
-        dlstProfesores.addElement("Profesor Generico 3");
-        dlstProfesores.addElement("Profesor Generico 4");
-        dlstProfesores.addElement("Profesor Generico 5");
-        dlstProfesores.addElement("Profesor Genreico 6");
-        dlstProfesores.addElement("Profesor Generico 7");
-        dlstProfesores.addElement("Profesor Generico 8");
-        dlstProfesores.addElement("Profesor Generico 9");
-        dlstProfesores.addElement("Profesor Generico 10");
-        dlstProfesores.addElement("Profesor Generico 11");
-        dlstProfesores.addElement("Profesor Generico 12");
-        dlstProfesores.addElement("Profesor Generico 13");
-        dlstProfesores.addElement("Profesor Genreico 14");
-        dlstProfesores.addElement("Profesor Generico 15");
+        
+        
+        for (Profesor prof : listaProf)
+        {
+            dlstProfesores.addElement(prof.getNombre() + " " + prof.getApellido());
+        }
+        
     }
 }

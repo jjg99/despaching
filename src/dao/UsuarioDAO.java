@@ -65,8 +65,8 @@ public class UsuarioDAO {
                 // se cargan todos los datos necesarios de la base de datos para crear el profesor
                 String correo = resultadoConsulta.getString("correo");
                 String nombre = resultadoConsulta.getString("nombre");
-                String apellido = resultadoConsulta.getString("nombre");
-                String id = resultadoConsulta.getString("nombre");
+                String apellido = resultadoConsulta.getString("apellido");
+                String id = resultadoConsulta.getString("clavePROF");
                 //se añade al resultado
                 resultadoColas.add(new Profesor(correo,nombre,apellido,id));
 
