@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,6 +24,7 @@ import dominio.Profesor;
 import server.Fachada;
 import util.Colores;
 import util.Fuente;
+import util.GestionMensajes;
 
 
 /**
@@ -40,7 +42,7 @@ public class PnlCola extends JPanel {
     private static JButton btnEntrarCola;
     private static JButton btnSalirCola;
 
-    private static JLabel lblNumGenteEspera;
+    private static JLabel lblNumGenteEspera = new JLabel();
     private static JLabel lblNumPosCola = new JLabel();
     private static JLabel lblProf;
 
@@ -117,6 +119,7 @@ public class PnlCola extends JPanel {
         c.gridy = 1;
         c.gridwidth = 2;
         c.gridheight = 2;
+        c.weighty = 0.15;
         c.anchor = GridBagConstraints.PAGE_START;
 
         pnlInfCola.add(lblCola, c);
@@ -125,12 +128,13 @@ public class PnlCola extends JPanel {
         //lblProf = new JLabel("Profesor generico");
         //TODO: REvisar el nombre del profesor pasado por parametro
         getNombreProfesor(PnlCola.profesor);
-        Fuente.setFuenteTitulo(lblProf);
+        Fuente.setFuenteNegrita(lblProf);
         
 
         // Ajuste de lblProf en el panel
         c.gridy = 2;
         c.gridheight = 1;
+        c.weighty = 0;
         c.anchor = GridBagConstraints.CENTER;
 
         pnlInfCola.add(lblProf, c);
@@ -148,7 +152,7 @@ public class PnlCola extends JPanel {
         c.gridwidth = 1;
         c.anchor = GridBagConstraints.CENTER;
 
-        pnlInfCola.add(lblAbierta, c);
+        //pnlInfCola.add(lblAbierta, c);
 
         // Creacion del boton actualizar
         btnActualizar = new JButton("Actualizar");
@@ -166,8 +170,10 @@ public class PnlCola extends JPanel {
         Fuente.setFuente(btnActualizar);
 
         // Ajuste de btnActualizar en el panel
-        c.gridx = 1;
-        c.anchor = GridBagConstraints.LINE_END;
+        c.gridx = 0;
+        c.gridwidth = 2;
+        c.weighty = 0.1;
+        c.anchor = GridBagConstraints.CENTER;
 
         pnlInfCola.add(btnActualizar, c);
 
@@ -213,7 +219,7 @@ public class PnlCola extends JPanel {
         pnlInfCola.add(lblNumPosCola, c);
 
         // Creacion del boton salir de la cola
-        btnSalirCola = new JButton("Salir de la cola");
+        btnSalirCola = new JButton("Salir");
 
         try{
             btnSalirCola.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/40/logout-rounded.png"))); // se pone el icono al boton
@@ -236,7 +242,7 @@ public class PnlCola extends JPanel {
         pnlInfCola.add(btnSalirCola, c);
 
         // Creacion del boton entrar a la cola
-        btnEntrarCola = new JButton("Entrar a la cola");
+        btnEntrarCola = new JButton("Entrar");
 
         try{
             btnEntrarCola.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/40/login-rounded-right.png"))); // se pone el icono al boton
@@ -318,10 +324,10 @@ public class PnlCola extends JPanel {
         btnSalirCola.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-
-                //TODO: Añadir el metodo para salir de la cola
                 
+                GestorCola.delAlumno(alumno, profesor);
                 actualizarDatos();
+                PnlCola.pnlCola.updateUI();
             }
         });
     }
@@ -333,17 +339,28 @@ public class PnlCola extends JPanel {
     private static void actualizarDatos() 
     {
 
-        PnlCola.intPosCola = GestorCola.getPosicionAlumno(PnlCola.alumno.getId(), PnlCola.profesor.getId());
-        if (PnlCola.intPosCola == 0) {
-            PnlCola.lblNumPosCola.setText("-");
-            Fuente.setFuenteNegrita(PnlCola.lblNumPosCola);
+        ArrayList <Alumno> colaprof = GestorCola.getColaProfesor(profesor.getId());
+        if (colaprof.isEmpty() == true) {
+                GestionMensajes.msgColaCerrada();
+                volverPnlInicio();
         } else {
-            PnlCola.lblNumPosCola.setText(String.valueOf(intPosCola));
-            Fuente.setFuenteNegrita(PnlCola.lblNumPosCola);
+                
+            PnlCola.intPosCola = GestorCola.getPosicionAlumno(PnlCola.alumno.getId(), PnlCola.profesor.getId());
+            if (PnlCola.intPosCola == 0) {
+                PnlCola.lblNumPosCola.setText("-");
+                Fuente.setFuenteNegrita(PnlCola.lblNumPosCola);
+            } else {
+                PnlCola.lblNumPosCola.setText(String.valueOf(intPosCola));
+                Fuente.setFuenteNegrita(PnlCola.lblNumPosCola);
+            }
+    
+            PnlCola.intNumCola = Fachada.getColaProfesor(PnlCola.profesor.getId()).size();
+            PnlCola.lblNumGenteEspera.setText(String.valueOf(intNumCola));
+            
         }
-        //TODO: Checkear que no da error esto
-        PnlCola.intNumCola = Fachada.getColaProfesor(PnlCola.profesor.getId()).size();
         
+        PnlCola.lblNumPosCola.updateUI();
+        PnlCola.lblNumGenteEspera.updateUI();
     }
 
     /**
@@ -375,6 +392,9 @@ public class PnlCola extends JPanel {
         Fuente.setFuenteTitulo(PnlCola.lblProf);
     }
 
+    /**
+     * Metodo que vuelve a mostrar PnlAlumno
+     */
     private static void volverPnlInicio()
     {
         JVentana.cambiarPanel(PnlAlumno.PnlAlumno);

@@ -23,12 +23,14 @@ import javax.swing.border.EmptyBorder;
 import java.util.ArrayList;
 
 import dominio.Alumno;
+import dominio.GestorCola;
 import dominio.Profesor;
 import gui.JVentana;
 import paneluser.PnlEncabezado;
 import paneluser.PnlCola;
 import util.Colores;
 import util.Fuente;
+import util.GestionMensajes;
 
 /**
  * Clase destinada a crear el panel del alumno, con el que interactuara con el resto del programa
@@ -168,8 +170,12 @@ public class PnlAlumno extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e){
 
-                JVentana.cambiarPanel(PnlCola.pnlCola = new PnlCola(alumno, lstProfesores.getSelectedValue()));
-                
+                ArrayList <Alumno> colaprof = GestorCola.getColaProfesor(lstProfesores.getSelectedValue().getId());
+                if (colaprof.isEmpty() == true) {
+                    GestionMensajes.msgColaCerrada();
+                } else {
+                    JVentana.cambiarPanel(PnlCola.pnlCola = new PnlCola(alumno, lstProfesores.getSelectedValue()));
+                }
             }
         });
         
