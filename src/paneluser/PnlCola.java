@@ -41,7 +41,7 @@ public class PnlCola extends JPanel {
     private static JButton btnSalirCola;
 
     private static JLabel lblNumGenteEspera;
-    private static JLabel lblNumPosCola;
+    private static JLabel lblNumPosCola = new JLabel();
     private static JLabel lblProf;
 
     //TODO: Revisar la instanciación de clases
@@ -335,10 +335,10 @@ public class PnlCola extends JPanel {
 
         PnlCola.intPosCola = GestorCola.getPosicionAlumno(PnlCola.alumno.getId(), PnlCola.profesor.getId());
         if (PnlCola.intPosCola == 0) {
-            PnlCola.lblNumPosCola = new JLabel("-");
+            PnlCola.lblNumPosCola.setText("-");
             Fuente.setFuenteNegrita(PnlCola.lblNumPosCola);
         } else {
-            PnlCola.lblNumPosCola = new JLabel(String.valueOf(intPosCola));
+            PnlCola.lblNumPosCola.setText(String.valueOf(intPosCola));
             Fuente.setFuenteNegrita(PnlCola.lblNumPosCola);
         }
         //TODO: Checkear que no da error esto
