@@ -48,7 +48,7 @@ public class ColaDAO {
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "DELETE FROM \"Colas\" WHERE clave='" + id + "'";
+            String sql = "DELETE FROM \"Colas\" WHERE clavePROFESOR='" + id + "'";
             stmt.executeUpdate(sql);
             return true;
         } catch (Exception e) {
@@ -102,7 +102,7 @@ public class ColaDAO {
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "SELECT Colas FROM \"colas\" WHERE clave = '" + colaProfesor + "' CONTAINS('" + idAlumno
+            String sql = "SELECT colas FROM \"colas\" WHERE clavePROFESOR = '" + colaProfesor + "' CONTAINS('" + idAlumno
                     + "') ";
             resultadoConsulta = stmt.executeQuery(sql); // se ejecuta la solicitud sql
             // se lee la respuesta por parte dela base de datos
@@ -150,7 +150,7 @@ public class ColaDAO {
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "SELECT \"colas\" FROM \"Colas\" WHERE clave = '" + idProfesor + "'";
+            String sql = "SELECT \"colas\" FROM \"Colas\" WHERE clavePROFESOR = '" + idProfesor + "'";
             resultadoConsulta = stmt.executeQuery(sql); // se ejecuta la solicitud sql
             // se lee la respuesta por parte de la base de datos
             while (resultadoConsulta.next()) {
@@ -215,7 +215,7 @@ public class ColaDAO {
         // ahora se inserta el nuevo string en la base de datos
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "UPDATE \"Colas\" SET \"colas\"=" + stringCompuesto.toString() + "WHERE clave ="
+            String sql = "UPDATE \"Colas\" SET \"colas\"=" + stringCompuesto.toString() + "WHERE clavePROFESOR ="
                     + profesor.getId();
             stmt.executeUpdate(sql); // se ejecuta la solicitud sql
         } catch (Exception e) {
@@ -259,12 +259,12 @@ public class ColaDAO {
                 }
                 stmt = ConexionServer.conexion.createStatement();
                 String sql = "UPDATE \"Colas\" SET \"colas\"='"
-                        + newColaProfesor.substring(0, newColaProfesor.length() - 1) + "' WHERE clave ='"
+                        + newColaProfesor.substring(0, newColaProfesor.length() - 1) + "' WHERE clavePROFESOR ='"
                         + profesor.getId() + "'";
                 stmt.executeUpdate(sql); // se ejecuta la solicitud sql
             } catch (StringIndexOutOfBoundsException se) {  //Si es el ultimo alumno, saltara esta excepcion
                 try {
-                    String sql = "UPDATE \"Colas\" SET \"colas\"= null WHERE clave ='" + profesor.getId() + "'";
+                    String sql = "UPDATE \"Colas\" SET \"colas\"= null WHERE clavePROFESOR ='" + profesor.getId() + "'";
                     stmt = ConexionServer.conexion.createStatement();
                     stmt.executeUpdate(sql);
                 } catch (SQLException e) {
