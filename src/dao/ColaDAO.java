@@ -26,7 +26,7 @@ public class ColaDAO {
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "INSERT INTO \"Colas\"(\"clave\") VALUES ('" + id + "')";
+            String sql = "INSERT INTO \"Colas\"(\"clavePROFESOR\") VALUES ('" + id + "')";
             stmt.executeUpdate(sql);
             return true;
         } catch (Exception e) {
@@ -48,7 +48,7 @@ public class ColaDAO {
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "DELETE FROM \"Colas\" WHERE clavePROFESOR='" + id + "'";
+            String sql = "DELETE FROM \"Colas\" WHERE \"clavePROFESOR\"='" + id + "'";
             stmt.executeUpdate(sql);
             return true;
         } catch (Exception e) {
