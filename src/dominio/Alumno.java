@@ -38,7 +38,7 @@ public class Alumno extends Usuario  {
         return listaProfesores;
     }
 
-    public ArrayList<String> getListaColas() {
+    public ArrayList<Profesor> getListaColas() {
         this.cargarColas();
         return listaColas;
     }
