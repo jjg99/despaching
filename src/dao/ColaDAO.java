@@ -106,8 +106,9 @@ public class ColaDAO {
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "SELECT colas FROM \"colas\" WHERE clavePROFESOR = '" + colaProfesor + "' CONTAINS('" + idAlumno
-                    + "') ";
+            String sql = "SELECT \"colas\" FROM \"Colas\" WHERE \"clavePROFESOR\" = '" + colaProfesor +
+                         "' AND \"colas\" LIKE '%" + idAlumno + "%'";
+        
             resultadoConsulta = stmt.executeQuery(sql); // se ejecuta la solicitud sql
             // se lee la respuesta por parte dela base de datos
             while (resultadoConsulta.next()) {
@@ -135,7 +136,8 @@ public class ColaDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return resultadoPosicion;
+        // Se anade el + 1 para devolver la posicion y no los alumnos que existen anteriores
+        return resultadoPosicion + 1;
 
     }
 
@@ -154,7 +156,7 @@ public class ColaDAO {
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "SELECT \"colas\" FROM \"Colas\" WHERE clavePROFESOR = '" + idProfesor + "'";
+            String sql = "SELECT \"colas\" FROM \"Colas\" WHERE \"clavePROFESOR\" = '" + idProfesor + "'";
             resultadoConsulta = stmt.executeQuery(sql); // se ejecuta la solicitud sql
             // se lee la respuesta por parte de la base de datos
             while (resultadoConsulta.next()) {
@@ -205,7 +207,7 @@ public class ColaDAO {
         Statement stmt; // se crea el statement sobre el que trabajar
         StringBuilder stringCompuesto = new StringBuilder(); // objeto utilizado para formar un string con el nombre del
                                                              // alumno y su clave
-        // Ejecucion de la sentencia SQLç
+        // Ejecucion de la sentencia SQL
         // primero se necesita conseguir la cola actual de alumno asociada al profesor
         // en concreto
         ArrayList<Alumno> colaProfesor = ColaDAO.getColaProfesor(profesor.getId());
@@ -219,8 +221,8 @@ public class ColaDAO {
         // ahora se inserta el nuevo string en la base de datos
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "UPDATE \"Colas\" SET \"colas\"=" + stringCompuesto.toString() + "WHERE clavePROFESOR ="
-                    + profesor.getId();
+            String sql = "UPDATE \"Colas\" SET \"colas\"='" + stringCompuesto.toString() + "' WHERE \"clavePROFESOR\" ='"
+                    + profesor.getId() + "'";
             stmt.executeUpdate(sql); // se ejecuta la solicitud sql
         } catch (Exception e) {
             e.printStackTrace();

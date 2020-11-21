@@ -15,9 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import dominio.Usuario;
 import gui.JVentana;
 import panelAlu.PnlAlumno;
+import dominio.Alumno;
 import dominio.GestorCola;
 import dominio.Profesor;
 import server.Fachada;
@@ -32,7 +32,7 @@ import util.Fuente;
 public class PnlCola extends JPanel {
 
     
-    private static Usuario alumno;
+    private static Alumno alumno;
     private static Profesor profesor;
 
     private static JButton btnAtras;
@@ -53,14 +53,14 @@ public class PnlCola extends JPanel {
 
 
     /** Constructor que llama al metodo {@link initComponentes} y {@link crearComponentes} */
-    public PnlCola(Usuario alu, Profesor prof)
+    public PnlCola(Alumno alu, Profesor prof)
     {
         actualizarAlumno(alu);
         actualizarProfesor(prof);
         getNombreProfesor(prof);
         actualizarDatos();
-        crearComponentes();
-        initComponentes(); 
+        this.crearComponentes();
+        this.initComponentes(); 
     }
 
 
@@ -204,7 +204,6 @@ public class PnlCola extends JPanel {
         pnlInfCola.add(lblPosCola, c);
 
         // Creacion de la etiqueta Numero Personas en la cola
-        lblNumPosCola = new JLabel(String.valueOf(intPosCola));
         Fuente.setFuenteNegrita(lblNumPosCola);
         
         // Ajuste de lblNumPosCola en el panel
@@ -270,7 +269,7 @@ public class PnlCola extends JPanel {
      * Metodo que genera todos los Action Listeners y asocia acciones a los elementos presentes en la ventana
      */
 
-    private static void initComponentes()
+    private void initComponentes()
     {
         // CREACION DE LOS ACTION LISTENER
 
@@ -294,6 +293,7 @@ public class PnlCola extends JPanel {
             public void actionPerformed(ActionEvent e){
 
                 actualizarDatos();
+                PnlCola.pnlCola.updateUI();
 
             }
         });
@@ -305,9 +305,9 @@ public class PnlCola extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e){
 
-                //TODO: Añadir el metodo para entrar en la cola
-                //Fachada.addAlumnoCola(PnlCola.alumno, PnlCola.profesor);
+                GestorCola.addAlumnoCola(alumno, profesor);
                 actualizarDatos();
+                PnlCola.pnlCola.updateUI();
                 
             }
         });
@@ -350,7 +350,7 @@ public class PnlCola extends JPanel {
      * @param alu recibe el alumno para anadir este al panel
      */
 
-    public static void actualizarAlumno(Usuario alu)
+    public static void actualizarAlumno(Alumno alu)
     {
         PnlCola.alumno = alu;
     }

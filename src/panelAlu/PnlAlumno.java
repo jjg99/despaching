@@ -168,7 +168,7 @@ public class PnlAlumno extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e){
 
-                JVentana.cambiarPanel(new PnlCola(alumno, lstProfesores.getSelectedValue()));
+                JVentana.cambiarPanel(PnlCola.pnlCola = new PnlCola(alumno, lstProfesores.getSelectedValue()));
                 
             }
         });
