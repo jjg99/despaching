@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -22,7 +24,9 @@ import java.util.ArrayList;
 
 import dominio.Alumno;
 import dominio.Profesor;
+import gui.JVentana;
 import paneluser.PnlEncabezado;
+import paneluser.PnlCola;
 import util.Colores;
 import util.Fuente;
 
@@ -92,14 +96,13 @@ public class PnlAlumno extends JPanel {
         gbc.insets = (new Insets(0,40,0,0)); // ponemos margenes
         pnlInicioAlumno.add(txtProfesor, gbc);    //Lo añadimos al panel
 
-        DefaultListModel<String> dlstProfesores = new DefaultListModel<String>();   //Gestionara añadira y eliminara objetos de la lista
+        DefaultListModel<Profesor> dlstProfesores = new DefaultListModel<Profesor>();   //Gestionara añadira y eliminara objetos de la lista
         /** Lista que en la que el alumno podra ver a sus profesores */
-        JList<String> lstProfesores = new JList<String>(dlstProfesores);
+        JList<Profesor> lstProfesores = new JList<Profesor>(dlstProfesores);
         lstProfesores.setLayoutOrientation(JList.VERTICAL);  //Hace que la lista se rellene de arriba a abajo 
         addProfesores(dlstProfesores);      //Llamamos a el metodo para que rellene la lista
         Fuente.setFuente(lstProfesores);    //Fijamos la fuente
         lstProfesores.setFixedCellHeight(25);       //se fija la altura de cada objeto de la lista
-        // lstProfesores.setFixedCellWidth(225);       //se fija el ancho de cada objeto de la lista
         lstProfesores.setBorder(new EmptyBorder(5,5,5,5));        //se agrega un pequeño margen al en el interior de la lista
         JScrollPane pnlLstScroll = new JScrollPane(lstProfesores);   //Hacemos que podamos hacer scroll en la lista
         pnlLstScroll.setPreferredSize(new Dimension(350, 350));     //Fiajamos el tamaño del JScrollPane
@@ -158,7 +161,17 @@ public class PnlAlumno extends JPanel {
         pnlInicioAlumno.add(btnCola, gbc);
         gbc.anchor = GridBagConstraints.CENTER;
 
-        
+        /**
+         * Metodo que implementa el action listener para entrar en el panel de la cola
+         */
+        btnCola.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+
+                JVentana.cambiarPanel(new PnlCola(alumno, lstProfesores.getSelectedValue()));
+                
+            }
+        });
         
         this.setLayout(new BorderLayout());
         this.add(new PnlEncabezado(alumno),BorderLayout.NORTH);
@@ -170,12 +183,11 @@ public class PnlAlumno extends JPanel {
         alumno=null;
     }
     
-    private void addProfesores(DefaultListModel<String> dlstProfesores){
-        
+    private void addProfesores(DefaultListModel<Profesor> dlstProfesores){
         
         for (Profesor prof : listaProf)
         {
-            dlstProfesores.addElement(prof.getNombre() + " " + prof.getApellido());
+            dlstProfesores.addElement(prof);
         }
         
     }

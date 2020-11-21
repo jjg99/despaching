@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import dominio.Usuario;
 import gui.JVentana;
 import panelAlu.PnlAlumno;
+import dominio.GestorCola;
 import dominio.Profesor;
 import server.Fachada;
 import util.Colores;
@@ -47,12 +48,12 @@ public class PnlCola extends JPanel {
     private static int intPosCola;
     private static int intNumCola;
 
-    public static PnlCola pnlCola = new PnlCola(alumno, profesor);
+    public static PnlCola pnlCola;
 
 
 
     /** Constructor que llama al metodo {@link initComponentes} y {@link crearComponentes} */
-    private PnlCola(Usuario alu, Profesor prof)
+    public PnlCola(Usuario alu, Profesor prof)
     {
         actualizarAlumno(alu);
         actualizarProfesor(prof);
@@ -332,7 +333,7 @@ public class PnlCola extends JPanel {
     private static void actualizarDatos() 
     {
 
-        PnlCola.intPosCola = Fachada.getPosicionAlumno(PnlCola.alumno.getId(), PnlCola.profesor.getId());
+        PnlCola.intPosCola = GestorCola.getPosicionAlumno(PnlCola.alumno.getId(), PnlCola.profesor.getId());
         if (PnlCola.intPosCola == 0) {
             PnlCola.lblNumPosCola = new JLabel("-");
             Fuente.setFuenteNegrita(PnlCola.lblNumPosCola);
@@ -369,7 +370,7 @@ public class PnlCola extends JPanel {
      */
     private static void getNombreProfesor(Profesor prof)
     {
-        PnlCola.lblProf = new JLabel(Fachada.getNombreAlumno(prof.getId()));
+        PnlCola.lblProf = new JLabel(prof.toString());
         Fuente.setFuenteTitulo(PnlCola.lblProf);
     }
 
