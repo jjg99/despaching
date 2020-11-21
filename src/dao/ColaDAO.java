@@ -123,7 +123,7 @@ public class ColaDAO {
                         // en el caso de que se trate de un divisor no se aumenta el contador
 
                     } else if (elemento.equals(idAlumno)) {
-                        resultadoPosicion = posicion;
+                        resultadoPosicion = posicion + 1;
 
                     } else {
                         posicion = posicion + 1; // si se trata de un alumno se
@@ -137,7 +137,7 @@ public class ColaDAO {
             e.printStackTrace();
         }
         // Se anade el + 1 para devolver la posicion y no los alumnos que existen anteriores
-        return resultadoPosicion + 1;
+        return resultadoPosicion;
 
     }
 
@@ -265,12 +265,12 @@ public class ColaDAO {
                 }
                 stmt = ConexionServer.conexion.createStatement();
                 String sql = "UPDATE \"Colas\" SET \"colas\"='"
-                        + newColaProfesor.substring(0, newColaProfesor.length() - 1) + "' WHERE clavePROFESOR ='"
+                        + newColaProfesor.substring(0, newColaProfesor.length() - 1) + "' WHERE \"clavePROFESOR\" ='"
                         + profesor.getId() + "'";
                 stmt.executeUpdate(sql); // se ejecuta la solicitud sql
             } catch (StringIndexOutOfBoundsException se) {  //Si es el ultimo alumno, saltara esta excepcion
                 try {
-                    String sql = "UPDATE \"Colas\" SET \"colas\"= null WHERE clavePROFESOR ='" + profesor.getId() + "'";
+                    String sql = "UPDATE \"Colas\" SET \"colas\"= null WHERE \"clavePROFESOR\" ='" + profesor.getId() + "'";
                     stmt = ConexionServer.conexion.createStatement();
                     stmt.executeUpdate(sql);
                 } catch (SQLException e) {

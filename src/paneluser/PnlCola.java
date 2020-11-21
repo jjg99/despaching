@@ -343,6 +343,7 @@ public class PnlCola extends JPanel {
         }
         //TODO: Checkear que no da error esto
         PnlCola.intNumCola = Fachada.getColaProfesor(PnlCola.profesor.getId()).size();
+        
     }
 
     /**
