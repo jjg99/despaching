@@ -49,19 +49,26 @@ public class UsuarioDAO {
      * @param Stirng idALumno
      * @return {@link ArrayList}
      */
-    public static ArrayList<String> getProfesoresAlumno(String idAlumno){
+    public static ArrayList<Profesor> getProfesoresAlumno(String idAlumno){
 
         Statement stmt;     // se crea el statement sobre el que trabajar
         ResultSet resultadoConsulta = null;
-        ArrayList<String> resultadoColas = new ArrayList<String>();     // objeto que va a contener el resultado que se envia al alumno
+        ArrayList<Profesor> resultadoColas = new ArrayList<Profesor>();     // objeto que va a contener el resultado que se envia al alumno
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "SELECT \"clavePROF\" FROM \"Clases\" WHERE claveALU = '"+idAlumno+"'";
+            String sql = "SELECT \"correo\",\"nombre\",\"apellido\",\"clavePROF\" FROM \"Clases\"FULL OUTER JOIN \"Usuarios\" ON  \"clave\" = \"clavePROF\"  WHERE \"claveALU\" = '"+idAlumno+"'";
+
             resultadoConsulta =stmt.executeQuery(sql);    // se ejecuta la solicitud sql
             // se lee la respuesta por parte dela base de datos
             while(resultadoConsulta.next()){
-                resultadoColas.add(resultadoConsulta.getString("clavePROF"));
+                // se cargan todos los datos necesarios de la base de datos para crear el profesor
+                String correo = resultadoConsulta.getString("correo");
+                String nombre = resultadoConsulta.getString("nombre");
+                String apellido = resultadoConsulta.getString("nombre");
+                String id = resultadoConsulta.getString("nombre");
+                //se añade al resultado
+                resultadoColas.add(new Profesor(correo,nombre,apellido,id));
 
             }
         
