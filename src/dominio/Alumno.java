@@ -8,7 +8,7 @@ public class Alumno extends Usuario  {
     /**Atributos de la clase alumno */
     
     private ArrayList<Profesor> listaProfesores = new ArrayList<Profesor>();        // arrayList que va a contener todos los porfesores del alumno
-    private ArrayList<String> listaColas = new ArrayList<String>();        // arrayList que contiene los nombres de 
+    private ArrayList<Profesor> listaColas = new ArrayList<Profesor>();        // arrayList que contiene los nombres de 
     
     public Alumno (String correo,String password){
         super(correo);  // se inicia el objeto, instanciando al objeto superior     

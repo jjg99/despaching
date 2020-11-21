@@ -37,10 +37,10 @@ public abstract class GestorCola {
     * metodo se encarga de conectarse a la fachada y recibir una lista con todos los despachos a los que se ah apuntado el alumno
     * @param String id
     * @return @ArrayList con los nombres de los profesores a los que esta apuntado */
-    public static ArrayList<String> getColasAlumno(String id){
+    public static ArrayList<Profesor> getColasAlumno(String id){
         
         //el 
-        ArrayList<String> colasAlumno = Fachada.getColasAlumno(id);
+        ArrayList<Profesor> colasAlumno = Fachada.getColasAlumno(id);
         return colasAlumno;
     }
     /**Metoodo que deuelve al profesor la cola de alumnos que tiene */

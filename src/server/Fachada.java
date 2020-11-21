@@ -15,7 +15,7 @@ public class Fachada {
      * @param String id
      * @return  {@link ArrayList}
      */
-    public static ArrayList<String> getColasAlumno(String idAlumno){
+    public static ArrayList<Profesor> getColasAlumno(String idAlumno){
         return ColaDAO.getColasAlumno(idAlumno);
 
 
