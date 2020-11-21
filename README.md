@@ -6,6 +6,8 @@ En esta version 0.5 para iniciar sesión se requiere un usuario y contraseña, t
 
 Las credenciales para poder acceder se encuntran en el archivo "credenciales.txt" adjunto a la entrega.
 
+En esta entrega el botón para recuperar la contraseña no tiene ninguna funcionalidad.
+
 ### Alumno
 En esta pantalla se le muestra una lista con sus profesores, los cuales han sido obtenidos de la base de datos. Pudiendo seleccionar uno de ellos para poder acceder a la cola virtual de este. Actualmente, la información de la cola, hay que actualizarla manualmente, en un futuro se agregara un thread que la ira actualizandola en segundo plano. Por tanto el alumno, puede ver cuantos alumnos hay en la cola de un profesor, si esta está abierta. A su vez, podrá ingresar o salir de ella si el alumno lo desea. Si el alumno ya se encuentra en la cola, el sistema le mostrará su posición.
 
