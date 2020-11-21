@@ -80,7 +80,7 @@ public class ColaDAO {
                 String nombre = resultadoConsulta.getString("nombre");
                 String apellido = resultadoConsulta.getString("apellido");
                 String id = resultadoConsulta.getString("clave"); 
-                Usuario usuario = new Usuario(nombre,apellido,id)
+                Usuario usuario = new Usuario(nombre,apellido,id);
                 resultadoColas.add((Profesor)usuario);      // se hace un downcasting al objeto de usuario y se guarda en el arraylist
 
             }
