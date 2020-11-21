@@ -16,6 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import dominio.Usuario;
+import gui.JVentana;
+import panelAlu.PnlAlumno;
+import dominio.Profesor;
 import server.Fachada;
 import util.Colores;
 import util.Fuente;
@@ -27,8 +30,9 @@ import util.Fuente;
  */
 public class PnlCola extends JPanel {
 
+    
     private static Usuario alumno;
-    private static String idProf;
+    private static Profesor profesor;
 
     private static JButton btnAtras;
     private static JButton btnActualizar;
@@ -43,14 +47,16 @@ public class PnlCola extends JPanel {
     private static int intPosCola;
     private static int intNumCola;
 
-    public static PnlCola pnlCola = new PnlCola(alumno, idProf);
+    public static PnlCola pnlCola = new PnlCola(alumno, profesor);
+
+
 
     /** Constructor que llama al metodo {@link initComponentes} y {@link crearComponentes} */
-    private PnlCola(Usuario alu, String idprof)
+    private PnlCola(Usuario alu, Profesor prof)
     {
         actualizarAlumno(alu);
-        actualizarProfesor(idprof);
-        getNombreProfesor(idprof);
+        actualizarProfesor(prof);
+        getNombreProfesor(prof);
         actualizarDatos();
         crearComponentes();
         initComponentes(); 
@@ -116,8 +122,10 @@ public class PnlCola extends JPanel {
 
         //Creacion de la etiqueta del profesor
         //lblProf = new JLabel("Profesor generico");
-        //TODO: Añadir el nombre del profesor pasado por el constructor
+        //TODO: REvisar el nombre del profesor pasado por parametro
+        getNombreProfesor(PnlCola.profesor);
         Fuente.setFuenteTitulo(lblProf);
+        
 
         // Ajuste de lblProf en el panel
         c.gridy = 2;
@@ -129,6 +137,7 @@ public class PnlCola extends JPanel {
 
         // Creacion de la etiqueta cola abierta
         //TODO: Añadir color a la etiqueta de Abierta
+        //TODO: Cambiar la etiqueta para que la cola este cerrada
         JLabel lblAbierta = new JLabel("Abierta");
         Fuente.setFuente(lblAbierta);
         Colores.setBGVerde(lblAbierta);
@@ -270,13 +279,14 @@ public class PnlCola extends JPanel {
         btnAtras.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+
+                volverPnlInicio();
                 
-                //TODO: Implementar la vuelta al panel original 
             }
         });
 
         /**
-         * Metodo que implementa el action listener para actualizar los datos en al pantalla
+         * Metodo que implementa el action listener para actualizar los datos en la pantalla
          */
         btnActualizar.addActionListener(new ActionListener(){
             @Override
@@ -295,6 +305,8 @@ public class PnlCola extends JPanel {
             public void actionPerformed(ActionEvent e){
 
                 //TODO: Añadir el metodo para entrar en la cola
+                //Fachada.addAlumnoCola(PnlCola.alumno, PnlCola.profesor);
+                actualizarDatos();
                 
             }
         });
@@ -308,6 +320,7 @@ public class PnlCola extends JPanel {
 
                 //TODO: Añadir el metodo para salir de la cola
                 
+                actualizarDatos();
             }
         });
     }
@@ -318,8 +331,17 @@ public class PnlCola extends JPanel {
      */
     private static void actualizarDatos() 
     {
-        PnlCola.intPosCola = Fachada.getPosicionAlumno(PnlCola.alumno.getId(), idProf);
-        PnlCola.intNumCola = Fachada.getColaProfesor(idProf).size();
+
+        PnlCola.intPosCola = Fachada.getPosicionAlumno(PnlCola.alumno.getId(), PnlCola.profesor.getId());
+        if (PnlCola.intPosCola == 0) {
+            PnlCola.lblNumPosCola = new JLabel("-");
+            Fuente.setFuenteNegrita(PnlCola.lblNumPosCola);
+        } else {
+            PnlCola.lblNumPosCola = new JLabel(String.valueOf(intPosCola));
+            Fuente.setFuenteNegrita(PnlCola.lblNumPosCola);
+        }
+        //TODO: Checkear que no da error esto
+        PnlCola.intNumCola = Fachada.getColaProfesor(PnlCola.profesor.getId()).size();
     }
 
     /**
@@ -327,7 +349,7 @@ public class PnlCola extends JPanel {
      * @param alu recibe el alumno para anadir este al panel
      */
 
-    private static void actualizarAlumno(Usuario alu)
+    public static void actualizarAlumno(Usuario alu)
     {
         PnlCola.alumno = alu;
     }
@@ -336,18 +358,24 @@ public class PnlCola extends JPanel {
      * Metodo que actualiza el rpofesor a ensenar en el panel
      * @param prof String que indica el codigo de profesor para hacer queries
      */
-    private static void actualizarProfesor(String prof)
+    public static void actualizarProfesor(Profesor prof)
     {
-        PnlCola.idProf = prof;
+        PnlCola.profesor = prof;
     }
 
     /**
      * Metodo que obtiene el nombre del profesor para enseñarlo por pantalla
      * @param prof String que contiene el identificador del porfesor
      */
-    private static void getNombreProfesor(String prof)
+    private static void getNombreProfesor(Profesor prof)
     {
-        //PnlCola.lblProf = Fachada.getNombreProf(prof)
+        PnlCola.lblProf = new JLabel(Fachada.getNombreAlumno(prof.getId()));
+        Fuente.setFuenteTitulo(PnlCola.lblProf);
+    }
+
+    private static void volverPnlInicio()
+    {
+        JVentana.cambiarPanel(PnlAlumno.PnlAlumno);
     }
 
 }

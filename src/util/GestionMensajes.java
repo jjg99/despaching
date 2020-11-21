@@ -56,6 +56,11 @@ public class GestionMensajes {
         }
     }
 
+    /**
+     * Metodo que crea un mensaje de error con la informacion del StackTrace
+     * @param e la excepcion que se ha generado es pasada como parametro
+     */
+
     public static void msgErrorGenerico(Exception e) {
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
@@ -83,5 +88,21 @@ public class GestionMensajes {
             return 1;
         }
         
+    }
+
+    /**
+     * Metodo que indica que la cola se encuentra cerrada en el momento de realizar la solicitud.
+     */
+    public static void msgColaCerrada() 
+    {
+        try {
+            String mensaje = "La cola del profesor se encuentra en este momento cerrada";
+            Object[] opciones = {"Aceptar"};
+            JOptionPane.showOptionDialog(null, mensaje, "Error Cola Profesor", JOptionPane.DEFAULT_OPTION,
+                                        JOptionPane.QUESTION_MESSAGE,
+                                        new ImageIcon(new URL("https://img.icons8.com/dusk/64/000000/error.png")), opciones, opciones[0]);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
