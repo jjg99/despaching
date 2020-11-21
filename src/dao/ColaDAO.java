@@ -65,19 +65,23 @@ public class ColaDAO {
      * @return @link ArrayList
      */
 
-    public static ArrayList<String> getColasAlumno(String idAlumno) {
+    public static ArrayList<Profesor> getColasAlumno(String idAlumno) {
         Statement stmt; // se crea el statement sobre el que trabajar
         ResultSet resultadoConsulta = null;
-        ArrayList<String> resultadoColas = new ArrayList<String>(); // objeto que va a contener el resultado que se
+        ArrayList<Profesor> resultadoColas = new ArrayList<Profesor>(); // objeto que va a contener el resultado que se
                                                                     // envia al alumno
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "SELECT U.nombre FROM \"Colas C, Usuarios U\" WHERE (U.clave= C.clave) AND CONTAINS(C.colas,'" + idAlumno + "') ";
+            String sql = "SELECT \"nombre\",\"apellido\",\"clave\" FROM \"Colas\" FULL OUTER JOIN \"Usuarios\" ON  \"clavePROFESOR\" = \"clave\"  WHERE \"colas\" LIKE '%"+idAlumno+"%' ";
             resultadoConsulta = stmt.executeQuery(sql); // se ejecuta la solicitud sql
-            // se lee la respuesta por parte dela base de datos
+            // se lee la respuesta por parte de la base de datos
             while (resultadoConsulta.next()) {
-                resultadoColas.add(resultadoConsulta.getString("U.nombre"));
+                String nombre = resultadoConsulta.getString("nombre");
+                String apellido = resultadoConsulta.getString("apellido");
+                String id = resultadoConsulta.getString("clave"); 
+                Usuario usuario = new Usuario(nombre,apellido,id)
+                resultadoColas.add((Profesor)usuario);      // se hace un downcasting al objeto de usuario y se guarda en el arraylist
 
             }
 
