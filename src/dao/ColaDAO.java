@@ -141,14 +141,12 @@ public class ColaDAO {
      * @param String idProfesor
      * @return {@link ArrayList}
      */
-    public static ArrayList<Usuario> getColaProfesor(String idProfesor) {
+    public static ArrayList<Alumno> getColaProfesor(String idProfesor) {
         Statement stmt; // se crea el statement sobre el que trabajar
         ResultSet resultadoConsulta = null;
-        ArrayList<Usuario> resultadoCola = new ArrayList<Usuario>();
+        ArrayList<Alumno> resultadoCola = new ArrayList<Alumno>();
         // ArrayList<String> resultadoCola = new ArrayList<String>(); // objeto que va a
         // contener el resultado que se envia al alumno
-        StringBuilder stringCompuesto = new StringBuilder(); // objeto utilizado para formar un string con el nombre del
-                                                             // alumno y su clave
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
@@ -165,18 +163,6 @@ public class ColaDAO {
                         // en el caso de que se trate de un divisor no se aumenta el contador
 
                     } else {
-                        // // en el caso de que se trate de un alumno, se guarda la clave del alumno, y
-                        // se busca en la base de datos por el nombre del alumno
-                        // stringCompuesto.append(UsuarioDAO.getNombreAlumno(elemento)); // se añade al
-                        // string compuesto el nombre y apellido del alumno
-                        // stringCompuesto.append("(");
-                        // stringCompuesto.append(elemento);
-                        // stringCompuesto.append(")");
-
-                        // resultadoCola.add(stringCompuesto.toString()); // se guarda en la cola
-                        // resultado para el profesor el nombre apellido y clave del alumno
-                        // stringCompuesto = new StringBuilder(); // de esta forma se deja el objeto
-                        // vacío para el siguiente alumno
                         String nombreYapellido[] = UsuarioDAO.getNombreAlumno(elemento).split(" ");
                         StringBuilder nombreCompleto = new StringBuilder();
                         if (nombreYapellido.length >= 2) {
@@ -189,7 +175,7 @@ public class ColaDAO {
                         } else {
                             nombreCompleto.append(nombreYapellido[0]);
                         }
-                        resultadoCola.add(new Usuario(nombreCompleto.toString(),
+                        resultadoCola.add(new Alumno(nombreCompleto.toString(),
                                 nombreYapellido[nombreYapellido.length - 1], elemento));
                         nombreCompleto = new StringBuilder();
                     }
@@ -218,9 +204,9 @@ public class ColaDAO {
         // Ejecucion de la sentencia SQLç
         // primero se necesita conseguir la cola actual de alumno asociada al profesor
         // en concreto
-        ArrayList<Usuario> colaProfesor = ColaDAO.getColaProfesor(profesor.getId());
+        ArrayList<Alumno> colaProfesor = ColaDAO.getColaProfesor(profesor.getId());
         // se constuye un string con todos los alumnos de la cola
-        for (Usuario alumnoEnCola : colaProfesor) {
+        for (Alumno alumnoEnCola : colaProfesor) {
             stringCompuesto.append(alumnoEnCola.getId());
             stringCompuesto.append(",");
         }
@@ -249,7 +235,7 @@ public class ColaDAO {
 
         // para poder borrar a un alumno de una cola, primero se necesita cargar la cola
         // del profesor
-        ArrayList<Usuario> colaProfesor = ColaDAO.getColaProfesor(profesor.getId());
+        ArrayList<Alumno> colaProfesor = ColaDAO.getColaProfesor(profesor.getId());
 
         // busca en la cola en indice del alumno que se desea borrar
         int indiceAlumno = colaProfesor.indexOf(alumno);
@@ -268,7 +254,7 @@ public class ColaDAO {
             }
             try {
                 newColaProfesor = new StringBuilder();
-                for (Usuario alu : colaProfesor) {
+                for (Alumno alu : colaProfesor) {
                     newColaProfesor.append(alu.getId()).append(",");
                 }
                 stmt = ConexionServer.conexion.createStatement();

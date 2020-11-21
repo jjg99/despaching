@@ -44,7 +44,7 @@ public abstract class GestorCola {
         return colasAlumno;
     }
     /**Metoodo que deuelve al profesor la cola de alumnos que tiene */
-    public static ArrayList<Usuario>getColaProfesor(String idProfesor){
+    public static ArrayList<Alumno>getColaProfesor(String idProfesor){
         return Fachada.getColaProfesor(idProfesor);
 
     }
@@ -69,8 +69,8 @@ public abstract class GestorCola {
         Fachada.addAlumnoCola(alumno, profesor);
 
     }
-    public static void delAlumno(Usuario alumno, Profesor profesor){
-        Fachada.delAlumno(alumno,profesor);
+    public static void delAlumno(Alumno alumno, Profesor profesor){
+        Fachada.delAlumnoCola(alumno,profesor);
 
     }
     

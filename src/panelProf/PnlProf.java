@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import dominio.Alumno;
 import dominio.GestorCola;
 import dominio.Profesor;
 import dominio.Usuario;
@@ -110,9 +111,9 @@ public class PnlProf extends JPanel{
         pnlGestorCola.add(pnlCola);
         
         //Agregamos la lista
-        DefaultListModel<Usuario> dlstColaAlumnos = new DefaultListModel<Usuario>();   //Gestionara añadira y eliminara objetos de la lista
+        DefaultListModel<Alumno> dlstColaAlumnos = new DefaultListModel<Alumno>();   //Gestionara añadira y eliminara objetos de la lista
         /** Lista que en la que el alumno podra ver a sus profesores */
-        JList<Usuario> lstCola = new JList<Usuario>(dlstColaAlumnos);
+        JList<Alumno> lstCola = new JList<Alumno>(dlstColaAlumnos);
         lstCola.setLayoutOrientation(JList.VERTICAL);  //Hace que la lista se rellene de  de arriba a abajo y de izquierda a derecha
         Fuente.setFuente(lstCola);
         lstCola.setFixedCellHeight(35);       //se fija la altura de cada objeto de la lista
@@ -234,10 +235,10 @@ public class PnlProf extends JPanel{
      * Metodo que obtiene la Cola
      * @param dlstCola <code>ListModel</code> donde se cargara la cola
      */
-    private void setCola(DefaultListModel<Usuario> dlstCola){
-        ArrayList<Usuario> colaAlumnos = profesor.getColaAlu();
+    private void setCola(DefaultListModel<Alumno> dlstCola){
+        ArrayList<Alumno> colaAlumnos = profesor.getColaAlu();
         if(!colaAlumnos.isEmpty()){
-            for(Usuario alu:colaAlumnos){
+            for(Alumno alu:colaAlumnos){
                 dlstCola.addElement(alu);
             } 
         }
@@ -247,7 +248,7 @@ public class PnlProf extends JPanel{
      * Metodo que elimina todo el contenido de la cola
      * @param dlstCola ListModel que contiene la cola a borrar
      */
-    private void removeCola(DefaultListModel<Usuario> dlstCola){
+    private void removeCola(DefaultListModel<Alumno> dlstCola){
         dlstCola.removeAllElements();
     }
 

@@ -6,19 +6,12 @@ import server.Fachada;
 
 public class Profesor extends Usuario{
     /**  */
-    private ArrayList<String> listaAlu;
-    /**  */
     private ArrayList<String> listaClases;
     /**  */
-    private ArrayList<Usuario> colaAlu;
+    private ArrayList<Alumno> colaAlu;
 
     public Profesor(String correo, String nombre, String apellido, String id) {
         super(correo, nombre, apellido, id);
-    }
-    /**Metodo para conseguir una lista de todos los profesores del alumno
-     * crea un {@link ArrayList} de @Profesor */
-    private void cargarAlumnos(){ 
-        listaAlu = Fachada.getProfesoresAlumno(super.getId());
     }
 
     /**Utiliza el metodo de la clase @link Fachada, para conectarse a la base de datos y pedir las colas en las que se encuentra el alumno */
@@ -29,10 +22,6 @@ public class Profesor extends Usuario{
         listaClases = Fachada.getClasesProfesor(super.getId());
     }
 
-    public ArrayList<String> getListaAlu() {
-        this.cargarAlumnos();
-        return listaAlu;
-    }
 
     public ArrayList<String> getListaClases() {
         this.cargarClases();
@@ -40,7 +29,7 @@ public class Profesor extends Usuario{
     }
 
 
-    public ArrayList<Usuario> getColaAlu() {
+    public ArrayList<Alumno> getColaAlu() {
         this.cargarCola();
         return colaAlu;
     }

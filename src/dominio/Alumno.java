@@ -6,14 +6,18 @@ import server.Fachada;
 
 public class Alumno extends Usuario  {
     /**Atributos de la clase alumno */
-
-    private ArrayList<String> listaProfesores = new ArrayList<String>();        // arrayList que va a contener todos los porfesores del alumno
+    
+    private ArrayList<Profesor> listaProfesores = new ArrayList<Profesor>();        // arrayList que va a contener todos los porfesores del alumno
     private ArrayList<String> listaColas = new ArrayList<String>();        // arrayList que contiene los nombres de 
-
+    
     public Alumno (String correo,String password){
         super(correo);  // se inicia el objeto, instanciando al objeto superior     
     }
-
+    
+    public Alumno(String nombre, String apellido, String id) {
+        super(nombre, apellido, id);
+    }
+    
     /** constructor que inicia todos los atributos de un usuario */
     public Alumno (String correo, String nombre, String apellido, String id){
         super(correo,nombre,apellido,id);     // se inicia el objeto, instanciando al objeto superior
@@ -29,7 +33,7 @@ public class Alumno extends Usuario  {
         listaColas = GestorCola.getColasAlumno(super.getId());      // le pide al gestor de colas que le devuelva la lista de colas a la que se encuentra apuntado el alumno
     }
 
-    public ArrayList<String> getListaProfesores() {
+    public ArrayList<Profesor> getListaProfesores() {
         this.cargarProfesores();
         return listaProfesores;
     }
@@ -38,5 +42,6 @@ public class Alumno extends Usuario  {
         this.cargarColas();
         return listaColas;
     }
+
     
 }
