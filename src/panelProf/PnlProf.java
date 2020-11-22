@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JTabbedPane;
 
 import dominio.Alumno;
 import dominio.GestorCola;
@@ -102,16 +103,16 @@ public class PnlProf extends JPanel{
         Colores.setBGRojo(btnCerrar);
 
         /**Panel de botones que controlan el estado de la cola */
-        JPanel pnlCola = new JPanel();
-        pnlCola.setLayout(new FlowLayout());
-        pnlCola.add(btnCerrar);
-        pnlCola.add(btnAbrir);
+        JPanel pnlBotonesCola = new JPanel();
+        pnlBotonesCola.setLayout(new FlowLayout());
+        pnlBotonesCola.add(btnCerrar);
+        pnlBotonesCola.add(btnAbrir);
 
         /**Panel con la etiqueta y los botones de abrir y cerrar la cola */
         JPanel pnlGestorCola = new JPanel();
         pnlGestorCola.setLayout(new GridLayout(2,1));
         pnlGestorCola.add(pnlTxtCola);
-        pnlGestorCola.add(pnlCola);
+        pnlGestorCola.add(pnlBotonesCola);
         
         //Agregamos la lista
         DefaultListModel<Alumno> dlstColaAlumnos = new DefaultListModel<Alumno>();   //Gestionara añadira y eliminara objetos de la lista
@@ -161,10 +162,40 @@ public class PnlProf extends JPanel{
         pnlBotonesLista.add(btnEliminarAlumno);
         pnlBotonesLista.setVisible(false);  
 
+        // creamos el panel cola
+        JPanel pnlCola = new JPanel(new BorderLayout());
+        pnlCola.add(pnlGestorCola,BorderLayout.NORTH);
+        pnlCola.add(lstScroll,BorderLayout.CENTER);
+        pnlCola.add(pnlBotonesLista,BorderLayout.SOUTH);
+
+        // creamos el panel con distintas pestañas
+        JTabbedPane pnlPestañas = new JTabbedPane();
+        ImageIcon iconoCola = null;
+        try{
+            iconoCola = new ImageIcon(new URL("https://img.icons8.com/dusk/32/000000/queue.png"));
+
+        }
+        catch(MalformedURLException e){
+            e.printStackTrace();
+        } 
+
+        JPanel pnlCalendario = new JPanel(new FlowLayout());
+        JLabel txtProgress = new JLabel("Work in progress");
+        pnlCalendario.add(txtProgress);
+        ImageIcon iconoCalendario = null;
+        try{
+            iconoCalendario = new ImageIcon(new URL("https://img.icons8.com/dusk/32/000000/date-to.png"));
+
+        }
+        catch(MalformedURLException e){
+            e.printStackTrace();
+        } 
+
+        pnlPestañas.addTab("Cola", iconoCola, pnlCola);
+        pnlPestañas.addTab("Calendario",iconoCalendario,pnlCalendario);
+
         //Agregamos componentes al panel derecho
-        pnlDerecha.add(pnlGestorCola,BorderLayout.NORTH);
-        pnlDerecha.add(lstScroll,BorderLayout.CENTER);
-        pnlDerecha.add(pnlBotonesLista,BorderLayout.SOUTH);
+        pnlDerecha.add(pnlPestañas);
 
         //Agregamos todo a PnlProf
         this.setLayout(new BorderLayout()); //se establece el layout de tipo borderLayout
