@@ -68,6 +68,12 @@ public abstract class GestorCola {
         Fachada.addAlumnoCola(alumno, profesor);
 
     }
+
+    /**
+     * Metodo encargado de solicitar a {@link Fachada} que elimine un alumno de la cola de un profesor
+     * @param alumno Atributo Alumno
+     * @param profesor Atributo Profesor
+     */
     public static void delAlumno(Alumno alumno, Profesor profesor){
         Fachada.delAlumnoCola(alumno,profesor);
 
