@@ -1,6 +1,9 @@
 # Despaching
 Despaching es una aplicación para la gestión de citas entre alumnos y profesores en los despachos.
 
+## Version 0.1
+En esta version 0.1 si haces click en el boton de "Entrar" entras como alumno y si le das a "Olvidaste tu coontrasena?" entras como profesor.
+
 ## Version 0.5
 En esta version 0.5 para iniciar sesión se requiere un usuario y contraseña, tanto si se es alumno como profesor, ya que el sistema detectará automaticamente el tipo de usuario y lo tratara acorde con este. Actualmente el botón de recuperar contraseña no se encuentra operativo, para la proxima entrega lo estará.
 
