@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -20,14 +21,12 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import java.util.ArrayList;
-
 import dominio.Alumno;
 import dominio.GestorCola;
 import dominio.Profesor;
 import gui.JVentana;
-import paneluser.PnlEncabezado;
 import paneluser.PnlCola;
+import paneluser.PnlEncabezado;
 import util.Colores;
 import util.Fuente;
 import util.GestionMensajes;
@@ -66,7 +65,7 @@ public class PnlAlumno extends JPanel {
 
     private void setListaProfesores()
     {
-        listaProf = alumno.getListaProfesores();
+        listaProf = alumno.getListaProfesores();    // Llamada al metodo que se encuentra dentro de alumno
     }
 
     /** Metodo en el cual se instanciaran todos los componentes */
@@ -170,11 +169,11 @@ public class PnlAlumno extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e){
 
-                
+                // Comprobacion del estado de la cola
                 if (!GestorCola.isColaAbierta(lstProfesores.getSelectedValue().getId())) {
-                    GestionMensajes.msgColaCerrada();
+                    GestionMensajes.msgColaCerrada();       // Envio de un mensaje de error en el caso de  que la cola este cerrada
                 } else {
-                    JVentana.cambiarPanel(PnlCola.pnlCola = new PnlCola(alumno, lstProfesores.getSelectedValue()));
+                    JVentana.cambiarPanel(PnlCola.pnlCola = new PnlCola(alumno, lstProfesores.getSelectedValue())); // Apertura del PnlCOla
                 }
             }
         });
@@ -189,6 +188,11 @@ public class PnlAlumno extends JPanel {
         alumno=null;
     }
     
+
+    /**
+     * Metodo que se encarga de anadir los profesores del alumno a la lista de profesores del panel
+     * @param dlstProfesores Lista a la que se añadiran los profesores
+     */
     private void addProfesores(DefaultListModel<Profesor> dlstProfesores){
         
         for (Profesor prof : listaProf)

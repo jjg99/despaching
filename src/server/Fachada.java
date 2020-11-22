@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import dao.ColaDAO;
 import dao.UsuarioDAO;
-import dao.HorarioDao;
+import dao.HorarioDAO_;
 import dominio.Alumno;
 import dominio.Usuario;
 import dominio.Profesor;
@@ -50,23 +50,52 @@ public class Fachada {
 		return ColaDAO.closeCola(id);
     }
     
+    /**
+     * Metodo que se encarga de realizar la comprobacion del login de un usuario, reenviandolo a la clase de gestion {@link UsuarioDAO.logIn}
+     * @param user String de identificacion del usuario
+     * @param pass String de contrasena del usuatio
+     * @return Usuario que se ha autenticado correctamente
+     */
     public static Usuario logIn(String user, String pass) {
         return UsuarioDAO.logIn(user, pass);    
     }
+
+    /**
+     * Metodo que se encarga de obtener todos los profesores de un alumno, reenviando este metodo a {@link UsuarioDAO.getProfesoresAlumno}
+     * @param idAlumno String con el id del alumno
+     * @return Devuelve un ArrayList de profesores
+     */
     public static ArrayList<Profesor> getProfesoresAlumno(String idAlumno){
         return UsuarioDAO.getProfesoresAlumno(idAlumno);
 
     }
+
+    /**
+     * Metodo que devuelve todos los alumnos que se enceuntran en la cola de un profesor, reenviando este metodo a {@link ColaDAO.getCOlaProfesor}
+     * @param idProfesor String con el id del profesor
+     * @return Devuelve un ArrayList de alumnos
+     */
     public static ArrayList<Alumno> getColaProfesor(String idProfesor){
         return ColaDAO.getColaProfesor(idProfesor);
     }
+
+    /**
+     * Metodo que obtiene todas las clases en las que esta un profesor, redirige este metodo a {@link UsuarioDAO.getClasesProfesor}
+     * @param idProfesor String con el id del profesor
+     * @return Devuelve un ArrayList con todas las clases que imparte
+     */
     public static ArrayList<String> getClasesProfesor(String idProfesor){
         return UsuarioDAO.getClasesProfesor(idProfesor);
 
     }
 
+    /**
+     * Metodo que obtiene el horario de un profesor, redirigiendo este metodo a {@link HorarioDAO.idProfesor}
+     * @param idProfesor
+     * @return
+     */
     public static String getHorario(String idProfesor){
-        return HorarioDao.getHorario(idProfesor);
+        return HorarioDAO_.getHorario(idProfesor);
     }
     
     /**Metodo encargado de solicitar a {@link ColaDao} que añada un alumno a la cola de un profesor

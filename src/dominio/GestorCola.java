@@ -39,7 +39,6 @@ public abstract class GestorCola {
     * @return @ArrayList con los nombres de los profesores a los que esta apuntado */
     public static ArrayList<Profesor> getColasAlumno(String id){
         
-        //el 
         ArrayList<Profesor> colasAlumno = Fachada.getColasAlumno(id);
         return colasAlumno;
     }

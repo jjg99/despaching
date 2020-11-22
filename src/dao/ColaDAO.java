@@ -296,16 +296,17 @@ public class ColaDAO {
         Boolean isAbierta = false; // Se crea la variable de return
 
         try {
-            stmt = ConexionServer.conexion.createStatement();
-            String sql = "SELECT \"clavePROFESOR\" FROM \"Colas\" WHERE \"clavePROFESOR\" ='" + idProfesor + "'"; // Sentencia SQL
+            stmt = ConexionServer.conexion.createStatement();       //Creacion del statement
+            String sql = "SELECT \"clavePROFESOR\" FROM \"Colas\" WHERE \"clavePROFESOR\" ='" + idProfesor + "'"; 
+            // Sentencia SQL que solicita la devolucion del idPROFESOR para comprobar si existe dentro de la tabla
 
-            resultadoConsulta = stmt.executeQuery(sql);     //Realizacion de la consulta
+            resultadoConsulta = stmt.executeQuery(sql);     //Realizacion de la consulta SQL
 
             while (resultadoConsulta.next()) {
                 String id = resultadoConsulta.getString("clavePROFESOR");       //Analisis de la consulta para determinar si esta abierta
 
                 if (id.equals(idProfesor)) {
-                    isAbierta = true;
+                    isAbierta = true;       // COnfirmacion de la apertura de la cola
                 }
             }
 
