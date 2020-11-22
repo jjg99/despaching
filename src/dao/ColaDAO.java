@@ -73,15 +73,16 @@ public class ColaDAO {
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "SELECT \"nombre\",\"apellido\",\"clave\" FROM \"Colas\" FULL OUTER JOIN \"Usuarios\" ON  \"clavePROFESOR\" = \"clave\"  WHERE \"colas\" LIKE '%"+idAlumno+"%' ";
+            String sql = "SELECT \"nombre\",\"apellido\",\"clave\",\"correo\" FROM \"Colas\" FULL OUTER JOIN \"Usuarios\" ON  \"clavePROFESOR\" = \"clave\"  WHERE \"colas\" LIKE '%"+idAlumno+"%' ";
             resultadoConsulta = stmt.executeQuery(sql); // se ejecuta la solicitud sql
             // se lee la respuesta por parte de la base de datos
             while (resultadoConsulta.next()) {
                 String nombre = resultadoConsulta.getString("nombre");      // se obtienen los valores de las columnas
                 String apellido = resultadoConsulta.getString("apellido");
                 String id = resultadoConsulta.getString("clave"); 
-                Usuario usuario = new Usuario(nombre,apellido,id);
-                resultadoColas.add((Profesor)usuario);      // se hace un downcasting al objeto de usuario y se guarda en el arraylist
+                String correo = resultadoConsulta.getString("correo"); 
+                Profesor prof = new Profesor(correo,nombre,apellido,id);
+                resultadoColas.add(prof);      // se hace un downcasting al objeto de usuario y se guarda en el arraylist
 
             }
 
