@@ -320,7 +320,7 @@ public class PnlCola extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e){
                 
-                GestorCola.delAlumno(alumno, profesor);     // Eliminacion del alumno de la cola
+                GestorCola.delAlumno(alumno,profesor);      // Eliminacion del alumno de la cola
                 actualizarDatos();                          // Actualizacion de los datos
                 PnlCola.pnlCola.updateUI();                 // Actualizacion de la interfaz grafica
             }
