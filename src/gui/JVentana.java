@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import paneluser.PnlInicio;
 import util.Colores;
@@ -39,10 +40,21 @@ public class JVentana extends JFrame {
      * ventana.
      */
     public JVentana() {
-        //Fijamos unos colores por defecto
+        // Fijamos unos colores por defecto
         UIManager.put("OptionPane.background", Colores.FONDO);
         UIManager.put("Panel.background", Colores.FONDO);
         UIManager.put("Button.background", Colores.AZUL);
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
         initComponents();
         initFrame();
         this.requestFocusInWindow(); // Hacemos focus en la JVentana para que no empiece en el Textfield de Usuario

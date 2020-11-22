@@ -101,6 +101,7 @@ public class PnlCola extends JPanel {
         btnAtras.setVerticalTextPosition(SwingConstants.CENTER);
         Colores.setBGTransparente(btnAtras);
         btnAtras.setBorder(null);
+        btnAtras.setOpaque(false);
         Fuente.setFuente(btnAtras);
 
         // Ajuste del btnAtras en el panel
@@ -199,7 +200,7 @@ public class PnlCola extends JPanel {
         pnlInfCola.add(lblNumGenteEspera, c);
 
         // Creacion de la etiqueta de posicion en la cola
-        JLabel lblPosCola = new JLabel("Su posicion en la cola: ");
+        JLabel lblPosCola = new JLabel("Posicion en la cola: ");
         Fuente.setFuente(lblPosCola);
 
         // Ajuste de lblPosCola en el panel
@@ -231,6 +232,7 @@ public class PnlCola extends JPanel {
         btnSalirCola.setVerticalTextPosition(SwingConstants.BOTTOM);
         Colores.setBGTransparente(btnSalirCola);
         btnSalirCola.setBorder(null);
+        btnSalirCola.setOpaque(false);
         Fuente.setFuente(btnSalirCola);
 
         // Ajuste del btnSalirCola en el panel
@@ -254,6 +256,7 @@ public class PnlCola extends JPanel {
         btnEntrarCola.setVerticalTextPosition(SwingConstants.BOTTOM);
         Colores.setBGTransparente(btnEntrarCola);
         btnEntrarCola.setBorder(null);
+        btnEntrarCola.setOpaque(false);
         Fuente.setFuente(btnEntrarCola);
 
         // Ajuste del btnEntrarCola en el panel
@@ -339,8 +342,8 @@ public class PnlCola extends JPanel {
     private static void actualizarDatos() 
     {
 
-        ArrayList <Alumno> colaprof = GestorCola.getColaProfesor(profesor.getId());
-        if (colaprof.isEmpty() == true) {
+        
+        if (!GestorCola.isColaAbierta(profesor.getId())) {
                 GestionMensajes.msgColaCerrada();
                 volverPnlInicio();
         } else {
@@ -356,7 +359,7 @@ public class PnlCola extends JPanel {
     
             PnlCola.intNumCola = Fachada.getColaProfesor(PnlCola.profesor.getId()).size();
             PnlCola.lblNumGenteEspera.setText(String.valueOf(intNumCola));
-            
+
         }
         
         PnlCola.lblNumPosCola.updateUI();

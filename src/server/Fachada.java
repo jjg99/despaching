@@ -83,4 +83,14 @@ public class Fachada {
         return UsuarioDAO.getNombreAlumno(idAlumno);
 
     }
+
+    /**
+     * Metodo que comprueba si la cola de un profesor esta abierta o no
+     * @param idProfesor String que indica el id de un profesor
+     * @return Boolean que devuelve si la cola esta abierta
+     */
+    public static Boolean isColaAbierta(String idProfesor) 
+    {
+        return ColaDAO.isColaAbierta(idProfesor);
+    }
 }

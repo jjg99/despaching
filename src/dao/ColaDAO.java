@@ -281,7 +281,39 @@ public class ColaDAO {
             }
         }
 
+    }
 
+    /**
+     * Metodo que comprueba si la cola de un profesor esta abierta o no
+     * @param idProfesor String que indica el id de un profesor
+     * @return Boolean que devuelve si la cola esta abierta
+     */
+
+    public static Boolean isColaAbierta(String idProfesor)
+    {
+        Statement stmt; // se crea el statement sobre el que trabajar
+        ResultSet resultadoConsulta = null; // Se crea el resultset
+        Boolean isAbierta = false; // Se crea la variable de return
+
+        try {
+            stmt = ConexionServer.conexion.createStatement();
+            String sql = "SELECT \"clavePROFESOR\" FROM \"Colas\" WHERE \"clavePROFESOR\" ='" + idProfesor + "'"; // Sentencia SQL
+
+            resultadoConsulta = stmt.executeQuery(sql);     //Realizacion de la consulta
+
+            while (resultadoConsulta.next()) {
+                String id = resultadoConsulta.getString("clavePROFESOR");       //Analisis de la consulta para determinar si esta abierta
+
+                if (id.equals(idProfesor)) {
+                    isAbierta = true;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return isAbierta;
     }
 
 }

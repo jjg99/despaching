@@ -170,8 +170,8 @@ public class PnlAlumno extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e){
 
-                ArrayList <Alumno> colaprof = GestorCola.getColaProfesor(lstProfesores.getSelectedValue().getId());
-                if (colaprof.isEmpty() == true) {
+                
+                if (!GestorCola.isColaAbierta(lstProfesores.getSelectedValue().getId())) {
                     GestionMensajes.msgColaCerrada();
                 } else {
                     JVentana.cambiarPanel(PnlCola.pnlCola = new PnlCola(alumno, lstProfesores.getSelectedValue()));

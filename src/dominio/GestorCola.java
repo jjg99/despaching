@@ -73,5 +73,14 @@ public abstract class GestorCola {
         Fachada.delAlumnoCola(alumno,profesor);
 
     }
+
+    /**
+     * Metodo que comprueba si la cola de un profesor esta abierta o no
+     * @param idProfesor String que indica el id de un profesor
+     * @return Boolean que devuelve si la cola esta abierta
+     */
+    public static Boolean isColaAbierta(String idProfesor) {
+        return Fachada.isColaAbierta(idProfesor);
+    }
     
 }
