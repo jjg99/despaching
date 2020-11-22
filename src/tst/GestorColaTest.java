@@ -1,5 +1,8 @@
 package tst;
 import static org.junit.Assert.*;
+import org.junit.runners.*;
+import org.junit.*;
+
 
 import java.util.ArrayList;
 
@@ -7,6 +10,7 @@ import org.junit.Test;
 
 import dao.ColaDAO;
 
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
 import dominio.Alumno;
@@ -15,11 +19,12 @@ import dominio.Profesor;
 import server.ConexionServer;
 
 /**Clase encargada de probar si la cola funciona correctamente */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class GestorColaTest {
   
     private static Profesor profTest;
     private static Alumno alu1,alu2;
-
+    
     @BeforeClass
     public static void testInit() {
         // lo primero que hace el crear un profesor y dos alumnos
@@ -31,31 +36,32 @@ public class GestorColaTest {
     }
 
     @Test
-    public void testOpenCola() {
+    public void AtestOpenCola() {
         // prueba que se pueda crear una cola nueva
-        assertEquals(GestorCola.openCola(profTest.getId()), true);
+        assertEquals( true,GestorCola.openCola(profTest.getId()));
     }
 
     @Test
-    public void testAddAlu() {   // prueba de añadir un alumno a la cola
+    public void BtestAddAlu() {   // prueba de añadir un alumno a la cola
         ArrayList<Alumno> alumnosCola = new ArrayList<Alumno>();
         alumnosCola.add(alu1);
         //se añade un alumno a la cola de profesor
         GestorCola.addAlumnoCola(alu1, profTest);
+         //se añade un segundo alumno a la cola de profesor
+         ColaDAO.addAlumnoCola(alu2, profTest);
+         alumnosCola.add(alu2);
+
         // se coge la cola del profesor y se compara
         assertEquals(alumnosCola, profTest.getColaAlu());
     }
     @Test
-    public void testPosAlu() {   // prueba la posición en la cola de un alumno
-        ArrayList<Alumno> alumnosCola = new ArrayList<Alumno>();
-        alumnosCola.add(alu1);
-        //se añade un alumno a la cola de profesor
-        ColaDAO.addAlumnoCola(alu2, profTest);
+    public void CtestPosAlu() {   // prueba la posición en la cola de un alumno
+              
         // se coge la cola del profesor y se compara
         assertEquals(2, GestorCola.getPosicionAlumno(alu2.getId(),profTest.getId()));
     }
     @Test
-    public void testDelAlu() {   // prueba la posición en la cola de un alumno
+    public void DtestDelAlu() {   // prueba la posición en la cola de un alumno
         ArrayList<Alumno> alumnosCola = new ArrayList<Alumno>();
         alumnosCola.add(alu1);
         //se añade un alumno a la cola de profesor
@@ -64,14 +70,14 @@ public class GestorColaTest {
         assertEquals(alumnosCola, profTest.getColaAlu());
     }
     @Test
-    public  void testColaAbierta() {
+    public  void EtestColaAbierta() {
         // prueba que se pueda crear una cola nueva
         assertEquals(GestorCola.isColaAbierta(profTest.getId()), true);
     }
-    @Test
-    public  void closeCola() {
+    @AfterClass
+    public static  void testcloseCola() {
         // prueba que se pueda crear una cola nueva
-        assertEquals(GestorCola.closeCola(profTest.getId(),true), true);
+        assertEquals(true,GestorCola.closeCola(profTest.getId(),true));
     }
 }
 
