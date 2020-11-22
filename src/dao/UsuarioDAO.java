@@ -89,7 +89,7 @@ public class UsuarioDAO {
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "SELECT \"nombre\", \"apellido\" FROM \"Usuarios\" WHERE clave = '"+idAlumno+"'";
+            String sql = "SELECT \"nombre\", \"apellido\" FROM \"Usuarios\" WHERE \"clave\" = '"+idAlumno+"'";
             resultadoConsulta =stmt.executeQuery(sql);    // se ejecuta la solicitud sql
             // se lee la respuesta por parte dela base de datos
             while(resultadoConsulta.next()){
@@ -110,7 +110,7 @@ public class UsuarioDAO {
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "SELECT \"grupo\" FROM \"Clases\" WHERE clavePROF = '"+idProfesor+"'";
+            String sql = "SELECT \"grupo\" FROM \"Clases\" WHERE \"clavePROF\" = '"+idProfesor+"'";
             resultadoConsulta =stmt.executeQuery(sql);    // se ejecuta la solicitud sql
             // se lee la respuesta por parte dela base de datos
             while(resultadoConsulta.next()){
