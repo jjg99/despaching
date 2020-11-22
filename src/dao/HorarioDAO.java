@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import server.ConexionServer;
 
-public class HorarioDAO_ {
+public class HorarioDAO {
 
 
 
