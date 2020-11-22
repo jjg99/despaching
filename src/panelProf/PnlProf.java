@@ -67,7 +67,7 @@ public class PnlProf extends JPanel{
         JPanel pnlIzquierda = new JPanel();
         pnlIzquierda.setLayout(new BorderLayout());
 
-        JLabel lblHorario = new JLabel("Horario:");
+        JLabel lblHorario = new JLabel(getDiaHorario());
         Fuente.setFuenteNegrita(lblHorario);
 
         /** Panel que contendra la etiqueta {@link lblHorario}*/
@@ -266,6 +266,43 @@ public class PnlProf extends JPanel{
             }
         });
     }
+
+    /**
+     * Metodo que obtiene el dia de la semana y lo asigna a la Label, si es Sabado o Domingo lo pondrá como Lunes
+     * @return una String con el dia de la semana
+     */
+    private String getDiaHorario() {
+        int dia = Fecha.getDiaSemana();
+        String diaSemana;
+        switch (dia) {
+            case 1:
+                diaSemana = "Horario lunes:";
+                break;
+            case 2:
+                diaSemana = "Horario martes:";
+                break;
+            case 3:
+                diaSemana = "Horario miercoles:";
+                break;
+            case 4:
+                diaSemana = "Horario jueves:";
+                break;
+            case 5:
+                diaSemana = "Horario viernes:";
+                break;
+            case 6:
+                diaSemana = "Horario lunes:";
+                break;
+            case 7:
+                diaSemana = "Horario lunes:";
+                break;
+            default:
+                diaSemana = null;
+                break;
+        }
+        return diaSemana;
+    }
+
     /**
      * Metodo que obtiene la Cola
      * @param dlstCola <code>ListModel</code> donde se cargara la cola
