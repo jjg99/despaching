@@ -63,7 +63,11 @@ public class GestorColaTest {
         // se coge la cola del profesor y se compara
         assertEquals(alumnosCola, profTest.getColaAlu());
     }
-
+    @Test
+    public  void testColaAbierta() {
+        // prueba que se pueda crear una cola nueva
+        assertEquals(GestorCola.isColaAbierta(profTest.getId()), true);
+    }
     @Test
     public  void closeCola() {
         // prueba que se pueda crear una cola nueva
