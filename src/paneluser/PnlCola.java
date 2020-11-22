@@ -52,7 +52,6 @@ public class PnlCola extends JPanel {
     public static PnlCola pnlCola;
 
 
-
     /** Constructor que llama al metodo {@link initComponentes} y {@link crearComponentes} */
     public PnlCola(Alumno alu, Profesor prof)
     {

@@ -3,11 +3,12 @@ package server;
 import java.util.ArrayList;
 
 import dao.ColaDAO;
-import dao.UsuarioDAO;
 import dao.HorarioDAO;
+import dao.HorarioDao;
+import dao.UsuarioDAO;
 import dominio.Alumno;
-import dominio.Usuario;
 import dominio.Profesor;
+import dominio.Usuario;
 
 /** Clase que se encarga de redirigir el trafico a los DAO */
 public class Fachada {
@@ -17,8 +18,6 @@ public class Fachada {
      */
     public static ArrayList<Profesor> getColasAlumno(String idAlumno){
         return ColaDAO.getColasAlumno(idAlumno);
-
-
     }
     
     /**Metodo que se encarga de instanciar al Dao de la base de datos de colas para recibir la posición de un alumno en una cola
@@ -28,8 +27,6 @@ public class Fachada {
     */
     public static int getPosicionAlumno(String idAlumno,String profesorCola){
         return ColaDAO.getPosicionColaAlumno(idAlumno, profesorCola);
-
-
     }
 
     /**
@@ -91,11 +88,11 @@ public class Fachada {
 
     /**
      * Metodo que obtiene el horario de un profesor, redirigiendo este metodo a {@link HorarioDAO.idProfesor}
-     * @param idProfesor
-     * @return
+     * @param idProfesor String con el id del profesor
+     * @return Devuelve un String con todo el horario del profesor
      */
     public static String getHorario(String idProfesor){
-        return HorarioDAO.getHorario(idProfesor);
+        return HorarioDao.getHorario(idProfesor);
     }
     
     /**Metodo encargado de solicitar a {@link ColaDao} que añada un alumno a la cola de un profesor
@@ -105,12 +102,23 @@ public class Fachada {
     public static void addAlumnoCola(Alumno alumno, Profesor profesor){
         ColaDAO.addAlumnoCola(alumno,profesor);
     }
+
+    /**
+     * Metodo que elimina a un alumno de una cola, redirige a {@link ColaDAO.delAlumnoCola}
+     * @param alumno Objeto Alumno a eliminar
+     * @param profesor Objeto Profesor al que pertenece la cola
+     */
     public static void delAlumnoCola(Alumno alumno, Profesor profesor){
         ColaDAO.delAlumnoCola(alumno, profesor);
     }
+
+    /**
+     * Metodo que obtiene el nombre de un alumno/profesor conocido su id, redirige este metodo a {@link UsuarioDAO.getNombreAlumno}
+     * @param idAlumno String que contiene el id del usuario
+     * @return Devuelve un string con el nombre + apellidos de la persona
+     */
     public static String getNombreAlumno(String idAlumno){
         return UsuarioDAO.getNombreAlumno(idAlumno);
-
     }
 
     /**

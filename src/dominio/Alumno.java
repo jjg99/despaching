@@ -28,7 +28,7 @@ public class Alumno extends Usuario  {
         listaProfesores = Fachada.getProfesoresAlumno(super.getId());
     }
 
-    /**Utiliza el metodo de la clase @link Fachada, para conectarse a la base de datos y pedir las colas en las que se encuentra el alumno */
+    /**Utiliza el metodo de la clase {@link Fachada}, para conectarse a la base de datos y pedir las colas en las que se encuentra el alumno */
     private void cargarColas(){
         listaColas = GestorCola.getColasAlumno(super.getId());      // le pide al gestor de colas que le devuelva la lista de colas a la que se encuentra apuntado el alumno
     }

@@ -77,7 +77,7 @@ public class ColaDAO {
             resultadoConsulta = stmt.executeQuery(sql); // se ejecuta la solicitud sql
             // se lee la respuesta por parte de la base de datos
             while (resultadoConsulta.next()) {
-                String nombre = resultadoConsulta.getString("nombre");
+                String nombre = resultadoConsulta.getString("nombre");      // se obtienen los valores de las columnas
                 String apellido = resultadoConsulta.getString("apellido");
                 String id = resultadoConsulta.getString("clave"); 
                 Usuario usuario = new Usuario(nombre,apellido,id);
@@ -314,7 +314,7 @@ public class ColaDAO {
             e.printStackTrace();
         }
 
-        return isAbierta;
+        return isAbierta;       // Devolucion 
     }
 
 }
