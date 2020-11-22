@@ -35,7 +35,12 @@ import util.GestionMensajes;
  * Clase destinada a crear el panel del alumno, con el que interactuara con el resto del programa
  */
 public class PnlAlumno extends JPanel {
-    public static PnlAlumno PnlAlumno;  // se crea la variable que se instanciará desde fuera
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
+    public static PnlAlumno PnlAlumno; // se crea la variable que se instanciará desde fuera
 
     /** Alumno que ha iniciado sesion */
     private static Alumno alumno;

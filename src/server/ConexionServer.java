@@ -38,7 +38,7 @@ public class ConexionServer{
         try {
             conexion.close();
         } catch (SQLException e) {
-            //TODO: Usar error generico cuando este creado
+
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);

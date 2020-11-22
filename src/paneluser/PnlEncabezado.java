@@ -31,8 +31,12 @@ import util.GestionMensajes;
  *  el panel tendra 1 entrada que sera el alumno o profesor en cuestion(la primera version puede no contar con ello)
  */
 public class PnlEncabezado extends JPanel{
-    
-    /** atributo que tiene la informacion del usuario*/
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
+    /** atributo que tiene la informacion del usuario */
      private Usuario usuario; 
     
     /** constructor que indica que usuario se tiene */

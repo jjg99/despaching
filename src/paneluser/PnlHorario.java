@@ -12,6 +12,10 @@ import util.Fuente;
 
 /** Panel generico el cual mostrata un horario de un profesor */
 public class PnlHorario extends JPanel{
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     
     /** atributo que contiene el usuario al que pertenece el horario */
     private Usuario usuario;

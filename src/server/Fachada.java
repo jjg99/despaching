@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import dao.ColaDAO;
 import dao.HorarioDAO;
-import dao.HorarioDao;
 import dao.UsuarioDAO;
 import dominio.Alumno;
 import dominio.Profesor;
@@ -92,7 +91,7 @@ public class Fachada {
      * @return Devuelve un String con todo el horario del profesor
      */
     public static String getHorario(String idProfesor){
-        return HorarioDao.getHorario(idProfesor);
+        return HorarioDAO.getHorario(idProfesor);
     }
     
     /**Metodo encargado de solicitar a {@link ColaDao} que añada un alumno a la cola de un profesor

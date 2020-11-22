@@ -1,6 +1,5 @@
 package util;
 
-import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JComponent;
@@ -18,9 +17,6 @@ public class Fuente {
 
     /**Fija el tamaño de la letra del cuerpo*/
     private final static int TAM_CUERPO = 20;
-
-    /**Fija el color de la letra verda */
-    private final static Color VERDE = new Color(114, 202, 175);
 
     /**
      * Metodo para fijar la letra del cuerpo.

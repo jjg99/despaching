@@ -18,6 +18,11 @@ import util.Colores;
  * todos los usuarios y la que se encargara de pasar entre ellas.
  */
 public class JVentana extends JFrame {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
     /** String con el nombre que tendra la ventanga generada */
     private final String Titulo = new String("Despaching");
 

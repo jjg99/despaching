@@ -22,16 +22,19 @@ import javax.swing.border.EmptyBorder;
 import dominio.Alumno;
 import dominio.GestorCola;
 import dominio.Profesor;
-import dominio.Usuario;
 import paneluser.PnlEncabezado;
 import paneluser.PnlHorario;
-import server.Fachada;
 import util.Colores;
-import util.Fuente;
 import util.Fecha;
+import util.Fuente;
 
 /**Clase para el panel del profesor */
 public class PnlProf extends JPanel{
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
     public static PnlProf pnlProf; // se crea la variable que se instanciará desde fuera
 

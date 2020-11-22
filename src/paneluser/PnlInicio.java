@@ -33,6 +33,11 @@ import util.GestionMensajes;
  * Implementa la interfaz {@link PnlInterface}
  */
 public class PnlInicio extends JPanel{
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    
     public static PnlInicio PnlInicio = new PnlInicio();
     JLabel lblImgOjo; 
 

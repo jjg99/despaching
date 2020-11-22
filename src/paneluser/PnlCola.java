@@ -32,7 +32,10 @@ import util.GestionMensajes;
  * apuntarse y modificar su situacion en ella
  */
 public class PnlCola extends JPanel {
-
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     
     private static Alumno alumno;
     private static Profesor profesor;
@@ -254,7 +257,6 @@ public class PnlCola extends JPanel {
         // Creacion del layout dentro de la ventana
         this.setLayout(new BorderLayout());
         this.add(new PnlEncabezado(PnlCola.alumno),BorderLayout.NORTH);
-        //TODO: ajustar el encabezado dentro del panel e instanciarlo correctamente
         this.add(pnlInfCola, BorderLayout.CENTER);
 
     }
