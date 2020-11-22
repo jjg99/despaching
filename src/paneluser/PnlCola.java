@@ -16,11 +16,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import gui.JVentana;
-import panelAlu.PnlAlumno;
 import dominio.Alumno;
 import dominio.GestorCola;
 import dominio.Profesor;
+import gui.JVentana;
+import panelAlu.PnlAlumno;
 import server.Fachada;
 import util.Colores;
 import util.Fuente;
@@ -314,10 +314,14 @@ public class PnlCola extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e){
 
-                GestorCola.addAlumnoCola(alumno, profesor);
-                actualizarDatos();
-                PnlCola.pnlCola.updateUI();
-                
+                if (isAlumnoCola()) {
+                    GestionMensajes.msgErrorGenerico2("Ya se enceuntra en la cola");
+                } else {
+                    GestorCola.addAlumnoCola(alumno, profesor);
+                    actualizarDatos();
+                    PnlCola.pnlCola.updateUI();
+                }
+             
             }
         });
 
@@ -401,6 +405,26 @@ public class PnlCola extends JPanel {
     private static void volverPnlInicio()
     {
         JVentana.cambiarPanel(PnlAlumno.PnlAlumno);
+    }
+
+    /**
+     * Metodo que comprueba si un alumno se encuentra en una cola presente
+     * @return
+     */
+
+    
+     private static boolean isAlumnoCola()
+    {
+        boolean isCola = false;
+        ArrayList <Alumno> listAlu = GestorCola.getColaProfesor(profesor.getId());
+        for (Alumno al : listAlu) {
+            if (al.equals(alumno)) {
+                isCola = true;
+                return isCola;
+            }
+        }
+
+        return isCola;
     }
 
 }

@@ -71,6 +71,23 @@ public class GestionMensajes {
     }
 
     /**
+     * Metodo que crea un mensaje de error con la informacion pasada como texto
+     * @param e La String es pasada como parametro
+     */
+
+    public static void msgErrorGenerico2(String mensaje) {
+
+        try {
+            Object[] opciones = {"Aceptar"};
+            JOptionPane.showOptionDialog(null, mensaje, "Error", JOptionPane.DEFAULT_OPTION,
+                                        JOptionPane.QUESTION_MESSAGE,
+                                        new ImageIcon(new URL("https://img.icons8.com/dusk/64/000000/error.png")), opciones, opciones[0]);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Metodo que muestra realiza una pregunta y da al usuario dos opciones para responder.
      * @param opciones es de tipo <code>Object[]</code> y debera tener dos objetos, estos seran los que se mostrara al usuario
      *                 para elegir, es importante que el que segundo sea la opcion que se quiere por defecto.
