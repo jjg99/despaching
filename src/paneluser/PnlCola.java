@@ -158,6 +158,7 @@ public class PnlCola extends JPanel {
 
         // Ajuste de btnActualizar en el panel
         c.gridx = 0;
+        c.gridy = 3;
         c.gridwidth = 2;
         c.weighty = 0.1;
         c.anchor = GridBagConstraints.CENTER;
@@ -303,7 +304,7 @@ public class PnlCola extends JPanel {
 
                 // Comporbacion de la pertennecia del alumno a la cola
                 if (isAlumnoCola()) {
-                    GestionMensajes.msgErrorGenerico2("Ya se enceuntra en la cola");
+                    GestionMensajes.msgErrorGenerico2("Ya se encuentra en la cola");
                 } else {
                     GestorCola.addAlumnoCola(alumno, profesor);     //Adicion del alumno a la cola
                     actualizarDatos();                              // Actualizacion de los datos
