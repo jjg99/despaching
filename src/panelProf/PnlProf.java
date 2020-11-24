@@ -23,6 +23,7 @@ import javax.swing.JTabbedPane;
 import dominio.Alumno;
 import dominio.GestorCola;
 import dominio.Profesor;
+import paneluser.PnlCalendario;
 import paneluser.PnlEncabezado;
 import paneluser.PnlHorario;
 
@@ -180,9 +181,6 @@ public class PnlProf extends JPanel{
             e.printStackTrace();
         } 
 
-        JPanel pnlCalendario = new JPanel(new FlowLayout());
-        JLabel txtProgress = new JLabel("Work in progress");
-        pnlCalendario.add(txtProgress);
         ImageIcon iconoCalendario = null;
         try{
             iconoCalendario = new ImageIcon(new URL("https://img.icons8.com/dusk/32/000000/date-to.png"));
@@ -193,7 +191,7 @@ public class PnlProf extends JPanel{
         } 
 
         pnlPestañas.addTab("Cola", iconoCola, pnlCola);
-        pnlPestañas.addTab("Calendario",iconoCalendario,pnlCalendario);
+        pnlPestañas.addTab("Calendario",iconoCalendario,new PnlCalendario(profesor));
 
         //Agregamos componentes al panel derecho
         pnlDerecha.add(pnlPestañas);

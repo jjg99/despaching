@@ -25,6 +25,8 @@ public class Colores {
     private final static Color AZUL_OSC = new Color(9, 110, 226);
     /**Fija el color Azul Oscuro Translucido para el texto */
     private final static Color AZUL_OSC_TRANSLUX = new Color(9, 110, 226, 180);
+    /**fija el color carne */
+    private final static Color CARNE = new Color(250,239,222);
     /**Fija el color Transparente */
     private final static Color TRANSPARENTE = new Color(0, 0, 0, 0);
 
@@ -82,6 +84,14 @@ public class Colores {
      */
     public static void setFGAzulOscTrans(JComponent comp){
         comp.setForeground(AZUL_OSC_TRANSLUX);
+    }
+
+    /**
+     * Metodo para fijar el color del background en color carne.
+     * @param comp <code>JComponent</code> al que se le cambiara el color.
+     */
+    public static void setBGCarne(JComponent comp){
+        comp.setBackground(CARNE);
     }
 
     /**
