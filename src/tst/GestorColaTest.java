@@ -18,7 +18,7 @@ import dominio.GestorCola;
 import dominio.Profesor;
 import server.ConexionServer;
 
-/**Clase encargada de probar si la cola funciona correctamente */
+/**Clase encargada de probar si la cola funciona correctamente, así como todos sus metodos relacionados */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class GestorColaTest {
   
