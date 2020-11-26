@@ -2,7 +2,6 @@ package server;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Map;
 
 public class Mensaje implements Serializable {
 	/**
