@@ -2,9 +2,7 @@ package server;
 
 import java.util.ArrayList;
 
-import dao.ColaDAO;
-import dao.HorarioDAO;
-import dao.UsuarioDAO;
+
 import dominio.Alumno;
 import dominio.Profesor;
 import dominio.Usuario;
