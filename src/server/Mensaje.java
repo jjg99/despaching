@@ -31,7 +31,7 @@ public class Mensaje implements Serializable {
 		return contenido;
 	}
 
-	public void setContenido(ArrayList<Object> session) {
-		this.contenido = session;
+	public void setContenido(ArrayList<Object> contenido) {
+		this.contenido = contenido;
 	}	
 }
