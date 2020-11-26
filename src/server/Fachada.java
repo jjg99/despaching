@@ -15,7 +15,14 @@ public class Fachada {
      * @param String id
      * @return  {@link ArrayList}
      */
+    
     public static ArrayList<Profesor> getColasAlumno(String idAlumno){
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getColasAlumno");
+
+        return ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);
         return ColaDAO.getColasAlumno(idAlumno);
     }
     
@@ -25,6 +32,10 @@ public class Fachada {
     * @return  {@link ArrayList}
     */
     public static int getPosicionAlumno(String idAlumno,String profesorCola){
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getColasAlumno");
         return ColaDAO.getPosicionColaAlumno(idAlumno, profesorCola);
     }
 
@@ -34,6 +45,10 @@ public class Fachada {
      * @return <code>true</code> si el profesor se agrego a la base de datos satisfactoriamente
      */
     public static boolean openCola(String id){
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getColasAlumno");
         return ColaDAO.openCola(id);
         
     }
@@ -43,6 +58,10 @@ public class Fachada {
      * @return <code>true</code> si el profesor se borro de la base de datos satisfactoriamente
      */
 	public static boolean closeCola(String id) {
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getColasAlumno");
 		return ColaDAO.closeCola(id);
     }
     
@@ -53,6 +72,10 @@ public class Fachada {
      * @return Usuario que se ha autenticado correctamente
      */
     public static Usuario logIn(String user, String pass) {
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getColasAlumno");
         return UsuarioDAO.logIn(user, pass);    
     }
 
@@ -62,6 +85,10 @@ public class Fachada {
      * @return Devuelve un ArrayList de profesores
      */
     public static ArrayList<Profesor> getProfesoresAlumno(String idAlumno){
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getColasAlumno");
         return UsuarioDAO.getProfesoresAlumno(idAlumno);
 
     }
@@ -72,6 +99,10 @@ public class Fachada {
      * @return Devuelve un ArrayList de alumnos
      */
     public static ArrayList<Alumno> getColaProfesor(String idProfesor){
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getColasAlumno");
         return ColaDAO.getColaProfesor(idProfesor);
     }
 
@@ -81,6 +112,10 @@ public class Fachada {
      * @return Devuelve un ArrayList con todas las clases que imparte
      */
     public static ArrayList<String> getClasesProfesor(String idProfesor){
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getColasAlumno");
         return UsuarioDAO.getClasesProfesor(idProfesor);
 
     }
@@ -91,6 +126,10 @@ public class Fachada {
      * @return Devuelve un String con todo el horario del profesor
      */
     public static String getHorario(String idProfesor){
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getColasAlumno");
         return HorarioDAO.getHorario(idProfesor);
     }
     
@@ -99,6 +138,10 @@ public class Fachada {
      * @param Profesor profesor
      */
     public static void addAlumnoCola(Alumno alumno, Profesor profesor){
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getColasAlumno");
         ColaDAO.addAlumnoCola(alumno,profesor);
     }
 
@@ -108,6 +151,10 @@ public class Fachada {
      * @param profesor Objeto Profesor al que pertenece la cola
      */
     public static void delAlumnoCola(Alumno alumno, Profesor profesor){
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getColasAlumno");
         ColaDAO.delAlumnoCola(alumno, profesor);
     }
 
@@ -117,6 +164,10 @@ public class Fachada {
      * @return Devuelve un string con el nombre + apellidos de la persona
      */
     public static String getNombreAlumno(String idAlumno){
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getColasAlumno");
         return UsuarioDAO.getNombreAlumno(idAlumno);
     }
 
@@ -125,8 +176,11 @@ public class Fachada {
      * @param idProfesor String que indica el id de un profesor
      * @return Boolean que devuelve si la cola esta abierta
      */
-    public static Boolean isColaAbierta(String idProfesor) 
-    {
+    public static Boolean isColaAbierta(String idProfesor) {
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getColasAlumno");
         return ColaDAO.isColaAbierta(idProfesor);
     }
 }
