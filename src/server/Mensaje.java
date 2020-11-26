@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Mensaje implements Serializable {
 	/**
-	 * 
+	 * Clase encargada de contener la informacióne nviada a través del socket
 	 */
 	private static final long serialVersionUID = 1L;
 	private String context;
