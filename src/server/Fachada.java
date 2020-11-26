@@ -20,10 +20,22 @@ public class Fachada {
         // se crea el mensaje para enviar toda la información 
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
-        mensajeEnviar.setContext("/getColasAlumno");
+        mensajeEnviar.setContext("/getColasAlumno");        // se coloca el tipo de consulta
+        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
 
-        return ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);
-        return ColaDAO.getColasAlumno(idAlumno);
+        ArrayList<Profesor> respuesta = new ArrayList<Profesor>();  // array para almacenar la respuesta del servidor
+        // se añade el contenido al mensaje
+        contenido.add(new String(idAlumno));
+        mensajeEnviar.setContenido(contenido);
+        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);     // se envia la consulta al servidor
+        // se recibe un array con todos los profesores del alumno
+        ArrayList<Object> ArrayRespuesta =mensajeRespuesta.getContenido();
+        for(Object elemento: ArrayRespuesta){
+            Profesor profesor = (Profesor)elemento;
+            respuesta.add(profesor);
+        }
+        
+        return respuesta;
     }
     
     /**Metodo que se encarga de instanciar al Dao de la base de datos de colas para recibir la posición de un alumno en una cola
@@ -35,8 +47,16 @@ public class Fachada {
         // se crea el mensaje para enviar toda la información 
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
-        mensajeEnviar.setContext("/getColasAlumno");
-        return ColaDAO.getPosicionColaAlumno(idAlumno, profesorCola);
+        mensajeEnviar.setContext("/getPosicionAlumno");     // se coloca el tipo de consulta
+        // se añade el contenido del mensaje a enviar al servidor
+        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        contenido.add(new String(idAlumno));
+        contenido.add(new String(profesorCola));
+        // se envia la consulta al servidor
+        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);  
+        // se carga el primer elemento del array, el cual contiene la posicion del alumno en la cola
+        int posicion = (int)mensajeRespuesta.getContenido().get(0);
+        return posicion;
     }
 
     /**
@@ -48,8 +68,16 @@ public class Fachada {
         // se crea el mensaje para enviar toda la información 
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
-        mensajeEnviar.setContext("/getColasAlumno");
-        return ColaDAO.openCola(id);
+        mensajeEnviar.setContext("/openCola");      // se coloca el tipo de consulta
+        // se añade el contenido del mensaje a enviar al servidor
+        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        contenido.add(new String(id));
+        // se envia la consulta al servidor
+        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);  
+        // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta la apertura de la cola
+        boolean result = (boolean)mensajeRespuesta.getContenido().get(0);
+
+        return result;
         
     }
     /**
@@ -61,8 +89,15 @@ public class Fachada {
         // se crea el mensaje para enviar toda la información 
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
-        mensajeEnviar.setContext("/getColasAlumno");
-		return ColaDAO.closeCola(id);
+        mensajeEnviar.setContext("/closeCola");     // se coloca el tipo de consulta
+        // se añade el contenido del mensaje a enviar al servidor
+        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        contenido.add(new String(id));
+        // se envia la consulta al servidor
+        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);  
+        // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
+        boolean result = (boolean)mensajeRespuesta.getContenido().get(0);
+		return result;
     }
     
     /**
@@ -88,8 +123,22 @@ public class Fachada {
         // se crea el mensaje para enviar toda la información 
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
-        mensajeEnviar.setContext("/getColasAlumno");
-        return UsuarioDAO.getProfesoresAlumno(idAlumno);
+        mensajeEnviar.setContext("/getProfesoresAlumno");       // se coloca el tipo de consulta
+        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+
+        ArrayList<Profesor> respuesta = new ArrayList<Profesor>();  // array para almacenar la respuesta del servidor
+        // se añade el contenido al mensaje
+        contenido.add(new String(idAlumno));
+        mensajeEnviar.setContenido(contenido);
+        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);     // se envia la consulta al servidor
+        // se recibe un array con todos los profesores del alumno
+        ArrayList<Object> ArrayRespuesta =mensajeRespuesta.getContenido();
+        for(Object elemento: ArrayRespuesta){
+            Profesor profesor = (Profesor)elemento;
+            respuesta.add(profesor);
+        }
+        
+        return respuesta;
 
     }
 
@@ -102,8 +151,22 @@ public class Fachada {
         // se crea el mensaje para enviar toda la información 
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
-        mensajeEnviar.setContext("/getColasAlumno");
-        return ColaDAO.getColaProfesor(idProfesor);
+        mensajeEnviar.setContext("/getColaProfesor");       // se coloca el tipo de consulta
+        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+
+        ArrayList<Alumno> respuesta = new ArrayList<Alumno>();  // array para almacenar la respuesta del servidor
+        // se añade el contenido al mensaje
+        contenido.add(new String(idProfesor));
+        mensajeEnviar.setContenido(contenido);
+        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);     // se envia la consulta al servidor
+        // se recibe un array con todos los profesores del alumno
+        ArrayList<Object> ArrayRespuesta =mensajeRespuesta.getContenido();
+        for(Object elemento: ArrayRespuesta){
+            Alumno alumno = (Alumno)elemento;
+            respuesta.add(alumno);
+        }
+        
+        return respuesta;
     }
 
     /**
@@ -115,8 +178,22 @@ public class Fachada {
         // se crea el mensaje para enviar toda la información 
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
-        mensajeEnviar.setContext("/getColasAlumno");
-        return UsuarioDAO.getClasesProfesor(idProfesor);
+        mensajeEnviar.setContext("/getClasesProfesor");       // se coloca el tipo de consulta
+        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+
+        ArrayList<String> respuesta = new ArrayList<String>();  // array para almacenar la respuesta del servidor
+        // se añade el contenido al mensaje
+        contenido.add(new String(idProfesor));
+        mensajeEnviar.setContenido(contenido);
+        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);     // se envia la consulta al servidor
+        // se recibe un array con todos los profesores del alumno
+        ArrayList<Object> ArrayRespuesta =mensajeRespuesta.getContenido();
+        for(Object elemento: ArrayRespuesta){
+            String clase = (String)elemento;
+            respuesta.add(clase);
+        }
+        
+        return respuesta;
 
     }
 
@@ -129,8 +206,17 @@ public class Fachada {
         // se crea el mensaje para enviar toda la información 
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
-        mensajeEnviar.setContext("/getColasAlumno");
-        return HorarioDAO.getHorario(idProfesor);
+        mensajeEnviar.setContext("/getHorario");       // se coloca el tipo de consulta
+        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+
+        // se añade el contenido al mensaje
+        contenido.add(new String(idProfesor));
+        mensajeEnviar.setContenido(contenido);
+        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);     // se envia la consulta al servidor
+        // se recibe un array con todos los profesores del alumno
+        String respuesta = (String)mensajeRespuesta.getContenido().get(0);
+    
+        return respuesta;
     }
     
     /**Metodo encargado de solicitar a {@link ColaDao} que añada un alumno a la cola de un profesor
@@ -141,8 +227,14 @@ public class Fachada {
         // se crea el mensaje para enviar toda la información 
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
-        mensajeEnviar.setContext("/getColasAlumno");
-        ColaDAO.addAlumnoCola(alumno,profesor);
+        mensajeEnviar.setContext("/addAlumnoCola");       // se coloca el tipo de consulta
+        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        // se añade el contenido al mensaje
+        contenido.add(alumno);
+        contenido.add(profesor);
+        mensajeEnviar.setContenido(contenido);
+        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);     // se envia la consulta al servidor
+        
     }
 
     /**
@@ -154,8 +246,14 @@ public class Fachada {
         // se crea el mensaje para enviar toda la información 
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
-        mensajeEnviar.setContext("/getColasAlumno");
-        ColaDAO.delAlumnoCola(alumno, profesor);
+        mensajeEnviar.setContext("/delAlumnoCola");       // se coloca el tipo de consulta
+        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        // se añade el contenido al mensaje
+        contenido.add(alumno);
+        contenido.add(profesor);
+        mensajeEnviar.setContenido(contenido);
+        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);     // se envia la consulta al servidor
+        
     }
 
     /**
@@ -167,8 +265,17 @@ public class Fachada {
         // se crea el mensaje para enviar toda la información 
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
-        mensajeEnviar.setContext("/getColasAlumno");
-        return UsuarioDAO.getNombreAlumno(idAlumno);
+        mensajeEnviar.setContext("/getNombreAlumno");       // se coloca el tipo de consulta
+        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+
+        // se añade el contenido al mensaje
+        contenido.add(new String(idAlumno));
+        mensajeEnviar.setContenido(contenido);
+        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);     // se envia la consulta al servidor
+        // se recibe un array con todos los profesores del alumno
+        String respuesta = (String)mensajeRespuesta.getContenido().get(0);
+    
+        return respuesta;
     }
 
     /**
@@ -180,7 +287,14 @@ public class Fachada {
         // se crea el mensaje para enviar toda la información 
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
-        mensajeEnviar.setContext("/getColasAlumno");
-        return ColaDAO.isColaAbierta(idProfesor);
+        mensajeEnviar.setContext("/isColaAbierta");     // se coloca el tipo de consulta
+        // se añade el contenido del mensaje a enviar al servidor
+        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        contenido.add(new String(idProfesor));
+        // se envia la consulta al servidor
+        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);  
+        // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
+        boolean result = (boolean)mensajeRespuesta.getContenido().get(0);
+		return result;
     }
 }
