@@ -1,7 +1,7 @@
 package server;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class Mensaje implements Serializable {
@@ -10,12 +10,12 @@ public class Mensaje implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String context;
-	private Map<String, Object> contenido;
+	private ArrayList<Object> contenido;
 	
 	
 	public Mensaje () {
 		context=new String();
-		contenido=new HashMap<String, Object>();	// en este campo se guardan todos los objetos que sea ncesario enviar por medio del socket, puede quedar vacio
+		contenido=new ArrayList<Object>();	// en este campo se guardan todos los objetos que sea ncesario enviar por medio del socket, puede quedar vacio
 		
 	}
 
@@ -27,11 +27,11 @@ public class Mensaje implements Serializable {
 		this.context = context;
 	}
 
-	public Map<String, Object> getContenido() {
+	public ArrayList<Object> getContenido() {
 		return contenido;
 	}
 
-	public void setContenido(Map<String, Object> session) {
+	public void setContenido(ArrayList<Object> session) {
 		this.contenido = session;
 	}	
 }
