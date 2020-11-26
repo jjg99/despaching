@@ -43,11 +43,29 @@ public class Servidor extends Thread {
 		    //se analiza el mensaje y se devuelve la respuesta
 		    Mensaje mensajeRespuesta=new Mensaje();
 		    switch (mensajeEntrada.getContext()) {
-		    	case "/getColasAlumno":
-		    				    		
-		    	break;
-		    	
-		    	
+				case "/getColasAlumno":
+					break;
+				case "/getPosicionAlumno":
+
+		    		break;
+				case "/openCola":
+					break;
+				case "/closeCola":
+					break;
+				case "/login":
+					break;
+				case "/getProfesoresAlumno":
+					break;
+				case "/getColaProfeso":
+					break;
+				case "/getHorario":
+					break;
+				case "/addAlumnoCola":
+					break;
+				case "/delAlumnoCola":
+					break;
+				case "/getClasesProfeso":
+					break;
 		    	default:
 		    		System.out.println("\nParámetro no encontrado");
 		    		break;
