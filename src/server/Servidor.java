@@ -7,8 +7,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 
 
 /**Clase encargada de la parte servidor de la aplicación, se encarga de escuchar por nuevos mensaje y responder */
@@ -36,14 +35,15 @@ public class Servidor extends Thread {
 			in = socket.getInputStream();		// carga la información que le ha mandado el socket
 			out = socket.getOutputStream();
 			
-			//first read the object that has been sent
-			ObjectInputStream objectInputStream = new ObjectInputStream(in);
-		    Mensaje mensajeIn= (Mensaje)objectInputStream.readObject();
-		    //Object to return informations 
-		    ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
-		    Mensaje mensajeOut=new Mensaje();
-		    switch (mensajeIn.getContext()) {
-		    	case "/getCustomer":
+			//objetos de entrada y salida del servidor
+			ObjectInputStream entrada = new ObjectInputStream(in);
+			ObjectOutputStream salida = new ObjectOutputStream(out);
+
+		    Mensaje mensajeEntrada= (Mensaje)entrada.readObject();
+		    //se analiza el mensaje y se devuelve la respuesta
+		    Mensaje mensajeRespuesta=new Mensaje();
+		    switch (mensajeEntrada.getContext()) {
+		    	case "/getColasAlumno":
 		    				    		
 		    	break;
 		    	
@@ -52,37 +52,12 @@ public class Servidor extends Thread {
 		    		System.out.println("\nParámetro no encontrado");
 		    		break;
 		    }
-		    
-		    //Lógica del controlador 
-		    //System.out.println("\n1.- He leído: "+mensaje.getContext());
-		    //System.out.println("\n2.- He leído: "+(String)mensaje.getSession().get("Nombre"));
-		    
-		    
-		    
-		    //Prueba para esperar
-		    /*try {
-		    	System.out.println("Me duermo");
-				Thread.sleep(15000);
-				System.out.println("Me levanto");
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
-			// create an object output stream from the output stream so we can send an object through it
-			/*ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
-			
-			//Create the object to send
-			String cadena=((String)mensaje.getSession().get("Nombre"));
-			cadena+=" añado información";
-			mensaje.getSession().put("Nombre", cadena);
-			//System.out.println("\n3.- He leído: "+(String)mensaje.getSession().get("Nombre"));
-			objectOutputStream.writeObject(mensaje);*
-			*/
+			// se envia el mensaje de respuesta
+			salida.writeObject(mensajeRespuesta);
 
 		} catch (IOException ex) {
 			System.out.println("Unable to get streams from client");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
