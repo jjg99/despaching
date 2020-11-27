@@ -47,6 +47,8 @@ public class ClienteServidor {
 		}
 	}
 	/**Metodo utilizado para enviar un mensaje al servidor destino,
+	 * @param {@link Mensaje} mensajeEnviar
+	 * @param {@link Mensaje} mensajeRespuesta
 	 * envia {@link Mensaje}
 	*/
     public static void enviarMensaje(Mensaje mensajeEnviar,Mensaje mensajeRespuesta){
