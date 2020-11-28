@@ -8,6 +8,16 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import dominio.Alumno;
+import dominio.Profesor;
+import dominio.Usuario;
+
+import java.util.ArrayList;
+
+import dao.ColaDAO;
+import dao.HorarioDAO;
+import dao.UsuarioDAO;
+
 
 
 /**Clase encargada de la parte servidor de la aplicación, se encarga de escuchar por nuevos mensaje y responder */
@@ -41,35 +51,109 @@ public class Servidor extends Thread {
 
 		    Mensaje mensajeEntrada= (Mensaje)entrada.readObject();
 		    //se analiza el mensaje y se devuelve la respuesta
-		    Mensaje mensajeRespuesta=new Mensaje();
+			Mensaje mensajeRespuesta=new Mensaje();
+			// la respuesta es común a todos los alumnos
+			mensajeRespuesta.setContext("/respuesta");
+			ArrayList<Object> respuesta = new ArrayList<Object>();	// array para devolver el resultado de la consulta
+
 		    switch (mensajeEntrada.getContext()) {
 				case "/getColasAlumno":
+					// se carga el id del alumno
+					String idAlumno = (String)mensajeEntrada.getContenido().get(0);
+					// se realiza la consulta en el gestor de colas
+					ArrayList<Profesor> colaAlumno = ColaDAO.getColasAlumno(idAlumno);
+					// se recorre el array de respuesta para castear de Profesor a Object
+					for(Profesor profesor :colaAlumno){
+						respuesta.add((Object)profesor);	// se guarda el objeto en el arrayList de respuesta
+					}
 					break;
 				case "/getPosicionAlumno":
-
-		    		break;
+					// se carga el id del alumno
+					String idAlumnoPos = (String)mensajeEntrada.getContenido().get(0);
+					String idProfPos = (String)mensajeEntrada.getContenido().get(1);
+					// se realiza la consulta en el gestor de colas
+					Integer posicion = ColaDAO.getPosicionColaAlumno(idAlumnoPos,idProfPos);
+					respuesta.add((Object)posicion);
+					break;
 				case "/openCola":
+					// se carga el id de de la cola
+					String idColaOpen = (String)mensajeEntrada.getContenido().get(0);
+					// se realiza la consulta en el gestor de colas
+					Boolean isOpenned = ColaDAO.openCola(idColaOpen);
+					respuesta.add((Object)isOpenned);
 					break;
 				case "/closeCola":
+					// se carga el id de de la cola
+					String idColaClose = (String)mensajeEntrada.getContenido().get(0);
+					// se realiza la consulta en el gestor de colas
+					Boolean isClossed= ColaDAO.openCola(idColaClose);
+					respuesta.add((Object)isClossed);
 					break;
 				case "/login":
+					// se carga el id de de la cola
+					String user = (String)mensajeEntrada.getContenido().get(0);
+					String pass = (String)mensajeEntrada.getContenido().get(1);
+					// se realiza la consulta en el gestor de colas
+					Usuario usuario = UsuarioDAO.logIn(user,pass);
+					respuesta.add((Object)usuario);
 					break;
 				case "/getProfesoresAlumno":
+					// se carga el id del alumno
+					String idAlumnoProf = (String)mensajeEntrada.getContenido().get(0);
+					// se realiza la consulta en el gestor de colas
+					ArrayList<Profesor> profesoresAlumno = UsuarioDAO.getProfesoresAlumno(idAlumnoProf);
+					// se recorre el array de respuesta para castear de Profesor a Object
+					for(Profesor profesor :profesoresAlumno){
+						respuesta.add((Object)profesor);	// se guarda el objeto en el arrayList de respuesta
+					}
 					break;
-				case "/getColaProfeso":
+				case "/getColaProfesor":
+					// se carga el id del alumno
+					String idProfCola = (String)mensajeEntrada.getContenido().get(0);
+					// se realiza la consulta en el gestor de colas
+					ArrayList<Alumno> alumnosProfesor = ColaDAO.getColaProfesor(idProfCola);
+					// se recorre el array de respuesta para castear de Profesor a Object
+					for(Alumno profesor :alumnosProfesor){
+						respuesta.add((Object)profesor);	// se guarda el objeto en el arrayList de respuesta
+					}
 					break;
 				case "/getHorario":
+					// se carga el id del alumno
+					String idProfHorario = (String)mensajeEntrada.getContenido().get(0);
+					// se realiza la consulta en el gestor de colas
+					String horarioProfesor = HorarioDAO.getHorario(idProfHorario);
+					respuesta.add(horarioProfesor);
 					break;
 				case "/addAlumnoCola":
+					// se carga el id del alumno
+					Alumno alumnoAdd = (Alumno)mensajeEntrada.getContenido().get(0);
+					Profesor profesorAdd = (Profesor)mensajeEntrada.getContenido().get(1);
+					// se realiza la consulta en el gestor de colas
+					ColaDAO.addAlumnoCola(alumnoAdd,profesorAdd);
 					break;
 				case "/delAlumnoCola":
+					// se carga el id del alumno
+					Alumno alumnoBorrar = (Alumno)mensajeEntrada.getContenido().get(0);
+					Profesor profesorBorrar = (Profesor)mensajeEntrada.getContenido().get(1);
+					// se realiza la consulta en el gestor de colas
+					ColaDAO.delAlumnoCola(alumnoBorrar,profesorBorrar);
 					break;
-				case "/getClasesProfeso":
+				case "/getClasesProfesor":
+					// se carga el id del alumno
+					String idProfClases = (String)mensajeEntrada.getContenido().get(0);
+					// se realiza la consulta en el gestor de colas
+					ArrayList<String> clasesProfesor = UsuarioDAO.getClasesProfesor(idProfCola);
+					// se recorre el array de respuesta para castear de Profesor a Object
+					for(String profesor :clasesProfesor){
+						respuesta.add((Object)profesor);	// se guarda el objeto en el arrayList de respuesta
+					}
 					break;
 		    	default:
 		    		System.out.println("\nParámetro no encontrado");
 		    		break;
-		    }
+			}
+			// se carga la respuesta en el mensaje
+			mensajeRespuesta.setContenido(respuesta);
 			// se envia el mensaje de respuesta
 			salida.writeObject(mensajeRespuesta);
 
