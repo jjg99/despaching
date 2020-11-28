@@ -11,6 +11,7 @@ import java.net.Socket;
 import dominio.Alumno;
 import dominio.Profesor;
 import dominio.Usuario;
+import util.Fecha;
 
 import java.util.ArrayList;
 
@@ -33,7 +34,7 @@ public class Servidor extends Thread {
 		 cada vez que se intenta conectar alquien desde fuera, la conexión se acepta y se crea un nuevo socket
 		*/
 		this.socket = socket;
-		System.out.println("New client connected from " + socket.getInetAddress().getHostAddress());
+		System.out.println("New client connected from " + socket.getInetAddress().getHostAddress()+ Fecha.fechaHoraString());
 		start();
 	}
 
@@ -49,7 +50,8 @@ public class Servidor extends Thread {
 			ObjectInputStream entrada = new ObjectInputStream(in);
 			ObjectOutputStream salida = new ObjectOutputStream(out);
 
-		    Mensaje mensajeEntrada= (Mensaje)entrada.readObject();
+			Mensaje mensajeEntrada= (Mensaje)entrada.readObject();
+			System.out.print(mensajeEntrada.getContenido().toString());
 		    //se analiza el mensaje y se devuelve la respuesta
 			Mensaje mensajeRespuesta=new Mensaje();
 			// la respuesta es común a todos los alumnos
@@ -149,7 +151,8 @@ public class Servidor extends Thread {
 					}
 					break;
 		    	default:
-		    		System.out.println("\nParámetro no encontrado");
+					System.out.println("\nParámetro no encontrado");
+					System.out.println(mensajeEntrada.getContext());
 		    		break;
 			}
 			// se carga la respuesta en el mensaje

@@ -110,7 +110,7 @@ public class Fachada {
         Mensaje mensajeRespuesta = new Mensaje();
         // se inicia la conexion con el servidor
         ClienteServidor.iniciarConexion(); 
-        mensajeEnviar.setContext("/logIn");
+        mensajeEnviar.setContext("/login");
         // se añade el contenido del mensaje a enviar al servidor
         ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
         contenido.add(new String(user));
