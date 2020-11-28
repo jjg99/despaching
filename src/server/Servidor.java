@@ -161,6 +161,8 @@ public class Servidor extends Thread {
 			}
 			// se carga la respuesta en el mensaje
 			mensajeRespuesta.setContenido(respuesta);
+			System.out.println("Se va a enviar "+mensajeRespuesta.getContenido().toString());
+
 			// se envia el mensaje de respuesta
 			salida.writeObject(mensajeRespuesta);
 			
