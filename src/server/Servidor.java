@@ -142,7 +142,7 @@ public class Servidor extends Thread {
 					// se carga el id del alumno
 					String idProfClases = (String)mensajeEntrada.getContenido().get(0);
 					// se realiza la consulta en el gestor de colas
-					ArrayList<String> clasesProfesor = UsuarioDAO.getClasesProfesor(idProfCola);
+					ArrayList<String> clasesProfesor = UsuarioDAO.getClasesProfesor(idProfClases);
 					// se recorre el array de respuesta para castear de Profesor a Object
 					for(String profesor :clasesProfesor){
 						respuesta.add((Object)profesor);	// se guarda el objeto en el arrayList de respuesta
