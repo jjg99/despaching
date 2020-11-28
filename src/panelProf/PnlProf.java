@@ -43,6 +43,7 @@ public class PnlProf extends JPanel{
 
     /** Profesor que ha iniciado sesion */
     private static Profesor profesor;
+    private JPanel pnlIzquierda = new JPanel();
 
     /**
      * Constructor del panel el cual llamara al metodo {@link establecerVentana} y al metodo{@link setProfesor}
@@ -65,20 +66,7 @@ public class PnlProf extends JPanel{
     /** Metodo que inicializara e instanciara todos los componentes en la ventana */
     public void establecerVentana(){
         /** Panel que contendra el Horario del dia */
-        JPanel pnlIzquierda = new JPanel();
-        pnlIzquierda.setLayout(new BorderLayout());
-
-        JLabel lblHorario = new JLabel(getDiaHorario());
-        Fuente.setFuenteNegrita(lblHorario);
-
-        /** Panel que contendra la etiqueta {@link lblHorario}*/
-        JPanel pnlTxtHorario = new JPanel();
-        pnlTxtHorario.setLayout(new FlowLayout());
-        pnlTxtHorario.add(lblHorario);
-        
-        // Agregamos ambos componentes al panel
-        pnlIzquierda.add(pnlTxtHorario,BorderLayout.NORTH);
-        pnlIzquierda.add(new PnlHorario(profesor,Fecha.getDiaSemana()),BorderLayout.CENTER);
+        setPnlHorario(new PnlHorario(profesor,Fecha.getDiaSemana()), Fecha.fechaString());
 
         /** Panel que contendra la cola */
         JPanel pnlDerecha = new JPanel();
@@ -266,42 +254,6 @@ public class PnlProf extends JPanel{
     }
 
     /**
-     * Metodo que obtiene el dia de la semana y lo asigna a la Label, si es Sabado o Domingo lo pondrá como Lunes
-     * @return una String con el dia de la semana
-     */
-    private String getDiaHorario() {
-        int dia = Fecha.getDiaSemana();
-        String diaSemana;
-        switch (dia) {
-            case 1:
-                diaSemana = "Horario lunes:";
-                break;
-            case 2:
-                diaSemana = "Horario martes:";
-                break;
-            case 3:
-                diaSemana = "Horario miercoles:";
-                break;
-            case 4:
-                diaSemana = "Horario jueves:";
-                break;
-            case 5:
-                diaSemana = "Horario viernes:";
-                break;
-            case 6:
-                diaSemana = "Horario lunes:";
-                break;
-            case 7:
-                diaSemana = "Horario lunes:";
-                break;
-            default:
-                diaSemana = null;
-                break;
-        }
-        return diaSemana;
-    }
-
-    /**
      * Metodo que obtiene la Cola
      * @param dlstCola <code>ListModel</code> donde se cargara la cola
      */
@@ -325,5 +277,24 @@ public class PnlProf extends JPanel{
     /** Metodo estatico que elimina el profesor asociado al panel */
 	public static void delProfesor(){
         profesor=null;
-	}
+    }
+    
+    public void setPnlHorario(PnlHorario pnlHorario,String fecha){
+
+        pnlIzquierda.removeAll();
+
+        pnlIzquierda.setLayout(new BorderLayout());
+        JLabel lblHorario = new JLabel(fecha);
+        Fuente.setFuenteNegrita(lblHorario);
+
+        /** Panel que contendra la etiqueta {@link lblHorario}*/
+        JPanel pnlTxtHorario = new JPanel();
+        pnlTxtHorario.setLayout(new FlowLayout());
+        pnlTxtHorario.add(lblHorario);
+        
+        // Agregamos ambos componentes al panel
+        pnlIzquierda.add(pnlTxtHorario,BorderLayout.NORTH);
+        pnlIzquierda.add(pnlHorario,BorderLayout.CENTER);
+        pnlIzquierda.updateUI();
+    }
 }

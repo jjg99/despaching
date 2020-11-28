@@ -18,11 +18,38 @@ public abstract class Fecha {
     }
 
     /**
+     * Metodo para obtener la fecha con el formato <code>dd/MM/yyyy</code>
+     * @return Una <code>String</code> de la fecha
+     */
+    public static String fechaString(int dia, int mes, int anio){
+        Calendar fecha = Calendar.getInstance();    //Obtenemos una instancia de calendario
+        SimpleDateFormat sdf = new SimpleDateFormat("E dd/MM/yyyy");  //Fijamos el formato que deseamos
+        fecha.set(Calendar.YEAR,anio);
+        fecha.set(Calendar.MONTH,mes);
+        fecha.set(Calendar.DAY_OF_MONTH,dia);
+		return sdf.format(fecha.getTime()).toString();     //aplicamos el formato y lo convertimos a String
+    }
+
+
+    /**
      * Metodo para obtener el dia de la semana indicado en un numero empezando en 0-> Lunes
      * @return un <code>int</code> del dia de la semana
      */
     public static int getDiaSemana(){
         Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("u");  //Fijamos el formato que deseamos
+        return Integer.parseInt(sdf.format(cal.getTime()).toString()) -1;
+    }
+
+    /**
+     * Metodo para obtener el dia de la semana indicado en un numero empezando en 0-> Lunes
+     * @return un <code>int</code> del dia de la semana
+     */
+    public static int getDiaSemana(int dia, int mes, int anio){
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR,anio);
+        cal.set(Calendar.MONTH,mes);
+        cal.set(Calendar.DAY_OF_MONTH,dia);
         SimpleDateFormat sdf = new SimpleDateFormat("u");  //Fijamos el formato que deseamos
         return Integer.parseInt(sdf.format(cal.getTime()).toString()) -1;
     }
@@ -45,6 +72,16 @@ public abstract class Fecha {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("M");
         return Integer.valueOf(sdf.format(cal.getTime())) -1;
+    }
+
+    /**
+    * metodo para obtener el dia actual
+    * @return <code>int</code> con el dia del mes
+    */
+    public static int getDia(){
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("d");
+        return Integer.valueOf(sdf.format(cal.getTime()));
     }
 
     /**

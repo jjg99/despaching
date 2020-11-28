@@ -2,21 +2,26 @@ package paneluser;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 
 
 import dominio.Usuario;
+import panelProf.PnlProf;
 import util.Colores;
 import util.Fecha;
 
 public class PnlCalendario extends JPanel{
 
     private Usuario usuario;
+    private static int diaActivo = Fecha.getDia();
+    private static int mesActivo = Fecha.getMes();
+    private static int anioActivo = Fecha.getAnio();
     /**
      *
      */
@@ -57,7 +62,6 @@ public class PnlCalendario extends JPanel{
 
         for (int i=0;i<7;i++){
             txtDias[i].setOpaque(true);
-            txtDias[i].setBorder(UIManager.getBorder("Button.border"));
             Colores.setBGAzul(txtDias[i]);
             pnlDias.add(txtDias[i]);
         }
@@ -66,10 +70,29 @@ public class PnlCalendario extends JPanel{
             btnDias[i-1] = new JButton(String.valueOf(i));
         }
 
+    
         this.establecerMes(pnlDias,btnDias);
+        
             
         pnlMes.add(pnlDias);
         this.add(pnlMes);
+
+        //Acciones de los botones
+        for (JButton btnDia: btnDias){
+            btnDia.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    Colores.setBGCarne(btnDias[diaActivo-1]);
+                    diaActivo = Integer.valueOf(btnDia.getText());
+                    Colores.setBGVerde(btnDias[diaActivo-1]);
+                    int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
+                    PnlProf.pnlProf.setPnlHorario(new PnlHorario(usuario, dia), Fecha.fechaString(diaActivo, mesActivo, anioActivo));
+                    updateUI();
+                }
+            });
+        }
+        
+
     }
 
     private void establecerMes(JPanel pnlDias,JButton btnDias[]){
@@ -82,19 +105,24 @@ public class PnlCalendario extends JPanel{
                 if( i== 0 && j < primerDiaMes){
                     JLabel txtVacio = new JLabel();
                     txtVacio.setOpaque(true);
-                    txtVacio.setBorder(UIManager.getBorder(btnDias[0].getBorder()));
                     Colores.setBGCarne(txtVacio);
                     pnlDias.add(txtVacio);
                 }
                 else{
                     if(dia <= Fecha.getUltimoDiaMes(Fecha.getMes(),Fecha.getAnio())){
-                        Colores.setBGCarne(btnDias[dia-1]);
-                        pnlDias.add(btnDias[dia-1]);
-                        dia++;
+                        if (diaActivo == dia){
+                            Colores.setBGVerde(btnDias[dia-1]);
+                            pnlDias.add(btnDias[dia-1]);
+                            dia++;
+                        }
+                        else{
+                            Colores.setBGCarne(btnDias[dia-1]);
+                            pnlDias.add(btnDias[dia-1]);
+                            dia++;
+                        }
                     }
                     else{
                         JLabel txtVacio = new JLabel();
-                        txtVacio.setBorder(UIManager.getBorder(btnDias[0].getBorder()));
                         txtVacio.setOpaque(true);
                         Colores.setBGCarne(txtVacio);
                         pnlDias.add(txtVacio);
