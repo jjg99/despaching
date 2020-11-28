@@ -157,7 +157,7 @@ public class Servidor extends Thread {
 				default:
 					System.out.println("\nParámetro no encontrado");
 					System.out.println(mensajeEntrada.getContext());
-					break;
+					
 			}
 			// se carga la respuesta en el mensaje
 			mensajeRespuesta.setContenido(respuesta);
