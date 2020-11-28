@@ -4,7 +4,11 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+
 
 import dominio.Usuario;
 import util.Colores;
@@ -37,57 +41,63 @@ public class PnlCalendario extends JPanel{
     }
 
     private void establecerVentana(){
-        //JLabel txtProgress = new JLabel("Work in progress");
-        //this.add(txtProgress);
 
         JPanel pnlMes = new JPanel(new FlowLayout());
         JPanel pnlDias = new JPanel(new GridLayout(Fecha.getSemanasMes(Fecha.getMes(), Fecha.getAnio())+1,7));
-        JButton btnDias[][] = new JButton[Fecha.getSemanasMes(Fecha.getMes(), Fecha.getAnio())+1][7];
+        JLabel txtDias[] = new JLabel[7];
+        JButton btnDias[] = new JButton[Fecha.getUltimoDiaMes(Fecha.getMes(), Fecha.getAnio())];
 
+        txtDias[0] = new JLabel("L",SwingConstants.CENTER);
+        txtDias[1] = new JLabel("M",SwingConstants.CENTER);
+        txtDias[2] = new JLabel("X",SwingConstants.CENTER);
+        txtDias[3] = new JLabel("J",SwingConstants.CENTER);
+        txtDias[4] = new JLabel("V",SwingConstants.CENTER);
+        txtDias[5] = new JLabel("S",SwingConstants.CENTER);
+        txtDias[6] = new JLabel("D",SwingConstants.CENTER);
 
-        this.establecerMes(btnDias);
-        for (int i=0;i < Fecha.getSemanasMes(Fecha.getMes(), Fecha.getAnio())+1; i++)
-            for (int j=0; j< 7;j++)
-                pnlDias.add(btnDias[i][j]);
+        for (int i=0;i<7;i++){
+            txtDias[i].setOpaque(true);
+            txtDias[i].setBorder(UIManager.getBorder("Button.border"));
+            Colores.setBGAzul(txtDias[i]);
+            pnlDias.add(txtDias[i]);
+        }
+
+        for (int i=1;i<Fecha.getUltimoDiaMes(Fecha.getMes(), Fecha.getAnio())+1;i++){
+            btnDias[i-1] = new JButton(String.valueOf(i));
+        }
+
+        this.establecerMes(pnlDias,btnDias);
             
         pnlMes.add(pnlDias);
         this.add(pnlMes);
     }
 
-    private void establecerMes(JButton btnDias[][]){
+    private void establecerMes(JPanel pnlDias,JButton btnDias[]){
         
-        btnDias[0][0] = new JButton("L");
-        btnDias[0][1] = new JButton("M");
-        btnDias[0][2] = new JButton("X");
-        btnDias[0][3] = new JButton("J");
-        btnDias[0][4] = new JButton("V");
-        btnDias[0][5] = new JButton("S");
-        btnDias[0][6] = new JButton("D");
-
-        for (int j=0;j<7;j++){
-            // btnDias[0][j]
-        }
-
+        
         int primerDiaMes = Fecha.getPrimerDiaMes(Fecha.getMes(), Fecha.getAnio());
         int dia=1;
-        for (int i= 1; i<Fecha.getSemanasMes(Fecha.getMes(), Fecha.getAnio())+1; i++)
+        for (int i= 0; i<Fecha.getSemanasMes(Fecha.getMes(), Fecha.getAnio()); i++)
             for (int j = 0; j<7; j++){
-                if( i== 1 && j < primerDiaMes){
-                    btnDias[i][j] = new JButton();
-                    Colores.setBGCarne(btnDias[i][j]);
-                    btnDias[i][j].setOpaque(true);
-                    
+                if( i== 0 && j < primerDiaMes){
+                    JLabel txtVacio = new JLabel();
+                    txtVacio.setOpaque(true);
+                    txtVacio.setBorder(UIManager.getBorder(btnDias[0].getBorder()));
+                    Colores.setBGCarne(txtVacio);
+                    pnlDias.add(txtVacio);
                 }
                 else{
                     if(dia <= Fecha.getUltimoDiaMes(Fecha.getMes(),Fecha.getAnio())){
-                        btnDias[i][j] = new JButton(String.valueOf(dia));
-                        Colores.setBGCarne(btnDias[i][j]);
+                        Colores.setBGCarne(btnDias[dia-1]);
+                        pnlDias.add(btnDias[dia-1]);
                         dia++;
                     }
                     else{
-                        btnDias[i][j] = new JButton();
-                        Colores.setBGCarne(btnDias[i][j]);
-                        btnDias[i][j].setOpaque(true);
+                        JLabel txtVacio = new JLabel();
+                        txtVacio.setBorder(UIManager.getBorder(btnDias[0].getBorder()));
+                        txtVacio.setOpaque(true);
+                        Colores.setBGCarne(txtVacio);
+                        pnlDias.add(txtVacio);
                     }
                     
                 }
