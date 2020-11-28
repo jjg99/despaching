@@ -1,11 +1,13 @@
 package dominio;
 
+import java.io.Serializable;
+
 /**
  * Clase que define los atributos y metodos de todas las personas que usen el
  * programa
  */
-public class Usuario {
-
+public class Usuario implements Serializable{
+    private static final long serialVersionUID = 1L;
     /** String que contiene el correo con el que se inicia sesion */
     private String correo;
     /** String que contiene la contraseña con la que se inicia sesion */
