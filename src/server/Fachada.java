@@ -50,6 +50,7 @@ public class Fachada {
         ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
         contenido.add(new String(idAlumno));
         contenido.add(new String(profesorCola));
+        mensajeEnviar.setContenido(contenido);
         // se envia la consulta al servidor
         ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);  
         // se carga el primer elemento del array, el cual contiene la posicion del alumno en la cola
@@ -70,6 +71,7 @@ public class Fachada {
         // se añade el contenido del mensaje a enviar al servidor
         ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
         contenido.add(new String(id));
+        mensajeEnviar.setContenido(contenido);
         // se envia la consulta al servidor
         ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);  
         // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta la apertura de la cola
@@ -91,6 +93,7 @@ public class Fachada {
         // se añade el contenido del mensaje a enviar al servidor
         ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
         contenido.add(new String(id));
+        mensajeEnviar.setContenido(contenido);
         // se envia la consulta al servidor
         ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);  
         // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
@@ -105,6 +108,7 @@ public class Fachada {
      * @return Usuario que se ha autenticado correctamente
      */
     public static Usuario logIn(String user, String pass) {
+        
         // se crea el mensaje para enviar toda la información 
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
@@ -113,8 +117,9 @@ public class Fachada {
         mensajeEnviar.setContext("/login");
         // se añade el contenido del mensaje a enviar al servidor
         ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
-        contenido.add(new String(user));
-        contenido.add(new String(pass));
+        contenido.add((Object)new String(user));
+        contenido.add((Object)new String(pass));
+        mensajeEnviar.setContenido(contenido);
         // se envia la consulta al servidor
         ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);  
         // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
@@ -299,6 +304,7 @@ public class Fachada {
         // se añade el contenido del mensaje a enviar al servidor
         ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
         contenido.add(new String(idProfesor));
+        mensajeEnviar.setContenido(contenido);
         // se envia la consulta al servidor
         ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);  
         // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
