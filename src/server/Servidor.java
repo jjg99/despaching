@@ -51,6 +51,9 @@ public class Servidor extends Thread {
 			//objetos de entrada y salida del servidor
 			ObjectInputStream entrada = new ObjectInputStream(in);
 			ObjectOutputStream salida = new ObjectOutputStream(out);
+			out.flush();
+			salida.flush();
+
 
 			Mensaje mensajeEntrada= (Mensaje)entrada.readObject();
 			System.out.print(mensajeEntrada.getContenido().toString());
