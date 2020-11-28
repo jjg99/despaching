@@ -111,15 +111,15 @@ public class Fachada {
         // se inicia la conexion con el servidor
         ClienteServidor.iniciarConexion(); 
         mensajeEnviar.setContext("/logIn");
-         // se añade el contenido del mensaje a enviar al servidor
-         ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
-         contenido.add(new String(user));
-         contenido.add(new String(pass));
-         // se envia la consulta al servidor
-         ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);  
-         // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
-         Usuario result = (Usuario)mensajeRespuesta.getContenido().get(0);
-         return result;  
+        // se añade el contenido del mensaje a enviar al servidor
+        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        contenido.add(new String(user));
+        contenido.add(new String(pass));
+        // se envia la consulta al servidor
+        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);  
+        // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
+        Usuario result = (Usuario)mensajeRespuesta.getContenido().get(0);
+        return result;  
     }
 
     /**
