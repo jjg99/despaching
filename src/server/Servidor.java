@@ -34,7 +34,7 @@ public class Servidor extends Thread {
 		 cada vez que se intenta conectar alquien desde fuera, la conexión se acepta y se crea un nuevo socket
 		*/
 		this.socket = socket;
-		System.out.println("New client connected from " + socket.getInetAddress().getHostAddress()+ Fecha.fechaHoraString());
+		System.out.println("New client connected from " +" "+ socket.getInetAddress().getHostAddress()+ Fecha.fechaHoraString());
 		start();
 	}
 
