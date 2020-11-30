@@ -157,6 +157,12 @@ public class Servidor extends Thread {
 						respuesta.add((Object)profesor);	// se guarda el objeto en el arrayList de respuesta
 					}
 					break;
+				case "/isColaAbierta":
+				String idProfColaAbierta = (String)mensajeEntrada.getContenido().get(0);
+					// se realiza la consulta en el gestor de colas
+					Boolean isColaAbierta = ColaDAO.isColaAbierta(idProfColaAbierta);
+					respuesta.add((Object)isColaAbierta);
+					break;
 				default:
 					System.out.println("\nParámetro no encontrado");
 					System.out.println(mensajeEntrada.getContext());
