@@ -25,7 +25,7 @@ public class Fachada {
         // se añade el contenido al mensaje
         contenido.add(new String(idAlumno));
         mensajeEnviar.setContenido(contenido);
-        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);     // se envia la consulta al servidor
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se recibe un array con las colas de alumno
         ArrayList<Object> ArrayRespuesta =mensajeRespuesta.getContenido();
         for(Object elemento: ArrayRespuesta){
@@ -52,7 +52,7 @@ public class Fachada {
         contenido.add(new String(profesorCola));
         mensajeEnviar.setContenido(contenido);
         // se envia la consulta al servidor
-        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);  
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se carga el primer elemento del array, el cual contiene la posicion del alumno en la cola
         int posicion = (int)mensajeRespuesta.getContenido().get(0);
         return posicion;
@@ -73,7 +73,7 @@ public class Fachada {
         contenido.add(new String(id));
         mensajeEnviar.setContenido(contenido);
         // se envia la consulta al servidor
-        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);  
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta la apertura de la cola
         boolean result = (boolean)mensajeRespuesta.getContenido().get(0);
 
@@ -95,7 +95,7 @@ public class Fachada {
         contenido.add(new String(id));
         mensajeEnviar.setContenido(contenido);
         // se envia la consulta al servidor
-        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);  
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
         boolean result = (boolean)mensajeRespuesta.getContenido().get(0);
 		return result;
@@ -121,8 +121,9 @@ public class Fachada {
         contenido.add((Object)new String(pass));
         mensajeEnviar.setContenido(contenido);
         // se envia la consulta al servidor
-        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);  
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
+        System.out.println(mensajeRespuesta.getContenido().toString());
         Usuario result = (Usuario)mensajeRespuesta.getContenido().get(0);
         return result;  
     }
@@ -143,7 +144,7 @@ public class Fachada {
         // se añade el contenido al mensaje
         contenido.add(new String(idAlumno));
         mensajeEnviar.setContenido(contenido);
-        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);     // se envia la consulta al servidor
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se recibe un array con todos los profesores del alumno
         ArrayList<Object> ArrayRespuesta =mensajeRespuesta.getContenido();
         for(Object elemento: ArrayRespuesta){
@@ -171,7 +172,7 @@ public class Fachada {
         // se añade el contenido al mensaje
         contenido.add(new String(idProfesor));
         mensajeEnviar.setContenido(contenido);
-        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);     // se envia la consulta al servidor
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se recibe un array con la cola del profesor
         ArrayList<Object> ArrayRespuesta =mensajeRespuesta.getContenido();
         for(Object elemento: ArrayRespuesta){
@@ -198,7 +199,7 @@ public class Fachada {
         // se añade el contenido al mensaje
         contenido.add(new String(idProfesor));
         mensajeEnviar.setContenido(contenido);
-        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);     // se envia la consulta al servidor
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se recibe un array con todas las clases del profesor
         ArrayList<Object> ArrayRespuesta =mensajeRespuesta.getContenido();
         for(Object elemento: ArrayRespuesta){
@@ -225,7 +226,7 @@ public class Fachada {
         // se añade el contenido al mensaje
         contenido.add(new String(idProfesor));
         mensajeEnviar.setContenido(contenido);
-        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);     // se envia la consulta al servidor
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se recibe el horario del profesor
         String respuesta = (String)mensajeRespuesta.getContenido().get(0);
     
@@ -246,7 +247,7 @@ public class Fachada {
         contenido.add(alumno);
         contenido.add(profesor);
         mensajeEnviar.setContenido(contenido);
-        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);     // se envia la consulta al servidor
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         
     }
 
@@ -265,7 +266,7 @@ public class Fachada {
         contenido.add(alumno);
         contenido.add(profesor);
         mensajeEnviar.setContenido(contenido);
-        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);     // se envia la consulta al servidor
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         
     }
 
@@ -284,7 +285,7 @@ public class Fachada {
         // se añade el contenido al mensaje
         contenido.add(new String(idAlumno));
         mensajeEnviar.setContenido(contenido);
-        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);     // se envia la consulta al servidor
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se recibe el nombre del alumno
         String respuesta = (String)mensajeRespuesta.getContenido().get(0);
     
@@ -306,7 +307,7 @@ public class Fachada {
         contenido.add(new String(idProfesor));
         mensajeEnviar.setContenido(contenido);
         // se envia la consulta al servidor
-        ClienteServidor.enviarMensaje(mensajeEnviar, mensajeRespuesta);  
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
         boolean result = (boolean)mensajeRespuesta.getContenido().get(0);
 		return result;

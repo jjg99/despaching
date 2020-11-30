@@ -23,10 +23,7 @@ public class ClienteServidor {
     public static boolean iniciarConexion(){
 		try{
 			conexionSocket = new Socket(HOST, PORT);		// intenta conectarse al socket del servidor
-			in = conexionSocket.getInputStream();		// canal para recibir y mandar los mensajes
-			out = conexionSocket.getOutputStream();
-			salida = new ObjectOutputStream(out);
-			entrada = new ObjectInputStream(in);
+			
 			System.out.println("conexion abierta");
 			return true;
 		}catch(Exception error){
@@ -52,9 +49,17 @@ public class ClienteServidor {
 	 * @param {@link Mensaje} mensajeRespuesta
 	 * envia {@link Mensaje}
 	*/
-    public static void enviarMensaje(Mensaje mensajeEnviar,Mensaje mensajeRespuesta){
+    public static Mensaje enviarMensaje(Mensaje mensajeEnviar){
+		Mensaje mensajeRespuesta = new Mensaje();
 		
 		try{
+			iniciarConexion();
+			in = conexionSocket.getInputStream();		// canal para recibir y mandar los mensajes
+			out = conexionSocket.getOutputStream();
+			salida = new ObjectOutputStream(out);
+			entrada = new ObjectInputStream(in);
+			out.flush();
+			salida.flush();
 			if(conexionSocket.isConnected()){
 				// se envia el mensaje
 				salida.writeObject(mensajeEnviar);
@@ -63,9 +68,11 @@ public class ClienteServidor {
 				mensajeRespuesta = (Mensaje)entrada.readObject();
 				
 			}
+			cerrarConexion();
 			
 		}catch(Exception error){
 			error.printStackTrace();
 		}
+		return mensajeRespuesta;
 	}
 }
