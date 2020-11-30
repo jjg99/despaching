@@ -54,8 +54,13 @@ public class ClienteServidor {
 		
 		try{
 			iniciarConexion();
+			in = null;
+			out = null;
 			in = conexionSocket.getInputStream();		// canal para recibir y mandar los mensajes
 			out = conexionSocket.getOutputStream();
+			entrada = null;
+			salida = null;
+			
 			salida = new ObjectOutputStream(out);
 			entrada = new ObjectInputStream(in);
 			out.flush();

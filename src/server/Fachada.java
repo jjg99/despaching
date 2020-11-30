@@ -123,7 +123,6 @@ public class Fachada {
         // se envia la consulta al servidor
         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
-        System.out.println(mensajeRespuesta.getContenido().toString());
         Usuario result = (Usuario)mensajeRespuesta.getContenido().get(0);
         return result;  
     }

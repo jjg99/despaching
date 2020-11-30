@@ -36,7 +36,6 @@ public class Servidor extends Thread {
 		this.socket = socket;
 		System.out.println("New client connected from " + socket.getInetAddress().getHostAddress()+" "+ Fecha.fechaHoraString());
 		// se arranca la conexion con la base de datos
-		ConexionServer.startConnection();
 		start();
 	}
 
@@ -85,6 +84,7 @@ public class Servidor extends Thread {
 					respuesta.add((Object)posicion);
 					break;
 				case "/openCola":
+					System.out.println("Se va a abrir la cola");
 					// se carga el id de de la cola
 					String idColaOpen = (String)mensajeEntrada.getContenido().get(0);
 					// se realiza la consulta en el gestor de colas
@@ -95,7 +95,7 @@ public class Servidor extends Thread {
 					// se carga el id de de la cola
 					String idColaClose = (String)mensajeEntrada.getContenido().get(0);
 					// se realiza la consulta en el gestor de colas
-					Boolean isClossed= ColaDAO.openCola(idColaClose);
+					Boolean isClossed= ColaDAO.closeCola(idColaClose);
 					respuesta.add((Object)isClossed);
 					break;
 				case "/login":
@@ -188,6 +188,7 @@ public class Servidor extends Thread {
 
 	public static void main(String[] args) {
 		ServerSocket server = null;
+		ConexionServer.startConnection();
 		try {
 			server = new ServerSocket(PORT_NUMBER);
 			while (true) {
