@@ -59,7 +59,7 @@ public class Servidor extends Thread {
 		    //se analiza el mensaje y se devuelve la respuesta
 			Mensaje mensajeRespuesta=new Mensaje();
 			
-			System.out.println("Se ha recibido algo");
+			System.out.println("\nSe ha recibido algo");
 			// la respuesta es común a todos los alumnos
 			mensajeRespuesta.setContext("/respuesta");
 			ArrayList<Object> respuesta = new ArrayList<Object>();	// array para devolver el resultado de la consulta
@@ -170,7 +170,8 @@ public class Servidor extends Thread {
 			}
 			// se carga la respuesta en el mensaje
 			mensajeRespuesta.setContenido(respuesta);
-			System.out.println("Se va a enviar "+mensajeRespuesta.getContenido().toString());
+			System.out.println("Se va a enviar");
+			System.out.print(mensajeRespuesta.getContenido().toString());
 
 			// se envia el mensaje de respuesta
 			salida.writeObject(mensajeRespuesta);
