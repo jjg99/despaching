@@ -25,6 +25,7 @@ public class ColaDAO {
         Statement stmt;
         // Ejecucion de la sentencia SQL
         try {
+            System.out.println("Cola abriendose");
             stmt = ConexionServer.conexion.createStatement();
             String sql = "INSERT INTO \"Colas\"(\"clavePROFESOR\") VALUES ('" + id + "')";
             stmt.executeUpdate(sql);
@@ -47,6 +48,7 @@ public class ColaDAO {
         Statement stmt;
         // Ejecucion de la sentencia SQL
         try {
+            System.out.println("Cola cerrandose");
             stmt = ConexionServer.conexion.createStatement();
             String sql = "DELETE FROM \"Colas\" WHERE \"clavePROFESOR\"='" + id + "'";
             stmt.executeUpdate(sql);
