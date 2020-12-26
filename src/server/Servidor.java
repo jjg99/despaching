@@ -14,6 +14,7 @@ import dominio.Usuario;
 import util.Fecha;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import dao.ColaDAO;
 import dao.HorarioDAO;
@@ -62,106 +63,115 @@ public class Servidor extends Thread {
 			System.out.println("\nSe ha recibido algo");
 			// la respuesta es común a todos los alumnos
 			mensajeRespuesta.setContext("/respuesta");
-			ArrayList<Object> respuesta = new ArrayList<Object>();	// array para devolver el resultado de la consulta
-
+			HashMap<String,Object> HashMapRespuesta = new HashMap<String,Object>();
+						
 			switch (mensajeEntrada.getContext()) {
 				case "/getColasAlumno":
 					// se carga el id del alumno
-					String idAlumno = (String)mensajeEntrada.getContenido().get(0);
+					String idAlumno = (String)mensajeEntrada.getContenido().get("idAlumno");
 					// se realiza la consulta en el gestor de colas
 					ArrayList<Profesor> colaAlumno = ColaDAO.getColasAlumno(idAlumno);
+					// array para contener la respuesta 
+					ArrayList<Object> arrayRespuesta = new ArrayList<Object>();
 					// se recorre el array de respuesta para castear de Profesor a Object
 					for(Profesor profesor :colaAlumno){
-						respuesta.add((Object)profesor);	// se guarda el objeto en el arrayList de respuesta
+						arrayRespuesta.add((Object)profesor);	// se guarda el objeto en el arrayList de respuesta
 					}
+					HashMapRespuesta.put("Colas",arrayRespuesta);
 					break;
 				case "/getPosicionAlumno":
 					// se carga el id del alumno
-					String idAlumnoPos = (String)mensajeEntrada.getContenido().get(0);
-					String idProfPos = (String)mensajeEntrada.getContenido().get(1);
+					String idAlumnoPos = (String)mensajeEntrada.getContenido().get("idAlumno");
+					String idProfPos = (String)mensajeEntrada.getContenido().get("idProfesor");
 					// se realiza la consulta en el gestor de colas
 					Integer posicion = ColaDAO.getPosicionColaAlumno(idAlumnoPos,idProfPos);
-					respuesta.add((Object)posicion);
+					HashMapRespuesta.put("Posicion",posicion);
 					break;
 				case "/openCola":
 					System.out.println("Se va a abrir la cola");
 					// se carga el id de de la cola
-					String idColaOpen = (String)mensajeEntrada.getContenido().get(0);
+					String idColaOpen = (String)mensajeEntrada.getContenido().get("idProfesor");
 					// se realiza la consulta en el gestor de colas
 					Boolean isOpenned = ColaDAO.openCola(idColaOpen);
-					respuesta.add((Object)isOpenned);
+					HashMapRespuesta.put("Resultado",isOpenned);
 					break;
 				case "/closeCola":
 					// se carga el id de de la cola
-					String idColaClose = (String)mensajeEntrada.getContenido().get(0);
+					String idColaClose = (String)mensajeEntrada.getContenido().get("idProfesor");
 					// se realiza la consulta en el gestor de colas
 					Boolean isClossed= ColaDAO.closeCola(idColaClose);
-					respuesta.add((Object)isClossed);
+					HashMapRespuesta.put("Resultado",isClossed);
 					break;
 				case "/login":
 					// se carga el id de de la cola
-					String user = (String)mensajeEntrada.getContenido().get(0);
-					String pass = (String)mensajeEntrada.getContenido().get(1);
+					String user = (String)mensajeEntrada.getContenido().get("Usuario");
+					String pass = (String)mensajeEntrada.getContenido().get("Contrasena");
 					// se realiza la consulta en el gestor de colas
 					Usuario usuario = UsuarioDAO.logIn(user,pass);
-					respuesta.add((Object)usuario);
+					HashMapRespuesta.put("Usuario",usuario);
 					break;
 				case "/getProfesoresAlumno":
 					// se carga el id del alumno
-					String idAlumnoProf = (String)mensajeEntrada.getContenido().get(0);
+					String idAlumnoProf = (String)mensajeEntrada.getContenido().get("idAlumno");
 					// se realiza la consulta en el gestor de colas
 					ArrayList<Profesor> profesoresAlumno = UsuarioDAO.getProfesoresAlumno(idAlumnoProf);
+					ArrayList<Object> arrayRespuestaProfesores = new ArrayList<Object>();
 					// se recorre el array de respuesta para castear de Profesor a Object
 					for(Profesor profesor :profesoresAlumno){
-						respuesta.add((Object)profesor);	// se guarda el objeto en el arrayList de respuesta
+						arrayRespuestaProfesores.add((Object)profesor);	// se guarda el objeto en el arrayList de respuesta
 					}
+					HashMapRespuesta.put("Profesores",arrayRespuestaProfesores);
 					break;
 				case "/getColaProfesor":
 					// se carga el id del alumno
-					String idProfCola = (String)mensajeEntrada.getContenido().get(0);
+					String idProfCola = (String)mensajeEntrada.getContenido().get("idProfesor");
 					// se realiza la consulta en el gestor de colas
 					ArrayList<Alumno> alumnosProfesor = ColaDAO.getColaProfesor(idProfCola);
+					ArrayList<Object> arrayRespuestaCola = new ArrayList<Object>();
 					// se recorre el array de respuesta para castear de Profesor a Object
 					for(Alumno profesor :alumnosProfesor){
-						respuesta.add((Object)profesor);	// se guarda el objeto en el arrayList de respuesta
+						arrayRespuestaCola.add((Object)profesor);	// se guarda el objeto en el arrayList de respuesta
 					}
+					HashMapRespuesta.put("Alumnos",arrayRespuestaCola);
 					break;
 				case "/getHorario":
 					// se carga el id del alumno
-					String idProfHorario = (String)mensajeEntrada.getContenido().get(0);
+					String idProfHorario = (String)mensajeEntrada.getContenido().get("idProfesor");
 					// se realiza la consulta en el gestor de colas
 					String horarioProfesor = HorarioDAO.getHorario(idProfHorario);
-					respuesta.add(horarioProfesor);
+					HashMapRespuesta.put("Horario",horarioProfesor);
 					break;
 				case "/addAlumnoCola":
 					// se carga el id del alumno
-					Alumno alumnoAdd = (Alumno)mensajeEntrada.getContenido().get(0);
-					Profesor profesorAdd = (Profesor)mensajeEntrada.getContenido().get(1);
+					Alumno alumnoAdd = (Alumno)mensajeEntrada.getContenido().get("Alumno");
+					Profesor profesorAdd = (Profesor)mensajeEntrada.getContenido().get("Profesor");
 					// se realiza la consulta en el gestor de colas
 					ColaDAO.addAlumnoCola(alumnoAdd,profesorAdd);
 					break;
 				case "/delAlumnoCola":
 					// se carga el id del alumno
-					Alumno alumnoBorrar = (Alumno)mensajeEntrada.getContenido().get(0);
-					Profesor profesorBorrar = (Profesor)mensajeEntrada.getContenido().get(1);
+					Alumno alumnoBorrar = (Alumno)mensajeEntrada.getContenido().get("Alumno");
+					Profesor profesorBorrar = (Profesor)mensajeEntrada.getContenido().get("Profesor");
 					// se realiza la consulta en el gestor de colas
 					ColaDAO.delAlumnoCola(alumnoBorrar,profesorBorrar);
 					break;
 				case "/getClasesProfesor":
 					// se carga el id del alumno
-					String idProfClases = (String)mensajeEntrada.getContenido().get(0);
+					String idProfClases = (String)mensajeEntrada.getContenido().get("idProfesor");
 					// se realiza la consulta en el gestor de colas
 					ArrayList<String> clasesProfesor = UsuarioDAO.getClasesProfesor(idProfClases);
+					ArrayList<Object> arrayRespuestaClases = new ArrayList<Object>();
 					// se recorre el array de respuesta para castear de Profesor a Object
 					for(String profesor :clasesProfesor){
-						respuesta.add((Object)profesor);	// se guarda el objeto en el arrayList de respuesta
+						arrayRespuestaClases.add(profesor);	// se guarda el objeto en el arrayList de respuesta
 					}
+					HashMapRespuesta.put("Clases",arrayRespuestaClases);
 					break;
 				case "/isColaAbierta":
-				String idProfColaAbierta = (String)mensajeEntrada.getContenido().get(0);
+				String idProfColaAbierta = (String)mensajeEntrada.getContenido().get("idProfesor");
 					// se realiza la consulta en el gestor de colas
 					Boolean isColaAbierta = ColaDAO.isColaAbierta(idProfColaAbierta);
-					respuesta.add((Object)isColaAbierta);
+					HashMapRespuesta.put("Resultado",isColaAbierta);
 					break;
 				default:
 					System.out.println("\nParámetro no encontrado");
@@ -169,7 +179,7 @@ public class Servidor extends Thread {
 					
 			}
 			// se carga la respuesta en el mensaje
-			mensajeRespuesta.setContenido(respuesta);
+			mensajeRespuesta.setContenido(HashMapRespuesta);
 			System.out.println("Se va a enviar");
 			System.out.print(mensajeRespuesta.getContenido().toString());
 
