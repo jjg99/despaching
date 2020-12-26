@@ -77,7 +77,7 @@ public class Fachada {
         // se envia la consulta al servidor
         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta la apertura de la cola
-        boolean result = (boolean)mensajeRespuesta.getContenido().get("resultado");
+        boolean result = (boolean)mensajeRespuesta.getContenido().get("Resultado");
 
         return result;
         
@@ -99,7 +99,7 @@ public class Fachada {
         // se envia la consulta al servidor
         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
-        boolean result = (boolean)mensajeRespuesta.getContenido().get("resultado");
+        boolean result = (boolean)mensajeRespuesta.getContenido().get("Resultado");
 		return result;
     }
     
@@ -120,7 +120,7 @@ public class Fachada {
         // se añade el contenido del mensaje a enviar al servidor
         HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
         contenido.put("Usuario",new String(user));
-        contenido.put("Usuario",new String(pass));
+        contenido.put("Contrasena",new String(pass));
         mensajeEnviar.setContenido(contenido);
         // se envia la consulta al servidor
         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
@@ -235,7 +235,7 @@ public class Fachada {
         mensajeEnviar.setContenido(contenido);
         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se recibe el horario del profesor
-        String respuesta = (String)mensajeRespuesta.getContenido().get(0);
+        String respuesta = (String)mensajeRespuesta.getContenido().get("Horario");
     
         return respuesta;
     }
@@ -316,7 +316,7 @@ public class Fachada {
         // se envia la consulta al servidor
         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
-        boolean result = (boolean)mensajeRespuesta.getContenido().get("resultado");
+        boolean result = (boolean)mensajeRespuesta.getContenido().get("Resultado");
 		return result;
     }
 }
