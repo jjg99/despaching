@@ -1,7 +1,7 @@
 package server;
 
+import java.util.HashMap;
 import java.util.ArrayList;
-
 
 import dominio.Alumno;
 import dominio.Profesor;
@@ -19,15 +19,17 @@ public class Fachada {
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
         mensajeEnviar.setContext("/getColasAlumno");        // se coloca el tipo de consulta
-        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
 
         ArrayList<Profesor> respuesta = new ArrayList<Profesor>();  // array para almacenar la respuesta del servidor
         // se añade el contenido al mensaje
-        contenido.add(new String(idAlumno));
+        contenido.put("idAlumno", new String(idAlumno));
         mensajeEnviar.setContenido(contenido);
         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se recibe un array con las colas de alumno
-        ArrayList<Object> ArrayRespuesta =mensajeRespuesta.getContenido();
+        HashMap<String,Object> HashMapRespuesta =mensajeRespuesta.getContenido();
+        // se lee la respuesta del mensaje
+        ArrayList<Object>ArrayRespuesta = (ArrayList<Object>) HashMapRespuesta.get("Colas");
         for(Object elemento: ArrayRespuesta){
             Profesor profesor = (Profesor)elemento;
             respuesta.add(profesor);
@@ -47,14 +49,14 @@ public class Fachada {
         Mensaje mensajeRespuesta = new Mensaje();
         mensajeEnviar.setContext("/getPosicionAlumno");     // se coloca el tipo de consulta
         // se añade el contenido del mensaje a enviar al servidor
-        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
-        contenido.add(new String(idAlumno));
-        contenido.add(new String(profesorCola));
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        contenido.put("idAlumno",new String(idAlumno));
+        contenido.put("idProfesor",new String(profesorCola));
         mensajeEnviar.setContenido(contenido);
         // se envia la consulta al servidor
         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se carga el primer elemento del array, el cual contiene la posicion del alumno en la cola
-        int posicion = (int)mensajeRespuesta.getContenido().get(0);
+        int posicion = (int)mensajeRespuesta.getContenido().get("Posicion");
         return posicion;
     }
 
@@ -69,13 +71,13 @@ public class Fachada {
         Mensaje mensajeRespuesta = new Mensaje();
         mensajeEnviar.setContext("/openCola");      // se coloca el tipo de consulta
         // se añade el contenido del mensaje a enviar al servidor
-        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
-        contenido.add(new String(id));
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        contenido.put("idProfesor",new String(id));
         mensajeEnviar.setContenido(contenido);
         // se envia la consulta al servidor
         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta la apertura de la cola
-        boolean result = (boolean)mensajeRespuesta.getContenido().get(0);
+        boolean result = (boolean)mensajeRespuesta.getContenido().get("resultado");
 
         return result;
         
@@ -91,13 +93,13 @@ public class Fachada {
         Mensaje mensajeRespuesta = new Mensaje();
         mensajeEnviar.setContext("/closeCola");     // se coloca el tipo de consulta
         // se añade el contenido del mensaje a enviar al servidor
-        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
-        contenido.add(new String(id));
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        contenido.put("idProfesor",new String(id));
         mensajeEnviar.setContenido(contenido);
         // se envia la consulta al servidor
         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
-        boolean result = (boolean)mensajeRespuesta.getContenido().get(0);
+        boolean result = (boolean)mensajeRespuesta.getContenido().get("resultado");
 		return result;
     }
     
@@ -116,14 +118,14 @@ public class Fachada {
         ClienteServidor.iniciarConexion(); 
         mensajeEnviar.setContext("/login");
         // se añade el contenido del mensaje a enviar al servidor
-        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
-        contenido.add((Object)new String(user));
-        contenido.add((Object)new String(pass));
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        contenido.put("Usuario",new String(user));
+        contenido.put("Usuario",new String(pass));
         mensajeEnviar.setContenido(contenido);
         // se envia la consulta al servidor
         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
-        Usuario result = (Usuario)mensajeRespuesta.getContenido().get(0);
+        Usuario result = (Usuario)mensajeRespuesta.getContenido().get("Usuario");
         return result;  
     }
 
@@ -137,15 +139,17 @@ public class Fachada {
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
         mensajeEnviar.setContext("/getProfesoresAlumno");       // se coloca el tipo de consulta
-        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
 
         ArrayList<Profesor> respuesta = new ArrayList<Profesor>();  // array para almacenar la respuesta del servidor
         // se añade el contenido al mensaje
-        contenido.add(new String(idAlumno));
+        contenido.put("idAlumno",new String(idAlumno));
         mensajeEnviar.setContenido(contenido);
         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se recibe un array con todos los profesores del alumno
-        ArrayList<Object> ArrayRespuesta =mensajeRespuesta.getContenido();
+        HashMap<String,Object> HashMapRespuesta =mensajeRespuesta.getContenido();
+        // se lee la respuesta del mensaje
+        ArrayList<Object>ArrayRespuesta = (ArrayList<Object>) HashMapRespuesta.get("Profesores");
         for(Object elemento: ArrayRespuesta){
             Profesor profesor = (Profesor)elemento;
             respuesta.add(profesor);
@@ -165,15 +169,17 @@ public class Fachada {
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
         mensajeEnviar.setContext("/getColaProfesor");       // se coloca el tipo de consulta
-        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
 
         ArrayList<Alumno> respuesta = new ArrayList<Alumno>();  // array para almacenar la respuesta del servidor
         // se añade el contenido al mensaje
-        contenido.add(new String(idProfesor));
+        contenido.put("idProfesor",new String(idProfesor));
         mensajeEnviar.setContenido(contenido);
         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se recibe un array con la cola del profesor
-        ArrayList<Object> ArrayRespuesta =mensajeRespuesta.getContenido();
+        HashMap<String,Object> HashMapRespuesta =mensajeRespuesta.getContenido();
+        // se lee la respuesta del mensaje
+        ArrayList<Object>ArrayRespuesta = (ArrayList<Object>) HashMapRespuesta.get("Alumnos");
         for(Object elemento: ArrayRespuesta){
             Alumno alumno = (Alumno)elemento;
             respuesta.add(alumno);
@@ -192,15 +198,17 @@ public class Fachada {
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
         mensajeEnviar.setContext("/getClasesProfesor");       // se coloca el tipo de consulta
-        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
 
         ArrayList<String> respuesta = new ArrayList<String>();  // array para almacenar la respuesta del servidor
         // se añade el contenido al mensaje
-        contenido.add(new String(idProfesor));
+        contenido.put("idProfesor",new String(idProfesor));
         mensajeEnviar.setContenido(contenido);
         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se recibe un array con todas las clases del profesor
-        ArrayList<Object> ArrayRespuesta =mensajeRespuesta.getContenido();
+        HashMap<String,Object> HashMapRespuesta =mensajeRespuesta.getContenido();
+        // se lee la respuesta del mensaje
+        ArrayList<Object>ArrayRespuesta = (ArrayList<Object>) HashMapRespuesta.get("Clases");
         for(Object elemento: ArrayRespuesta){
             String clase = (String)elemento;
             respuesta.add(clase);
@@ -220,10 +228,10 @@ public class Fachada {
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
         mensajeEnviar.setContext("/getHorario");       // se coloca el tipo de consulta
-        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
 
         // se añade el contenido al mensaje
-        contenido.add(new String(idProfesor));
+        contenido.put("idProfesor",new String(idProfesor));
         mensajeEnviar.setContenido(contenido);
         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se recibe el horario del profesor
@@ -241,10 +249,10 @@ public class Fachada {
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
         mensajeEnviar.setContext("/addAlumnoCola");       // se coloca el tipo de consulta
-        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
         // se añade el contenido al mensaje
-        contenido.add(alumno);
-        contenido.add(profesor);
+        contenido.put("Alumno",alumno);
+        contenido.put("Profesor",profesor);
         mensajeEnviar.setContenido(contenido);
         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         
@@ -260,10 +268,10 @@ public class Fachada {
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
         mensajeEnviar.setContext("/delAlumnoCola");       // se coloca el tipo de consulta
-        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
         // se añade el contenido al mensaje
-        contenido.add(alumno);
-        contenido.add(profesor);
+        contenido.put("Alumno",alumno);
+        contenido.put("Profesor",profesor);
         mensajeEnviar.setContenido(contenido);
         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         
@@ -279,14 +287,14 @@ public class Fachada {
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
         mensajeEnviar.setContext("/getNombreAlumno");       // se coloca el tipo de consulta
-        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
 
         // se añade el contenido al mensaje
-        contenido.add(new String(idAlumno));
+        contenido.put("idAlumno",new String(idAlumno));
         mensajeEnviar.setContenido(contenido);
         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se recibe el nombre del alumno
-        String respuesta = (String)mensajeRespuesta.getContenido().get(0);
+        String respuesta = (String)mensajeRespuesta.getContenido().get("Nombre");
     
         return respuesta;
     }
@@ -302,13 +310,13 @@ public class Fachada {
         Mensaje mensajeRespuesta = new Mensaje();
         mensajeEnviar.setContext("/isColaAbierta");     // se coloca el tipo de consulta
         // se añade el contenido del mensaje a enviar al servidor
-        ArrayList<Object> contenido = new ArrayList<Object>();     // array para almacenar el contenido de la consulta que se va a enviar
-        contenido.add(new String(idProfesor));
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        contenido.put("idProfesor",new String(idProfesor));
         mensajeEnviar.setContenido(contenido);
         // se envia la consulta al servidor
         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
         // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
-        boolean result = (boolean)mensajeRespuesta.getContenido().get(0);
+        boolean result = (boolean)mensajeRespuesta.getContenido().get("resultado");
 		return result;
     }
 }
