@@ -155,6 +155,13 @@ public class Servidor extends Thread {
 					// se realiza la consulta en el gestor de colas
 					ColaDAO.delAlumnoCola(alumnoBorrar,profesorBorrar);
 					break;
+				case "/getNombreAlumno":
+					//se carga el ID
+					String idAlumnoNombre = (String)mensajeEntrada.getContenido().get("idAlumno");
+					//se realiza la consulta en la base de datos
+					String nombreAlumno = UsuarioDAO.getNombreAlumno(idAlumnoNombre);
+					HashMapRespuesta.put("Nombre",nombreAlumno);
+					break;
 				case "/getClasesProfesor":
 					// se carga el id del alumno
 					String idProfClases = (String)mensajeEntrada.getContenido().get("idProfesor");
