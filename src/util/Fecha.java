@@ -16,7 +16,11 @@ public abstract class Fecha {
 		SimpleDateFormat sdf = new SimpleDateFormat("E dd/MM/yyyy");  //Fijamos el formato que deseamos
 		return sdf.format(fecha.getTime()).toString();     //aplicamos el formato y lo convertimos a String
     }
-
+    public static String fechaHoraString(){
+        Calendar fecha = Calendar.getInstance();    //Obtenemos una instancia de calendario
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");  //Fijamos el formato que deseamos
+		return sdf.format(fecha.getTime()).toString();     //aplicamos el formato y lo convertimos a String
+    }
     /**
      * Metodo para obtener la fecha con el formato <code>dd/MM/yyyy</code>
      * @return Una <code>String</code> de la fecha

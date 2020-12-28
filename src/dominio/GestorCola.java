@@ -24,6 +24,7 @@ public abstract class GestorCola {
      */
 	public static boolean closeCola(String id, boolean first) {
         if(first){
+            System.out.print("Se cierra la cola");
             return Fachada.closeCola(id);
         } else if(0 == GestionMensajes.msg2OpcionesGenerico(new Object[] {"Si", "No"}, "Al cerrar la cola se borraran todos los alumnos que estan en ella\n¿Seguro que desea cerrar la cola?"
             , "¿Desea cerrar la cola?")){

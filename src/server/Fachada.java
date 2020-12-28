@@ -1,10 +1,8 @@
 package server;
 
+import java.util.HashMap;
 import java.util.ArrayList;
 
-import dao.ColaDAO;
-import dao.HorarioDAO;
-import dao.UsuarioDAO;
 import dominio.Alumno;
 import dominio.Profesor;
 import dominio.Usuario;
@@ -15,8 +13,29 @@ public class Fachada {
      * @param String id
      * @return  {@link ArrayList}
      */
+    
     public static ArrayList<Profesor> getColasAlumno(String idAlumno){
-        return ColaDAO.getColasAlumno(idAlumno);
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getColasAlumno");        // se coloca el tipo de consulta
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+
+        ArrayList<Profesor> respuesta = new ArrayList<Profesor>();  // array para almacenar la respuesta del servidor
+        // se añade el contenido al mensaje
+        contenido.put("idAlumno", new String(idAlumno));
+        mensajeEnviar.setContenido(contenido);
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+        // se recibe un array con las colas de alumno
+        HashMap<String,Object> HashMapRespuesta =mensajeRespuesta.getContenido();
+        // se lee la respuesta del mensaje
+        ArrayList<Object>ArrayRespuesta = (ArrayList<Object>) HashMapRespuesta.get("Colas");
+        for(Object elemento: ArrayRespuesta){
+            Profesor profesor = (Profesor)elemento;
+            respuesta.add(profesor);
+        }
+        
+        return respuesta;
     }
     
     /**Metodo que se encarga de instanciar al Dao de la base de datos de colas para recibir la posición de un alumno en una cola
@@ -25,7 +44,20 @@ public class Fachada {
     * @return  {@link ArrayList}
     */
     public static int getPosicionAlumno(String idAlumno,String profesorCola){
-        return ColaDAO.getPosicionColaAlumno(idAlumno, profesorCola);
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getPosicionAlumno");     // se coloca el tipo de consulta
+        // se añade el contenido del mensaje a enviar al servidor
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        contenido.put("idAlumno",new String(idAlumno));
+        contenido.put("idProfesor",new String(profesorCola));
+        mensajeEnviar.setContenido(contenido);
+        // se envia la consulta al servidor
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+        // se carga el primer elemento del array, el cual contiene la posicion del alumno en la cola
+        int posicion = (int)mensajeRespuesta.getContenido().get("Posicion");
+        return posicion;
     }
 
     /**
@@ -34,7 +66,20 @@ public class Fachada {
      * @return <code>true</code> si el profesor se agrego a la base de datos satisfactoriamente
      */
     public static boolean openCola(String id){
-        return ColaDAO.openCola(id);
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/openCola");      // se coloca el tipo de consulta
+        // se añade el contenido del mensaje a enviar al servidor
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        contenido.put("idProfesor",new String(id));
+        mensajeEnviar.setContenido(contenido);
+        // se envia la consulta al servidor
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+        // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta la apertura de la cola
+        boolean result = (boolean)mensajeRespuesta.getContenido().get("Resultado");
+
+        return result;
         
     }
     /**
@@ -43,7 +88,19 @@ public class Fachada {
      * @return <code>true</code> si el profesor se borro de la base de datos satisfactoriamente
      */
 	public static boolean closeCola(String id) {
-		return ColaDAO.closeCola(id);
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/closeCola");     // se coloca el tipo de consulta
+        // se añade el contenido del mensaje a enviar al servidor
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        contenido.put("idProfesor",new String(id));
+        mensajeEnviar.setContenido(contenido);
+        // se envia la consulta al servidor
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+        // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
+        boolean result = (boolean)mensajeRespuesta.getContenido().get("Resultado");
+		return result;
     }
     
     /**
@@ -53,7 +110,23 @@ public class Fachada {
      * @return Usuario que se ha autenticado correctamente
      */
     public static Usuario logIn(String user, String pass) {
-        return UsuarioDAO.logIn(user, pass);    
+        
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        // se inicia la conexion con el servidor
+        ClienteServidor.iniciarConexion(); 
+        mensajeEnviar.setContext("/login");
+        // se añade el contenido del mensaje a enviar al servidor
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        contenido.put("Usuario",new String(user));
+        contenido.put("Contrasena",new String(pass));
+        mensajeEnviar.setContenido(contenido);
+        // se envia la consulta al servidor
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+        // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
+        Usuario result = (Usuario)mensajeRespuesta.getContenido().get("Usuario");
+        return result;  
     }
 
     /**
@@ -62,7 +135,27 @@ public class Fachada {
      * @return Devuelve un ArrayList de profesores
      */
     public static ArrayList<Profesor> getProfesoresAlumno(String idAlumno){
-        return UsuarioDAO.getProfesoresAlumno(idAlumno);
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getProfesoresAlumno");       // se coloca el tipo de consulta
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+
+        ArrayList<Profesor> respuesta = new ArrayList<Profesor>();  // array para almacenar la respuesta del servidor
+        // se añade el contenido al mensaje
+        contenido.put("idAlumno",new String(idAlumno));
+        mensajeEnviar.setContenido(contenido);
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+        // se recibe un array con todos los profesores del alumno
+        HashMap<String,Object> HashMapRespuesta =mensajeRespuesta.getContenido();
+        // se lee la respuesta del mensaje
+        ArrayList<Object>ArrayRespuesta = (ArrayList<Object>) HashMapRespuesta.get("Profesores");
+        for(Object elemento: ArrayRespuesta){
+            Profesor profesor = (Profesor)elemento;
+            respuesta.add(profesor);
+        }
+        
+        return respuesta;
 
     }
 
@@ -72,7 +165,27 @@ public class Fachada {
      * @return Devuelve un ArrayList de alumnos
      */
     public static ArrayList<Alumno> getColaProfesor(String idProfesor){
-        return ColaDAO.getColaProfesor(idProfesor);
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getColaProfesor");       // se coloca el tipo de consulta
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+
+        ArrayList<Alumno> respuesta = new ArrayList<Alumno>();  // array para almacenar la respuesta del servidor
+        // se añade el contenido al mensaje
+        contenido.put("idProfesor",new String(idProfesor));
+        mensajeEnviar.setContenido(contenido);
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+        // se recibe un array con la cola del profesor
+        HashMap<String,Object> HashMapRespuesta =mensajeRespuesta.getContenido();
+        // se lee la respuesta del mensaje
+        ArrayList<Object>ArrayRespuesta = (ArrayList<Object>) HashMapRespuesta.get("Alumnos");
+        for(Object elemento: ArrayRespuesta){
+            Alumno alumno = (Alumno)elemento;
+            respuesta.add(alumno);
+        }
+        
+        return respuesta;
     }
 
     /**
@@ -81,7 +194,27 @@ public class Fachada {
      * @return Devuelve un ArrayList con todas las clases que imparte
      */
     public static ArrayList<String> getClasesProfesor(String idProfesor){
-        return UsuarioDAO.getClasesProfesor(idProfesor);
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getClasesProfesor");       // se coloca el tipo de consulta
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+
+        ArrayList<String> respuesta = new ArrayList<String>();  // array para almacenar la respuesta del servidor
+        // se añade el contenido al mensaje
+        contenido.put("idProfesor",new String(idProfesor));
+        mensajeEnviar.setContenido(contenido);
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+        // se recibe un array con todas las clases del profesor
+        HashMap<String,Object> HashMapRespuesta =mensajeRespuesta.getContenido();
+        // se lee la respuesta del mensaje
+        ArrayList<Object>ArrayRespuesta = (ArrayList<Object>) HashMapRespuesta.get("Clases");
+        for(Object elemento: ArrayRespuesta){
+            String clase = (String)elemento;
+            respuesta.add(clase);
+        }
+        
+        return respuesta;
 
     }
 
@@ -91,7 +224,20 @@ public class Fachada {
      * @return Devuelve un String con todo el horario del profesor
      */
     public static String getHorario(String idProfesor){
-        return HorarioDAO.getHorario(idProfesor);
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getHorario");       // se coloca el tipo de consulta
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+
+        // se añade el contenido al mensaje
+        contenido.put("idProfesor",new String(idProfesor));
+        mensajeEnviar.setContenido(contenido);
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+        // se recibe el horario del profesor
+        String respuesta = (String)mensajeRespuesta.getContenido().get("Horario");
+    
+        return respuesta;
     }
     
     /**Metodo encargado de solicitar a {@link ColaDao} que añada un alumno a la cola de un profesor
@@ -99,7 +245,17 @@ public class Fachada {
      * @param Profesor profesor
      */
     public static void addAlumnoCola(Alumno alumno, Profesor profesor){
-        ColaDAO.addAlumnoCola(alumno,profesor);
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/addAlumnoCola");       // se coloca el tipo de consulta
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        // se añade el contenido al mensaje
+        contenido.put("Alumno",alumno);
+        contenido.put("Profesor",profesor);
+        mensajeEnviar.setContenido(contenido);
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+        
     }
 
     /**
@@ -108,7 +264,17 @@ public class Fachada {
      * @param profesor Objeto Profesor al que pertenece la cola
      */
     public static void delAlumnoCola(Alumno alumno, Profesor profesor){
-        ColaDAO.delAlumnoCola(alumno, profesor);
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/delAlumnoCola");       // se coloca el tipo de consulta
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        // se añade el contenido al mensaje
+        contenido.put("Alumno",alumno);
+        contenido.put("Profesor",profesor);
+        mensajeEnviar.setContenido(contenido);
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+        
     }
 
     /**
@@ -117,7 +283,20 @@ public class Fachada {
      * @return Devuelve un string con el nombre + apellidos de la persona
      */
     public static String getNombreAlumno(String idAlumno){
-        return UsuarioDAO.getNombreAlumno(idAlumno);
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getNombreAlumno");       // se coloca el tipo de consulta
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+
+        // se añade el contenido al mensaje
+        contenido.put("idAlumno",new String(idAlumno));
+        mensajeEnviar.setContenido(contenido);
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+        // se recibe el nombre del alumno
+        String respuesta = (String)mensajeRespuesta.getContenido().get("Nombre");
+    
+        return respuesta;
     }
 
     /**
@@ -125,8 +304,37 @@ public class Fachada {
      * @param idProfesor String que indica el id de un profesor
      * @return Boolean que devuelve si la cola esta abierta
      */
-    public static Boolean isColaAbierta(String idProfesor) 
-    {
-        return ColaDAO.isColaAbierta(idProfesor);
+    public static Boolean isColaAbierta(String idProfesor) {
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/isColaAbierta");     // se coloca el tipo de consulta
+        // se añade el contenido del mensaje a enviar al servidor
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        contenido.put("idProfesor",new String(idProfesor));
+        mensajeEnviar.setContenido(contenido);
+        // se envia la consulta al servidor
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+        // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
+        boolean result = (boolean)mensajeRespuesta.getContenido().get("Resultado");
+		return result;
+    }
+    /**
+     * Metodo encargado de reestablecer la contraseña de un usuario
+     * @param idUsuario String que indica el id de un usuario
+     */
+    public static void reestablecerContrasena(String idUsuario){
+          // se crea el mensaje para enviar toda la información 
+          Mensaje mensajeEnviar = new Mensaje();
+          Mensaje mensajeRespuesta = new Mensaje();
+          mensajeEnviar.setContext("/reestablecerContrasena");     // se coloca el tipo de consulta
+          // se añade el contenido del mensaje a enviar al servidor
+          HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+          contenido.put("idUsuario",new String(idUsuario));
+          mensajeEnviar.setContenido(contenido);
+          // se envia la consulta al servidor
+          mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+           
+
     }
 }
