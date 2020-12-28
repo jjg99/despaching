@@ -106,6 +106,8 @@ public class Servidor extends Thread {
 					// se carga el id de de la cola
 					String user = (String)mensajeEntrada.getContenido().get("Usuario");
 					String pass = (String)mensajeEntrada.getContenido().get("Contrasena");
+					System.out.println(user);
+					System.out.println(pass);
 					// se realiza la consulta en el gestor de colas
 					Usuario usuario = UsuarioDAO.logIn(user,pass);
 					HashMapRespuesta.put("Usuario",usuario);
