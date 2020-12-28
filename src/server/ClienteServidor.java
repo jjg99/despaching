@@ -24,7 +24,6 @@ public class ClienteServidor {
 		try{
 			conexionSocket = new Socket(HOST, PORT);		// intenta conectarse al socket del servidor
 			
-			System.out.println("conexion abierta");
 			return true;
 		}catch(Exception error){
 			error.printStackTrace();
@@ -68,7 +67,6 @@ public class ClienteServidor {
 			if(conexionSocket.isConnected()){
 				// se envia el mensaje
 				salida.writeObject(mensajeEnviar);
-				System.out.println("Mensaje enviado");
 				// se lee el mensaje de respuesta, y se carga en el mensaje de respuesta
 				mensajeRespuesta = (Mensaje)entrada.readObject();
 				
