@@ -180,7 +180,11 @@ public class Servidor extends Thread {
 					Boolean isColaAbierta = ColaDAO.isColaAbierta(idProfColaAbierta);
 					HashMapRespuesta.put("Resultado",isColaAbierta);
 					break;
-				
+				case "/reestablecerContrasena":
+					String idUsuario = (String)mensajeEntrada.getContenido().get("idUsuario");
+					GestorUsuarios.reestablecerContrasena(idUsuario);//se llama al gestor de usuario para que se encargue de resetearlo
+					HashMapRespuesta.put("Resultado",true);//se envia el mensaje de vuelta
+					break;
 				default:
 					System.out.println("\nParámetro no encontrado");
 					System.out.println(mensajeEntrada.getContext());

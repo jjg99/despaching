@@ -319,4 +319,22 @@ public class Fachada {
         boolean result = (boolean)mensajeRespuesta.getContenido().get("Resultado");
 		return result;
     }
+    /**
+     * Metodo encargado de reestablecer la contraseña de un usuario
+     * @param idUsuario String que indica el id de un usuario
+     */
+    public static void reestablecerContrasena(String idUsuario){
+          // se crea el mensaje para enviar toda la información 
+          Mensaje mensajeEnviar = new Mensaje();
+          Mensaje mensajeRespuesta = new Mensaje();
+          mensajeEnviar.setContext("/reestablecerContrasena");     // se coloca el tipo de consulta
+          // se añade el contenido del mensaje a enviar al servidor
+          HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+          contenido.put("idUsuario",new String(idUsuario));
+          mensajeEnviar.setContenido(contenido);
+          // se envia la consulta al servidor
+          mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+           
+
+    }
 }

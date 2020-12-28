@@ -122,5 +122,23 @@ public class UsuarioDAO {
         }
         return resultadoClases;
     }
+    public static String getCorreoUsuario(String idUsuario){
+        Statement stmt;     // se crea el statement sobre el que trabajar
+        ResultSet resultadoConsulta = null;
+        StringBuilder resultadoCorreo = new StringBuilder();     // objeto que va a contener el resultado que se envia al profesor
+        // Ejecucion de la sentencia SQL
+        try {
+            stmt = ConexionServer.conexion.createStatement();
+            String sql = "SELECT \"correo\" FROM \"Usuarios\" WHERE \"clave\" = '"+idUsuario+"'";
+            resultadoConsulta =stmt.executeQuery(sql);    // se ejecuta la solicitud sql
+            // se lee la respuesta por parte dela base de datos
+            while(resultadoConsulta.next()){
+                resultadoCorreo.append(resultadoConsulta.getString("correo"));      // se construye el String con el nombrey apellidos del alumno
+            }
+        
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resultadoCorreo.toString();
     
 }
