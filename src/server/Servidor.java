@@ -56,11 +56,11 @@ public class Servidor extends Thread {
 
 
 			Mensaje mensajeEntrada= (Mensaje)entrada.readObject();
-			System.out.print(mensajeEntrada.getContenido().toString());
+			System.out.println("Mensaje recibido:");
+			System.out.println(mensajeEntrada.getContenido().toString());
 		    //se analiza el mensaje y se devuelve la respuesta
 			Mensaje mensajeRespuesta=new Mensaje();
 			
-			System.out.println("\nSe ha recibido algo");
 			// la respuesta es común a todos los alumnos
 			mensajeRespuesta.setContext("/respuesta");
 			HashMap<String,Object> HashMapRespuesta = new HashMap<String,Object>();
@@ -88,7 +88,6 @@ public class Servidor extends Thread {
 					HashMapRespuesta.put("Posicion",posicion);
 					break;
 				case "/openCola":
-					System.out.println("Se va a abrir la cola");
 					// se carga el id de de la cola
 					String idColaOpen = (String)mensajeEntrada.getContenido().get("idProfesor");
 					// se realiza la consulta en el gestor de colas
@@ -106,8 +105,7 @@ public class Servidor extends Thread {
 					// se carga el id de de la cola
 					String user = (String)mensajeEntrada.getContenido().get("Usuario");
 					String pass = (String)mensajeEntrada.getContenido().get("Contrasena");
-					System.out.println(user);
-					System.out.println(pass);
+					
 					// se realiza la consulta en el gestor de colas
 					Usuario usuario = UsuarioDAO.logIn(user,pass);
 					HashMapRespuesta.put("Usuario",usuario);
@@ -223,6 +221,7 @@ public class Servidor extends Thread {
 				 * this will allow multiple client connections
 				 */
 				new Servidor(server.accept());
+				GestorEmail.enviarEmail("jagilcarrera@gmail.com", "", "");
 			}
 		} catch (IOException ex) {
 			System.out.println("Unable to start server.");
