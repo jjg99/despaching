@@ -31,12 +31,10 @@ public class GestorEmail {
                     Message.RecipientType.TO,
                     InternetAddress.parse(destinatario)
             );
-            message.setSubject("Mensaje Despaching");
-            message.setText("Tiene usted una cita");
+            message.setSubject(cabecera);
+            message.setText(mensaje);
 
             Transport.send(message);
-
-            System.out.println("Done");
 
         } catch (MessagingException e) {
             e.printStackTrace();

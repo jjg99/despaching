@@ -175,11 +175,12 @@ public class Servidor extends Thread {
 					HashMapRespuesta.put("Clases",arrayRespuestaClases);
 					break;
 				case "/isColaAbierta":
-				String idProfColaAbierta = (String)mensajeEntrada.getContenido().get("idProfesor");
+					String idProfColaAbierta = (String)mensajeEntrada.getContenido().get("idProfesor");
 					// se realiza la consulta en el gestor de colas
 					Boolean isColaAbierta = ColaDAO.isColaAbierta(idProfColaAbierta);
 					HashMapRespuesta.put("Resultado",isColaAbierta);
 					break;
+				
 				default:
 					System.out.println("\nParámetro no encontrado");
 					System.out.println(mensajeEntrada.getContext());
@@ -192,9 +193,6 @@ public class Servidor extends Thread {
 
 			// se envia el mensaje de respuesta
 			salida.writeObject(mensajeRespuesta);
-			
-		
-
 		} catch (IOException ex) {
 			System.out.println("Unable to get streams from client");
 		} catch (ClassNotFoundException e) {
@@ -221,7 +219,6 @@ public class Servidor extends Thread {
 				 * this will allow multiple client connections
 				 */
 				new Servidor(server.accept());
-				GestorEmail.enviarEmail("jagilcarrera@gmail.com", "", "");
 			}
 		} catch (IOException ex) {
 			System.out.println("Unable to start server.");
