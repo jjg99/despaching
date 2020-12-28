@@ -64,6 +64,7 @@ public abstract class Fecha {
         return Integer.valueOf(sdf.format(cal.getTime()));
     }
 
+
     /**
     * metodo para obtener el mes actual siendo enero un 0
     * @return <code>int</code> con el mes de año
@@ -72,6 +73,16 @@ public abstract class Fecha {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("M");
         return Integer.valueOf(sdf.format(cal.getTime())) -1;
+    }
+
+     /**
+    * metodo para obtener el mes actual en letra
+    * @return <code>String</code> con el mes de año
+    */
+    public static String getMesString(){
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM");
+        return sdf.format(cal.getTime()).toString();
     }
 
     /**
