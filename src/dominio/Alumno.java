@@ -6,7 +6,7 @@ import server.Fachada;
 
 public class Alumno extends Usuario  {
     /**Atributos de la clase alumno */
-    private static final long serialVersionUID = 1L;
+    
     private ArrayList<Profesor> listaProfesores = new ArrayList<Profesor>();        // arrayList que va a contener todos los porfesores del alumno
     private ArrayList<Profesor> listaColas = new ArrayList<Profesor>();        // arrayList que contiene los nombres de 
     
