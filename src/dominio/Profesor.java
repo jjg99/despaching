@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import server.Fachada;
 
 public class Profesor extends Usuario{
+    private static final long serialVersionUID = 1L;
     /**  */
     private ArrayList<String> listaClases;
     /**  */
