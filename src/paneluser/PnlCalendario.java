@@ -98,7 +98,7 @@ public class PnlCalendario extends JPanel {
         for (int i = 1; i < Fecha.getUltimoDiaMes(Fecha.getMes(), Fecha.getAnio()) + 1; i++) {
             btnDias[i - 1] = new JButton(String.valueOf(i));
         }
-
+        diaActivo = Fecha.getDia();
         this.establecerMes(pnlDias, btnDias);
 
         pnlMes.add(pnlDias);
