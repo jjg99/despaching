@@ -141,7 +141,7 @@ public class PnlCalendario extends JPanel {
                     diaActivo = Integer.valueOf(btnDia.getText());
                     Colores.setBGVerde(btnDias[diaActivo-1]);
                     int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
-                    PnlProf.pnlProf.setPnlHorario(new PnlHorario(usuario, dia), Fecha.fechaString(diaActivo, mesActivo, anioActivo));
+                    PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo));
                     updateUI();
                 }
             });
