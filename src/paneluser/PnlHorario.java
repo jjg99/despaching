@@ -1,6 +1,8 @@
 package paneluser;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -9,6 +11,7 @@ import dominio.Usuario;
 import server.Fachada;
 import util.Colores;
 import util.Fuente;
+import util.GestionMensajes;
 
 /** Panel generico el cual mostrata un horario de un profesor */
 public class PnlHorario extends JPanel{
@@ -70,6 +73,7 @@ public class PnlHorario extends JPanel{
         }
         //hacemos que el horario sea dinámico
         this.setHorario(dia);
+        this.setAccionesBtn();
     }
 
     /**
@@ -113,10 +117,7 @@ public class PnlHorario extends JPanel{
                                 sb.append(informacion[horaini -15][1])
                                   .append("\n");
                             }
-                            sb.append(horaini + ":" + minutosini)
-                              .append(" - ")
-                              .append(horafin + ":" + minutosfin)
-                              .append("\t Clase");
+                            sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
                             informacion[horaini -15][1]=sb.toString();
                             // Añadimos la ocupacion
                             ocupacion[horaini -15][1]=ocupacion[horaini -15][1]+(minutosfin-minutosini);
@@ -127,10 +128,7 @@ public class PnlHorario extends JPanel{
                                 sb.append(informacion[horaini -8][0])
                                   .append("\n");
                             }
-                            sb.append(horaini + ":" + minutosini)
-                              .append(" - ")
-                              .append(horafin + ":" + minutosfin)
-                              .append("\t Clase");
+                            sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
                             informacion[horaini -8][0]=sb.toString();
                             // Añadimos la ocupacion
                             ocupacion[horaini -8][0]=ocupacion[horaini -8][0]+(minutosfin-minutosini);
@@ -143,10 +141,7 @@ public class PnlHorario extends JPanel{
                                 sb.append(informacion[horaini -15][1])
                                   .append("\n");
                             }
-                            sb.append(horaini + ":" + minutosini)
-                              .append(" - ")
-                              .append(horafin + ":" + minutosfin)
-                              .append("\t Clase");
+                            sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
                             informacion[horaini -15][1]=sb.toString();
                             // Añadimos la ocupacion de la primera hora
                             ocupacion[horaini -15][1]=ocupacion[horaini -15][1]+(60-minutosini);
@@ -157,10 +152,7 @@ public class PnlHorario extends JPanel{
                                 sb.append(informacion[horafin -15][1])
                                   .append("\n");
                             }
-                            sb.append(horaini + ":" + minutosini)
-                              .append(" - ")
-                              .append(horafin + ":" + minutosfin)
-                              .append("\t Clase");
+                            sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
                             informacion[horafin -15][1]=sb.toString();
                             // Añadimos la ocupacion de la segunda hora
                             ocupacion[horafin -15][1]=ocupacion[horafin -15][1]+minutosfin;
@@ -171,10 +163,7 @@ public class PnlHorario extends JPanel{
                                 sb.append(informacion[horaini -8][0])
                                   .append("\n");
                             }
-                            sb.append(horaini + ":" + minutosini)
-                              .append(" - ")
-                              .append(horafin + ":" + minutosfin)
-                              .append("\t Clase");
+                            sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
                             informacion[horaini -8][0]=sb.toString();
                             // Añadimos la ocupacion de la primera hora
                             ocupacion[horaini -8][0]=ocupacion[horaini -8][0]+(60-minutosini);
@@ -185,10 +174,7 @@ public class PnlHorario extends JPanel{
                                 sb.append(informacion[horafin -8][0])
                                   .append("\n");
                             }
-                            sb.append(horaini + ":" + minutosini)
-                              .append(" - ")
-                              .append(horafin + ":" + minutosfin)
-                              .append("\t Clase");
+                            sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
                             informacion[horafin -8][0]=sb.toString();
                             // Añadimos la ocupacion de la primera hora
                             ocupacion[horafin -8][0]=ocupacion[horafin -8][0]+minutosfin;
@@ -200,6 +186,25 @@ public class PnlHorario extends JPanel{
         } else {
             this.setBtnsGreen();
         }
+    }
+
+    private String horaMensaje(int horaini, int minutosini, int horafin, int minutosfin){
+        StringBuilder sb = new StringBuilder();
+        sb.append(horaini + ":");
+            if(minutosini<10){
+                sb.append("0" + minutosini);
+            } else {
+                sb.append(minutosini);
+            }
+            sb.append(" - ")
+                .append(horafin + ":");
+            if(minutosfin<10){
+                sb.append("0" + minutosfin);
+            } else {
+                sb.append(minutosfin);
+            }
+            sb.append("   Clase");
+        return sb.toString();
     }
 
     /**
@@ -217,4 +222,27 @@ public class PnlHorario extends JPanel{
             }
         }
     }
+
+    private void setAccionesBtn() {
+        for(int i=0; i<7; i++){
+            for(int j=0; j<2; j++){
+                JButton boton = btnHoras[i][j];
+                boton.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent e){
+                        if(!Colores.VERDE.equals(boton.getBackground())){
+                            String titulo = boton.getText();
+                            int horaini = Integer.parseInt((titulo.split(":", 0))[0]);
+                            if(horaini-7 > 7){
+                                GestionMensajes.msgMostarInfo(informacion[horaini -15][1], titulo);
+                            } else {
+                                GestionMensajes.msgMostarInfo(informacion[horaini -8][0], titulo);
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    }
+
 }

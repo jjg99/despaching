@@ -14,7 +14,7 @@ public class Colores {
     /**Fija el color del fonda para toda la app */
     public final static Color FONDO = new Color(255, 255, 255);    //Blanco
     /**Fija el color Verde */
-    private final static Color VERDE = new Color(114, 202, 175);
+    public final static Color VERDE = new Color(114, 202, 175);
     /**Fija el color Rojo */
     private final static Color ROJO = new Color(237, 120, 153);
     /**Fija el color Amarillo */

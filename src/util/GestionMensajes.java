@@ -122,4 +122,8 @@ public class GestionMensajes {
             e.printStackTrace();
         }
     }
+
+    public static void msgMostarInfo(String mensaje, String titulo){
+        JOptionPane.showMessageDialog(null, mensaje, titulo, JOptionPane.PLAIN_MESSAGE);
+    }
 }
