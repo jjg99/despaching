@@ -80,11 +80,12 @@ public abstract class Fecha {
     }
 
      /**
-    * metodo para obtener el mes actual en letra
+    * metodo para transformar el mes pasado de numero a letra
     * @return <code>String</code> con el mes de año
     */
-    public static String getMesString(){
+    public static String getMesToString(int mes){
         Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.MONTH,mes);
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM");
         return sdf.format(cal.getTime()).toString();
     }
