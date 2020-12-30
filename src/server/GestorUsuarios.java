@@ -4,7 +4,6 @@ import dao.UsuarioDAO;
 
 import java.util.Random;
 
-
 public class GestorUsuarios {
     public static void reestablecerContrasena(String idUsuario){
         // se realiza la consulta en el gestor de usuarios

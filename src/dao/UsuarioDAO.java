@@ -102,7 +102,10 @@ public class UsuarioDAO {
         }
         return resultadoNombre.toString();
     }
-
+     /**Metodo para obtener las clases de un profesor
+     * @param String idProfesor
+     * @return ArrayList clasesProfesor
+     */
     public static ArrayList<String> getClasesProfesor(String idProfesor){
         Statement stmt;     // se crea el statement sobre el que trabajar
         ResultSet resultadoConsulta = null;
@@ -122,6 +125,10 @@ public class UsuarioDAO {
         }
         return resultadoClases;
     }
+     /**Metodo para obtener el correo de un usuario en concreto
+     * @param String idUsuario
+     * @return String correo
+     */
     public static String getCorreoUsuario(String idUsuario){
         Statement stmt;     // se crea el statement sobre el que trabajar
         ResultSet resultadoConsulta = null;
@@ -140,5 +147,22 @@ public class UsuarioDAO {
             e.printStackTrace();
         }
         return resultadoCorreo.toString();
+    }
+     /**Metodo para obtener el nombre de un alumno en concreto
+     * @param String idAlumno
+     * @return String nombreAlumno
+     */
+    public static void cambiarContrasena(String idUsuario, String contrasenaNueva){
+        Statement stmt;     // se crea el statement sobre el que trabajar
+        
+        // Ejecucion de la sentencia SQL
+        try {
+            stmt = ConexionServer.conexion.createStatement();
+            String sql = "UPDATE \"Usuarios\" SET contrasena ='"+contrasenaNueva+"' WHERE \"clave\" ='"+idUsuario+"'";
+            stmt.executeUpdate(sql);  // se ejecuta la actualización sql
+        
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
