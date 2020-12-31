@@ -127,6 +127,7 @@ public abstract class Fecha {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR,anio);
         cal.set(Calendar.MONTH,mes);
+        cal.set(Calendar.DAY_OF_MONTH,1);
         return cal.getActualMaximum(Calendar.DAY_OF_MONTH);
     }
 
