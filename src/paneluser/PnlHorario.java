@@ -203,6 +203,7 @@ public class PnlHorario extends JPanel{
             } else {
                 sb.append(minutosfin);
             }
+            // TODO: QUITAR ESTO
             sb.append("   Clase");
         return sb.toString();
     }
