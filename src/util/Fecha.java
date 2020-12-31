@@ -28,9 +28,9 @@ public abstract class Fecha {
     public static String fechaString(int dia, int mes, int anio){
         Calendar fecha = Calendar.getInstance();    //Obtenemos una instancia de calendario
         SimpleDateFormat sdf = new SimpleDateFormat("E dd/MM/yyyy");  //Fijamos el formato que deseamos
-        fecha.set(Calendar.DAY_OF_MONTH,dia);
-        fecha.set(Calendar.MONTH,mes);
         fecha.set(Calendar.YEAR,anio);
+        fecha.set(Calendar.MONTH,mes);
+        fecha.set(Calendar.DAY_OF_MONTH,dia);
 		return sdf.format(fecha.getTime()).toString();     //aplicamos el formato y lo convertimos a String
     }
 
@@ -51,9 +51,9 @@ public abstract class Fecha {
      */
     public static int getDiaSemana(int dia, int mes, int anio){
         Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.DAY_OF_MONTH,dia);
-        cal.set(Calendar.MONTH,mes);
         cal.set(Calendar.YEAR,anio);
+        cal.set(Calendar.MONTH,mes);
+        cal.set(Calendar.DAY_OF_MONTH,dia);
         SimpleDateFormat sdf = new SimpleDateFormat("u");  //Fijamos el formato que deseamos
         return Integer.parseInt(sdf.format(cal.getTime()).toString()) -1;
     }
