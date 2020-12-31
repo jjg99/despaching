@@ -158,7 +158,6 @@ public class PnlCalendario extends JPanel {
                 }else{
                     mesActivo++;
                 }
-                
                 diaActivo = 1;
                 lblMes.setText(Fecha.getMesToString(mesActivo) + "  " + anioActivo);
                 pnlFecha.removeAll();
