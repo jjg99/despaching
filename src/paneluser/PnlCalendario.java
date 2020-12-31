@@ -296,8 +296,18 @@ public class PnlCalendario extends JPanel {
                 diaActivo = 1;
                 lblMes.setText(Fecha.getMesToString(mesActivo) + "  " + anioActivo);
                 pnlFecha.removeAll();
-                pnlFecha.add(pnlCambioFecha);
-                pnlFecha.add(establecerMes());
+                gbc.gridx = 0;       //se especifica la posicion en la matriz
+                gbc.gridy = 0;
+                gbc.gridheight = 2;	// altura
+                gbc.gridwidth = 1; // anchura
+                gbc.insets = new Insets(0,0,5,0); // deja una separacion a la izquierda 
+                pnlFecha.add(pnlCambioFecha,gbc);   // lo añadimos al panel superior
+                gbc.gridx = 0;       //se especifica la posicion en la matriz
+                gbc.gridy = 2;
+                gbc.gridheight = 4;	// altura
+                gbc.gridwidth = 1; // anchura
+                gbc.insets = new Insets(0,0,20,0); // deja una separacion a la izquierda
+                pnlFecha.add(establecerMes(),gbc);
                 pnlFecha.updateUI();
                 int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
                 PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo));
@@ -317,8 +327,18 @@ public class PnlCalendario extends JPanel {
                 diaActivo = 1;
                 lblMes.setText(Fecha.getMesToString(mesActivo) + "  " + anioActivo);
                 pnlFecha.removeAll();
-                pnlFecha.add(pnlCambioFecha);
-                pnlFecha.add(establecerMes());
+                gbc.gridx = 0;       //se especifica la posicion en la matriz
+                gbc.gridy = 0;
+                gbc.gridheight = 2;	// altura
+                gbc.gridwidth = 1; // anchura
+                gbc.insets = new Insets(0,0,5,0); // deja una separacion a la izquierda 
+                pnlFecha.add(pnlCambioFecha,gbc);   // lo añadimos al panel superior
+                gbc.gridx = 0;       //se especifica la posicion en la matriz
+                gbc.gridy = 2;
+                gbc.gridheight = 4;	// altura
+                gbc.gridwidth = 1; // anchura
+                gbc.insets = new Insets(0,0,20,0); // deja una separacion a la izquierda
+                pnlFecha.add(establecerMes(),gbc);
                 pnlFecha.updateUI();
                 int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
                 PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo));
