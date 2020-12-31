@@ -142,6 +142,7 @@ public abstract class Fecha {
         cal.setMinimalDaysInFirstWeek(1);
         cal.set(Calendar.MONTH,mes);
         cal.set(Calendar.YEAR,anio);
+        cal.set(Calendar.DAY_OF_MONTH,1);
         return cal.getActualMaximum(Calendar.WEEK_OF_MONTH);
     }
 }
