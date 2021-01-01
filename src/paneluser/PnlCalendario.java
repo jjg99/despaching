@@ -346,6 +346,26 @@ public class PnlCalendario extends JPanel {
             }
         });
 
+        btnAtras.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                pnlPrincipal.removeAll();
+                gbc.gridx = 0;       //se especifica la posicion en la matriz
+                gbc.gridy = 0;
+                gbc.gridheight = 6;	// altura
+                gbc.gridwidth = 1; // anchura
+                gbc.insets = new Insets(0,0,10,0); // deja una separacion a la izquierda
+                pnlPrincipal.add(pnlFecha,gbc); // lo añadimos al panel principal
+                gbc.gridx = 0;       //se especifica la posicion en la matriz
+                gbc.gridy = 6;
+                gbc.gridheight = 4;	// altura
+                gbc.gridwidth = 1; // anchura
+                gbc.insets = new Insets(0,0,0,0); // deja una separacion a la izquierda
+                pnlPrincipal.add(pnlBotones,gbc);   // lo añadimos al panel principal
+                pnlPrincipal.updateUI();
+            }
+        });
+
         btnCambiarHorario.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
