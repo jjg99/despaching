@@ -168,7 +168,7 @@ public class PnlCalendario extends JPanel {
 
         JButton btnAtras = new JButton("Retroceder");
         try{
-            btnAtras.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/20/000000/exit-sign.png"))); // se pone el icono al boton
+            btnAtras.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/20/return.png"))); // se pone el icono al boton
         }
         catch(MalformedURLException e){
             e.printStackTrace();
@@ -189,7 +189,7 @@ public class PnlCalendario extends JPanel {
         // label dia
         JPanel pnlDia = new JPanel(new GridBagLayout());
         JLabel lblDia = new JLabel("Dia: ");
-        Fuente.setFuente(btnRetroceder);    //  cambiamos la fuente
+        Fuente.setFuente(lblDia);    //  cambiamos la fuente
         gbc.gridx = 0;       //se especifica la posicion en la matriz
         gbc.gridy = 0;
         gbc.gridheight = 1;	// altura
@@ -215,7 +215,7 @@ public class PnlCalendario extends JPanel {
         gbc.gridwidth = 3; // anchura
         gbc.insets = new Insets(0,0,0,0); // deja una separacion a la izquierda
         pnlDia.add(pnlDias,gbc);
-        pnlCambiarHorario.add(pnlDia);
+        
         
         // panel con la hora de inicio
         JPanel pnlHoraIni = new JPanel(new GridBagLayout());
@@ -236,8 +236,7 @@ public class PnlCalendario extends JPanel {
         gbc.gridwidth = 3; // anchura
         gbc.insets = new Insets(0,0,0,0); // deja una separacion a la izquierda
         pnlHoraIni.add(txtHoraIni,gbc);
-        pnlCambiarHorario.add(pnlHoraIni);
-
+        
         // panel con la hora de fin
         JPanel pnlHoraFin = new JPanel(new GridBagLayout());
         //label hora inicio
@@ -257,7 +256,7 @@ public class PnlCalendario extends JPanel {
         gbc.gridwidth = 3; // anchura
         gbc.insets = new Insets(0,0,0,0); // deja una separacion a la izquierda
         pnlHoraFin.add(txtHoraFin,gbc);
-        pnlCambiarHorario.add(pnlHoraFin);
+        
 
         //boton que sirve para agregar la hora al horario
         JButton btnAgregarHora = new JButton("Agregar Hora");  // creamos el boton actualizar
@@ -265,22 +264,96 @@ public class PnlCalendario extends JPanel {
         btnAgregarHora.setOpaque(false);     // cambiamos la opacidad
         Colores.setBGTransparente(btnAgregarHora); // establecesmos el color
         btnAgregarHora.setBorder(null);
-        pnlCambiarHorario.add(btnAgregarHora);
+        
         //boton que sirve para eliminar la hora del horario
         JButton btnEliminarHora = new JButton("Eliminar Hora");  // creamos el boton actualizar
         Fuente.setFuente(btnEliminarHora);    // cambiamos la fuente
         btnEliminarHora.setOpaque(false);     // cambiamos la opacidad
         Colores.setBGTransparente(btnEliminarHora); // establecesmos el color
         btnEliminarHora.setBorder(null);
-        pnlCambiarHorario.add(btnEliminarHora);
+        
         //boton que sirve para guardar los cambios
         JButton btnGuardarCambiarHora = new JButton("Guardar Horario");  // creamos el boton actualizar
         Fuente.setFuente(btnGuardarCambiarHora);    // cambiamos la fuente
         btnGuardarCambiarHora.setOpaque(false);     // cambiamos la opacidad
         Colores.setBGTransparente(btnGuardarCambiarHora); // establecesmos el color
         btnGuardarCambiarHora.setBorder(null);
-        pnlCambiarHorario.add(btnGuardarCambiarHora);
         
+        
+        // panel para crear una tutoria
+        JPanel pnlCrearTutoria = new JPanel(new GridLayout(6,1)); // creamos el panel para cambiar el horario
+
+        //label titulo crear tutoria
+        JPanel pnlTituloCrearTutoria = new JPanel (new GridBagLayout()); // creamos el panel que tiene el titulo
+        
+
+        JLabel lblCrearTutoria = new JLabel("Crear Tutoria"); // creamos el label cambiar horario
+        Fuente.setFuenteNegrita(lblCrearTutoria); // cambiamos la fuente
+        gbc.gridx = 0;       //se especifica la posicion en la matriz
+        gbc.gridy = 0;
+        gbc.gridheight = 1;	// altura
+        gbc.gridwidth = 3; // anchura
+        gbc.insets = new Insets(0,0,0,100); // deja una separacion a la izquierda
+        pnlTituloCrearTutoria.add(lblCrearTutoria,gbc); // lo añadimos al panel 
+
+        gbc.gridx = 3;       //se especifica la posicion en la matriz
+        gbc.gridy = 0;
+        gbc.gridheight = 1;	// altura
+        gbc.gridwidth = 1; // anchura
+        gbc.insets = new Insets(0,0,0,0); // deja una separacion a la izquierda
+        pnlCrearTutoria.add(pnlTituloCrearTutoria,gbc);
+
+        // label informacion 
+        JPanel pnlInformacion = new JPanel(new FlowLayout());
+        JLabel lblInformacion= new JLabel("seleccionar arriba la fecha");
+        Fuente.setFuente(lblInformacion);    //  cambiamos la fuente
+        pnlInformacion.add(lblInformacion); // lo añadimos al panel 
+        
+
+        //boton que sirve para agregar la hora al horario
+        JButton btnCrearCita = new JButton("Crear cita");  // creamos el boton actualizar
+        Fuente.setFuente(btnCrearCita);    // cambiamos la fuente
+        btnCrearCita.setOpaque(false);     // cambiamos la opacidad
+        Colores.setBGTransparente(btnCrearCita); // establecesmos el color
+        btnCrearCita.setBorder(null);
+
+        //boton que sirve para agregar la hora al horario
+        JButton btnGuardarCitas = new JButton("Guardar citas");  // creamos el boton actualizar
+        Fuente.setFuente(btnGuardarCitas );    // cambiamos la fuente
+        btnGuardarCitas .setOpaque(false);     // cambiamos la opacidad
+        Colores.setBGTransparente(btnGuardarCitas ); // establecesmos el color
+        btnGuardarCitas .setBorder(null);
+        
+        // panel para crear una tutoria
+        JPanel pnlEliminarTutoria = new JPanel(new GridLayout(6,1)); // creamos el panel para cambiar el horario
+
+        //label titulo crear tutoria
+        JPanel pnlTituloEliminarTutoria = new JPanel (new GridBagLayout()); // creamos el panel que tiene el titulo
+        
+
+        JLabel lblEliminarTutoria = new JLabel("Eliminar Tutoria"); // creamos el label cambiar horario
+        Fuente.setFuenteNegrita(lblEliminarTutoria); // cambiamos la fuente
+        gbc.gridx = 0;       //se especifica la posicion en la matriz
+        gbc.gridy = 0;
+        gbc.gridheight = 1;	// altura
+        gbc.gridwidth = 3; // anchura
+        gbc.insets = new Insets(0,0,0,100); // deja una separacion a la izquierda
+        pnlTituloEliminarTutoria.add(lblEliminarTutoria,gbc); // lo añadimos al panel 
+
+        gbc.gridx = 3;       //se especifica la posicion en la matriz
+        gbc.gridy = 0;
+        gbc.gridheight = 1;	// altura
+        gbc.gridwidth = 1; // anchura
+        gbc.insets = new Insets(0,0,0,0); // deja una separacion a la izquierda
+        pnlEliminarTutoria.add(pnlTituloEliminarTutoria,gbc);
+
+        //boton que sirbe para eliminar una cita
+        JButton btnEliminarCita = new JButton("Eliminar cita");  // creamos el boton actualizar
+        Fuente.setFuente(btnEliminarCita);    // cambiamos la fuente
+        btnEliminarCita.setOpaque(false);     // cambiamos la opacidad
+        Colores.setBGTransparente(btnEliminarCita); // establecesmos el color
+        btnEliminarCita.setBorder(null);
+
 
         //Acciones de los botones
         
@@ -366,6 +439,57 @@ public class PnlCalendario extends JPanel {
             }
         });
 
+        btnCrearTutoria.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                pnlPrincipal.removeAll();
+                gbc.gridx = 0;       //se especifica la posicion en la matriz
+                gbc.gridy = 0;
+                gbc.gridheight = 6;	// altura
+                gbc.gridwidth = 1; // anchura
+                gbc.insets = new Insets(0,0,10,0); // deja una separacion a la izquierda
+                pnlPrincipal.add(pnlFecha,gbc); // lo añadimos al panel principal
+                gbc.gridx = 0;       //se especifica la posicion en la matriz
+                gbc.gridy = 6;
+                gbc.gridheight = 4;	// altura
+                gbc.gridwidth = 1; // anchura
+                gbc.insets = new Insets(0,0,0,0); // deja una separacion a la izquierda
+                pnlPrincipal.add(pnlCrearTutoria,gbc);
+                pnlTituloCrearTutoria.add(btnAtras);
+                pnlCrearTutoria.add(pnlInformacion);
+                pnlCrearTutoria.add(pnlHoraIni);
+                pnlCrearTutoria.add(pnlHoraFin);
+                pnlCrearTutoria.add(btnCrearCita);
+                pnlCrearTutoria.add(btnGuardarCitas);
+                pnlPrincipal.updateUI();
+            }
+        });
+
+        btnEliminarTutoria.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                pnlPrincipal.removeAll();
+                gbc.gridx = 0;       //se especifica la posicion en la matriz
+                gbc.gridy = 0;
+                gbc.gridheight = 6;	// altura
+                gbc.gridwidth = 1; // anchura
+                gbc.insets = new Insets(0,0,10,0); // deja una separacion a la izquierda
+                pnlPrincipal.add(pnlFecha,gbc); // lo añadimos al panel principal
+                gbc.gridx = 0;       //se especifica la posicion en la matriz
+                gbc.gridy = 6;
+                gbc.gridheight = 4;	// altura
+                gbc.gridwidth = 1; // anchura
+                gbc.insets = new Insets(0,0,0,0); // deja una separacion a la izquierda
+                pnlPrincipal.add(pnlEliminarTutoria,gbc);
+                pnlTituloEliminarTutoria.add(btnAtras);
+                pnlEliminarTutoria.add(pnlInformacion);
+                pnlEliminarTutoria.add(pnlHoraIni);
+                pnlEliminarTutoria.add(btnEliminarCita);
+                pnlEliminarTutoria.add(btnGuardarCitas);
+                pnlPrincipal.updateUI();
+            }
+        });
+
         btnCambiarHorario.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
@@ -382,6 +506,13 @@ public class PnlCalendario extends JPanel {
                 gbc.gridwidth = 1; // anchura
                 gbc.insets = new Insets(0,0,0,0); // deja una separacion a la izquierda
                 pnlPrincipal.add(pnlCambiarHorario,gbc);
+                pnlTituloCambiarHorario.add(btnAtras);
+                pnlCambiarHorario.add(pnlDia);
+                pnlCambiarHorario.add(pnlHoraIni);
+                pnlCambiarHorario.add(pnlHoraFin);
+                pnlCambiarHorario.add(btnAgregarHora);
+                pnlCambiarHorario.add(btnEliminarHora);
+                pnlCambiarHorario.add(btnGuardarCambiarHora);
                 pnlPrincipal.updateUI();
             }
         });
