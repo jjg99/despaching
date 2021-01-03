@@ -20,7 +20,6 @@ import dominio.Usuario;
 import gui.JVentana;
 import panelAlu.PnlAlumno;
 import panelProf.PnlProf;
-import server.ConexionServer;
 import server.Fachada;
 import util.Colores;
 import util.Fecha;
