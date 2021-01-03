@@ -26,6 +26,7 @@ public class UsuarioDAO {
         Statement stmt;
         // Ejecucion de la sentencia SQL
         try {
+            ConexionServer.startConnection();
             stmt = ConexionServer.conexion.createStatement();
             ResultSet rs;
             //Sentencia SQL
@@ -42,12 +43,6 @@ public class UsuarioDAO {
                 }
             }
             return usuario;
-        } catch (PSQLException PSQLE){
-            if(ConexionServer.startConnection()){
-                return logIn(user, pass);
-            } else {
-                return null;
-            }
         } catch (Exception e) {
             e.printStackTrace();
             return null;
