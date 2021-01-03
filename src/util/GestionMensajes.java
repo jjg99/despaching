@@ -7,6 +7,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+
 /**
  * Esta clase se encarga de la gestión de mensajes de errores, emitiendolos una
  * vez llamados sus metodos o interpretando el tipo de error presentado en el
@@ -125,5 +126,23 @@ public class GestionMensajes {
 
     public static void msgMostarInfo(String mensaje, String titulo){
         JOptionPane.showMessageDialog(null, mensaje, titulo, JOptionPane.PLAIN_MESSAGE);
+    }
+    /**
+     * Metodo que crea un mensaje para reestablecer la contraseña
+     * @return String idUsuario
+     */
+
+    public static String msgResetContrasena() {
+
+        try {
+            //se crea el panel
+            String idUsuario = (String)JOptionPane.showInputDialog(null,"Introduzca el usuario","Reseteo", JOptionPane.QUESTION_MESSAGE,new ImageIcon(new URL("https://img.icons8.com/dusk/64/000000/password1.png")),null,"");
+            //se muestra el panel con un espacio para la respuesta
+            return idUsuario;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

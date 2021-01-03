@@ -21,7 +21,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import dominio.ControlSesion;
-import server.ConexionServer;
+import server.Fachada;
 import util.Colores;
 import util.Fuente;
 import util.GestionMensajes;
@@ -241,8 +241,10 @@ public class PnlInicio extends JPanel{
         btnReset.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO: modificar acorde con la funcionalidad el momento de conectarse a la base de datos
-                //ConexionServer.startConnection();
+                //muestra el mensaje para que el usuario introduzca su nombre usuario
+                String usuario = GestionMensajes.msgResetContrasena();
+                //llama a fachada para que se encargue de cambiar la contraseña
+                Fachada.reestablecerContrasena(usuario);
             }
         });
 
