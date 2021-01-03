@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.postgresql.util.PSQLException;
+
 import dominio.Alumno;
 import dominio.Profesor;
 import dominio.Usuario;
@@ -40,6 +42,12 @@ public class UsuarioDAO {
                 }
             }
             return usuario;
+        } catch (PSQLException PSQLE){
+            if(ConexionServer.startConnection()){
+                return logIn(user, pass);
+            } else {
+                return null;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return null;
