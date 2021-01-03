@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import dominio.Alumno;
 import dominio.Profesor;
 import dominio.Usuario;
-import server.Mensaje;
 
 /** Clase que se encarga de redirigir el trafico a los DAO */
 public class Fachada {
