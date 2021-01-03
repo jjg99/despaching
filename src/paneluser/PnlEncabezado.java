@@ -150,7 +150,7 @@ public class PnlEncabezado extends JPanel{
                         Fachada.closeCola(usuario.getId());
                         JVentana.cambiarPanel(PnlInicio.PnlInicio); // se establece el nuevo panel de la aplicación
                         PnlProf.delProfesor();
-                        ConexionServer.endConnection();
+                        // ConexionServer.endConnection();
                         delUsuario();
                     }
                 } else if (usuario instanceof Alumno){
@@ -159,7 +159,7 @@ public class PnlEncabezado extends JPanel{
                     if (opcion == 0){
                         JVentana.cambiarPanel(PnlInicio.PnlInicio); // se establece el nuevo panel de la aplicación
                         PnlAlumno.delAlumno();
-                        ConexionServer.endConnection();
+                        // ConexionServer.endConnection();
                         delUsuario();
                     }
                 }

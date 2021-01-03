@@ -212,17 +212,18 @@ public class PnlInicio extends JPanel{
         btnEntrar.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean conexion = false;   //indica si se ha realizado satisfactoriamente la conexion con la BD
-                int salir = 0; //0 indica que se debe reintentar 1 que se debe salir de la app
-                do{
-                    conexion = ConexionServer.startConnection();    //Realiza la conexion con la BD
-                    if(!conexion){                                  //Comprueba si se a sido corecta la conexion con la BD
-                        salir = GestionMensajes.msgErrorBD();       //Pregunta al usuario que desea hacer, si reintentar o cerrar la app
-                    }
-                }while(!conexion && salir == 0);
-                if(salir==1){
-                    System.exit(0);     //Si el usuario decidio cerrar la app se cierra
-                }
+                // boolean conexion = false;   //indica si se ha realizado satisfactoriamente la conexion con la BD
+                // int salir = 0; //0 indica que se debe reintentar 1 que se debe salir de la app
+                // do{
+                //     conexion = ConexionServer.startConnection();    //Realiza la conexion con la BD
+                //     if(!conexion){                                  //Comprueba si se a sido corecta la conexion con la BD
+                //         salir = GestionMensajes.msgErrorBD();       //Pregunta al usuario que desea hacer, si reintentar o cerrar la app
+                //     }
+                // }while(!conexion && salir == 0);
+                // if(salir==1){
+                //     System.exit(0);     //Si el usuario decidio cerrar la app se cierra
+                // }
+                
                 //Hacemos el logIn del usuario
                 if(ControlSesion.logIn(txtUsuario.getText(),new String(pswdContrasena.getPassword()))){
                     txtUsuario.setText("Usuario");              //Se rellena con "Usuario"
