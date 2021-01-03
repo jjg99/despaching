@@ -137,7 +137,7 @@ public class GestionMensajes {
         try {
             //se crea el panel
             String idUsuario = (String)JOptionPane.showInputDialog(null,"Introduzca el usuario","Reseteo", JOptionPane.QUESTION_MESSAGE,new ImageIcon(new URL("https://img.icons8.com/dusk/64/000000/password1.png")),null,"");
-            //se muestra el panel con un espacio para la respuesta
+          
             return idUsuario;
 
         } catch (Exception e) {

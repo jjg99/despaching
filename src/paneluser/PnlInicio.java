@@ -243,8 +243,13 @@ public class PnlInicio extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 //muestra el mensaje para que el usuario introduzca su nombre usuario
                 String usuario = GestionMensajes.msgResetContrasena();
-                //llama a fachada para que se encargue de cambiar la contraseña
-                Fachada.reestablecerContrasena(usuario);
+                if(usuario== null){//en el caso de que el objeto se encuentre vacio no se hace nada
+
+                }else{
+                    //llama a fachada para que se encargue de cambiar la contraseña
+                    Fachada.reestablecerContrasena(usuario);
+                }
+                
             }
         });
 
