@@ -29,6 +29,7 @@ public class PnlCalendario extends JPanel {
     private static int diaActivo = Fecha.getDia();
     private static int mesActivo = Fecha.getMes();
     private static int anioActivo = Fecha.getAnio();
+    private static int diaSemana = 0;
     /**
      *
      */
@@ -198,15 +199,16 @@ public class PnlCalendario extends JPanel {
         pnlDia.add(lblDia,gbc); // lo añadimos al panel 
 
         JPanel pnlDias = new JPanel(new GridLayout(1,5));
-        JButton btnDias[] = new JButton[5];
-        btnDias[0] = new JButton("L");
-        btnDias[1] = new JButton("M");
-        btnDias[2] = new JButton("X");
-        btnDias[3] = new JButton("J");
-        btnDias[4] = new JButton("V");
+        JButton btnDiasSemana[] = new JButton[5];
+        btnDiasSemana[0] = new JButton("L");
+        btnDiasSemana[1] = new JButton("M");
+        btnDiasSemana[2] = new JButton("X");
+        btnDiasSemana[3] = new JButton("J");
+        btnDiasSemana[4] = new JButton("V");
         
+        Colores.setBGVerde(btnDiasSemana[0]);
 
-        for (JButton i:btnDias)
+        for (JButton i:btnDiasSemana)
             pnlDias.add(i);
 
         gbc.gridx = 1;       //se especifica la posicion en la matriz
@@ -516,6 +518,20 @@ public class PnlCalendario extends JPanel {
                 pnlPrincipal.updateUI();
             }
         });
+
+        for (int i = 0; i< btnDiasSemana.length;i++){
+            int dia = i;
+            btnDiasSemana[i].addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    Colores.setBGAzul(btnDiasSemana[diaSemana]);
+                    diaSemana = dia;
+                    Colores.setBGVerde(btnDiasSemana[diaSemana]);
+                    updateUI();
+                }
+            });
+        }
+        
     }
 
     
