@@ -30,6 +30,8 @@ public class PnlCalendario extends JPanel {
     private static int mesActivo = Fecha.getMes();
     private static int anioActivo = Fecha.getAnio();
     private static int diaSemana = 0;
+    private static int horaIni[] = new int[2];
+    private static int horaFin[] = new int[2];
     /**
      *
      */
