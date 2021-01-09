@@ -14,8 +14,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
+import javax.swing.text.DateFormatter;
 
 import dominio.Usuario;
 import panelProf.PnlProf;
@@ -32,6 +35,7 @@ public class PnlCalendario extends JPanel {
     private static int diaSemana = 0;
     private static int horaIni[] = new int[2];
     private static int horaFin[] = new int[2];
+    private SpinnerDateModel spnDMH = new SpinnerDateModel();
     /**
      *
      */
@@ -232,14 +236,22 @@ public class PnlCalendario extends JPanel {
         gbc.gridwidth = 1; // anchura
         gbc.insets = new Insets(0,0,0,30); // deja una separacion a la izquierda
         pnlHoraIni.add(lblHoraIni,gbc);
-        //textfield con la hora de inicio
-        JTextField txtHoraIni = new JTextField(10);
+
+        //JSpinner horaini
+        JSpinner spnHoraIni = new JSpinner(spnDMH);
+        JSpinner.DateEditor editorH = new JSpinner.DateEditor(spnHoraIni, "HH:mm");
+        DateFormatter formatterH = (DateFormatter) editorH.getTextField().getFormatter();
+        formatterH.setAllowsInvalid(false);
+        formatterH.setOverwriteMode(true);
+        spnHoraIni.setEditor(editorH);
+        spnHoraIni.setOpaque(true);
+        Fuente.setFuente(spnHoraIni);
         gbc.gridx = 1;       //se especifica la posicion en la matriz
         gbc.gridy = 0;
         gbc.gridheight = 1;	// altura
         gbc.gridwidth = 3; // anchura
         gbc.insets = new Insets(0,0,0,0); // deja una separacion a la izquierda
-        pnlHoraIni.add(txtHoraIni,gbc);
+        pnlHoraIni.add(spnHoraIni,gbc);
         
         // panel con la hora de fin
         JPanel pnlHoraFin = new JPanel(new GridBagLayout());
@@ -252,14 +264,18 @@ public class PnlCalendario extends JPanel {
         gbc.gridwidth = 1; // anchura
         gbc.insets = new Insets(0,0,0,55); // deja una separacion a la izquierda
         pnlHoraFin.add(lblHoraFin,gbc);
-        //textfield con la hora de inicio
-        JTextField txtHoraFin = new JTextField(10);
+
+        //JSpinner horafin
+        JSpinner spnHoraFin = new JSpinner(spnDMH);
+        spnHoraFin.setEditor(editorH);
+        spnHoraFin.setOpaque(true);
+        Fuente.setFuente(spnHoraFin);
         gbc.gridx = 1;       //se especifica la posicion en la matriz
         gbc.gridy = 0;
         gbc.gridheight = 1;	// altura
         gbc.gridwidth = 3; // anchura
         gbc.insets = new Insets(0,0,0,0); // deja una separacion a la izquierda
-        pnlHoraFin.add(txtHoraFin,gbc);
+        pnlHoraFin.add(spnHoraFin,gbc);
         
 
         //boton que sirve para agregar la hora al horario
