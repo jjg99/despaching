@@ -444,7 +444,18 @@ public class Fachada {
         return result;
     }
     public static void setHorario(String idProfesor,String horario){
-        
+          // se crea el mensaje para enviar toda la información 
+          Mensaje mensajeEnviar = new Mensaje();
+          Mensaje mensajeRespuesta = new Mensaje();
+          mensajeEnviar.setContext("/setHorario");     // se coloca el tipo de consulta
+          // se añade el contenido del mensaje a enviar al servidor
+          HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+          contenido.put("idProfesor",idProfesor);
+          contenido.put("horario", horario); 
+          mensajeEnviar.setContenido(contenido);
+          // se envia la consulta al servidor
+          mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+         
     }
     
 }

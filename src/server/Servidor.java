@@ -219,6 +219,12 @@ public class Servidor extends Thread {
 					Boolean citaCreada =  ControladorCitas.crearCita(profesorCrearCita,alumnoCrearCita,fechaInicioCrearCita,fechaFinCrearCita); 
 					HashMapRespuesta.put("Resultado",citaCreada);//se envia el mensaje de vuelta
 					break;
+				case "/setHorario":
+					String idProfesorHorario = (String)mensajeEntrada.getContenido().get("idProfesor");
+					String horarioSet = (String)mensajeEntrada.getContenido().get("horario");
+					HorarioDAO.setHorario(idProfesorHorario, horarioSet); 
+					HashMapRespuesta.put("Resultado",true);//se envia el mensaje de vuelta
+					break;
 				default:
 					System.out.println("\nParámetro no encontrado");
 					System.out.println(mensajeEntrada.getContext());
