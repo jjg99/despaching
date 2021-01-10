@@ -147,14 +147,15 @@ public abstract class Fecha {
         return cal.getActualMaximum(Calendar.WEEK_OF_MONTH);
     }
 
-    public static Date setDateSQL(int year, int month, int day, int hour, int minute) {
+    public static java.util.Date setDateSQL(int year, int month, int day, int hour, int minute) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR,year);
         cal.set(Calendar.MONTH,month);
         cal.set(Calendar.DAY_OF_MONTH,day);
         cal.set(Calendar.HOUR_OF_DAY,hour);
         cal.set(Calendar.MINUTE, minute);
-        
-        return new Date(cal.getTime().getTime());
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTime();
     }
 }
