@@ -9,7 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Date;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,8 +22,10 @@ import javax.swing.SwingConstants;
 import javax.swing.text.DateFormatter;
 
 import dao.CitasDAO;
+import dominio.Profesor;
 import dominio.Usuario;
 import panelProf.PnlProf;
+import server.ControladorCitas;
 import util.Colores;
 import util.Fecha;
 import util.Fuente;
@@ -402,7 +405,7 @@ public class PnlCalendario extends JPanel {
                 pnlFecha.add(establecerMes(),gbc);
                 pnlFecha.updateUI();
                 int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
-                PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo));
+                PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
                 updateUI();
             }
         });
@@ -433,7 +436,7 @@ public class PnlCalendario extends JPanel {
                 pnlFecha.add(establecerMes(),gbc);
                 pnlFecha.updateUI();
                 int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
-                PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo));
+                PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
                 updateUI();
             }
         });
@@ -540,10 +543,16 @@ public class PnlCalendario extends JPanel {
                 horaIni[0] = Fecha.getHora(spnDMHIni.getDate());
                 horaIni[1] = Fecha.getMinuto(spnDMHIni.getDate());
                 horaFin[0] = Fecha.getHora(spnDMHFin.getDate());
-                horaIni[1] = Fecha.getMinuto(spnDMHFin.getDate());
+                horaFin[1] = Fecha.getMinuto(spnDMHFin.getDate());
+                //TODO: Borrar, solo sirve para testear antes de pasar a sockets
+                ControladorCitas.crearTutoria((Profesor)usuario, Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]),
+                                            Fecha.setDate(anioActivo, mesActivo, diaActivo, horaFin[0], horaFin[1]));
                 //TODO:  funcionalidad botones horario
                 // Fachada.crearCita(usuario,Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]),
                 //                             Fecha.setDate(anioActivo, mesActivo, diaActivo, horaFin[0], horaFin[1]));
+                //Actualizamos panel horario
+                int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
+                PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
             }
         });
 
@@ -553,9 +562,12 @@ public class PnlCalendario extends JPanel {
                 horaIni[0] = Fecha.getHora(spnDMHIni.getDate());
                 horaIni[1] = Fecha.getMinuto(spnDMHIni.getDate());
                 horaFin[0] = Fecha.getHora(spnDMHFin.getDate());
-                horaIni[1] = Fecha.getMinuto(spnDMHFin.getDate());
+                horaFin[1] = Fecha.getMinuto(spnDMHFin.getDate());
                 // Fachada.eliminarCita(usuario,Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]),
                 //                             Fecha.setDate(anioActivo, mesActivo, diaActivo, horaFin[0], horaFin[1]));
+            //Actualizamos panel horario
+            int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
+            PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
             }
         });
 
@@ -646,7 +658,7 @@ public class PnlCalendario extends JPanel {
                     diaActivo = Integer.valueOf(btnDia.getText());
                     Colores.setBGVerde(btnDias[diaActivo-1]);
                     int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
-                    PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo));
+                    PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
                     updateUI();
                 }
             });

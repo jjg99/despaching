@@ -175,6 +175,27 @@ public abstract class Fecha {
         return Integer.valueOf(sdf.format(cal.getTime()))-1;
     }
 
+    public static int getAnio(Date fecha){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fecha);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+        return Integer.valueOf(sdf.format(cal.getTime()));
+    }
+
+    public static int getMes(Date fecha){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fecha);
+        SimpleDateFormat sdf = new SimpleDateFormat("MM");
+        return Integer.valueOf(sdf.format(cal.getTime()))-1;
+    }
+
+    public static int getDia(Date fecha){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fecha);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd");
+        return Integer.valueOf(sdf.format(cal.getTime()));
+    }
+
     public static int getHora(Date fecha){
         Calendar cal = Calendar.getInstance();
         cal.setTime(fecha);

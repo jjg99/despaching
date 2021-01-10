@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -76,22 +77,19 @@ public class CitasDAO {
      * @param idalu contiene el id del profesor
      * @return devuelve un arraylist con las distintas citas de un alumno
      */
-    public static ArrayList<String> getCitasAlumno(String idAlu) {
+    public static ArrayList<Timestamp> getCitasAlumno(String idAlu) {
 
         Statement stmt;
         ResultSet resultadoConsulta = null;
-        ArrayList<String> citas = new ArrayList<String>();    // objeto que va a contener el resultado que se envia
+        ArrayList<Timestamp> citas = new ArrayList<Timestamp>();    // objeto que va a contener el resultado que se envia
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
             String sql = "SELECT \"fechaINI\", \"fechaFIN\" FROM \"Citas\" WHERE \"claveALU\" = '"+idAlu+"'";
             resultadoConsulta =stmt.executeQuery(sql);    // se ejecuta la solicitud sql
             while(resultadoConsulta.next()){
-                StringBuilder medio = new StringBuilder(resultadoConsulta.getString("fechaINI"));
-                medio.append(";")
-                     .append(resultadoConsulta.getString("fechaFIN"));
-
-                citas.add(medio.toString());
+                citas.add(resultadoConsulta.getTimestamp("fechaINI"));
+                citas.add(resultadoConsulta.getTimestamp("fechaFIN"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -105,22 +103,19 @@ public class CitasDAO {
      * @param idProf contiene el id del profesor
      * @return devuelve un arraylist con las distintas citas de un alumno
      */
-    public static ArrayList<String> getCitasProf(String idProf) {
+    public static ArrayList<Timestamp> getCitasProf(String idProf) {
 
         Statement stmt;
         ResultSet resultadoConsulta = null;
-        ArrayList<String> citas = new ArrayList<String>();    // objeto que va a contener el resultado que se envia
+        ArrayList<Timestamp> citas = new ArrayList<Timestamp>();    // objeto que va a contener el resultado que se envia
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
             String sql = "SELECT \"fechaINI\", \"fechaFIN\" FROM \"Citas\" WHERE \"clavePROF\" = '"+idProf+"'";
             resultadoConsulta =stmt.executeQuery(sql);    // se ejecuta la solicitud sql
             while(resultadoConsulta.next()){
-                StringBuilder medio = new StringBuilder(resultadoConsulta.getString("fechaINI"));
-                medio.append(";")
-                     .append(resultadoConsulta.getString("fechaFIN"));
-
-                citas.add(medio.toString());
+                citas.add(resultadoConsulta.getTimestamp("fechaINI"));
+                citas.add(resultadoConsulta.getTimestamp("fechaFIN"));
             }
         } catch (Exception e) {
             e.printStackTrace();

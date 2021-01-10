@@ -168,4 +168,27 @@ public class UsuarioDAO {
             e.printStackTrace();
         }
     }
+
+    public static ArrayList<String> getAlumnosProf(String idProf) {
+        Statement stmt;     // se crea el statement sobre el que trabajar
+        ResultSet resultadoConsulta = null;
+        ArrayList<String> resultado = new ArrayList<String>();     // objeto que va a contener el resultado que se envia al alumno
+        // Ejecucion de la sentencia SQL
+        try {
+            stmt = ConexionServer.conexion.createStatement();
+            String sql = "SELECT \"claveALU\" FROM \"Clases\" WHERE \"clavePROF\" = '"+idProf+"'";
+
+            resultadoConsulta =stmt.executeQuery(sql);    // se ejecuta la solicitud sql
+            // se lee la respuesta por parte dela base de datos
+            while(resultadoConsulta.next()){
+                // se cargan todos los datos necesarios de la base de datos para crear el profesor
+                //se añade al resultado
+                resultado.add(resultadoConsulta.getString("claveALU"));
+            }
+        
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resultado;
+    }
 }

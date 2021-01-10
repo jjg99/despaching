@@ -66,9 +66,9 @@ public class PnlProf extends JPanel{
     /** Metodo que inicializara e instanciara todos los componentes en la ventana */
     public void establecerVentana(){
         //Creamos el PnlHorario
-        PnlHorario.pnlHorario = new PnlHorario(profesor, Fecha.getDiaSemana());
+        PnlHorario.pnlHorario = new PnlHorario(profesor, Fecha.getDiaSemana(), Fecha.getAnio(), Fecha.getMes(), Fecha.getDia());
         /** Panel que contendra el Horario del dia */
-        setPnlHorario(Fecha.getDiaSemana(), Fecha.fechaString());
+        setPnlHorario(Fecha.getDiaSemana(), Fecha.fechaString(), Fecha.getAnio(), Fecha.getMes(), Fecha.getDia());
 
         /** Panel que contendra la cola */
         JPanel pnlDerecha = new JPanel();
@@ -281,7 +281,7 @@ public class PnlProf extends JPanel{
         profesor=null;
     }
     
-    public void setPnlHorario(int dia,String fecha){
+    public void setPnlHorario(int diaSemana,String fecha, int anio, int mes, int dia){
 
         pnlIzquierda.removeAll();
 
@@ -295,7 +295,7 @@ public class PnlProf extends JPanel{
         pnlTxtHorario.add(lblHorario);
 
         // Actualizamos el PnlHorario
-        PnlHorario.pnlHorario.setHorario(dia);
+        PnlHorario.pnlHorario.setHorario(diaSemana, anio, mes, dia);
         
         // Agregamos ambos componentes al panel
         pnlIzquierda.add(pnlTxtHorario,BorderLayout.NORTH);
