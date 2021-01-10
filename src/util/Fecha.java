@@ -2,6 +2,7 @@ package util;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**Clase con metodos staticos para poder obtener el dia de la seman
  * De tipo abstract puesto que no se quiere que se instancie en el codigo.
@@ -166,4 +167,25 @@ public abstract class Fecha {
         cal.set(Calendar.MILLISECOND, 0);
         return cal.getTime();
     }
+
+    public static int getDiaSemana(Date fecha){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fecha);
+        SimpleDateFormat sdf = new SimpleDateFormat("u");
+        return Integer.valueOf(sdf.format(cal.getTime()))-1;
+    }
+
+    public static int getHora(Date fecha){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fecha);
+        SimpleDateFormat sdf = new SimpleDateFormat("H");
+        return Integer.valueOf(sdf.format(cal.getTime()));
+    }
+    
+    public static int getMinuto(Date fecha){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fecha);
+        SimpleDateFormat sdf = new SimpleDateFormat("m");
+        return Integer.valueOf(sdf.format(cal.getTime()));
+    }  
 }
