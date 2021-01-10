@@ -22,7 +22,7 @@ import dao.HorarioDAO;
 import dao.UsuarioDAO;
 import dao.CitasDAO;
 
-import java.sql.Date;
+import java.util.Date;
 
 
 /**Clase encargada de la parte servidor de la aplicación, se encarga de escuchar por nuevos mensaje y responder */
