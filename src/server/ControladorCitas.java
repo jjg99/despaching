@@ -7,11 +7,12 @@ import java.util.Date;
 import dao.CitasDAO;
 import dao.HorarioDAO;
 import dao.UsuarioDAO;
+import dominio.Alumno;
 import dominio.Profesor;
 import util.Fecha;
 
 public class ControladorCitas {
-    public static boolean crearTutoria(Profesor prof, Date fechaIni, Date fechaFin) {
+    public static boolean crearTutoriaProfesor(Profesor prof, Date fechaIni, Date fechaFin) {
         ConexionServer.startConnection();
         String horario = HorarioDAO.getHorario(prof.getId());
         String[] clases = horario.split(";");  // se separa en dias de la semana
@@ -62,4 +63,40 @@ public class ControladorCitas {
         System.out.println(satisfactorio);
         return satisfactorio;
     }
+
+    public static boolean EliminarCitaProfesor(Profesor prof, Date fechaIni){
+        boolean satisfactorio = false;
+        ConexionServer.startConnection();
+        ArrayList<Timestamp> citas = CitasDAO.getCitasProf(prof.getId());
+        for (int i=0; i<citas.size();i=i+2) {
+            if (fechaIni.equals(citas.get(i)))
+                satisfactorio = true;
+        }
+
+        if (satisfactorio)
+            CitasDAO.RemoveCitaProfesor(prof.getId(),fechaIni);
+
+        ConexionServer.endConnection();
+        System.out.println(satisfactorio);
+        return satisfactorio;
+    }
+
+    /*
+    public static boolean EliminarCitaAlumno(Alumno alu, Date fechaIni){
+        boolean satisfactorio = false;
+        ConexionServer.startConnection();
+        ArrayList<Timestamp> citas = CitasDAO.getCitasAlu(alu.getId());
+        for (int i=0; i<citas.size();i=i+2) {
+            if (fechaIni.equals(citas.get(i)))
+                satisfactorio = true;
+        }
+
+        if (satisfactorio)
+            CitasDAO.RemoveCitaAlumno(alu.getId(),fechaIni);
+
+        ConexionServer.endConnection();
+        System.out.println(satisfactorio);
+        return satisfactorio;
+    }
+    */
 }

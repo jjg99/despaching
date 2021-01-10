@@ -24,6 +24,7 @@ import javax.swing.text.DateFormatter;
 import dao.CitasDAO;
 import dominio.Profesor;
 import dominio.Usuario;
+import dominio.Alumno;
 import panelProf.PnlProf;
 import server.ControladorCitas;
 import util.Colores;
@@ -545,14 +546,19 @@ public class PnlCalendario extends JPanel {
                 horaFin[0] = Fecha.getHora(spnDMHFin.getDate());
                 horaFin[1] = Fecha.getMinuto(spnDMHFin.getDate());
                 //TODO: Borrar, solo sirve para testear antes de pasar a sockets
-                ControladorCitas.crearTutoria((Profesor)usuario, Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]),
+                if (usuario instanceof Profesor){
+                    ControladorCitas.crearTutoriaProfesor((Profesor)usuario, Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]),
                                             Fecha.setDate(anioActivo, mesActivo, diaActivo, horaFin[0], horaFin[1]));
+                    //Actualizamos panel horario
+                    int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
+                    PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
+                } else{
+                    //TODO codigo ejecutado cuando se entre como alumno
+                }
                 //TODO:  funcionalidad botones horario
                 // Fachada.crearCita(usuario,Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]),
                 //                             Fecha.setDate(anioActivo, mesActivo, diaActivo, horaFin[0], horaFin[1]));
-                //Actualizamos panel horario
-                int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
-                PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
+                
             }
         });
 
@@ -565,9 +571,24 @@ public class PnlCalendario extends JPanel {
                 horaFin[1] = Fecha.getMinuto(spnDMHFin.getDate());
                 // Fachada.eliminarCita(usuario,Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]),
                 //                             Fecha.setDate(anioActivo, mesActivo, diaActivo, horaFin[0], horaFin[1]));
-            //Actualizamos panel horario
-            int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
-            PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
+                
+                if (usuario instanceof Profesor){
+                    ControladorCitas.EliminarCitaProfesor((Profesor)usuario, Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]));
+                    //Actualizamos panel horario
+                    int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
+                    PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
+                } else{
+                    //ControladorCitas.EliminarCitaAlumno((Alumno)usuario, Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]));
+                }
+            }
+        });
+
+        btnActualizar.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
+                PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
+                updateUI();
             }
         });
 
