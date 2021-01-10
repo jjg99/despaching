@@ -34,4 +34,23 @@ public class HorarioDAO {
         return horario;
 
     }
+
+    /**Metodo encargado de establecer el horario asociado a un profesor
+     * @param Stirng idProfesor
+     * @param string horario
+     * @return {@link ArrayList}
+     */
+    public static void setHorario(String idProfesor,String horario){
+        
+        Statement stmt;     // se crea el statement sobre el que trabajar
+        // Ejecucion de la sentencia SQL
+        try {
+            stmt = ConexionServer.conexion.createStatement();
+            String sql = "UPDATE \"Horarios\" SET \"horario\" = '" + horario + "' WHERE \"clave\" = '"+idProfesor+"'";
+            stmt.executeUpdate(sql);    // se ejecuta la solicitud sql
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 }

@@ -22,6 +22,7 @@ import javax.swing.SwingConstants;
 import javax.swing.text.DateFormatter;
 
 import dao.CitasDAO;
+import dao.HorarioDAO;
 import dominio.Profesor;
 import dominio.Usuario;
 import dominio.Alumno;
@@ -662,6 +663,9 @@ public class PnlCalendario extends JPanel {
                 String realizar = dias[0];
                 for (int i=1; i< dias.length; i++)
                     realizar = realizar + ";" + dias[i];
+                
+                horario = realizar;
+                
             }
         });
 
@@ -687,12 +691,25 @@ public class PnlCalendario extends JPanel {
                 String realizar = dias[0];
                 for (int i=1; i< dias.length; i++)
                     realizar = realizar + ";" + dias[i];
+                horario = realizar;
             }
         });
 
         btnActualizar.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
+                PnlHorario.pnlHorario.actualizarHorarioCache();
+                PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
+                updateUI();
+            }
+        });
+
+        btnGuardarCambiarHora.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                HorarioDAO.setHorario(usuario.getId(), horario);
+                System.out.println(horario);
                 int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
                 PnlHorario.pnlHorario.actualizarHorarioCache();
                 PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);

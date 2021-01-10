@@ -443,5 +443,8 @@ public class Fachada {
         boolean result = (boolean)mensajeRespuesta.getContenido().get("Resultado");
         return result;
     }
+    public static void setHorario(String idProfesor,String horario){
+        
+    }
     
 }
