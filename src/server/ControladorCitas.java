@@ -13,6 +13,7 @@ import util.Fecha;
 
 public class ControladorCitas {
     public static boolean crearTutoriaProfesor(Profesor prof, Date fechaIni, Date fechaFin) {
+        //TODO: Quitar esto, la conexion a la base de datoos
         ConexionServer.startConnection();
         String horario = HorarioDAO.getHorario(prof.getId());
         String[] clases = horario.split(";");  // se separa en dias de la semana
@@ -59,6 +60,7 @@ public class ControladorCitas {
                 CitasDAO.addCita(prof.getId(), idAlu, fechaIni, fechaFin);
             }
         }
+        //TODO: Quitar esto, la conexion a la base de datoos
         ConexionServer.endConnection();
         System.out.println(satisfactorio);
         return satisfactorio;
@@ -66,6 +68,7 @@ public class ControladorCitas {
 
     public static boolean EliminarCitaProfesor(Profesor prof, Date fechaIni){
         boolean satisfactorio = false;
+        //TODO: Quitar esto, la conexion a la base de datoos
         ConexionServer.startConnection();
         ArrayList<Timestamp> citas = CitasDAO.getCitasProf(prof.getId());
         for (int i=0; i<citas.size();i=i+2) {
@@ -76,6 +79,7 @@ public class ControladorCitas {
         if (satisfactorio)
             CitasDAO.RemoveCitaProfesor(prof.getId(),fechaIni);
 
+        //TODO: Quitar esto, la conexion a la base de datoos
         ConexionServer.endConnection();
         System.out.println(satisfactorio);
         return satisfactorio;
@@ -84,6 +88,7 @@ public class ControladorCitas {
     /*
     public static boolean EliminarCitaAlumno(Alumno alu, Date fechaIni){
         boolean satisfactorio = false;
+        //TODO: Quitar esto, la conexion a la base de datoos
         ConexionServer.startConnection();
         ArrayList<Timestamp> citas = CitasDAO.getCitasAlu(alu.getId());
         for (int i=0; i<citas.size();i=i+2) {
@@ -94,6 +99,7 @@ public class ControladorCitas {
         if (satisfactorio)
             CitasDAO.RemoveCitaAlumno(alu.getId(),fechaIni);
 
+        //TODO: Quitar esto, la conexion a la base de datoos
         ConexionServer.endConnection();
         System.out.println(satisfactorio);
         return satisfactorio;
