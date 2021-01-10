@@ -63,7 +63,7 @@ public class ControladorCitas {
 
     public static boolean crearCita(Profesor prof, Alumno alu, Date fechaIni, Date fechaFin) {
 
-        
+
         return true;
     }
 
@@ -81,24 +81,17 @@ public class ControladorCitas {
         return satisfactorio;
     }
 
-    /*
-    public static boolean EliminarCitaAlumno(Alumno alu, Date fechaIni){
+    public static boolean eliminarCitaAlumno(Alumno alu, Date fechaIni){
         boolean satisfactorio = false;
-        //TODO: Quitar esto, la conexion a la base de datoos
-        ConexionServer.startConnection();
-        ArrayList<Timestamp> citas = CitasDAO.getCitasAlu(alu.getId());
+        ArrayList<Timestamp> citas = CitasDAO.getCitasProf(alu.getId());
         for (int i=0; i<citas.size();i=i+2) {
             if (fechaIni.equals(citas.get(i)))
                 satisfactorio = true;
         }
 
         if (satisfactorio)
-            CitasDAO.RemoveCitaAlumno(alu.getId(),fechaIni);
+            CitasDAO.removeCitaAlumno(alu.getId(),fechaIni);
 
-        //TODO: Quitar esto, la conexion a la base de datoos
-        ConexionServer.endConnection();
-        System.out.println(satisfactorio);
         return satisfactorio;
     }
-    */
 }

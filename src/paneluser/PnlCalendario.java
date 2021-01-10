@@ -602,15 +602,12 @@ public class PnlCalendario extends JPanel {
                 horaIni[1] = Fecha.getMinuto(spnDMHIni.getDate());
                 horaFin[0] = Fecha.getHora(spnDMHFin.getDate());
                 horaFin[1] = Fecha.getMinuto(spnDMHFin.getDate());
-                // Fachada.eliminarCitaProfesor((Profesor)usuario,Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]),
-                //                             Fecha.setDate(anioActivo, mesActivo, diaActivo, horaFin[0], horaFin[1]));
                 
                 if (usuario instanceof Profesor){
-                    Fachada.eliminarCitaProfesor((Profesor)usuario,Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]),
-                                             Fecha.setDate(anioActivo, mesActivo, diaActivo, horaFin[0], horaFin[1]));
+                    Fachada.eliminarCitaProfesor((Profesor)usuario,Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]));
                     
                 } else{
-                    //ControladorCitas.eliminarCitaAlumno((Alumno)usuario, Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]));
+                    Fachada.eliminarCitaAlumno((Alumno)usuario,Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]));
                 }
 
                 //Actualizamos panel horario
