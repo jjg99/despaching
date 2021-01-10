@@ -1,16 +1,14 @@
 package paneluser;
 
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Calendar;
-import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,13 +19,13 @@ import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
 import javax.swing.text.DateFormatter;
 
-import dao.CitasDAO;
-import dao.HorarioDAO;
+import dominio.Alumno;
 import dominio.Profesor;
 import dominio.Usuario;
-import dominio.Alumno;
+import gui.JVentana;
+import panelAlu.PnlAlumno;
+import panelAlu.PnlReserva;
 import panelProf.PnlProf;
-import server.ControladorCitas;
 import server.Fachada;
 import util.Colores;
 import util.Fecha;
@@ -139,6 +137,8 @@ public class PnlCalendario extends JPanel {
         JPanel pnlBotones = new JPanel(new GridLayout(4, 1));  // creamos el panel
         // boton crear tutoria
         JButton btnCrearTutoria = new JButton("Crear Tutoria"); // creamos el boton para crear tutorias
+        if (usuario instanceof Alumno)
+            btnCrearTutoria.setText("Crear cita");
         Fuente.setFuente(btnCrearTutoria);  // cambiamos la fuente
         btnCrearTutoria.setOpaque(false);   // cambiamos la opacidad
         Colores.setBGTransparente(btnCrearTutoria); // establecemos el color
@@ -146,6 +146,8 @@ public class PnlCalendario extends JPanel {
 
         //boton eliminar tutoria
         JButton btnEliminarTutoria = new JButton("Eliminar Tutoria"); // creamos el boton para eliminar tutorias
+        if (usuario instanceof Alumno)
+            btnEliminarTutoria.setText("Eliminar cita");
         Fuente.setFuente(btnEliminarTutoria);   // cambiamos la fuente
         btnEliminarTutoria.setOpaque(false);    // cambiamos la opacidad
         Colores.setBGTransparente(btnEliminarTutoria);  // establecemos el color
@@ -156,7 +158,8 @@ public class PnlCalendario extends JPanel {
         Fuente.setFuente(btnCambiarHorario);    // cambiamos la fuente
         btnCambiarHorario.setOpaque(false);     // cambiamos la opacidad
         Colores.setBGTransparente(btnCambiarHorario);   //establecemos el color
-        pnlBotones.add(btnCambiarHorario);      //& lo añadimos al panel 
+        if (usuario instanceof Profesor)
+            pnlBotones.add(btnCambiarHorario);      //& lo añadimos al panel 
 
         //boton para actualizar
         JButton btnActualizar = new JButton("Actualizar");  // creamos el boton actualizar
@@ -164,6 +167,15 @@ public class PnlCalendario extends JPanel {
         btnActualizar.setOpaque(false);     // cambiamos la opacidad
         Colores.setBGTransparente(btnActualizar); // establecesmos el color
         pnlBotones.add(btnActualizar);  // lo añadimos a un panel 
+        
+
+        //boton para regresar siendo un alumno
+        JButton btnAlumno = new JButton("Regresar");  // creamos el boton actualizar
+        Fuente.setFuente(btnAlumno);    // cambiamos la fuente
+        btnAlumno.setOpaque(false);     // cambiamos la opacidad
+        Colores.setBGTransparente(btnAlumno); // establecesmos el color
+        if (usuario instanceof Alumno)
+            pnlBotones.add(btnAlumno);
         gbc.gridx = 0;       //se especifica la posicion en la matriz
         gbc.gridy = 6;
         gbc.gridheight = 4;	// altura
@@ -171,6 +183,8 @@ public class PnlCalendario extends JPanel {
         gbc.insets = new Insets(0,0,0,0); // deja una separacion a la izquierda
         pnlPrincipal.add(pnlBotones,gbc);   // lo añadimos al panel principal
         this.add(pnlPrincipal);
+
+
 
         // panel para cambiar el horario
         JPanel pnlCambiarHorario = new JPanel(new GridLayout(7,1)); // creamos el panel para cambiar el horario
@@ -327,6 +341,8 @@ public class PnlCalendario extends JPanel {
         
 
         JLabel lblCrearTutoria = new JLabel("Crear Tutoria"); // creamos el label cambiar horario
+        if (usuario instanceof Alumno)
+            lblCrearTutoria.setText("Crear Cita");
         Fuente.setFuenteNegrita(lblCrearTutoria); // cambiamos la fuente
         gbc.gridx = 0;       //se especifica la posicion en la matriz
         gbc.gridy = 0;
@@ -364,6 +380,8 @@ public class PnlCalendario extends JPanel {
         
 
         JLabel lblEliminarTutoria = new JLabel("Eliminar Tutoria"); // creamos el label cambiar horario
+        if (usuario instanceof Alumno)
+            lblEliminarTutoria.setText("Eliminar Cita");
         Fuente.setFuenteNegrita(lblEliminarTutoria); // cambiamos la fuente
         gbc.gridx = 0;       //se especifica la posicion en la matriz
         gbc.gridy = 0;
@@ -415,7 +433,11 @@ public class PnlCalendario extends JPanel {
                 pnlFecha.add(establecerMes(),gbc);
                 pnlFecha.updateUI();
                 int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
-                PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
+                if (usuario instanceof Profesor)
+                    PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
+                else{
+                    PnlReserva.pnlReserva.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
+                }
                 updateUI();
             }
         });
@@ -446,7 +468,11 @@ public class PnlCalendario extends JPanel {
                 pnlFecha.add(establecerMes(),gbc);
                 pnlFecha.updateUI();
                 int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
-                PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
+                if (usuario instanceof Profesor)
+                    PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
+                else{
+                    PnlReserva.pnlReserva.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
+                }
                 updateUI();
             }
         });
@@ -708,12 +734,19 @@ public class PnlCalendario extends JPanel {
         btnGuardarCambiarHora.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                HorarioDAO.setHorario(usuario.getId(), horario);
+                Fachada.setHorario(usuario.getId(), horario);
                 System.out.println(horario);
                 int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
                 PnlHorario.pnlHorario.actualizarHorarioCache();
                 PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
                 updateUI();
+            }
+        });
+
+        btnAlumno.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                JVentana.cambiarPanel(PnlAlumno.PnlAlumno);     // LLamada a la funcion para la vuelta al panel anterior
             }
         });
 
@@ -732,7 +765,6 @@ public class PnlCalendario extends JPanel {
         
     }
 
-    
 
     private JPanel establecerMes(){
 
@@ -804,7 +836,11 @@ public class PnlCalendario extends JPanel {
                     diaActivo = Integer.valueOf(btnDia.getText());
                     Colores.setBGVerde(btnDias[diaActivo-1]);
                     int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
-                    PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
+                    if (usuario instanceof Profesor)
+                        PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
+                    else{
+                        PnlReserva.pnlReserva.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
+                    }
                     updateUI();
                 }
             });
