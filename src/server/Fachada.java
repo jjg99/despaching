@@ -1,11 +1,14 @@
 package server;
 
 import java.util.HashMap;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import dominio.Alumno;
 import dominio.Profesor;
 import dominio.Usuario;
+
+import java.util.Date;
 
 /** Clase que se encarga de redirigir el trafico a los DAO */
 public class Fachada {
@@ -304,7 +307,7 @@ public class Fachada {
      * @param idProfesor String que indica el id de un profesor
      * @return Boolean que devuelve si la cola esta abierta
      */
-    public static Boolean isColaAbierta(String idProfesor) {
+    public static boolean isColaAbierta(String idProfesor) {
         // se crea el mensaje para enviar toda la información 
         Mensaje mensajeEnviar = new Mensaje();
         Mensaje mensajeRespuesta = new Mensaje();
@@ -337,4 +340,108 @@ public class Fachada {
            
 
     }
+    
+    public static ArrayList<Timestamp> getCitasAlumno(String idAlumno){
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getCitasAlumno");       // se coloca el tipo de consulta
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+
+        ArrayList<Timestamp> respuesta = new ArrayList<Timestamp>();  // array para almacenar la respuesta del servidor
+        // se añade el contenido al mensaje
+        contenido.put("idAlumno",new String(idAlumno));
+        mensajeEnviar.setContenido(contenido);
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+        // se recibe un array con todas las clases del profesor
+        HashMap<String,Object> HashMapRespuesta =mensajeRespuesta.getContenido();
+        // se lee la respuesta del mensaje
+        ArrayList<Timestamp>ArrayRespuesta = (ArrayList<Timestamp>) HashMapRespuesta.get("Resultado");
+        for(Object elemento: ArrayRespuesta){
+            Timestamp cita = (Timestamp)elemento;
+            respuesta.add(cita);
+        }
+        return respuesta;
+
+    }
+    public static ArrayList<Timestamp> getCitasProfesor(String idProfesor){
+        // Dao.getCitasProf
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/getCitasProfesor");       // se coloca el tipo de consulta
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+
+        ArrayList<Timestamp> respuesta = new ArrayList<Timestamp>();  // array para almacenar la respuesta del servidor
+        // se añade el contenido al mensaje
+        contenido.put("idProfesor",new String(idProfesor));
+        mensajeEnviar.setContenido(contenido);
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+        // se recibe un array con todas las clases del profesor
+        HashMap<String,Object> HashMapRespuesta =mensajeRespuesta.getContenido();
+        // se lee la respuesta del mensaje
+        ArrayList<Timestamp>ArrayRespuesta = (ArrayList<Timestamp>) HashMapRespuesta.get("Citas");
+        for(Object elemento: ArrayRespuesta){
+            Timestamp cita = (Timestamp)elemento;
+            respuesta.add(cita);
+        }
+        return respuesta;
+
+    }
+    public static boolean crearTutoria(Profesor profesor,Date fechaInicio, Date fechaFin){
+        //controlador citas crearTutoriaProfesor
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/crearTutoria");     // se coloca el tipo de consulta
+        // se añade el contenido del mensaje a enviar al servidor
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        contenido.put("Profesor",profesor);
+        contenido.put("fechaInicio",fechaInicio);
+        contenido.put("fechaFin",fechaFin);
+        mensajeEnviar.setContenido(contenido);
+        // se envia la consulta al servidor
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+        // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
+        boolean result = (boolean)mensajeRespuesta.getContenido().get("Resultado");
+		return result;
+    }
+    public static boolean eliminarCitaProfesor(Profesor profesor,Date fechaInicio, Date fechaFin){
+        //controlador Citas eliminarCitaProfesor
+         // se crea el mensaje para enviar toda la información 
+         Mensaje mensajeEnviar = new Mensaje();
+         Mensaje mensajeRespuesta = new Mensaje();
+         mensajeEnviar.setContext("/eliminarCitaProfesor");     // se coloca el tipo de consulta
+         // se añade el contenido del mensaje a enviar al servidor
+         HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+         contenido.put("Profesor",profesor);
+         contenido.put("fechaInicio",fechaInicio);
+         contenido.put("fechaInicio",fechaFin);
+         mensajeEnviar.setContenido(contenido);
+         // se envia la consulta al servidor
+         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+         // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
+         boolean result = (boolean)mensajeRespuesta.getContenido().get("Resultado");
+         return result;
+    }
+    public static boolean crearCita(Profesor profesor, Alumno alumno,Date fechaInicio, Date fechaFin){
+        //controladorCitas.crearCita()
+        // se crea el mensaje para enviar toda la información 
+        Mensaje mensajeEnviar = new Mensaje();
+        Mensaje mensajeRespuesta = new Mensaje();
+        mensajeEnviar.setContext("/crearCita");     // se coloca el tipo de consulta
+        // se añade el contenido del mensaje a enviar al servidor
+        HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+        contenido.put("Profesor",profesor);
+        contenido.put("Alumno", alumno);
+        contenido.put("fechaInicio",fechaInicio);
+        contenido.put("fechaInicio",fechaFin);
+        mensajeEnviar.setContenido(contenido);
+        // se envia la consulta al servidor
+        mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+        // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
+        boolean result = (boolean)mensajeRespuesta.getContenido().get("Resultado");
+        return result;
+    }
+    
 }

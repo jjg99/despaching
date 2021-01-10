@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.Timestamp;
 
 import dominio.Alumno;
 import dominio.Profesor;
@@ -19,7 +20,9 @@ import java.util.HashMap;
 import dao.ColaDAO;
 import dao.HorarioDAO;
 import dao.UsuarioDAO;
+import dao.CitasDAO;
 
+import java.sql.Date;
 
 
 /**Clase encargada de la parte servidor de la aplicación, se encarga de escuchar por nuevos mensaje y responder */
@@ -182,13 +185,47 @@ public class Servidor extends Thread {
 					break;
 				case "/reestablecerContrasena":
 					String idUsuario = (String)mensajeEntrada.getContenido().get("idUsuario");
-					GestorUsuarios.reestablecerContrasena(idUsuario);//se llama al gestor de usuario para que se encargue de resetearlo
+					GestorUsuarios.reestablecerContrasena(idUsuario);
 					HashMapRespuesta.put("Resultado",true);//se envia el mensaje de vuelta
+					break;
+					
+				case "/getCitasAlumno":
+					String idAlumnoCitas = (String)mensajeEntrada.getContenido().get("idAlumno");
+					ArrayList<Timestamp> citasAlumno =  CitasDAO.getCitasAlumno(idAlumnoCitas);//se llama al gestor de usuario para que se encargue de resetearlo
+					HashMapRespuesta.put("Resultado",citasAlumno);//se envia el mensaje de vuelta
+					break;
+				case "/getCitasProfesor":
+					String idProfesorCitas = (String)mensajeEntrada.getContenido().get("idProfesor");
+					ArrayList<Timestamp> citasProfesor =  CitasDAO.getCitasProf(idProfesorCitas);
+					HashMapRespuesta.put("Resultado",citasProfesor);//se envia el mensaje de vuelta
+					break;
+				case "/crearTutoria":
+					Profesor profesorTutoria = (Profesor)mensajeEntrada.getContenido().get("Profesor");
+					Date fechaInicioTutoria = (Date)mensajeEntrada.getContenido().get("fechaInicio");
+					Date fechaFinTutoria = (Date)mensajeEntrada.getContenido().get("fechaFin");
+					Boolean isTutoria =  ControladorCitas.crearTutoriaProfesor(profesorTutoria,fechaInicioTutoria,fechaFinTutoria); 
+					HashMapRespuesta.put("Resultado",isTutoria);//se envia el mensaje de vuelta
+					break;
+
+				case "/eliminarCitaProfesor":
+					Profesor profesorEliminarCita = (Profesor)mensajeEntrada.getContenido().get("Profesor");
+					Date fechaInicioEliminarCita = (Date)mensajeEntrada.getContenido().get("fechaInicio");
+					Date fechaFinEliminarCita = (Date)mensajeEntrada.getContenido().get("fechaFin");
+					Boolean eliminado =  ControladorCitas.crearTutoriaProfesor(profesorEliminarCita,fechaInicioEliminarCita,fechaFinEliminarCita); 
+					HashMapRespuesta.put("Resultado",eliminado);//se envia el mensaje de vuelta
+					break;
+				case "/crearCita":
+					Profesor profesorCrearCita = (Profesor)mensajeEntrada.getContenido().get("Profesor");
+					Alumno alumnoCrearCita = (Alumno)mensajeEntrada.getContenido().get("Alumno");
+					Date fechaInicioCrearCita = (Date)mensajeEntrada.getContenido().get("fechaInicio");
+					Date fechaFinCrearCita = (Date)mensajeEntrada.getContenido().get("fechaFin");
+					Boolean citaCreada =  ControladorCitas.crearCita(profesorCrearCita,alumnoCrearCita,fechaInicioCrearCita,fechaFinCrearCita); 
+					HashMapRespuesta.put("Resultado",citaCreada);//se envia el mensaje de vuelta
 					break;
 				default:
 					System.out.println("\nParámetro no encontrado");
 					System.out.println(mensajeEntrada.getContext());
-					
+						
 			}
 			// se carga la respuesta en el mensaje
 			mensajeRespuesta.setContenido(HashMapRespuesta);
