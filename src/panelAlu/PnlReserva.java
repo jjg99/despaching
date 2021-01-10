@@ -54,29 +54,6 @@ public class PnlReserva extends JPanel{
         pnlDerecha.setLayout(new BorderLayout());
         pnlDerecha.add(new PnlCalendario(alumno,profesor));
 
-        /** Panel que contiene el boton de atras */
-        JPanel pnlAbajo = new JPanel();
-        pnlAbajo.setLayout(new FlowLayout(FlowLayout.LEFT));
-        JButton btnAtras = new JButton("Atras");
-        try{
-            btnAtras.setIcon(new ImageIcon(new URL("https://img.icons8.com/dusk/30/return.png"))); // se pone el icono al boton
-        }
-        catch(MalformedURLException e){
-            e.printStackTrace();
-        }
-        btnAtras.setHorizontalTextPosition(SwingConstants.CENTER); // ponemos el texto en el centro
-        btnAtras.setVerticalTextPosition(SwingConstants.BOTTOM); // ponemos el texto abajo
-        btnAtras.setOpaque(false);
-        Colores.setBGTransparente(btnAtras);
-        btnAtras.setBorder(null);
-        pnlAbajo.add(btnAtras);
-
-        btnAtras.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                JVentana.cambiarPanel(PnlAlumno.PnlAlumno);
-            }
-        });
         this.setLayout(new BorderLayout()); //se establece el layout de tipo borderLayout
         this.add(new PnlEncabezado(alumno),BorderLayout.NORTH);   //se añade el panel de encabezado en la parte superior de la pantalla
         this.add(pnlIzquierda,BorderLayout.WEST);    //se añade el panel izquierdo para ser pintado
