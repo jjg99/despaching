@@ -406,7 +406,7 @@ public class Fachada {
         boolean result = (boolean)mensajeRespuesta.getContenido().get("Resultado");
 		return result;
     }
-    public static boolean eliminarCitaProfesor(Profesor profesor,Date fechaInicio, Date fechaFin){
+    public static boolean eliminarCitaProfesor(Profesor profesor,Date fechaInicio){
         //controlador Citas eliminarCitaProfesor
          // se crea el mensaje para enviar toda la información 
          Mensaje mensajeEnviar = new Mensaje();
@@ -416,7 +416,23 @@ public class Fachada {
          HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
          contenido.put("Profesor",profesor);
          contenido.put("fechaInicio",fechaInicio);
-         contenido.put("fechaFin",fechaFin);
+         mensajeEnviar.setContenido(contenido);
+         // se envia la consulta al servidor
+         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
+         // se carga el primer elemento del array, el cual contiene el boolean indicando si se ha realizado de forma correcta el cierre de la cola
+         boolean result = (boolean)mensajeRespuesta.getContenido().get("Resultado");
+         return result;
+    }
+    public static boolean eliminarCitaAlumno(Alumno alumno,Date fechaInicio){
+        //controlador Citas eliminarCitaProfesor
+         // se crea el mensaje para enviar toda la información 
+         Mensaje mensajeEnviar = new Mensaje();
+         Mensaje mensajeRespuesta = new Mensaje();
+         mensajeEnviar.setContext("/eliminarCitaAlumno");     // se coloca el tipo de consulta
+         // se añade el contenido del mensaje a enviar al servidor
+         HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
+         contenido.put("Alumno",alumno);
+         contenido.put("fechaInicio",fechaInicio);
          mensajeEnviar.setContenido(contenido);
          // se envia la consulta al servidor
          mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
