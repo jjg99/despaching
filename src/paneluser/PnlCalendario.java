@@ -584,13 +584,16 @@ public class PnlCalendario extends JPanel {
                 if (usuario instanceof Profesor){
                     Fachada.crearTutoria((Profesor)usuario,Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]),
                                             Fecha.setDate(anioActivo, mesActivo, diaActivo, horaFin[0], horaFin[1]));
+                    //Actualizamos panel horario
+                    int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
+                    PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
                 } else{
                     Fachada.crearCita(profesor,(Alumno)usuario,Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]),
                                             Fecha.setDate(anioActivo, mesActivo, diaActivo, horaFin[0], horaFin[1]));
+                    //Actualizamos panel horario
+                    int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
+                    PnlReserva.pnlReserva.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
                 }
-                //Actualizamos panel horario
-                int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
-                PnlReserva.pnlReserva.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
                 
             }
         });
@@ -605,14 +608,15 @@ public class PnlCalendario extends JPanel {
                 
                 if (usuario instanceof Profesor){
                     Fachada.eliminarCitaProfesor((Profesor)usuario,Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]));
-                    
+                    //Actualizamos panel horario
+                    int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
+                    PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
                 } else{
                     Fachada.eliminarCitaAlumno((Alumno)usuario,Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]));
+                    //Actualizamos panel horario
+                    int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
+                    PnlReserva.pnlReserva.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
                 }
-
-                //Actualizamos panel horario
-                int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
-                PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
             }
         });
 
@@ -722,8 +726,13 @@ public class PnlCalendario extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e){
                 int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
-                PnlHorario.pnlHorario.actualizarHorarioCache();
-                PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
+                if (usuario instanceof Profesor){
+                    //Actualizamos panel horario
+                    PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
+                } else{
+                    //Actualizamos panel horario
+                    PnlReserva.pnlReserva.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
+                }
                 updateUI();
             }
         });

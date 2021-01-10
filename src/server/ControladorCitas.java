@@ -126,7 +126,7 @@ public class ControladorCitas {
 
     public static boolean eliminarCitaAlumno(Alumno alu, Date fechaIni){
         boolean satisfactorio = false;
-        ArrayList<Timestamp> citas = CitasDAO.getCitasProf(alu.getId());
+        ArrayList<Timestamp> citas = CitasDAO.getCitasAlumno(alu.getId());
         for (int i=0; i<citas.size();i=i+2) {
             if (fechaIni.equals(citas.get(i)))
                 satisfactorio = true;
