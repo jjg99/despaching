@@ -36,7 +36,8 @@ public class PnlCalendario extends JPanel {
     private static int diaSemana = 0;
     private static int horaIni[] = new int[2];
     private static int horaFin[] = new int[2];
-    private SpinnerDateModel spnDMH = new SpinnerDateModel();
+    private SpinnerDateModel spnDMHIni = new SpinnerDateModel();
+    private SpinnerDateModel spnDMHFin = new SpinnerDateModel();
     /**
      *
      */
@@ -239,12 +240,12 @@ public class PnlCalendario extends JPanel {
         pnlHoraIni.add(lblHoraIni,gbc);
 
         //JSpinner horaini
-        JSpinner spnHoraIni = new JSpinner(spnDMH);
-        JSpinner.DateEditor editorH1 = new JSpinner.DateEditor(spnHoraIni, "HH:mm");
-        DateFormatter formatterH1= (DateFormatter) editorH1.getTextField().getFormatter();
-        formatterH1.setAllowsInvalid(false);
-        formatterH1.setOverwriteMode(true);
-        spnHoraIni.setEditor(editorH1);
+        JSpinner spnHoraIni = new JSpinner(spnDMHIni);
+        JSpinner.DateEditor editorHIni = new JSpinner.DateEditor(spnHoraIni, "HH:mm");
+        DateFormatter formatterHIni= (DateFormatter) editorHIni.getTextField().getFormatter();
+        formatterHIni.setAllowsInvalid(false);
+        formatterHIni.setOverwriteMode(true);
+        spnHoraIni.setEditor(editorHIni);
         spnHoraIni.setOpaque(true);
         Fuente.setFuente(spnHoraIni);
         gbc.gridx = 1;       //se especifica la posicion en la matriz
@@ -267,12 +268,12 @@ public class PnlCalendario extends JPanel {
         pnlHoraFin.add(lblHoraFin,gbc);
 
         //JSpinner horafin
-        JSpinner spnHoraFin = new JSpinner(spnDMH);
-        JSpinner.DateEditor editorH2 = new JSpinner.DateEditor(spnHoraIni, "HH:mm");
-        DateFormatter formatterH2= (DateFormatter) editorH2.getTextField().getFormatter();
-        formatterH2.setAllowsInvalid(false);
-        formatterH2.setOverwriteMode(true);
-        spnHoraFin.setEditor(editorH2);
+        JSpinner spnHoraFin = new JSpinner(spnDMHFin);
+        JSpinner.DateEditor editorHFin = new JSpinner.DateEditor(spnHoraFin, "HH:mm");
+        DateFormatter formatterHFin= (DateFormatter) editorHFin.getTextField().getFormatter();
+        formatterHFin.setAllowsInvalid(false);
+        formatterHFin.setOverwriteMode(true);
+        spnHoraFin.setEditor(editorHFin);
         spnHoraFin.setOpaque(true);
         Fuente.setFuente(spnHoraFin);
         gbc.gridx = 1;       //se especifica la posicion en la matriz
@@ -341,13 +342,6 @@ public class PnlCalendario extends JPanel {
         btnCrearCita.setOpaque(false);     // cambiamos la opacidad
         Colores.setBGTransparente(btnCrearCita); // establecesmos el color
         btnCrearCita.setBorder(null);
-
-        //boton que sirve para agregar la hora al horario
-        JButton btnGuardarCitas = new JButton("Guardar citas");  // creamos el boton actualizar
-        Fuente.setFuente(btnGuardarCitas );    // cambiamos la fuente
-        btnGuardarCitas .setOpaque(false);     // cambiamos la opacidad
-        Colores.setBGTransparente(btnGuardarCitas ); // establecesmos el color
-        btnGuardarCitas .setBorder(null);
         
         // panel para crear una tutoria
         JPanel pnlEliminarTutoria = new JPanel(new GridLayout(6,1)); // creamos el panel para cambiar el horario
@@ -485,7 +479,6 @@ public class PnlCalendario extends JPanel {
                 pnlCrearTutoria.add(pnlHoraIni);
                 pnlCrearTutoria.add(pnlHoraFin);
                 pnlCrearTutoria.add(btnCrearCita);
-                pnlCrearTutoria.add(btnGuardarCitas);
                 pnlPrincipal.updateUI();
             }
         });
@@ -510,7 +503,6 @@ public class PnlCalendario extends JPanel {
                 pnlEliminarTutoria.add(pnlInformacion);
                 pnlEliminarTutoria.add(pnlHoraIni);
                 pnlEliminarTutoria.add(btnEliminarCita);
-                pnlEliminarTutoria.add(btnGuardarCitas);
                 pnlPrincipal.updateUI();
             }
         });
@@ -539,6 +531,31 @@ public class PnlCalendario extends JPanel {
                 pnlCambiarHorario.add(btnEliminarHora);
                 pnlCambiarHorario.add(btnGuardarCambiarHora);
                 pnlPrincipal.updateUI();
+            }
+        });
+
+        btnCrearCita.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                horaIni[0] = Fecha.getHora(spnDMHIni.getDate());
+                horaIni[1] = Fecha.getMinuto(spnDMHIni.getDate());
+                horaFin[0] = Fecha.getHora(spnDMHFin.getDate());
+                horaIni[1] = Fecha.getMinuto(spnDMHFin.getDate());
+                //TODO:  funcionalidad botones horario
+                // Fachada.crearCita(usuario,Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]),
+                //                             Fecha.setDate(anioActivo, mesActivo, diaActivo, horaFin[0], horaFin[1]));
+            }
+        });
+
+        btnEliminarCita.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                horaIni[0] = Fecha.getHora(spnDMHIni.getDate());
+                horaIni[1] = Fecha.getMinuto(spnDMHIni.getDate());
+                horaFin[0] = Fecha.getHora(spnDMHFin.getDate());
+                horaIni[1] = Fecha.getMinuto(spnDMHFin.getDate());
+                // Fachada.eliminarCita(usuario,Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]),
+                //                             Fecha.setDate(anioActivo, mesActivo, diaActivo, horaFin[0], horaFin[1]));
             }
         });
 
