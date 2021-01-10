@@ -381,7 +381,8 @@ public class Fachada {
         HashMap<String,Object> HashMapRespuesta =mensajeRespuesta.getContenido();
         // se lee la respuesta del mensaje
         ArrayList<Timestamp>ArrayRespuesta = (ArrayList<Timestamp>) HashMapRespuesta.get("Citas");
-        for(Timestamp cita: ArrayRespuesta){
+        for(Object elemento: ArrayRespuesta){
+            Timestamp cita = (Timestamp)elemento;
             respuesta.add(cita);
         }
         return respuesta;

@@ -192,7 +192,7 @@ public class Servidor extends Thread {
 				case "/getCitasAlumno":
 					String idAlumnoCitas = (String)mensajeEntrada.getContenido().get("idAlumno");
 					ArrayList<Timestamp> citasAlumno =  CitasDAO.getCitasAlumno(idAlumnoCitas);//se llama al gestor de usuario para que se encargue de resetearlo
-					HashMapRespuesta.put("Resultado",citasAlumno);//se envia el mensaje de vuelta
+					HashMapRespuesta.put("Citas",citasAlumno);//se envia el mensaje de vuelta
 					break;
 				case "/getCitasProfesor":
 					String idProfesorCitas = (String)mensajeEntrada.getContenido().get("idProfesor");
