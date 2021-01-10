@@ -102,6 +102,7 @@ public class ControladorCitas {
         }
         
         if(satisfactorio){
+            System.out.println("\n\n"+prof.getId()+"           "+alu.getId()+"         "+ fechaIni+"         "+fechaFin);
             CitasDAO.addCita(prof.getId(), alu.getId(), fechaIni, fechaFin);
             
         }
