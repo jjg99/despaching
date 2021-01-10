@@ -416,7 +416,7 @@ public class Fachada {
          HashMap<String,Object> contenido = new HashMap<String,Object>();     // array para almacenar el contenido de la consulta que se va a enviar
          contenido.put("Profesor",profesor);
          contenido.put("fechaInicio",fechaInicio);
-         contenido.put("fechaInicio",fechaFin);
+         contenido.put("fechaFin",fechaFin);
          mensajeEnviar.setContenido(contenido);
          // se envia la consulta al servidor
          mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  
