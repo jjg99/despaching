@@ -1,0 +1,124 @@
+package dao;
+
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Date;
+
+import server.ConexionServer;
+
+public class CitasDAO {
+
+
+
+    /**
+     * Metodo encargado de añadir una cita a la base de datos
+     * @param idprof contiene el id del profesor
+     * @param idAlu  contiene el id de un alumno
+     * @param ini fecha con el momento de inicio de la cita
+     * @param fin fecha con el momento de fin de la cita
+     */
+    public static void addCita(String idProf, String idAlu, Date ini, Date fin) {
+
+        Statement stmt;
+        // Ejecucion de la sentencia SQL
+        try {
+            stmt = ConexionServer.conexion.createStatement();
+            String sql = "INSERT INTO \"Citas\" VALUES ('" + idProf + "','" + idAlu + "','" + ini + "','" + fin + "','" + "ok" +"')";
+            stmt.executeUpdate(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    /**
+     * Metodo encargado de eliminar una cita a la base de datos ejecutada por el profesor
+     * @param idprof contiene el id del profesor
+     * @param ini fecha con el momento de inicio de la cita
+     */
+    public static void RemoveCitaProfesor(String idProf, Date ini) {
+
+        Statement stmt;
+        // Ejecucion de la sentencia SQL
+        try {
+            stmt = ConexionServer.conexion.createStatement();
+            String sql = "DELETE FROM \"Citas\" WHERE \"clavePROF\" = '" + idProf + "' AND \"fechaINI\" = '" + ini + "'";
+            stmt.executeUpdate(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * Metodo encargado de eliminar una cita a la base de datos ejecutada por el profesor
+     * @param idAlu contiene el id del profesor
+     * @param ini fecha con el momento de inicio de la cita
+     */
+    public static void RemoveCitaAlumno(String idAlu, Date ini) {
+
+        Statement stmt;
+        // Ejecucion de la sentencia SQL
+        try {
+            stmt = ConexionServer.conexion.createStatement();
+            String sql = "DELETE FROM \"Citas\" WHERE \"clavePROF\" = '" + idAlu + "' AND \"fechaINI\" = '" + ini + "'";
+            stmt.executeUpdate(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * Metodo encargado de conseguir una cita de la base de datos
+     * @param idalu contiene el id del profesor
+     * @return devuelve un arraylist con las distintas citas de un alumno
+     */
+    public static ArrayList<String> getCitasAlumno(String idAlu) {
+
+        Statement stmt;
+        ResultSet resultadoConsulta = null;
+        ArrayList<String> citas = new ArrayList<String>();    // objeto que va a contener el resultado que se envia
+        // Ejecucion de la sentencia SQL
+        try {
+            stmt = ConexionServer.conexion.createStatement();
+            String sql = "SELECT \"FechaINI\", \"FechaFIN\" FROM \"Citas\" WHERE clave = '"+idAlu+"'";
+            resultadoConsulta =stmt.executeQuery(sql);    // se ejecuta la solicitud sql
+            while(resultadoConsulta.next()){
+                citas.add(resultadoConsulta.getString("Fecha"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return citas;
+
+    }
+
+    /**
+     * Metodo encargado de conseguir una cita de la base de datos
+     * @param idProf contiene el id del profesor
+     * @return devuelve un arraylist con las distintas citas de un alumno
+     */
+    public static ArrayList<String> getCitasProf(String idProf) {
+
+        Statement stmt;
+        ResultSet resultadoConsulta = null;
+        ArrayList<String> citas = new ArrayList<String>();    // objeto que va a contener el resultado que se envia
+        // Ejecucion de la sentencia SQL
+        try {
+            stmt = ConexionServer.conexion.createStatement();
+            String sql = "SELECT \"FechaINI\", \"FechaFIN\" FROM \"Citas\" WHERE clave = '"+idProf+"'";
+            resultadoConsulta =stmt.executeQuery(sql);    // se ejecuta la solicitud sql
+            while(resultadoConsulta.next()){
+                citas.add(resultadoConsulta.getString("Fecha"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return citas;
+
+    }
+
+}

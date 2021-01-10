@@ -9,17 +9,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
-import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
 import javax.swing.text.DateFormatter;
 
+import dao.CitasDAO;
 import dominio.Usuario;
 import panelProf.PnlProf;
 import util.Colores;
@@ -239,18 +240,18 @@ public class PnlCalendario extends JPanel {
 
         //JSpinner horaini
         JSpinner spnHoraIni = new JSpinner(spnDMH);
-        JSpinner.DateEditor editorH = new JSpinner.DateEditor(spnHoraIni, "HH:mm");
-        DateFormatter formatterH = (DateFormatter) editorH.getTextField().getFormatter();
-        formatterH.setAllowsInvalid(false);
-        formatterH.setOverwriteMode(true);
-        spnHoraIni.setEditor(editorH);
+        JSpinner.DateEditor editorH1 = new JSpinner.DateEditor(spnHoraIni, "HH:mm");
+        DateFormatter formatterH1= (DateFormatter) editorH1.getTextField().getFormatter();
+        formatterH1.setAllowsInvalid(false);
+        formatterH1.setOverwriteMode(true);
+        spnHoraIni.setEditor(editorH1);
         spnHoraIni.setOpaque(true);
         Fuente.setFuente(spnHoraIni);
         gbc.gridx = 1;       //se especifica la posicion en la matriz
         gbc.gridy = 0;
         gbc.gridheight = 1;	// altura
         gbc.gridwidth = 3; // anchura
-        gbc.insets = new Insets(0,0,0,0); // deja una separacion a la izquierda
+        gbc.insets = new Insets(0,0,0,0); // deja una separacion 
         pnlHoraIni.add(spnHoraIni,gbc);
         
         // panel con la hora de fin
@@ -262,19 +263,23 @@ public class PnlCalendario extends JPanel {
         gbc.gridy = 0;
         gbc.gridheight = 1;	// altura
         gbc.gridwidth = 1; // anchura
-        gbc.insets = new Insets(0,0,0,55); // deja una separacion a la izquierda
+        gbc.insets = new Insets(0,0,0,55); // deja una separacion 
         pnlHoraFin.add(lblHoraFin,gbc);
 
         //JSpinner horafin
         JSpinner spnHoraFin = new JSpinner(spnDMH);
-        spnHoraFin.setEditor(editorH);
+        JSpinner.DateEditor editorH2 = new JSpinner.DateEditor(spnHoraIni, "HH:mm");
+        DateFormatter formatterH2= (DateFormatter) editorH2.getTextField().getFormatter();
+        formatterH2.setAllowsInvalid(false);
+        formatterH2.setOverwriteMode(true);
+        spnHoraFin.setEditor(editorH2);
         spnHoraFin.setOpaque(true);
         Fuente.setFuente(spnHoraFin);
         gbc.gridx = 1;       //se especifica la posicion en la matriz
         gbc.gridy = 0;
         gbc.gridheight = 1;	// altura
         gbc.gridwidth = 3; // anchura
-        gbc.insets = new Insets(0,0,0,0); // deja una separacion a la izquierda
+        gbc.insets = new Insets(0,0,0,0); // deja una separacion
         pnlHoraFin.add(spnHoraFin,gbc);
         
 
@@ -471,7 +476,7 @@ public class PnlCalendario extends JPanel {
                 pnlPrincipal.add(pnlFecha,gbc); // lo añadimos al panel principal
                 gbc.gridx = 0;       //se especifica la posicion en la matriz
                 gbc.gridy = 6;
-                gbc.gridheight = 4;	// altura
+                gbc.gridheight = 8;	// altura
                 gbc.gridwidth = 1; // anchura
                 gbc.insets = new Insets(0,0,0,0); // deja una separacion a la izquierda
                 pnlPrincipal.add(pnlCrearTutoria,gbc);
@@ -497,7 +502,7 @@ public class PnlCalendario extends JPanel {
                 pnlPrincipal.add(pnlFecha,gbc); // lo añadimos al panel principal
                 gbc.gridx = 0;       //se especifica la posicion en la matriz
                 gbc.gridy = 6;
-                gbc.gridheight = 4;	// altura
+                gbc.gridheight = 8;	// altura
                 gbc.gridwidth = 1; // anchura
                 gbc.insets = new Insets(0,0,0,0); // deja una separacion a la izquierda
                 pnlPrincipal.add(pnlEliminarTutoria,gbc);
@@ -522,7 +527,7 @@ public class PnlCalendario extends JPanel {
                 pnlPrincipal.add(pnlFecha,gbc); // lo añadimos al panel principal
                 gbc.gridx = 0;       //se especifica la posicion en la matriz
                 gbc.gridy = 6;
-                gbc.gridheight = 4;	// altura
+                gbc.gridheight = 8;	// altura
                 gbc.gridwidth = 1; // anchura
                 gbc.insets = new Insets(0,0,0,0); // deja una separacion a la izquierda
                 pnlPrincipal.add(pnlCambiarHorario,gbc);
