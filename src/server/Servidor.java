@@ -214,8 +214,8 @@ public class Servidor extends Thread {
 					Alumno alumnoEliminarCita = (Alumno)mensajeEntrada.getContenido().get("Alumno");
 					Date fechaInicioEliminarCitaAlumno = (Date)mensajeEntrada.getContenido().get("fechaInicio");
 					// Date fechaFinEliminarCita = (Date)mensajeEntrada.getContenido().get("fechaFin");
-					Boolean eliminado =  ControladorCitas.eliminarCitaAlumno(alumnoEliminarCita,fechaInicioEliminarCitaAlumno); 
-					HashMapRespuesta.put("Resultado",eliminado);//se envia el mensaje de vuelta
+					Boolean isEliminado =  ControladorCitas.eliminarCitaAlumno(alumnoEliminarCita,fechaInicioEliminarCitaAlumno); 
+					HashMapRespuesta.put("Resultado",isEliminado);//se envia el mensaje de vuelta
 					break;
 				case "/crearCita":
 					Profesor profesorCrearCita = (Profesor)mensajeEntrada.getContenido().get("Profesor");
