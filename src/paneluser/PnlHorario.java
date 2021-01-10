@@ -9,10 +9,8 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import dao.CitasDAO;
 import dominio.Alumno;
 import dominio.Usuario;
-import server.ConexionServer;
 import server.Fachada;
 import util.Colores;
 import util.Fecha;
@@ -45,15 +43,11 @@ public class PnlHorario extends JPanel{
     /** Matriz con la ocupacion en tanto por 60 de cada hora */
     private int[][] ocupacion = new int[7][2];
 
-    /** Atributo que contendra el dia de la semana */
-    private int diaSemana;
-    
     /** Constructor que llama al metodo {@link initComponents} */
     public PnlHorario(Usuario usuario,int diaSemana, int anio, int mes, int dia){
         setUsuario(usuario);
         this.horario= Fachada.getHorario(this.usuario.getId()); // se consigue el horario de la base de datos
         clases = horario.split(";");  // se separa en diaSemanas de la semana
-        this.diaSemana=-1;    //Asignamos -1 para que la primera vez siempre cambie el diaSemana
         initComponents(diaSemana, anio, mes, dia);
     }
 
@@ -106,7 +100,6 @@ public class PnlHorario extends JPanel{
                     informacion[i][j]=null;
                 }
             }
-            this.diaSemana=diaSemana;
             String[] horas = clases[diaSemana].split(","); // se separa las clases del diaSemana
 
             for (int i=1; i< horas.length ;i++){ // bucle que rrecore las clases del diaSemana

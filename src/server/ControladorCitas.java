@@ -13,8 +13,6 @@ import util.Fecha;
 
 public class ControladorCitas {
     public static boolean crearTutoriaProfesor(Profesor prof, Date fechaIni, Date fechaFin) {
-        //TODO: Quitar esto, la conexion a la base de datoos
-        ConexionServer.startConnection();
         String horario = HorarioDAO.getHorario(prof.getId());
         String[] clases = horario.split(";");  // se separa en dias de la semana
         boolean satisfactorio=true;
@@ -60,9 +58,6 @@ public class ControladorCitas {
                 CitasDAO.addCita(prof.getId(), idAlu, fechaIni, fechaFin);
             }
         }
-        //TODO: Quitar esto, la conexion a la base de datoos
-        ConexionServer.endConnection();
-        System.out.println(satisfactorio);
         return satisfactorio;
     }
 
@@ -72,8 +67,6 @@ public class ControladorCitas {
 
     public static boolean eliminarCitaProfesor(Profesor prof, Date fechaIni){
         boolean satisfactorio = false;
-        //TODO: Quitar esto, la conexion a la base de datoos
-        ConexionServer.startConnection();
         ArrayList<Timestamp> citas = CitasDAO.getCitasProf(prof.getId());
         for (int i=0; i<citas.size();i=i+2) {
             if (fechaIni.equals(citas.get(i)))
@@ -83,9 +76,6 @@ public class ControladorCitas {
         if (satisfactorio)
             CitasDAO.removeCitaProfesor(prof.getId(),fechaIni);
 
-        //TODO: Quitar esto, la conexion a la base de datoos
-        ConexionServer.endConnection();
-        System.out.println(satisfactorio);
         return satisfactorio;
     }
 
