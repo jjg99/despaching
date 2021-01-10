@@ -100,103 +100,108 @@ public class PnlHorario extends JPanel{
      */
     public void setHorario(int diaSemana, int anio, int mes, int dia){
         if(diaSemana <= 4){   //Solo tratamos de lunes a viernes, los findes no hay clases
-            if(this.diaSemana != diaSemana){    //Solo cambiamos el horario si se cambia de diaSemana
-                for(int i=0; i<7; i++){
-                    for(int j=0; j<2; j++){
-                        ocupacion[i][j]=0;
-                        informacion[i][j]=null;
+            for(int i=0; i<7; i++){
+                for(int j=0; j<2; j++){
+                    ocupacion[i][j]=0;
+                    informacion[i][j]=null;
+                }
+            }
+            this.diaSemana=diaSemana;
+            String[] horas = clases[diaSemana].split(","); // se separa las clases del diaSemana
+
+            for (int i=1; i< horas.length ;i++){ // bucle que rrecore las clases del diaSemana
+                int horaini = Integer.valueOf(String.valueOf(horas[i].charAt(0)) + String.valueOf(horas[i].charAt(1))); // variable que almacena la hora de inicio de la clase
+                int minutosini = Integer.valueOf(String.valueOf(horas[i].charAt(3)) + String.valueOf(horas[i].charAt(4))); // variable que almacena los minutos de inicio de la clase
+                int horafin = Integer.valueOf(String.valueOf(horas[i].charAt(6)) + String.valueOf(horas[i].charAt(7))); // variable que almacena la hora de fin de la clase
+                int minutosfin = Integer.valueOf(String.valueOf(horas[i].charAt(9)) + String.valueOf(horas[i].charAt(10))); // variable que almacena los minutos de fin de la clase
+
+                if(horaini==horafin){   //Estan en la misma hora
+                    if (horaini-7 > 7 ){
+                        StringBuilder sb = new StringBuilder();
+                        // Añadimos el mensaje en la hora en concreto
+                        if(informacion[horaini -15][1]!=null){
+                            sb.append(informacion[horaini -15][1])
+                                .append("\n");
+                        }
+                        sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
+                        sb.append("   Clase");
+                        informacion[horaini -15][1]=sb.toString();
+                        // Añadimos la ocupacion
+                        ocupacion[horaini -15][1]=ocupacion[horaini -15][1]+(minutosfin-minutosini);
+                    }else{
+                        StringBuilder sb = new StringBuilder();
+                        // Añadimos el mensaje en la hora en concreto
+                        if(informacion[horaini -8][0]!=null){
+                            sb.append(informacion[horaini -8][0])
+                                .append("\n");
+                        }
+                        sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
+                        sb.append("   Clase");
+                        informacion[horaini -8][0]=sb.toString();
+                        // Añadimos la ocupacion
+                        ocupacion[horaini -8][0]=ocupacion[horaini -8][0]+(minutosfin-minutosini);
+                    }
+                } else {
+                    if (horaini-7 > 7 ){
+                        StringBuilder sb = new StringBuilder();
+                        // Añadimos el mensaje en la primera hora
+                        if(informacion[horaini -15][1]!=null){
+                            sb.append(informacion[horaini -15][1])
+                                .append("\n");
+                        }
+                        sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
+                        sb.append("   Clase");
+                        informacion[horaini -15][1]=sb.toString();
+                        // Añadimos la ocupacion de la primera hora
+                        ocupacion[horaini -15][1]=ocupacion[horaini -15][1]+(60-minutosini);
+
+                        sb = new StringBuilder();
+                        // Añadimos el mensaje en la segunda hora
+                        if(informacion[horafin -15][1]!=null){
+                            sb.append(informacion[horafin -15][1])
+                                .append("\n");
+                        }
+                        sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
+                        sb.append("   Clase");
+                        informacion[horafin -15][1]=sb.toString();
+                        // Añadimos la ocupacion de la segunda hora
+                        ocupacion[horafin -15][1]=ocupacion[horafin -15][1]+minutosfin;
+                    }else{
+                        StringBuilder sb = new StringBuilder();
+                        // Añadimos el mensaje de la primera hora
+                        if(informacion[horaini -8][0]!=null){
+                            sb.append(informacion[horaini -8][0])
+                                .append("\n");
+                        }
+                        sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
+                        sb.append("   Clase");
+                        informacion[horaini -8][0]=sb.toString();
+                        // Añadimos la ocupacion de la primera hora
+                        ocupacion[horaini -8][0]=ocupacion[horaini -8][0]+(60-minutosini);
+
+                        sb = new StringBuilder();
+                        // Añadimos el mensaje de la segunda hora
+                        if(informacion[horafin -8][0]!=null){
+                            sb.append(informacion[horafin -8][0])
+                                .append("\n");
+                        }
+                        sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
+                        sb.append("   Clase");
+                        informacion[horafin -8][0]=sb.toString();
+                        // Añadimos la ocupacion de la primera hora
+                        ocupacion[horafin -8][0]=ocupacion[horafin -8][0]+minutosfin;
                     }
                 }
-                this.diaSemana=diaSemana;
-                String[] horas = clases[diaSemana].split(","); // se separa las clases del diaSemana
-
-                for (int i=1; i< horas.length ;i++){ // bucle que rrecore las clases del diaSemana
-                    int horaini = Integer.valueOf(String.valueOf(horas[i].charAt(0)) + String.valueOf(horas[i].charAt(1))); // variable que almacena la hora de inicio de la clase
-                    int minutosini = Integer.valueOf(String.valueOf(horas[i].charAt(3)) + String.valueOf(horas[i].charAt(4))); // variable que almacena los minutos de inicio de la clase
-                    int horafin = Integer.valueOf(String.valueOf(horas[i].charAt(6)) + String.valueOf(horas[i].charAt(7))); // variable que almacena la hora de fin de la clase
-                    int minutosfin = Integer.valueOf(String.valueOf(horas[i].charAt(9)) + String.valueOf(horas[i].charAt(10))); // variable que almacena los minutos de fin de la clase
-
-                    if(horaini==horafin){   //Estan en la misma hora
-                        if (horaini-7 > 7 ){
-                            StringBuilder sb = new StringBuilder();
-                            // Añadimos el mensaje en la hora en concreto
-                            if(informacion[horaini -15][1]!=null){
-                                sb.append(informacion[horaini -15][1])
-                                  .append("\n");
-                            }
-                            sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
-                            sb.append("   Clase");
-                            informacion[horaini -15][1]=sb.toString();
-                            // Añadimos la ocupacion
-                            ocupacion[horaini -15][1]=ocupacion[horaini -15][1]+(minutosfin-minutosini);
-                        }else{
-                            StringBuilder sb = new StringBuilder();
-                            // Añadimos el mensaje en la hora en concreto
-                            if(informacion[horaini -8][0]!=null){
-                                sb.append(informacion[horaini -8][0])
-                                  .append("\n");
-                            }
-                            sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
-                            sb.append("   Clase");
-                            informacion[horaini -8][0]=sb.toString();
-                            // Añadimos la ocupacion
-                            ocupacion[horaini -8][0]=ocupacion[horaini -8][0]+(minutosfin-minutosini);
-                        }
-                    } else {
-                        if (horaini-7 > 7 ){
-                            StringBuilder sb = new StringBuilder();
-                            // Añadimos el mensaje en la primera hora
-                            if(informacion[horaini -15][1]!=null){
-                                sb.append(informacion[horaini -15][1])
-                                  .append("\n");
-                            }
-                            sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
-                            sb.append("   Clase");
-                            informacion[horaini -15][1]=sb.toString();
-                            // Añadimos la ocupacion de la primera hora
-                            ocupacion[horaini -15][1]=ocupacion[horaini -15][1]+(60-minutosini);
-
-                            sb = new StringBuilder();
-                            // Añadimos el mensaje en la segunda hora
-                            if(informacion[horafin -15][1]!=null){
-                                sb.append(informacion[horafin -15][1])
-                                  .append("\n");
-                            }
-                            sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
-                            sb.append("   Clase");
-                            informacion[horafin -15][1]=sb.toString();
-                            // Añadimos la ocupacion de la segunda hora
-                            ocupacion[horafin -15][1]=ocupacion[horafin -15][1]+minutosfin;
-                        }else{
-                            StringBuilder sb = new StringBuilder();
-                            // Añadimos el mensaje de la primera hora
-                            if(informacion[horaini -8][0]!=null){
-                                sb.append(informacion[horaini -8][0])
-                                  .append("\n");
-                            }
-                            sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
-                            sb.append("   Clase");
-                            informacion[horaini -8][0]=sb.toString();
-                            // Añadimos la ocupacion de la primera hora
-                            ocupacion[horaini -8][0]=ocupacion[horaini -8][0]+(60-minutosini);
-
-                            sb = new StringBuilder();
-                            // Añadimos el mensaje de la segunda hora
-                            if(informacion[horafin -8][0]!=null){
-                                sb.append(informacion[horafin -8][0])
-                                  .append("\n");
-                            }
-                            sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
-                            sb.append("   Clase");
-                            informacion[horafin -8][0]=sb.toString();
-                            // Añadimos la ocupacion de la primera hora
-                            ocupacion[horafin -8][0]=ocupacion[horafin -8][0]+minutosfin;
-                        }
-                    }
-                }
+                
             }
             this.setBtnsColores();
         } else {
+            for(int i=0; i<7; i++){
+                for(int j=0; j<2; j++){
+                    ocupacion[i][j]=0;
+                    informacion[i][j]=null;
+                }
+            }
             this.setBtnsGreen();
         }
         // TODO: Usar Fachada 
