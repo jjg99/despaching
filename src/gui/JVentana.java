@@ -115,7 +115,6 @@ public class JVentana extends JFrame {
                     if(PnlProf.isProfesor()){
                         Profesor profesor = PnlProf.getProfesor();
                         Fachada.closeCola(profesor.getId());
-                        System.out.println("Se ha cerrado la cola");
 
                     }
                     // en caso de que no haya iniciado sesión 
