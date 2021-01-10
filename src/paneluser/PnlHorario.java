@@ -391,14 +391,6 @@ public class PnlHorario extends JPanel{
             }
         }
         this.setBtnsColores();
-        for(int i=0; i<7; i++){
-            for(int j=0; j<2; j++){
-                System.out.print(ocupacion[i][j]);
-            }
-            System.out.print("\n");
-        }
-        System.out.print("\n");
-
     }
 
     private String horaMensaje(int horaini, int minutosini, int horafin, int minutosfin){

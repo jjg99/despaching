@@ -590,7 +590,7 @@ public class PnlCalendario extends JPanel {
                 }
                 //Actualizamos panel horario
                 int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
-                PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
+                PnlReserva.pnlReserva.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
                 
             }
         });

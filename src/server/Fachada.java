@@ -451,7 +451,7 @@ public class Fachada {
         contenido.put("Profesor",profesor);
         contenido.put("Alumno", alumno);
         contenido.put("fechaInicio",fechaInicio);
-        contenido.put("fechaInicio",fechaFin);
+        contenido.put("fechaFin",fechaFin);
         mensajeEnviar.setContenido(contenido);
         // se envia la consulta al servidor
         mensajeRespuesta = ClienteServidor.enviarMensaje(mensajeEnviar);  

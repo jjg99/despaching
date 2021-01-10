@@ -74,7 +74,7 @@ public class CitasDAO {
 
     /**
      * Metodo encargado de conseguir una cita de la base de datos
-     * @param idalu contiene el id del profesor
+     * @param idalu contiene el id del alumno
      * @return devuelve un arraylist con las distintas citas de un alumno
      */
     public static ArrayList<Timestamp> getCitasAlumno(String idAlu) {
