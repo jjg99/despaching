@@ -62,6 +62,11 @@ public class PnlProf extends JPanel{
     private void setProfesor(Profesor prof) {
         profesor = prof;
     }
+    //metodo para devolver el profesor de un alumno
+    public static Profesor getProfesor(){
+        return profesor;
+
+    }
 
     /** Metodo que inicializara e instanciara todos los componentes en la ventana */
     public void establecerVentana(){
@@ -301,5 +306,13 @@ public class PnlProf extends JPanel{
         pnlIzquierda.add(pnlTxtHorario,BorderLayout.NORTH);
         pnlIzquierda.add(PnlHorario.pnlHorario,BorderLayout.CENTER);
         pnlIzquierda.updateUI();
+    }
+    public static boolean isProfesor(){
+        // metodo que permite saber si se ha creado un profesor
+        if(profesor == null){
+            return false;
+        }else{
+            return true;
+        }
     }
 }

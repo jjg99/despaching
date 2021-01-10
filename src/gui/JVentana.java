@@ -8,9 +8,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+
 import javax.swing.UnsupportedLookAndFeelException;
 
+import dominio.Profesor;
+import panelProf.PnlProf;
 import paneluser.PnlInicio;
+import server.Fachada;
 import util.Colores;
 
 /**
@@ -97,6 +105,27 @@ public class JVentana extends JFrame {
         this.setLocationRelativeTo(null);   //Hacemos que la app se abra en el centro de la pantalla
         this.setResizable(false);   //Fijamos que no se modifique el tamaño de la ventana
         this.requestFocus();
+        // se le pone funcionalidad al cerrar la ventana
+        this.addWindowListener(new WindowAdapter(){             
+            public void windowClosing(WindowEvent e){  
+                Object[] opciones = {"Si", "No"};
+                if(0 == javax.swing.JOptionPane.showOptionDialog(null,"¿Esta seguro de que desea salir?", "¿Salir?",javax.swing.JOptionPane.DEFAULT_OPTION, javax.swing.JOptionPane.WARNING_MESSAGE,null,opciones,null)){                     
+                // en el caso de se que el usuario seleccione que se quiere cerrar la ventana, y que sea profesor, se 
+                    // pregunta si se trata de un profesor
+                    if(PnlProf.isProfesor()){
+                        Profesor profesor = PnlProf.getProfesor();
+                        Fachada.closeCola(profesor.getId());
+                        System.out.println("Se ha cerrado la cola");
+
+                    }
+                    // en caso de que no haya iniciado sesión 
+                    JVentana.this.dispose();
+
+                    
+                }
+            }
+        });
+    
     }
 
     /**
@@ -109,4 +138,6 @@ public class JVentana extends JFrame {
         pnlVentana.add(pnlPoner, BorderLayout.CENTER);
         pnlVentana.updateUI();
     }
+
+    
 }
