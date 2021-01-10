@@ -7,6 +7,9 @@ En esta version 0.1 si haces click en el boton de "Entrar" entras como alumno y 
 ## Version 0.5
 En esta version 0.5 para iniciar sesión se requiere un usuario y contraseña, tanto si se es alumno como profesor, ya que el sistema detectará automaticamente el tipo de usuario y lo tratara acorde con este. Actualmente el botón de recuperar contraseña no se encuentra operativo, para la proxima entrega lo estará.
 
+## Version 0.9
+En esta version 0.9 se ha implementado toda la funcionalidad basica tanto en cliente como en servidor. Todo lo disponible en la aplicacion esta completamente operativo. Si se olvida la contraseña, se mandará una nueva al correo del usuario, dicha constraseña es generada por el sistema. A dia de hoy el usuario no puede elegir. 
+
 Las credenciales para poder acceder se encuntran en el archivo "credenciales.txt" adjunto a la entrega.
 
 
