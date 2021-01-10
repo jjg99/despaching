@@ -2,24 +2,15 @@ package panelAlu;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.net.MalformedURLException;
-import java.net.URL;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 import dominio.Alumno;
 import dominio.Profesor;
-import gui.JVentana;
 import paneluser.PnlCalendario;
 import paneluser.PnlEncabezado;
 import paneluser.PnlHorario;
-import util.Colores;
 import util.Fecha;
 import util.Fuente;
 
@@ -58,7 +49,6 @@ public class PnlReserva extends JPanel{
         this.add(new PnlEncabezado(alumno),BorderLayout.NORTH);   //se añade el panel de encabezado en la parte superior de la pantalla
         this.add(pnlIzquierda,BorderLayout.WEST);    //se añade el panel izquierdo para ser pintado
         this.add(pnlDerecha,BorderLayout.CENTER);     //se añade el panel derecho
-        this.add(pnlAbajo, BorderLayout.SOUTH);
     }
 
     /**

@@ -204,7 +204,6 @@ public class PnlHorario extends JPanel{
         }
         ArrayList<Timestamp> citas;
         if(usuario instanceof Alumno){
-            //TODO
             citas=Fachada.getCitasAlumno(usuario.getId());
         } else {
             citas=Fachada.getCitasProfesor(usuario.getId());
@@ -234,160 +233,55 @@ public class PnlHorario extends JPanel{
                     minutosfin=59;
                 }
 
-                // if(tutorias.contains(horaini*60+minutosini)){
-                    for(int j=0; j<=horafin-horaini; j++){
-                        if (horaini+j-7 > 7 ){
-                            StringBuilder sb = new StringBuilder();
-                            // Añadimos el mensaje en la hora en concreto
-                            if(informacion[horaini+j -15][1]!=null){
-                                sb.append(informacion[horaini+j -15][1])
-                                .append("\n");
-                            }
-                            sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
-                            if(tutorias.contains(horaini*60+minutosini)){
-                                sb.append("   Tutoria");
-                            } else {
-                                sb.append("   Cita");
-                            }
-                            informacion[horaini+j -15][1]=sb.toString();
-                            if(horafin-horaini==0){
-                                ocupacion[horaini+j -15][1]=ocupacion[horaini+j -15][1]+(minutosfin-minutosini);
-                            } else if(horaini+j==horafin){
-                                ocupacion[horaini+j -15][1]=ocupacion[horaini+j -15][1]+(minutosfin);
-                            } else if(j==0){
-                                ocupacion[horaini+j -15][1]=ocupacion[horaini+j -15][1]+(60-minutosini);
-                            } else {
-                                ocupacion[horaini+j -15][1]=ocupacion[horaini+j -15][1]+60;
-                            }
+                for(int j=0; j<=horafin-horaini; j++){
+                    if (horaini+j-7 > 7 ){
+                        StringBuilder sb = new StringBuilder();
+                        // Añadimos el mensaje en la hora en concreto
+                        if(informacion[horaini+j -15][1]!=null){
+                            sb.append(informacion[horaini+j -15][1])
+                            .append("\n");
+                        }
+                        sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
+                        if(tutorias.contains(horaini*60+minutosini)){
+                            sb.append("   Tutoria");
                         } else {
-                            StringBuilder sb = new StringBuilder();
-                            // Añadimos el mensaje en la hora en concreto
-                            if(informacion[horaini+j -8][0]!=null){
-                                sb.append(informacion[horaini+j -8][0])
-                                .append("\n");
-                            }
-                            sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
-                            if(tutorias.contains(horaini*60+minutosini)){
-                                sb.append("   Tutoria");
-                            } else {
-                                sb.append("   Cita");
-                            };
-                            informacion[horaini+j -8][0]=sb.toString();
-                            if(horafin-horaini==0){
-                                ocupacion[horaini+j -8][0]=ocupacion[horaini+j -8][0]+(minutosfin-minutosini);
-                            } else if(horaini+j==horafin){
-                                ocupacion[horaini+j -8][0]=ocupacion[horaini+j -8][0]+(minutosfin);
-                            } else if(j==0){
-                                ocupacion[horaini+j -8][0]=ocupacion[horaini+j -8][0]+(60-minutosini);
-                            } else {
-                                ocupacion[horaini+j -8][0]=ocupacion[horaini+j -8][0]+(60);
-                            }
+                            sb.append("   Cita");
+                        }
+                        informacion[horaini+j -15][1]=sb.toString();
+                        if(horafin-horaini==0){
+                            ocupacion[horaini+j -15][1]=ocupacion[horaini+j -15][1]+(minutosfin-minutosini);
+                        } else if(horaini+j==horafin){
+                            ocupacion[horaini+j -15][1]=ocupacion[horaini+j -15][1]+(minutosfin);
+                        } else if(j==0){
+                            ocupacion[horaini+j -15][1]=ocupacion[horaini+j -15][1]+(60-minutosini);
+                        } else {
+                            ocupacion[horaini+j -15][1]=ocupacion[horaini+j -15][1]+60;
+                        }
+                    } else {
+                        StringBuilder sb = new StringBuilder();
+                        // Añadimos el mensaje en la hora en concreto
+                        if(informacion[horaini+j -8][0]!=null){
+                            sb.append(informacion[horaini+j -8][0])
+                            .append("\n");
+                        }
+                        sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
+                        if(tutorias.contains(horaini*60+minutosini)){
+                            sb.append("   Tutoria");
+                        } else {
+                            sb.append("   Cita");
+                        };
+                        informacion[horaini+j -8][0]=sb.toString();
+                        if(horafin-horaini==0){
+                            ocupacion[horaini+j -8][0]=ocupacion[horaini+j -8][0]+(minutosfin-minutosini);
+                        } else if(horaini+j==horafin){
+                            ocupacion[horaini+j -8][0]=ocupacion[horaini+j -8][0]+(minutosfin);
+                        } else if(j==0){
+                            ocupacion[horaini+j -8][0]=ocupacion[horaini+j -8][0]+(60-minutosini);
+                        } else {
+                            ocupacion[horaini+j -8][0]=ocupacion[horaini+j -8][0]+(60);
                         }
                     }
-
-                // } else {
-
-                // if(horaini==horafin){   //Estan en la misma hora
-                //     if (horaini-7 > 7 ){
-                //         StringBuilder sb = new StringBuilder();
-                //         // Añadimos el mensaje en la hora en concreto
-                //         if(informacion[horaini -15][1]!=null){
-                //             sb.append(informacion[horaini -15][1])
-                //             .append("\n");
-                //         }
-                //         sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
-                //         if(tutorias.contains(horaini*60+minutosini)){
-                //             sb.append("   Tutoria");
-                //         } else {
-                //             sb.append("   Cita");
-                //         }
-                //         informacion[horaini -15][1]=sb.toString();
-                //         // Añadimos la ocupacion
-                //         ocupacion[horaini -15][1]=ocupacion[horaini -15][1]+(minutosfin-minutosini);
-                //     }else{
-                //         StringBuilder sb = new StringBuilder();
-                //         // Añadimos el mensaje en la hora en concreto
-                //         if(informacion[horaini -8][0]!=null){
-                //             sb.append(informacion[horaini -8][0])
-                //             .append("\n");
-                //         }
-                //         sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
-                //         if(tutorias.contains(horaini*60+minutosini)){
-                //             sb.append("   Tutoria");
-                //         } else {
-                //             sb.append("   Cita");
-                //         }
-                //         informacion[horaini -8][0]=sb.toString();
-                //         // Añadimos la ocupacion
-                //         ocupacion[horaini -8][0]=ocupacion[horaini -8][0]+(minutosfin-minutosini);
-                //     }
-                // } else {
-                //     if (horaini-7 > 7 ){
-                //         StringBuilder sb = new StringBuilder();
-                //         // Añadimos el mensaje en la primera hora
-                //         if(informacion[horaini -15][1]!=null){
-                //             sb.append(informacion[horaini -15][1])
-                //             .append("\n");
-                //         }
-                //         sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
-                //         if(tutorias.contains(horaini*60+minutosini)){
-                //             sb.append("   Tutoria");
-                //         } else {
-                //             sb.append("   Cita");
-                //         }
-                //         informacion[horaini -15][1]=sb.toString();
-                //         // Añadimos la ocupacion de la primera hora
-                //         ocupacion[horaini -15][1]=ocupacion[horaini -15][1]+(60-minutosini);
-
-                //         sb = new StringBuilder();
-                //         // Añadimos el mensaje en la segunda hora
-                //         if(informacion[horafin -15][1]!=null){
-                //             sb.append(informacion[horafin -15][1])
-                //             .append("\n");
-                //         }
-                //         sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
-                //         if(tutorias.contains(horaini*60+minutosini)){
-                //             sb.append("   Tutoria");
-                //         } else {
-                //             sb.append("   Cita");
-                //         }
-                //         informacion[horafin -15][1]=sb.toString();
-                //         // Añadimos la ocupacion de la segunda hora
-                //         ocupacion[horafin -15][1]=ocupacion[horafin -15][1]+minutosfin;
-                //     }else{
-                //         StringBuilder sb = new StringBuilder();
-                //         // Añadimos el mensaje de la primera hora
-                //         if(informacion[horaini -8][0]!=null){
-                //             sb.append(informacion[horaini -8][0])
-                //             .append("\n");
-                //         }
-                //         sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
-                //         if(tutorias.contains(horaini*60+minutosini)){
-                //             sb.append("   Tutoria");
-                //         } else {
-                //             sb.append("   Cita");
-                //         }
-                //         informacion[horaini -8][0]=sb.toString();
-                //         // Añadimos la ocupacion de la primera hora
-                //         ocupacion[horaini -8][0]=ocupacion[horaini -8][0]+(60-minutosini);
-
-                //         sb = new StringBuilder();
-                //         // Añadimos el mensaje de la segunda hora
-                //         if(informacion[horafin -8][0]!=null){
-                //             sb.append(informacion[horafin -8][0])
-                //             .append("\n");
-                //         }
-                //         sb.append(this.horaMensaje(horaini, minutosini, horafin, minutosfin));
-                //         if(tutorias.contains(horaini*60+minutosini)){
-                //             sb.append("   Tutoria");
-                //         } else {
-                //             sb.append("   Cita");
-                //         }
-                //         informacion[horafin -8][0]=sb.toString();
-                //         // Añadimos la ocupacion de la primera hora
-                //         ocupacion[horafin -8][0]=ocupacion[horafin -8][0]+minutosfin;
-                //     }
-                // }
+                }
             }
         }
         this.setBtnsColores();
