@@ -656,7 +656,6 @@ public class PnlCalendario extends JPanel {
                 String realizar = dias[0];
                 for (int i=1; i< dias.length; i++)
                     realizar = realizar + ";" + dias[i];
-                System.out.println(realizar);
             }
         });
 
