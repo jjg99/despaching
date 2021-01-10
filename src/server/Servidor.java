@@ -8,21 +8,18 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
+import dao.CitasDAO;
+import dao.ColaDAO;
+import dao.HorarioDAO;
+import dao.UsuarioDAO;
 import dominio.Alumno;
 import dominio.Profesor;
 import dominio.Usuario;
 import util.Fecha;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import dao.ColaDAO;
-import dao.HorarioDAO;
-import dao.UsuarioDAO;
-import dao.CitasDAO;
-
-import java.util.Date;
 
 
 /**Clase encargada de la parte servidor de la aplicación, se encarga de escuchar por nuevos mensaje y responder */
