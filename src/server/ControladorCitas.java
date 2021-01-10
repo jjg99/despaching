@@ -66,7 +66,7 @@ public class ControladorCitas {
         return satisfactorio;
     }
 
-    public static boolean EliminarCitaProfesor(Profesor prof, Date fechaIni){
+    public static boolean eliminarCitaProfesor(Profesor prof, Date fechaIni){
         boolean satisfactorio = false;
         //TODO: Quitar esto, la conexion a la base de datoos
         ConexionServer.startConnection();
@@ -77,7 +77,7 @@ public class ControladorCitas {
         }
 
         if (satisfactorio)
-            CitasDAO.RemoveCitaProfesor(prof.getId(),fechaIni);
+            CitasDAO.removeCitaProfesor(prof.getId(),fechaIni);
 
         //TODO: Quitar esto, la conexion a la base de datoos
         ConexionServer.endConnection();

@@ -39,7 +39,7 @@ public class CitasDAO {
      * @param idprof contiene el id del profesor
      * @param ini fecha con el momento de inicio de la cita
      */
-    public static void RemoveCitaProfesor(String idProf, Date ini) {
+    public static void removeCitaProfesor(String idProf, Date ini) {
 
         Statement stmt;
         // Ejecucion de la sentencia SQL
@@ -58,7 +58,7 @@ public class CitasDAO {
      * @param idAlu contiene el id del profesor
      * @param ini fecha con el momento de inicio de la cita
      */
-    public static void RemoveCitaAlumno(String idAlu, Date ini) {
+    public static void removeCitaAlumno(String idAlu, Date ini) {
 
         Statement stmt;
         // Ejecucion de la sentencia SQL
