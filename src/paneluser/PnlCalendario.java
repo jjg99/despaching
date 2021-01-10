@@ -27,6 +27,7 @@ import dominio.Usuario;
 import dominio.Alumno;
 import panelProf.PnlProf;
 import server.ControladorCitas;
+import server.Fachada;
 import util.Colores;
 import util.Fecha;
 import util.Fuente;
@@ -40,6 +41,7 @@ public class PnlCalendario extends JPanel {
     private static int diaSemana = 0;
     private static int horaIni[] = new int[2];
     private static int horaFin[] = new int[2];
+    private static String horario = null;
     private SpinnerDateModel spnDMHIni = new SpinnerDateModel();
     private SpinnerDateModel spnDMHFin = new SpinnerDateModel();
     /**
@@ -535,6 +537,7 @@ public class PnlCalendario extends JPanel {
                 pnlCambiarHorario.add(btnEliminarHora);
                 pnlCambiarHorario.add(btnGuardarCambiarHora);
                 pnlPrincipal.updateUI();
+                horario = Fachada.getHorario(usuario.getId());
             }
         });
 
@@ -556,7 +559,7 @@ public class PnlCalendario extends JPanel {
                     //TODO codigo ejecutado cuando se entre como alumno
                 }
                 //TODO:  funcionalidad botones horario
-                // Fachada.crearCita(usuario,Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]),
+                // Fachada.crearTutoria(usuario,Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]),
                 //                             Fecha.setDate(anioActivo, mesActivo, diaActivo, horaFin[0], horaFin[1]));
                 
             }
@@ -569,17 +572,115 @@ public class PnlCalendario extends JPanel {
                 horaIni[1] = Fecha.getMinuto(spnDMHIni.getDate());
                 horaFin[0] = Fecha.getHora(spnDMHFin.getDate());
                 horaFin[1] = Fecha.getMinuto(spnDMHFin.getDate());
-                // Fachada.eliminarCita(usuario,Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]),
+                // Fachada.eliminarCitaProfesor(usuario,Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]),
                 //                             Fecha.setDate(anioActivo, mesActivo, diaActivo, horaFin[0], horaFin[1]));
                 
                 if (usuario instanceof Profesor){
-                    ControladorCitas.EliminarCitaProfesor((Profesor)usuario, Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]));
+                    ControladorCitas.eliminarCitaProfesor((Profesor)usuario, Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]));
                     //Actualizamos panel horario
                     int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
                     PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
                 } else{
-                    //ControladorCitas.EliminarCitaAlumno((Alumno)usuario, Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]));
+                    //ControladorCitas.eliminarCitaAlumno((Alumno)usuario, Fecha.setDate(anioActivo, mesActivo, diaActivo, horaIni[0], horaIni[1]));
                 }
+            }
+        });
+
+        btnAgregarHora.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                boolean repetido = false;
+                boolean satisfactorio = true;
+                horaIni[0] = Fecha.getHora(spnDMHIni.getDate());
+                horaIni[1] = Fecha.getMinuto(spnDMHIni.getDate());
+                horaFin[0] = Fecha.getHora(spnDMHFin.getDate());
+                horaFin[1] = Fecha.getMinuto(spnDMHFin.getDate());
+                String dias[] = horario.split(";");
+                String horas[] = dias[diaSemana].split(",");
+                int horaini = horaIni[0]*60; 
+                horaini = horaini + horaIni[1];
+                for (int i=1;i<horas.length;i++){
+                    String clases[] = horas[i].split("-");
+                    int hora = Integer.valueOf(clases[0].split(":")[0])* 60 + Integer.valueOf(clases[0].split(":")[1]);
+                    if (horaini == hora)
+                        repetido = true;
+                }
+
+                if(diaSemana<5){
+                    int citaTiempoIni=horaIni[0]*60+horaIni[1];
+                    int citaTiempoFin=horaFin[0]*60+horaFin[1];
+                    for (int i=1; i< horas.length ;i++){ // bucle que rrecore las clases del dia
+                        int horainicio = Integer.valueOf(String.valueOf(horas[i].charAt(0)) + String.valueOf(horas[i].charAt(1))); // variable que almacena la hora de inicio de la clase
+                        int minutosini = Integer.valueOf(String.valueOf(horas[i].charAt(3)) + String.valueOf(horas[i].charAt(4))); // variable que almacena los minutos de inicio de la clase
+                        int horafin = Integer.valueOf(String.valueOf(horas[i].charAt(6)) + String.valueOf(horas[i].charAt(7))); // variable que almacena la hora de fin de la clase
+                        int minutosfin = Integer.valueOf(String.valueOf(horas[i].charAt(9)) + String.valueOf(horas[i].charAt(10))); // variable que almacena los minutos de fin de la clase
+        
+                        int tiempoIni=horainicio*60+minutosini;
+                        int timepoFin=horafin*60+minutosfin;
+        
+                        if(tiempoIni>citaTiempoIni && tiempoIni>=citaTiempoFin){
+        
+                        } else if(timepoFin<=citaTiempoIni){
+        
+                        } else {
+                            satisfactorio = false;
+                        }
+                    }
+                }
+
+                
+                if (!repetido && satisfactorio){
+                    if (horaIni[0] <= 10){
+                        if (horaIni[1] < 10){
+                            if(horaFin[0]<10){
+                                if(horaFin[1]<10){
+                                    dias[diaSemana] = dias[diaSemana] + ",0" + horaIni[0] + ":0" + horaIni[1] + "-0"
+                                        + horaFin[0] + ":0" + horaFin[1];
+                                } else{
+                                    dias[diaSemana] = dias[diaSemana] + ",0" + horaIni[0] + ":0" + horaIni[1] + "-0"
+                                        + horaFin[0] + ":" + horaFin[1];
+                                }
+                            } else{
+                                dias[diaSemana] = dias[diaSemana] + ",0" + horaIni[0] + ":0" + horaIni[1] + "-"
+                                        + horaFin[0] + ":" + horaFin[1];
+                            } 
+                        } else{
+                            dias[diaSemana] = dias[diaSemana] + ",0" + horaIni[0] + ":" + horaIni[1] + "-"
+                                        + horaFin[0] + ":" + horaFin[1];
+                        }
+                    } else{
+                        dias[diaSemana] = dias[diaSemana] + "," + horaIni[0] + ":" + horaIni[1] + "-"
+                                        + horaFin[0] + ":" + horaFin[1];
+                    } 
+                }
+                String realizar = dias[0];
+                for (int i=1; i< dias.length; i++)
+                    realizar = realizar + ";" + dias[i];
+            }
+        });
+
+        btnEliminarHora.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                horaIni[0] = Fecha.getHora(spnDMHIni.getDate());
+                horaIni[1] = Fecha.getMinuto(spnDMHIni.getDate());
+                horaFin[0] = Fecha.getHora(spnDMHFin.getDate());
+                horaFin[1] = Fecha.getMinuto(spnDMHFin.getDate());
+                String dias[] = horario.split(";");
+                String horas[] = dias[diaSemana].split(",");
+                int horaini = horaIni[0]*60; 
+                horaini = horaini + horaIni[1];
+                String cambio = horas[0];
+                for (int i=1;i<horas.length;i++){
+                    String clases[] = horas[i].split("-");
+                    int hora = Integer.valueOf(clases[0].split(":")[0])* 60 + Integer.valueOf(clases[0].split(":")[1]);
+                    if (horaini != hora)
+                        cambio = cambio + "," +horas[i];
+                }
+                dias[diaSemana] = cambio;
+                String realizar = dias[0];
+                for (int i=1; i< dias.length; i++)
+                    realizar = realizar + ";" + dias[i];
             }
         });
 
