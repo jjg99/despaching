@@ -182,10 +182,24 @@ public class PnlAlumno extends JPanel {
                 }
             }
         });
+
+        /**
+         * Metodo que implementa el action listener para entrar en el panel de reserva
+         */
+        btnReservar.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+
+                //Apertura del panel reservar
+                JVentana.cambiarPanel(PnlReserva.pnlReserva = new PnlReserva(alumno, lstProfesores.getSelectedValue()));
+            }
+        });
         
         this.setLayout(new BorderLayout());
         this.add(new PnlEncabezado(alumno),BorderLayout.NORTH);
         this.add(pnlInicioAlumno, BorderLayout.CENTER);
+
+
     }
 
     /** Metodo estatico que elimina el alumno asociado al panel */
