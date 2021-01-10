@@ -197,7 +197,7 @@ public class Servidor extends Thread {
 				case "/getCitasProfesor":
 					String idProfesorCitas = (String)mensajeEntrada.getContenido().get("idProfesor");
 					ArrayList<Timestamp> citasProfesor =  CitasDAO.getCitasProf(idProfesorCitas);
-					HashMapRespuesta.put("Resultado",citasProfesor);//se envia el mensaje de vuelta
+					HashMapRespuesta.put("Citas",citasProfesor);//se envia el mensaje de vuelta
 					break;
 				case "/crearTutoria":
 					Profesor profesorTutoria = (Profesor)mensajeEntrada.getContenido().get("Profesor");

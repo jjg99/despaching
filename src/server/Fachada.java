@@ -356,7 +356,7 @@ public class Fachada {
         // se recibe un array con todas las clases del profesor
         HashMap<String,Object> HashMapRespuesta =mensajeRespuesta.getContenido();
         // se lee la respuesta del mensaje
-        ArrayList<Timestamp>ArrayRespuesta = (ArrayList<Timestamp>) HashMapRespuesta.get("Resultado");
+        ArrayList<Timestamp>ArrayRespuesta = (ArrayList<Timestamp>) HashMapRespuesta.get("Citas");
         for(Object elemento: ArrayRespuesta){
             Timestamp cita = (Timestamp)elemento;
             respuesta.add(cita);
@@ -380,7 +380,7 @@ public class Fachada {
         // se recibe un array con todas las clases del profesor
         HashMap<String,Object> HashMapRespuesta =mensajeRespuesta.getContenido();
         // se lee la respuesta del mensaje
-        ArrayList<Timestamp>ArrayRespuesta = (ArrayList<Timestamp>) HashMapRespuesta.get("Citas");
+        ArrayList<Object>ArrayRespuesta = (ArrayList<Object>) HashMapRespuesta.get("Citas");
         for(Object elemento: ArrayRespuesta){
             Timestamp cita = (Timestamp)elemento;
             respuesta.add(cita);
