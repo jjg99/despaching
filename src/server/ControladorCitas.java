@@ -9,6 +9,7 @@ import dao.HorarioDAO;
 import dao.UsuarioDAO;
 import dominio.Alumno;
 import dominio.Profesor;
+import jdk.javadoc.internal.doclets.formats.html.resources.standard;
 import util.Fecha;
 
 public class ControladorCitas {
@@ -64,6 +65,10 @@ public class ControladorCitas {
         ConexionServer.endConnection();
         System.out.println(satisfactorio);
         return satisfactorio;
+    }
+
+    public static boolean crearCita(Profesor prof, Alumno alu, Date fechaIni, Date fechaFin) {
+        return true;
     }
 
     public static boolean eliminarCitaProfesor(Profesor prof, Date fechaIni){
