@@ -1,6 +1,5 @@
 package util;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -147,7 +146,16 @@ public abstract class Fecha {
         return cal.getActualMaximum(Calendar.WEEK_OF_MONTH);
     }
 
-    public static java.util.Date setDateSQL(int year, int month, int day, int hour, int minute) {
+    /**
+     * metodo para crear una Date en funcion de unos parametros
+     * @param year anio que se desea asignar
+     * @param month numero del mes - 1 que se desea asignar
+     * @param day numero del dia que se desea asignar
+     * @param hour hora a asignar
+     * @param minute minutos a asignar
+     * @return Date de los parametros asignados
+     */
+    public static java.util.Date setDate(int year, int month, int day, int hour, int minute) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR,year);
         cal.set(Calendar.MONTH,month);
