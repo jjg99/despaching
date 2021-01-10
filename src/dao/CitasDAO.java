@@ -64,7 +64,7 @@ public class CitasDAO {
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "DELETE FROM \"Citas\" WHERE \"clavePROF\" = '" + idAlu + "' AND \"fechaINI\" = '" + ini + "'";
+            String sql = "DELETE FROM \"Citas\" WHERE \"claveALU\" = '" + idAlu + "' AND \"fechaINI\" = '" + ini + "'";
             stmt.executeUpdate(sql);
         } catch (Exception e) {
             e.printStackTrace();
