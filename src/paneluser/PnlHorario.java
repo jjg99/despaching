@@ -204,16 +204,11 @@ public class PnlHorario extends JPanel{
             }
             this.setBtnsGreen();
         }
-        // TODO: Usar Fachada 
         ArrayList<Timestamp> citas;
         if(usuario instanceof Alumno){
-            ConexionServer.startConnection();
-            citas = CitasDAO.getCitasAlumno(usuario.getId());
-            ConexionServer.endConnection();
+            citas=Fachada.getCitasAlumno(usuario.getId());
         } else {
-            ConexionServer.startConnection();
-            citas = CitasDAO.getCitasProf(usuario.getId());
-            ConexionServer.endConnection();
+            citas=Fachada.getCitasProfesor(usuario.getId());
         }
         for (int i=0; i<citas.size();i=i+2) {
             if(Fecha.getAnio(citas.get(i))==anio && Fecha.getMes(citas.get(i))==mes && Fecha.getDia(citas.get(i))==dia){
