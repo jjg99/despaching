@@ -694,6 +694,7 @@ public class PnlCalendario extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e){
                 int dia= Fecha.getDiaSemana(diaActivo, mesActivo, anioActivo);
+                PnlHorario.pnlHorario.actualizarHorarioCache();
                 PnlProf.pnlProf.setPnlHorario(dia, Fecha.fechaString(diaActivo, mesActivo, anioActivo), anioActivo, mesActivo, diaActivo);
                 updateUI();
             }

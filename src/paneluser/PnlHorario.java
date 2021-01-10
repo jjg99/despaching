@@ -88,6 +88,11 @@ public class PnlHorario extends JPanel{
         }
         this.updateUI();
     }
+
+    public void actualizarHorarioCache() {
+        this.horario= Fachada.getHorario(this.usuario.getId()); // se consigue el horario de la base de datos
+        clases = horario.split(";");  // se separa en diaSemanas de la semana
+    }
     
     /** metodo para establecer el horario del profesor de manera dinamica
      * @param btnHoras es una matriz de botones que seran de un color especifico y se les cambiara el color
@@ -199,6 +204,7 @@ public class PnlHorario extends JPanel{
         }
         ArrayList<Timestamp> citas;
         if(usuario instanceof Alumno){
+            //TODO
             citas=Fachada.getCitasAlumno(usuario.getId());
         } else {
             citas=Fachada.getCitasProfesor(usuario.getId());
