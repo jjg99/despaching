@@ -84,10 +84,14 @@ public class CitasDAO {
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "SELECT \"FechaINI\", \"FechaFIN\" FROM \"Citas\" WHERE clave = '"+idAlu+"'";
+            String sql = "SELECT \"fechaINI\", \"fechaFIN\" FROM \"Citas\" WHERE \"claveALU\" = '"+idAlu+"'";
             resultadoConsulta =stmt.executeQuery(sql);    // se ejecuta la solicitud sql
             while(resultadoConsulta.next()){
-                citas.add(resultadoConsulta.getString("Fecha"));
+                StringBuilder medio = new StringBuilder(resultadoConsulta.getString("fechaINI"));
+                medio.append(";")
+                     .append(resultadoConsulta.getString("fechaFIN"));
+
+                citas.add(medio.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -109,10 +113,14 @@ public class CitasDAO {
         // Ejecucion de la sentencia SQL
         try {
             stmt = ConexionServer.conexion.createStatement();
-            String sql = "SELECT \"FechaINI\", \"FechaFIN\" FROM \"Citas\" WHERE clave = '"+idProf+"'";
+            String sql = "SELECT \"fechaINI\", \"fechaFIN\" FROM \"Citas\" WHERE \"clavePROF\" = '"+idProf+"'";
             resultadoConsulta =stmt.executeQuery(sql);    // se ejecuta la solicitud sql
             while(resultadoConsulta.next()){
-                citas.add(resultadoConsulta.getString("Fecha"));
+                StringBuilder medio = new StringBuilder(resultadoConsulta.getString("fechaINI"));
+                medio.append(";")
+                     .append(resultadoConsulta.getString("fechaFIN"));
+
+                citas.add(medio.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
