@@ -662,30 +662,28 @@ public class PnlCalendario extends JPanel {
                     }
                 }
 
-                
                 if (!repetido && satisfactorio){
-                    if (horaIni[0] <= 10){
-                        if (horaIni[1] < 10){
-                            if(horaFin[0]<10){
-                                if(horaFin[1]<10){
-                                    dias[diaSemana] = dias[diaSemana] + ",0" + horaIni[0] + ":0" + horaIni[1] + "-0"
-                                        + horaFin[0] + ":0" + horaFin[1];
-                                } else{
-                                    dias[diaSemana] = dias[diaSemana] + ",0" + horaIni[0] + ":0" + horaIni[1] + "-0"
-                                        + horaFin[0] + ":" + horaFin[1];
-                                }
-                            } else{
-                                dias[diaSemana] = dias[diaSemana] + ",0" + horaIni[0] + ":0" + horaIni[1] + "-"
-                                        + horaFin[0] + ":" + horaFin[1];
-                            } 
-                        } else{
-                            dias[diaSemana] = dias[diaSemana] + ",0" + horaIni[0] + ":" + horaIni[1] + "-"
-                                        + horaFin[0] + ":" + horaFin[1];
-                        }
-                    } else{
-                        dias[diaSemana] = dias[diaSemana] + "," + horaIni[0] + ":" + horaIni[1] + "-"
-                                        + horaFin[0] + ":" + horaFin[1];
-                    } 
+                    if (horaIni[0] < 10){
+                        dias[diaSemana] = dias[diaSemana] + ",0" + horaIni[0];
+                    } else {
+                        dias[diaSemana] = dias[diaSemana] + "," + horaIni[0];
+                    }
+                    if (horaIni[1] < 10){
+                        dias[diaSemana] = dias[diaSemana] + ":0" + horaIni[1];
+                    } else {
+                        dias[diaSemana] = dias[diaSemana] + ":" + horaIni[1];
+                    }
+                    dias[diaSemana] = dias[diaSemana] + "-";
+                    if (horaFin[0] < 10){
+                        dias[diaSemana] = dias[diaSemana] + "0" + horaFin[0];
+                    } else {
+                        dias[diaSemana] = dias[diaSemana] + horaFin[0];
+                    }
+                    if (horaFin[1] < 10){
+                        dias[diaSemana] = dias[diaSemana] + ":0" + horaFin[1];
+                    } else {
+                        dias[diaSemana] = dias[diaSemana] + ":" + horaFin[1];
+                    }
                 }
                 String realizar = dias[0];
                 for (int i=1; i< dias.length; i++)
