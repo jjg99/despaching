@@ -11,7 +11,7 @@ public class ConexionServer{
     /** Variable estatica que en donde se almacenara la conexion */
     public static Connection conexion;
     /** Variable estatica y final en donde se almacenara la URL de la base de datos */
-    private static final String BD_URL = "jdbc:postgresql://jonan.hopto.org:5432/DespachingNEW";
+    private static final String BD_URL = "jdbc:postgresql://localhost:5432/DespachingNEW";
     /** Variable estatica y final en donde se almacenara el usuario con el que se conectara a la base de datos*/
     private static final String USER = "postgres";
     /** Variable estatica y final en donde se almacenara la contrasena con la que se conectara a la base de datos */

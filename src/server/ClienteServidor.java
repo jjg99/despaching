@@ -10,7 +10,7 @@ import java.net.Socket;
 
 
 public class ClienteServidor {
-	private static final String HOST = "81.40.148.54";	// variables para tener la direccion destino y el puerto destino
+	private static final String HOST = "localhost";	// variables para tener la direccion destino y el puerto destino
     private static final int PORT = 2345;
     private static Socket conexionSocket; 		
 	private static OutputStream out = null;
